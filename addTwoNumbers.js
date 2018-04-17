@@ -22,8 +22,6 @@
  */
 var addTwoNumbers = function(l1, l2) {
   
- 
-
   let num1 = getNumberFromLinkedList(l1);
   let num2 = getNumberFromLinkedList(l2);
 
@@ -36,38 +34,31 @@ var addTwoNumbers = function(l1, l2) {
   })
 
   return total; 
-  // let answerList = new LinkedList(null);
-  // while (total.length > 0) {
-  //   addNode(answerList, Number(total.pop()));
-  // }
-  
-  // console.log(answerList.next);
-  // return answerList.next;
 };
 
-  var LinkedList = function(val) {
-    this.val = val;
-    this.next = null;
-  }
+const LinkedList = function(val) {
+  this.val = val;
+  this.next = null;
+}
 
-  const addNode = (linkedList, val) => {
-    if (linkedList.next === null) {
-      linkedList.next = new LinkedList(val);
-    } else {
-      addNode(linkedList.next, val);
+const addNode = (linkedList, val) => {
+  if (linkedList.next === null) {
+    linkedList.next = new LinkedList(val);
+  } else {
+    addNode(linkedList.next, val);
+  }
+}
+
+const getNumberFromLinkedList = (linkedList) => {
+  let numbers = [];
+  const recurse = (node) => {
+    numbers.push(node.val.toString());
+    if (node.next !== null) {
+      recurse(node.next);
     }
   }
-
- const getNumberFromLinkedList = (linkedList) => {
-    let numbers = [];
-    const recurse = (node) => {
-      numbers.push(node.val.toString());
-      if (node.next !== null) {
-        recurse(node.next);
-      }
-    }
-    recurse(linkedList);
-    
-    numbers = numbers.reverse().join('');
-    return Number(numbers);
-  }
+  recurse(linkedList);
+  
+  numbers = numbers.reverse().join('');
+  return Number(numbers);
+}
