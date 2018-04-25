@@ -43,4 +43,9 @@ Purpose of this table is to quickly associate integers and bits with approx valu
 
 ### Linked Lists Ch. 2
 
-
+- Single v doule
+- Drawback -- no constant time access to particular index
+- Benefit -- add and remove items from the beginning in constant time
+- Also easy to remove a node without shifting things over 
+- Be familiar with "runner" technique, two pointers, tortoise/hare, or weaving
+- Recursive problems are common (take O(n) space)
