@@ -50,4 +50,17 @@ Purpose of this table is to quickly associate integers and bits with approx valu
 - Be familiar with "runner" technique, two pointers, tortoise/hare, or weaving
 - Recursive problems are common (take O(n) space)
 
-- Finished Problems 1.1 - 1.3
+- Finished Problems 2.1 - 2.3
+
+### Stacks and Queues Ch. 3
+- STACK
+- pop, push, peek, isEmpty
+- no constant time access to ith item, but constant time add and removes to the top
+- can be implemented with an array or a linkedlist 
+- can be useful for backtracking in recursion
+- QUEUE
+- add to end, remove first, peek at top, isEmpty
+- queues can also be implemented with linkedlist, as long as add/remove are from opposite sides
+- queues are good for BFS
+
+- Finished Problems 3.1 - 3.3 
