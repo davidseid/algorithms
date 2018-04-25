@@ -1,0 +1,63 @@
+### vertical partitoning
+
+### horizontal partitioning
+
+### how is data integrity insured in case of failure for sql database
+- persisted on disk
+- redo/undo log in queue
+
+### how do we improve performance of sql db architecture
+- index the data
+- sharding
+- master slave relationship
+- partitioning processes or sharding
+
+### what makes no sql more scalable than a sql database
+- don't have foreign keys or concerns about atomicity (needing to update rows on sepearate tables or servers)
+- SQL: ACID (all or nothing, no altering structure, transactions don't contend with one another, permanent)
+  - acid comes at performance cost, but it is highly reliable
+- NoSQL: BASE (support partial failures, values may change consistency is eventual, )
+
+### advantages of SQL database
+- acidity
+- store relational data for complex information
+- efficient and quick, long established standards
+- powerful means to combine separate dta to express complex relationships
+
+### primary v foreign key
+- primary keys are unique, foreign keys refer to another table
+
+### normalized v denormalized
+- denormalized data tends to be more optimized for time than space
+- normalized databases involve multiple tables
+
+### inner v outer join
+- union v intersection
+
+### db optimizations
+- in memory dbs (SAP HANA, TimesTen, Aerospike, Redis)
+- optimized search engines (elasticsearch, apache Solr, CrateDB)
+- realtime subscribing (rethinkDB, OrientDB)
+- Realtime sync (firebase, pubnub, pusher)
+
+### in memroy dbs
+- relies on main memory storage
+- faster than disk, non invasive and small
+- cost more, lack of expertise, smaller size
+
+### graphql
+- query language for apis, backed by facebook
+- define data you want
+- replace multiple rest requests
+- advantages over REST
+  - easy to consume or produce
+  - types
+- queries retrieve data, mutations modify them
+- resources: graphqlhub.com \ howtographql.com 
+
+### HTML5
+- canvas
+- tags, support for video
+- supports offline data storage (local and session storage)
+- data attributes
+- div is block and span is inline

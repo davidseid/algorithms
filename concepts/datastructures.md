@@ -49,3 +49,5 @@ Purpose of this table is to quickly associate integers and bits with approx valu
 - Also easy to remove a node without shifting things over 
 - Be familiar with "runner" technique, two pointers, tortoise/hare, or weaving
 - Recursive problems are common (take O(n) space)
+
+- Finished Problems 1.1 - 1.3
