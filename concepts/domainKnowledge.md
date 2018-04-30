@@ -1,4 +1,5 @@
 ### vertical partitoning
+need to learn about this
 
 ### horizontal partitioning
 
@@ -61,3 +62,9 @@
 - supports offline data storage (local and session storage)
 - data attributes
 - div is block and span is inline
+
+### CSS3
+- border-radius, box-shadow and text-shadow
+- transform / animate
+- flexbox
+- CSS grid! 
