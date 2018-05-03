@@ -1,39 +1,13 @@
 var isMatch = function(s, p) {
+  if (p.length === 0) {
+    return s.length === 0;
+  } 
 
-  // new attempt
+  let firstMatch = (s.length !== 0 && (p[0] === s[0] || p[0] === '.')); 
 
-
-
-
-
-
-
-
-  // let sIndex = 0;
-  // for (let i = 0; i < p.length; i++) {
-  //   let pChar = p[i];
-  //   let pNext = p[i + 1];
-
-  //   if (pChar === s[sIndex] && pNext === '*') {
-  //     while (s[sIndex] === pChar) {
-  //       sIndex++;
-  //     }
-  //   } else if (pChar >= 'a' && pChar <= 'z' && pChar !== s[sIndex] && pNext === '*') {
-  //     sIndex++;
-  //   } else if (pChar === s[sIndex] && pNext !== '*') {
-  //     sIndex++;
-  //   } else if (pChar === '.' && pNext === '*') {
-  //     let sChar = s[sIndex];
-  //     while (s[sIndex] === sChar) {
-  //       sIndex++;
-  //     }
-  //   } else if (pChar === '.' && pNext !== '*') {
-  //     sIndex++;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
-  // return true;
-
+  if (p.length >= 2 && p[1] === '*') {
+    return (isMatch(s, p.substring(2)) || firstMatch && isMatch(s.substring(1), p));
+  } else {
+    return (firstMatch && isMatch(s.substring(1), p.substring(1)))
+  }
 };
