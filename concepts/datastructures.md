@@ -64,3 +64,5 @@ Purpose of this table is to quickly associate integers and bits with approx valu
 - queues are good for BFS
 
 - Finished Problems 3.1 - 3.3 
+
+### Bit Manipulation
