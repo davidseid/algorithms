@@ -82,3 +82,11 @@ all calls are stateless; nothing can be retained by the RESTful service between 
 ### PUT v PATCH
 
 ### 
+
+## Redis v memcache
+Redis tends to be superior, but there are certain use cases where memcache may be better
+Main differences are:
+- Serialization - Memcached is optimal if you are simply storing html strings, it is slightly faster with this but it does not have the ability to store native data, it serializes instead. Redis on the other hand can store serialized data, but the associated meta data may take slightly longer for very simple use cases.
+- Scaling -- Memcached is slightly better here because it is multithreaded so it quickly scales but loses data potentially. Redis is mostly single-threaded but can be expanded with clustering, just slightly mroe complex to set up.
+- Data eviction - Redis is better because you can control how it evicts data, whereas Memcached is mainly LRU
+
