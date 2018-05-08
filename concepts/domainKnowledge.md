@@ -68,3 +68,17 @@ need to learn about this
 - transform / animate
 - flexbox
 - CSS grid! 
+
+### HTTP
+
+### SOAP
+Simple Object Access Protocol 
+
+### RESTful APIs
+representational state transfer (REST) technology
+RFC 2616 
+all calls are stateless; nothing can be retained by the RESTful service between executions
+
+### PUT v PATCH
+
+### 
