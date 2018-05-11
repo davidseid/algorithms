@@ -87,3 +87,25 @@ Purpose of this table is to quickly associate integers and bits with approx valu
   - 10101 = num , i = 4 
   1 << i = 10000
   - 10101 & 10000 = 10000 != 0, therefore true = 1, return true. 
+- Set Bit
+  - setBit(num, i) {
+    return ((num | (1 << i));
+  } 
+  - num = 10101, i = 4 
+  - return 10101 | 10000
+  - little unclear, seems like that only creates a 1 in the bit place
+- Clear Bit 
+  - clearBit(num, i) {
+    mask = ~(i << i)
+    return mask & num;
+  }
+- UpdateBit 
+  - updateBit(num, i, bitIs1) {
+    value = bitIs1 ? 1 : 0;
+    mask = ~(1 << 1);
+    return num & mask || value << i  
+  }
+- In summary, getBit works by making a mask with a 1 in the spot, performing an &, and returning whether that number != 0. 
+- setBit works by creating a mask and performing an OR to keep all the other bits the same but converting i to 1
+- clearBit works by creating an inverse mask and performing an AND
+- updateBit works by creating an inverse mask to clear the bit, and then change it to either 1 or 0 with a new mask based on the input
