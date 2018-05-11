@@ -109,3 +109,55 @@ Purpose of this table is to quickly associate integers and bits with approx valu
 - setBit works by creating a mask and performing an OR to keep all the other bits the same but converting i to 1
 - clearBit works by creating an inverse mask and performing an AND
 - updateBit works by creating an inverse mask to clear the bit, and then change it to either 1 or 0 with a new mask based on the input
+
+### Object-Oriented Design
+
+Step 1: Handle ambiguity
+  - Ask clarifying questions, don't make assumptions
+  - Ask WHO is going to use it and HOW they are going to use it
+  - Possibly who what when where why and how
+  - This helps you develop the API / methods
+  - OOD for a coffee maker. 
+    - Who - someone who wants coffee
+    - How - fill with water, fill with coffee, press button
+    - What - coffee, water, maker
+    - When - morning every day
+    - Why - for energy and as a ritual
+    - Where - in the kitchen
+  - CoffeeMaker - fill with water, fill with coffee, start brew
+
+Step 2: Define the core objects
+  - For a restaurant, table, guest, party, order, meal, employee, server, host
+
+Step 3: Analyze Relationships
+  - Which objects are members of others? Do they inherit? Many to many or one to many?
+
+Step 4: Investigate Actions
+  - Party goes to restaurant, guest requests table from host, host looks up reservation, etc.
+
+Design Patterns 
+  - Singleton Class:
+    - Class has only one instance, ensures access to the instance through the app
+    - Useful where global object with exactly one instance
+    - May be an antipattern because it interferes with unit testing
+
+  - Factory Method:
+    - A factory takes a parameter telling it which class to instantiate
+    - Uses a more abstract creator class
+    - Ex: CardGame, createCardGame(type of Game)
+
+Deck of Cards:
+  -  Ambiguities: 
+    - Who: gameplayer
+    - How: uses a full deck of cards to play blackjack
+    - 52 cards, with two jokers
+  - Core Objects:
+    - Card, Suits, Numbers, Jokers, Players, Dealer, Deck, Game, Hand
+  - Relationships:
+    - Card object takes suit and number to build a card, joker has no number
+    - Players have hands
+    - Deck hass cards
+    - Game has players, dealer, and decks
+  - Actions:
+    - Hit, Stay, Deal
+  
