@@ -160,4 +160,57 @@ Deck of Cards:
     - Game has players, dealer, and decks
   - Actions:
     - Hit, Stay, Deal
-  
+
+### Recursion and Dynamic Programming
+
+Bottom Up Approach
+- Start with base case, then two, three, etc.
+- build one case off the other
+
+Top Down Approach
+- How do we divide up this problem? 
+
+Half and Half Approach
+- Divide data set in half
+- Binary search, merge sort
+
+Recursive v Iterative
+- Recursive algorithms can be space inefficient because of call stack
+- All recursive problems can be implemented iteratively, but sometimes much more complex
+
+Dynamic Programming
+- Take a recursive algorithm and find the overlapping subproblems (repeated calls);- Cache those results
+- Top Down Dynamic Programming is also called memoization, and bottom up is dynamic programming
+- nth Fibonacci is a simple example 
+
+Fibonacci Numbers
+- fibonacci(n) {
+  // 1 1 2 3 5 8 13 21
+  // fib(1) = 1
+  if n === 1
+    return 1
+  if n === 0
+    return 0;
+  else 
+    return fib(n -1) + fib(n - 2);
+}
+
+- with dynamic programming
+
+fibonnaci(n) {
+  let memo = {};
+  memo[0] = 0;
+  memo[1] = 1;
+
+  if (n === 0) {
+    return 0;
+  }
+  if (n === 1) {
+    return 1;
+  }
+
+  for (let i = 2; i < n; i++) {
+    memo[i] = memo[i - 1] + memo[i - 2];
+  }
+  return memo[n - 1] + memo[n - 2];
+}
