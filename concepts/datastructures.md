@@ -77,3 +77,13 @@ Purpose of this table is to quickly associate integers and bits with approx valu
   - Arithmetic divides by two, logical shift is more visual
   - Logical = >>> 
   - Arithmetic = >> 
+  - Logical shifts right and adds a 0, Arithmetic shifts right and adds the sign 1 or 0 depending
+- Get Bit Method
+  - given a num and i
+  - 1 -> 0001000 -> mask that with AND on the number, that clears all the non 1 numbers, and the result comparison is either 0 or 1
+  getBit(num, i) {
+    return ((num & (1 << i)) != 0);
+  }
+  - 10101 = num , i = 4 
+  1 << i = 10000
+  - 10101 & 10000 = 10000 != 0, therefore true = 1, return true. 
