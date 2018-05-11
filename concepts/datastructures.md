@@ -230,3 +230,33 @@ fibonacci(n) {
 }
 
 ### System Design and Scalability
+
+General Tips:
+- Communicate
+- Broad first
+- Whiteboard draw
+- Acknowledge concerns
+- Don't assume too much
+- State any you make
+- Estimate!
+- Drive
+
+Design Steps:
+
+1. Scope
+  - List features and use cases (6Ws)
+2. Reasonable Assumptions
+  - Out of date, etc
+3. Major Components
+  - Diagram
+  - Servers, data, client, workers
+  - Show flow (disregard scalability first)
+4. Identify Key Issues
+  - Bottlenecks/challenges
+5. Redesign
+  - Adjust on whiteboard to accommodate challenges 
+  - Be aware of drawbacks
+
+Algorithms that Scale Steps:
+
+1. 
