@@ -66,4 +66,14 @@ Purpose of this table is to quickly associate integers and bits with approx valu
 - Finished Problems 3.1 - 3.3 
 
 ### Bit Manipulation
-- 
+- Twos Complement for negatives 
+  - Positive numbers are represented as themselves
+  - Negative are the two's complement of its absolute value with 1 sign to indicate negative
+  - Example: -3 as a 4 bit number 
+    - abv value is 3, 4 bit comparison is 2^3 = 8
+    - 8 - 3 = 5, which is 101, meaning the negative is 1101.
+    - or invert bits and add 1 11 = 3 011 --> 100 + 1 = 101 -> 1101
+- Arithmetic v Logical Shift
+  - Arithmetic divides by two, logical shift is more visual
+  - Logical = >>> 
+  - Arithmetic = >> 
