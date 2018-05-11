@@ -214,3 +214,17 @@ fibonnaci(n) {
   }
   return memo[n - 1] + memo[n - 2];
 }
+
+- with dp but not storing unnecessary info
+
+fibonacci(n) {
+  let a = 0;
+  let b = 1;
+
+  for (let i = 2; i < n; i++) {
+    let c = a + b;
+    let a = b;
+    let b = c;
+  }
+  return a + b;
+}
