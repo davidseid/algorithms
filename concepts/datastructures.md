@@ -259,4 +259,52 @@ Design Steps:
 
 Algorithms that Scale Steps:
 
-1. 
+1. Ask questions
+2. Make Believe, remove constraints first to get a general solution outline
+3. Get Real 
+  - think about how you would realistically divide the data
+4. Solve Problems
+  - Poke holes in your solution and try to solve it
+
+Key Concepts
+
+- Horizontal v Vertical Scaling
+- Load Balancing 
+- Database denormalization 
+  - Denormalization avoids joins
+  - NoSQL can also help with that
+- Database partitioning (sharding)
+  - vertical partitioning
+    - partition by feature
+    - drawback is might need to repartition
+  - key-based partitioning
+    - expensive to shift if num servers changes
+  - directory based
+    - maintain a lookup table
+    - single point of failure
+    - constantly accessing it hurts performance
+    - allows for flexible servers
+Caching
+  - Key value pair 
+  - can cache data or html
+Asynchronous Processing
+  - Slow -> async
+  - Speed v correctness tradeoffs
+Networking metrics
+  - bandwidth 
+    - max amount of data in unit of time bits per second or gB/s
+  - throughput
+    - actual amount in given time
+  - latency
+    - how long it takes for data transfer
+MapReduce
+  - program to process large amounts of data
+  - map makes a kv pair
+  - reduce takes a key and set of values and reduces them in some way, emitting a new key and value to be reduced
+  - allows for processing in parallel
+Considerations
+  - Failures
+  - Availability and Reliability
+  - Read v write
+  - Security
+No Perfect System
