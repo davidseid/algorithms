@@ -308,3 +308,4 @@ Considerations
   - Read v write
   - Security
 No Perfect System
+  - lots of ways to solve a problem
