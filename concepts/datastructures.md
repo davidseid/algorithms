@@ -328,4 +328,10 @@ Explanation: Child's algorithm, simple but inefficient. Repeatedly loop through 
 
 Runtime: O(n log(n)) 
 Memory: Depends
-Explanation: Merge sort divides the array in half, sorts each half, then merges them back together. 
+Explanation: Merge sort divides the array in half, sorts each half, then merges them back together. Each has the same sort applied to it. Eventually you just merge two single element arrays. The merge does the heavy lifting. 
+
+#### Quick Sort
+
+Runtime: O(n log(n)) or O(n^2) in worst case
+Memory: O(log(n))
+Explanation: 
