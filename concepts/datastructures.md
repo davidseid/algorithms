@@ -367,3 +367,30 @@ Practicality: Make sure testing plans are realistic
 
 #### Testing Software
 
+Manual v Automated Testing are both important
+Black box v white box, degree to which we reach in and test individual components
+
+1. Black box or white box? 
+2. Who will use it and why?
+3. Use cases? 
+4. Bounds of use?
+5. Stress or failure conditions?
+6. Test cases? How to perform?
+
+#### Testing a function
+
+Validating input and output, discuss assumptions
+
+1. Define test cases
+  - Normal case
+  - Extremes
+  - Null or illegal input
+  - Strange input
+2. Define expected result
+3. Write test code
+
+#### Troubleshooting
+
+1. Understand scenario
+2. Break down problem
+3. Create specific, manageable tests
