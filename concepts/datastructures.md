@@ -346,3 +346,24 @@ Unlike comparison sorting algorithms which cannot perform better than O(n log n)
 #### Searching Algorithms
 
 Binary search is a good example to know, but think beyond it to consider leveraging binary trees or hash tables. 
+
+### Testing
+
+Big Picture: What is the point, what are tests to prioritize. 
+
+Fit: Testing interactions with ecosystem. Integration
+
+Organization: Be systematic about categorizing and identifying tests
+
+Practicality: Make sure testing plans are realistic
+
+#### Real World Object
+
+1. Who uses it and why?
+2. What are the use cases?
+3. What are the bounds of use?
+4. Stress and failure conditions?
+5. How would you perform the testing?
+
+#### Testing Software
+
