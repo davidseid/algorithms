@@ -309,3 +309,8 @@ Considerations
   - Security
 No Perfect System
   - lots of ways to solve a problem
+
+### Sorting and Searching 
+
+#### Bubble Sort
+
