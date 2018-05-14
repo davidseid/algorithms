@@ -318,3 +318,13 @@ Runtime: O(n^2)
 Memory: O(1)
 Explanation: Repeatedly loop from beginning to end, swapping swapping pairs that are out of order. The smaller items bubble up to the beginning of the list. 
 
+#### Selection Sort
+
+Runtime: O(n^2)
+Memory: O(1)
+Explanation: Child's algorithm, simple but inefficient. Repeatedly loop through looking for the smallest, and move it to the front. 
+
+#### Merge Sort
+
+Runtime: O(n log(n)) 
+Memory: Depends
