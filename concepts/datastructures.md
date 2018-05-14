@@ -314,3 +314,7 @@ No Perfect System
 
 #### Bubble Sort
 
+Runtime: O(n^2)
+Memory: O(1)
+Explanation: Repeatedly loop from beginning to end, swapping swapping pairs that are out of order. The smaller items bubble up to the beginning of the list. 
+
