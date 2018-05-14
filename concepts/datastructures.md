@@ -328,3 +328,4 @@ Explanation: Child's algorithm, simple but inefficient. Repeatedly loop through 
 
 Runtime: O(n log(n)) 
 Memory: Depends
+Explanation: Merge sort divides the array in half, sorts each half, then merges them back together. 
