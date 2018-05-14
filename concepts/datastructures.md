@@ -334,4 +334,13 @@ Explanation: Merge sort divides the array in half, sorts each half, then merges 
 
 Runtime: O(n log(n)) or O(n^2) in worst case
 Memory: O(log(n))
-Explanation: 
+Explanation: Use a random element to partition the array. Sorting could be slow because no guarantee of efficient selection of partitioning element. 
+
+#### Radix Sort 
+
+Runtime: O(kn)
+Explanation: Sorts for integers mainly, takes advantage of fact that integers have a finite number of bits. Iterate through each digit of the number, grouping numbers by digit. 
+
+Unlike comparison sorting algorithms which cannot perform better than O(n log n), radix has a runtime of O(kn), where n is the number of elements and k is the number of passes of the sorting algorithm. 
+
+#### Searching Algorithms
