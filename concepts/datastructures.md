@@ -344,3 +344,5 @@ Explanation: Sorts for integers mainly, takes advantage of fact that integers ha
 Unlike comparison sorting algorithms which cannot perform better than O(n log n), radix has a runtime of O(kn), where n is the number of elements and k is the number of passes of the sorting algorithm. 
 
 #### Searching Algorithms
+
+Binary search is a good example to know, but think beyond it to consider leveraging binary trees or hash tables. 
