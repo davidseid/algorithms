@@ -90,3 +90,17 @@ Main differences are:
 - Scaling -- Memcached is slightly better here because it is multithreaded so it quickly scales but loses data potentially. Redis is mostly single-threaded but can be expanded with clustering, just slightly mroe complex to set up.
 - Data eviction - Redis is better because you can control how it evicts data, whereas Memcached is mainly LRU
 
+## Redux
+First Principle: All state management is concentrated in a single place
+Second Principle: The state is read only, can only be changed through dispatching actions
+Third Principle: It is essential to use pure functions when making changes to the state
+
+Reducers take the old state and an action to return a new state, which is a new object, not a mutated version of the original. However, it can use the old references if they don't change, that helps make it fast.
+
+createStore needs to be called with the reducer that controls it
+store has a getState() and a dispatch(action) methods, as well as subscribe(callback) in order to update the UI
+
+### Reselect
+Reselect is special because whereas react does shallow comparisons when updating state (and will therefore make a new array when all the inner elements of an array are the same), the reselect will look at each of the values as it selects the state and if there are no changes it will use memoization to avoid computing and just use the old state.
+
+the createSelector joins together the different states, and combines them into a single selector at the end.
