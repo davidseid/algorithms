@@ -1,35 +1,26 @@
-const findTallestStack = (availBoxes, currStack = [], currHeight = 0, maxHeight = 0) => {
+const findTallestStack = (availBoxes, currHeight = 0, maxHeight = 0) => {
   
-  if (availBoxes.length === 0) {
-      if (currHeight > maxHeight) {
-          maxHeight = currHeight;
-      }
+  if (currHeight > maxHeight) {
+      maxHeight = currHeight;
   }
-
   for (let i = 0; i < availBoxes.length; i++) {
-      let nextStack = currStack.slice();
-      let nextHeight = currHeight;
-      let chosenBox = availBoxes[i];
-      nextStack.push(chosenBox);
-      nextHeight += chosenBox.h;
-      let minH = chosenBox.h;
-      let minW = chosenBox.w;
-      let minL = chosenBox.l;
+      let remainingBoxes = getRemainingBoxes(availBoxes[i], availBoxes);
 
-      let remainingBoxes = [];
-
-      for (let j = 0; j < availBoxes.length; j++) {
-          let boxToCheck = availBoxes[j];
-          if (boxToCheck.l > minL && boxToCheck.w > minW && boxToCheck.h > minH) {
-              remainingBoxes.push(boxToCheck);
-          } 
-      }
-
-      maxHeight = findTallestStack(remainingBoxes.slice(), nextStack, nextHeight, maxHeight);
+      maxHeight = findTallestStack(remainingBoxes, currHeight + availBoxes[i].h, maxHeight);
   }
 
   return maxHeight;
+}
 
+const getRemainingBoxes = (topBox, availableBoxes) => {
+  let result = [];
+  for (let i = 0; i < availableBoxes.length; i++) {
+    if (availableBoxes[i].h > topBox.h && availableBoxes[i].l > topBox.l && availableBoxes[i].w > topBox.w) {
+      result.push(availableBoxes[i]);
+    }
+  }
+
+  return result;
 }
 
 class Box {
