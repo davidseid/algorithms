@@ -1,17 +1,13 @@
 const countAndSay = (n) => {
-  // initiate the first term n === 1 return 1; 
-  // for each in n, update the result, at the end return the value;
-
   let result = "1";
   if (n === 1) return result;
   let nextResult = ''; 
   
-  for (let i = 1; i <= n; i++) {
+  for (let i = 1; i < n; i++) {
     nextResult = getNextIteration(result);
     result = nextResult;
   }
   return result;
-
 }
 
 const getNextIteration = (lastIteration) => {
@@ -19,18 +15,21 @@ const getNextIteration = (lastIteration) => {
   let count = 0;
   let nextIteration = '';
 
-  for (let i = 0; i < lastIteration.length; i++) {
-    if (lastIteration[i] === num) {
+  for (let j = 0; j < lastIteration.length; j++) {
+    if (lastIteration[j] === num) {
       count++;
     } else {
       nextIteration += count;
       nextIteration += num;
-      num = lastIteration[i];
-      count = 0;
+      num = lastIteration[j];
+      count = 1;
     }
+  }
+
+  if (count > 0) {
+      nextIteration += count;
+      nextIteration += num;
   }
 
   return nextIteration;
 }
-
-console.log(countAndSay(4));
