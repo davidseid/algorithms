@@ -35,30 +35,52 @@
 - Client 
 - Web Server
 - Read API (for viewing particular subset of data)
+  - If we want to sort by volatility, will need to index stocks by that, as well as ticker
+  - User supplies simple get all, or options to filter the data
 - Write API (for watching stocks)
+  - User supplies a ticker or tickers to add the ids to the user table
 - Login API (for connecting client to account)
-- Database 
+  - Track cookie for login info
+  - If none passed in cookie, prompt user for login and password
+  - Or if new, give sign in option
+- SQL Database
+- Worker to Update Datastore each data
 
 ## Database Schema
 - Tables
-  - Users
-    - Id
-    - Username
-    - Password
-  - Stocks
-    - Id
-    - Ticker 
-    - EOD Date
-    - Open
-    - Close
-    - High 
-    - Low
+  - Users -> 16 bytes
+    - Id: INT -> 4 bytes
+    - Username -> 8 bytes
+    - Password -> 8 bytes
+  - Stocks -> 56 bytes * 5k -> 250k bytes -> 250M
+    - Id -> 8 bytes
+    - Ticker -> 8 bytes
+    - EOD Date -> 8 bytes
+    - Open -> 8 bytes
+    - Close -> 8 bytes
+    - Diff -> 8 bytes
+    - High -> 8 bytes
+    - Low -> 8 bytes
   - Users_Stocks
     - Users_ID
     - Stock_ID
 
 ## Bottlenecks
+- All 1000 users pinging servers at same time
+- Sorting by certain information
 
 ## Redesign
+- Storing all data on the client, potentially might need pagination
+- Indexing
+  - Index User by username
+  - Index Stocks by Ticker, Diff
 
 ## Failures and Security
+- Mainly read heavy 
+- Traffic at max can only be 1000 RPS, not too bad
+- Database can be overrun potentially, in which case we can have duplicates or do some database sharding to partition parts of the datastore
+- Availability: 
+  - The information should always be available and always be up to date, althoug it is only updated once per day.
+- Reliability: 
+  - 100% 
+- Maintenance: Load balancer, cache
