@@ -1,17 +1,4 @@
 const removeNthFromEnd = (head, n) => {
-  let counter = 0;
-  let pointer = head;
-
-  while (pointer !== null) {
-    pointer = pointer.next;
-    counter++;
-  }
-
-  let target = n - counter;
-
-  let newCounter = 0;
-  while ()
-
 
 }
 
