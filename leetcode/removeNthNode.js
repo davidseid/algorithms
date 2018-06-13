@@ -3,14 +3,28 @@ const removeNthFromEnd = (head, n) => {
   // go through again and stop at the one just before the nth from the end
   // point its next to the one just after the nth
   // return the head
+  let count = getNodeCount(head);
+  let targetCount = count - n;
 
-  let count = 0;
+  count = 0; 
+  let node = head;
+  while (count !== targetCount) {
+    node = node.next;
+    count++;
+  }
+  
+  node.next = node.next.next;
+  return head;
+}
+
+const getNodeCount = (head) => {
+  let count = -1;
   let node = head;
   while (node !== null) {
     node = node.next;
     count++;
   }
-  console.log(count);
+  return count;
 }
 
 class ListNode {
@@ -26,4 +40,4 @@ head.next.next = new ListNode(3);
 head.next.next.next = new ListNode(4);
 head.next.next.next.next = new ListNode(5);
 
-removeNthFromEnd(head, 2);
+console.log(removeNthFromEnd(head, 2));
