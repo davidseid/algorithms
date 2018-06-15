@@ -46,19 +46,19 @@ const reverseKGroup = (head, k) => {
   let nodes = [];
   let node = head;
   while (count > 0) {
-    if (node === null || node.next === null) return head;
+    if (node === null) return head;
     nodes.push(node);
     node = node.next;
     count--;
   }
 
-  let a = head;
-  let b = head.next;
-  let c = head.next.next;
-
-  head = b;
-  b.next = a;
-  a.next = reverseKGroup(c, k);
+  head = nodes[nodes.length - 1];
+  let newHead = head.next;
+  let tail = nodes[0];
+  for (let i = nodes.length - 1; i > 0; i--) {
+    nodes[i].next = nodes[i - 1];
+  }
+  tail.next = reverseKGroup(newHead, k);
 
   return head;
 }
