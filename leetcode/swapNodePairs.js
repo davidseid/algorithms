@@ -13,7 +13,29 @@ const swapPairs = (head) => {
     head.next = temp;
     return newHead;
   }
+  
+  let a = head; 
+  let b = head.next;
+  let c = head.next.next;
 
+  let newHead = b;
+  let d;
+
+  while (c !== null) {
+    b.next = a;
+    d = c.next;
+    b = c;
+    c = d;
+    a.next = c;
+    a = b; 
+    b = c;
+    c = d.next;
+  }
+
+  b.next = a;
+  a.next = null;
+
+  return newHead;
 
 }
 
@@ -27,6 +49,6 @@ class List {
 let newHead = new List(1);
 newHead.next = new List(2);
 newHead.next.next = new List(3);
-// newHead.next.next.next = new List(4);
+newHead.next.next.next = new List(4);
 
 console.log(swapPairs(newHead));
