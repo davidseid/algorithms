@@ -7,20 +7,33 @@
   use subtraction, recursion, or bitmath
 
   ex. 10, 3
-  while 3 > 0
+
+  product = 0
+  result = 0
+
+  result = 1
+  product = 3
+  r = 2
+  p = 6
+  r = 3 
+  p = 9
   
 
 */
 
-const divide = (dividend, divisor, count = divisor) => {
-  console.log(dividend, divisor, count);
-  if (dividend === 0) return 0;
-
-  if (count === 0) return dividend;
-
-  dividend = divide(dividend - divisor, divisor, count - 1);
-
-  return dividend;
+const divide = (dividend, divisor) => {
+  let negative = false;
+  if (dividend < 0 || divisor < 0) negative = true;
+  dividend = Math.abs(dividend);
+  divisor = Math.abs(divisor);
+  let result = 0;
+  let product = 0;
+  while ((dividend - product) > divisor) {
+    result++;
+    product += divisor;
+  }
+  if (negative) result = 0 - result;
+  return result;
 }
 
-console.log(divide(10, 3));
+console.log(divide(7, -3));
