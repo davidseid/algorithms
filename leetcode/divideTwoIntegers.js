@@ -8,32 +8,34 @@
 
   ex. 10, 3
 
-  product = 0
-  result = 0
-
-  result = 1
-  product = 3
-  r = 2
-  p = 6
-  r = 3 
-  p = 9
+  // 1010
+  // 0011
+  
+  
   
 
 */
 
 const divide = (dividend, divisor) => {
   let negative = false;
-  if (dividend < 0 || divisor < 0) negative = true;
+  if (dividend === divisor) return 1;
+  if (divisor === 1) return dividend;
+  if (dividend < 0 ^ divisor < 0) negative = true;
   dividend = Math.abs(dividend);
   divisor = Math.abs(divisor);
-  let result = 0;
+  
   let product = 0;
-  while ((dividend - product) > divisor) {
+  let result = 0;
+  while ((dividend - product) >= divisor) {
     result++;
     product += divisor;
   }
-  if (negative) result = 0 - result;
+
+  if (!negative && result > Math.pow(2, 31) - 1) return Math.pow(2, 31) - 1;
+  if (negative && result > Math.pow(2, 30)) return 0 - Math.pow(2, 30);
+
+  if (negative) return 0 - result;
   return result;
 }
 
-console.log(divide(7, -3));
+console.log(divide(12, -3));
