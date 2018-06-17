@@ -133,4 +133,56 @@ Processes
 
   ### Graph Algorithm Notes
 
+  - BFS search can gurantee shortest path if weighted graph
+  - If unweighted, we can still find shortest path using BFS and a priority queue as opposed to a FIFO queue. 
+  - The priority of each node in the queue is its distance from teh start node. 
+  - This is Dijkstra's algorithm, only works with positive edges.
   
+  - Queue's can be implemented with two stacks. 
+  - Priority queue's can be implemented with a binary heap
+  - DFS usually takes less memory than BFS, because you immediately jump into the call stack as oppposed to storing up a queue of order.
+  - A* is a modification of Dijkstra's algorithm which uses a heuristic added to the distance from the start node as the priority in the priroity queue.
+  - Floyd-Warshall algorithm is good for shortest paths on a graph with negative edge weights.
+  - Dijkstra's algorithm can find the shortest path if some edges have weight 0.
+  
+
+### ArrayList resizing
+
+- Implementation depends, but generally has amortized constant time
+- Probably doubles size and copies over.
+
+### Hash Tables
+- Insert is O(1), Update is O(1), Retrieve is O(1);
+
+### BST
+- Insertion, Search, and Delete are all O(logn)
+- Two common balancing mechanisms are AVL and Red Black Trees
+
+### Red Black Trees
+- Paths from the root to a leaf can't differ by more than a factor of two.
+- Good enough to ensure height is only a constant multiple of log(n)
+- All node are red and black
+- Red's can't connect to other reds
+- Same numberr of black nodes on every path from root to leaf.
+- Max height is alternating red and black, min height is when you have a bunch of black nodes in a row.
+
+### BTrees
+- Memory Tradeoffs:
+  - Huge between speed and size in memory
+  - SRAM is fast but expensive
+  - Great for on disk storage because of huge branching factor
+  - Minimizes the number of blocks to read on lookup
+  - Common in databases, file systems, in mem data structures
+
+
+### Memory Hierarchy
+1. Register -> 256B - 8KB -> .25 - 1 ns
+2. L1 Cache -> 16KB - 64KB -> 1ns - 5ns
+3. L2 Cache -> 1MB - 4MB -> 5ns - 25ns
+4. Main Memory -> 4GB - 256GB -> 25ns - 100ns
+5. Hard Disk -> 1TB+ -> 3 - 10ms
+6. Network/Cloud -> Lots -> 10 - 2000ms
+
+### AVL Tree
+  - Two subtrees have heights that differ by no more than one
+  - 
