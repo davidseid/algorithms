@@ -104,3 +104,29 @@ store has a getState() and a dispatch(action) methods, as well as subscribe(call
 Reselect is special because whereas react does shallow comparisons when updating state (and will therefore make a new array when all the inner elements of an array are the same), the reselect will look at each of the values as it selects the state and if there are no changes it will use memoization to avoid computing and just use the old state.
 
 the createSelector joins together the different states, and combines them into a single selector at the end.
+
+### Processes and Threads
+
+Processes
+  - Resource Ownership
+    - Includes a virtual address space to hold process image
+    - Prevents unwanted interference
+
+  - Scheduling/Execution
+    - Has an execution path that may be interleaved with other processes
+    - Has an execution state (running, ready, etc)
+    - Scheduled and dispatched by the OS
+
+  - Unit of dispatching is a thread or lightweight process
+  - unit of resource ownership is a process or task
+  - multithreading is the ability of an OS to support multiple concurrent pahts of execution within a signle process
+
+  - Single threaded means single thread per process
+  - Java runtime environment is a one process multiple thread system
+
+  Threads
+    - have an execution state
+    - save thread context, have per thread static storage
+    - have access to shared memory of its process
+    - Thread states are: running, ready, blocked
+    - Thread operations are: spawn, block, unblock, finish
