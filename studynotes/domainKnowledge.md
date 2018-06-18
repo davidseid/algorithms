@@ -239,4 +239,34 @@ Processes
     - Enforce data integrity by using check constraints
 
 ### Database Indexes
-  - 
+  - Indexes speed up reads for the column they are on
+  - Make writes slower and increase memory requirements
+  - Often implemented with B trees
+  - Composite indexes 
+
+### SQL Explain
+  - Shows the query plan for any query
+  - Query plan is a tree of plan nodes
+  - Scan nodes at the bottom and return raw rows from table
+  - Different types of scan nodes
+  - EXPLAIN has one line for each node in the plan tree
+  - Planner tries to minimize total execution cost for the plan
+  - Planner shows its plans, somtimes a sequential scan with a filter
+  - Other times uses a Bitmap Heap Scan, or Bitmap index scan
+
+### Postgres Query Planning
+  - Understanding it helps you to optimize your database with indexes to improve performance
+  - Explain Generic, Analyze (actually runs), and Verbose (tay away)
+
+### NoSQL 
+  - Good for unstructured schemaless data
+  - Favors denormalization because of no joins
+  - Performance versus data loss tradeoff
+  - Very easy to scale NoSQL by adding nodes *
+
+### ORM is Object Relational Mapping
+  - Uses object oriented paradigm to query a database. 
+  - Makes it easier to use, but can drag performance
+  - Can protect you from SQL injection attacks
+
+### HTTP
