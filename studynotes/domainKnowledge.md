@@ -185,4 +185,12 @@ Processes
 
 ### AVL Tree
   - Two subtrees have heights that differ by no more than one
-  - 
+
+### MinHeap
+  - Essentially a complete binary tree
+  - Complete means a binary tree that all levels are fully filled except for the last
+  - Full tree means that each node has either 0 or 2 child nodes
+  - Methods include insert, extractMin. 
+  - Insert O(logn), place at bottom right, bubble up
+  - Extract Min, swap top and bottom right, remove bottom right, bubble down top
+  
