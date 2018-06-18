@@ -203,4 +203,40 @@ Processes
     - Form of BST maintains a dynamic set of ordered keys. 
 
 ### Normalization
-  -
+  - Primary Key
+    - Column with unique value for each row
+    - Each table should have one
+  - Foreign Key
+    - Define relationships between tables, match primary key
+  - Composite Key
+    - Key made of more than one column
+    - Prevent a table from using same combo twice
+    - Sounds like a key on a join table
+  - 1:1 Relationship
+    - can be useful for optimizations, but typically all one to one relationshps are on the same table
+  - 1:N (One to many)
+    - Links multiple rows in a child table to a single row in a parent, with a foreign key.
+  - N:M (Many to many)
+    - Creates a join table containing foreign keys to both parents
+  - Up to 3NF is normalized
+  - 1NF (First Normal Form)
+    - Tables must not contain repeating groups of data
+    - Don't have multiple identical columns or serialized info.
+    - Because we have an unknown number of phone numbers, we extract it to another table
+  - Second Normal Form (2NF)
+    - No field should only be partially dependent on any candidate key in the table.
+    - In other words, we don't want to worry about making sure multiple columns maintain consistency
+    - Must move these fields out of the table into own tables
+    - Creating FKs to link the new tables to the main tables
+  - Third Normal Form (3NF)
+    - Columns should depend only upon the primary key of the table
+    - Tying countries to people limits countries.
+  - Normalization is a design goal
+    - Can impact performance and resource conservation
+    - 1NF is essential, but others are case by case
+    - Generally 3NF is worthwhile as a minimum. 
+  - Denormalization can speed up reads
+    - Enforce data integrity by using check constraints
+
+### Database Indexes
+  - 
