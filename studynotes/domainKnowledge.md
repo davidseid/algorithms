@@ -306,4 +306,4 @@ Semaphores are created by Dijkstra
   - Monitors consist of a mutex lock and condition variables
 
 ### Readers-Writer Lock
-  - 
+  - Allows concurrent access for read only operations
