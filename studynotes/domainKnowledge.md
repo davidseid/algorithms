@@ -193,4 +193,14 @@ Processes
   - Methods include insert, extractMin. 
   - Insert O(logn), place at bottom right, bubble up
   - Extract Min, swap top and bottom right, remove bottom right, bubble down top
-  
+  - Asymptotically identical to BST, but consume less memory and faster in practice
+
+  ### Randomized Data Structures
+  - Involve tradeoffs to make partial judgments mroe quickly
+  - Bloom filter (stashes buckets, can quickly determine if something does not exist, but being sure it does is harder)
+  - Count-min sketches and Hyper Log Logs are similar i think
+  - Treap
+    - Form of BST maintains a dynamic set of ordered keys. 
+
+### Normalization
+  -
