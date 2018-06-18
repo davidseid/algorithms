@@ -12,15 +12,28 @@
 const nextPermutation = (nums) => {
   for (let i = nums.length - 1; i >= 0; i--) {
     let firstNum = nums[i];
-    for (let j = i; j >= 0; j--) {
+    for (let j = nums.length - 1; j > i; j--) {
       let secondNum = nums[j];
-      if (firstNum > secondNum) {
+      if (secondNum > firstNum) {
         nums[j] = firstNum;
-        for (let k = j; k < nums.length - 1; k++) {
-          let tmp = nums[k + 1];
-          nums[k + 1] = secondNum;
-          secondNum = tmp;
+        nums[i] = secondNum;
+        let start = i + 1;
+
+        while(start < nums.length) {
+          let minIndex = start;
+          for (let k = start; k < nums.length; k++) {
+            if (nums[k] < nums[minIndex]) {
+              minIndex = k;
+            }
+          }
+          if (minIndex !== start) {
+            let min = nums[minIndex];
+            nums[minIndex] = nums[start];
+            nums[start] = min;
+          }
+          start++;
         }
+
         return nums;
       }
     }
@@ -29,4 +42,4 @@ const nextPermutation = (nums) => {
   return nums;
 }
 
-console.log(nextPermutation([1, 2, 3]));
+console.log(nextPermutation([9,1,9,6,3,6,8,4,6,6,7,2,7,4,1,0,0])); 
