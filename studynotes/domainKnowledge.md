@@ -270,3 +270,40 @@ Processes
   - Can protect you from SQL injection attacks
 
 ### HTTP
+  - Application-level protocol
+  - Stateless
+  - TCP/IP Delivers HTML, images, query results
+  -  and media independent
+  - Content type using MIME type must be specified
+  - Web caching is a feature of HTTP to minimize network traffic
+  - Seems like a CDN
+  - Can be stored in Browswer cache, Intermediary proxy, reverse cache
+  - Websockets
+    - Uses same TCP/IP connection but bidirectional
+  - TCP v UDP (Transmission control v User Data)
+  - TCP , UDP is more of a broadcast, less secure
+  - TCP is connection, UDP is connectionless
+  - TCP is handshake, UDP is spamming
+  - TCP is high reliability, UDP is fast and efficient
+
+### Mutexes and Sempahores
+
+Semaphores are created by Dijkstra
+  - binary semaphore or counting semaphore
+  - controls access between threads to a shared resource
+  - problems include accidental release, deadlock, priority inversion, semaphore as a signal
+  - Mutex: Different from semaphore because of principle of ownership
+  - only the task that locks a mutex can unlock it.
+  - Mutex is safer than semaphore, but circular deadlock and non cooperation still possible.
+
+### Locks
+  - Advisory locks, each thread cooperates by acquiring the lock before accessing the corresponding data.
+  - A binary semaphore is a lock, 
+  - Atomic interactions such as test and set, fetch and add, compare and swap
+
+### Monitors 
+  - A synchronization that allows threads to have both mutal exclusion and the ability to wait block for a certain condition to become true.
+  - Monitors consist of a mutex lock and condition variables
+
+### Readers-Writer Lock
+  - 
