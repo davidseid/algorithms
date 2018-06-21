@@ -13,10 +13,20 @@
   return false if any fails, otherwise return true
 
 
-
-
-
 */
+
+const isValidUnit = (arr) => {
+  const numbers = {};
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] !== '.' && numbers[arr[i]]) {
+      return false;
+    } else {
+      numbers[arr[i]] = true;
+    }
+  }
+  return true;
+}
 
 
 const isValidSudoku = (board) => {
