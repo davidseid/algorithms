@@ -30,7 +30,21 @@ const isValidUnit = (arr) => {
 
 
 const isValidSudoku = (board) => {
+  
+  for (let i = 0; i < board.length; i++) {
+    let row = board[i];
+    if (!isValidUnit(row)) {
+      return false;
+    }
+  }
 
+  for (let i = 0; i < 9; i++) {
+    let column = [];
+    for (let j = 0; j < 9; j++) {
+      column.push(board[j][i]);
+    }
+    if (!isValidUnit(column)) return false;
+  }
 }
 
 const testInput = [
