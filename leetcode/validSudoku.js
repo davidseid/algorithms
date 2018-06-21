@@ -45,10 +45,27 @@ const isValidSudoku = (board) => {
     }
     if (!isValidUnit(column)) return false;
   }
+  
+  for (let rowStart = 0; rowStart < board.length; rowStart += 3) {
+    for (let colStart = 0; colStart < board.length; colStart += 3) {
+      let square = [];
+
+      for (let i = 0; i < 3; i++) {
+        let row = rowStart + i;
+        for (let j = 0; j < 3; j++) {
+          let col = colStart + j;
+          square.push(board[row][col]);
+        }
+      }
+      if (!isValidUnit(square)) return false;
+    }
+  }
+
+  return true;
 }
 
 const testInput = [
-  ["5","3",".",".","7",".",".",".","."],
+  ["8","3",".",".","7",".",".",".","."],
   ["6",".",".","1","9","5",".",".","."],
   [".","9","8",".",".",".",".","6","."],
   ["8",".",".",".","6",".",".",".","3"],
@@ -59,3 +76,4 @@ const testInput = [
   [".",".",".",".","8",".",".","7","9"]
 ];
 
+console.log(isValidSudoku(testInput));
