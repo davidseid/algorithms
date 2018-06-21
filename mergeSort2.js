@@ -1,7 +1,7 @@
 const mergeSort = (items) => {
 
   if (items.length === 1) {
-    return items[0];
+    return items;
   } else {
     let firstHalf = items.slice(0, Math.floor(items.length / 2));
     let secondHalf = items.slice(Math.floor(items.length / 2));
@@ -30,4 +30,8 @@ const merge = (arr1, arr2) => {
   } else {
     result = result.concat(arr2.slice(rightPointer));
   }
+
+  return result;
 }
+
+console.log(mergeSort([1, 4, 7, 2, 3, 0]));
