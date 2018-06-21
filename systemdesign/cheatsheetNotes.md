@@ -90,5 +90,41 @@
   - Durability?
 
 ### Web App System Design Requirements
+- Security (CORS)
+- CDN
+- Full Text Search
+  - Uses index to search text (Solr)
+- Progressive enhancement (Service workers)
+- Web workers
+- SSR
+- Asynch loading of assets
+- Minimizing network requests (bundling, graphql)
+- Developer productivity / tooling
+- Accessibility
+- Internationalization
+- Responsive design
+- Browser compatibility
 
+### WWorking components of Front End
+- Code
+  - HTML
+  - CSS
+  - OOD
+  - JS Frameworks
+  - Asset Delivery
+- Documentation
+  - Onboarding Docs
+  - Styleguide
+  - Architecture diagrams
+- Testing
+  - Pefromance testing
+  - Visual regression
+  - Unit testing
+  - end to end testing
+- Process 
+  - Git workflow
+  - Dependency management
+  - build systems
+  - deploy process
+  - CI
 
