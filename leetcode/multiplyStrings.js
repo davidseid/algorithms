@@ -5,7 +5,6 @@ const multiply = (num1, num2) => {
   return result.toString();
 }
 
-// multiply using charCodes/ /ß
 
 console.log(multiply("123456789", "987654321"));
 
