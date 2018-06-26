@@ -1,0 +1,10 @@
+
+
+const permuteUnique = (nums, permutation = [], unique = {}) => {
+  let result = [];
+  
+  if (nums.length === 0) {
+    result.push(permutation);
+    return result;
+  }
+}
