@@ -68,6 +68,4 @@ const groupAnagrams = (strs) => {
   return result;
 }
 
-let testInput = ["eat", "tea", "tan", "ate", "nat", "bat"];
-
-console.log(groupAnagrams(testInput));
+let testInput = 
