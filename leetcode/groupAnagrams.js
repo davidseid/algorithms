@@ -82,7 +82,6 @@ const groupAnagrams = (strs) => {
   for (let i = 0; i < strs.length; i++) {
     let word = strs[i];
     let sortedWord = word.split('').sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0)).join('');
-    console.log(sortedWord)
 
     if (store[sortedWord]) {
       store[sortedWord].push(word);
@@ -91,7 +90,6 @@ const groupAnagrams = (strs) => {
     }
   }
 
-  console.log(store)
   
   let result = [];
   for (let key in store) {
