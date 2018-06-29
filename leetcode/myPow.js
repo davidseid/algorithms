@@ -12,28 +12,25 @@
 
 */
 
-const myPow = (x, n) => {
-  let result = x;
+const pow = (x, n) => {
+  if (n == 0) return 1;
+  let y = pow(x, n / 2);
 
-  if (n === 0) return x;
-  if (n === 1) return x;
-  if (n === -1) return (1 / x);
-
-  if (n < 0) {
-    n = Math.abs(n);
-    for (let i = 1; i < n; i++) {
-      result = result * x;
-    }
-    return 1 / result;
-  }
-
-  for (let i = 1; i < n; i++) {
-    result = result * x;
-  }
-
+  if (n % 2 === 0) return y * y;
   
-
-  return result;
+  return y * y * x;
 }
 
-console.log(myPow(2.00000, 2147483648));
+const myPow = (x, n) => {
+  if (n === 0) return 1;
+
+  if (n > 0) {
+    return pow(x, n);
+  } else if (n < 0) {
+    return 1 / pow(x, n);
+  }
+
+
+}
+
+console.log(myPow(2, 10));
