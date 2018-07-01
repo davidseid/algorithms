@@ -11,16 +11,42 @@
 
 
 const findSubstring = (s, words) => {
+
+  if (s.length === 0 || words.length === 0) return [];
   const wordLength = words[0].length;
-  const indices = [];
-  let startIndex = 0;
+  const wordStore = {};
+
+  for (let i = 0; i < words.length; i++) {
+    let word = words[i];
+    wordStore[word] = true;
+  }
+  const result = [];
   let pointer = 0;
 
   while (pointer < s.length) {
-    
+    let startIndex = pointer;
+    let currentWord = s.substr(pointer, wordLength);
+    let wordsInRow = 0;
+    let usedWords = {};
+
+    while (wordStore[currentWord] && !usedWords[currentWord]) {
+      wordsInRow++;
+      usedWords[currentWord];
+      pointer += wordLength;
+      currentWord = s.substr(pointer, wordLength);
+    }
+
+    if (wordsInRow === words.length) {
+      result.push(startIndex);
+    }
+
+    pointer++;;
   }
-}
+  return result;
+};
 
 const exampleS = "barfoothefoobarman";
 
 const exampleWords = ['foo', 'bar'];
+
+console.log(findSubstring(exampleS, exampleWords))
