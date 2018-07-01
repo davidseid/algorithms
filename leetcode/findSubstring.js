@@ -5,6 +5,8 @@
   cross off the word and keep going until all words are crossed
   or until a non match
   add index to result if completed
+
+  // figoured out a way to do it linear with respect to s
 */
 
 
