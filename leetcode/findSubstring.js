@@ -11,5 +11,16 @@
 
 
 const findSubstring = (s, words) => {
- // try tmrw
+  const wordLength = words[0].length;
+  const indices = [];
+  let startIndex = 0;
+  let pointer = 0;
+
+  while (pointer < s.length) {
+    
+  }
 }
+
+const exampleS = "barfoothefoobarman";
+
+const exampleWords = ['foo', 'bar'];
