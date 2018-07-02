@@ -18,7 +18,7 @@ const findSubstring = (s, words) => {
 
   for (let i = 0; i < words.length; i++) {
     let word = words[i];
-    wordStore[word] = true;
+    wordStore[word] ? wordStore[word]++ : wordStore[word] = 1;
   }
   const result = [];
   let pointer = 0;
@@ -29,9 +29,9 @@ const findSubstring = (s, words) => {
     let wordsInRow = 0;
     let usedWords = {};
 
-    while (wordStore[currentWord] && !usedWords[currentWord]) {
+    while (wordStore[currentWord] && (wordStore[currentWord] !== usedWords[currentWord])) {
       wordsInRow++;
-      usedWords[currentWord];
+      usedWords[currentWord] ? usedWords[currentWord]++ : usedWords[currentWord] = 1;
       pointer += wordLength;
       currentWord = s.substr(pointer, wordLength);
     }
