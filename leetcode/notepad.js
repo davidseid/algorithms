@@ -1,71 +1,34 @@
-/*
-let m=mult(2)(3)(6);
+const https = require('https');
 
-console.log(m);//36
-*/
+async function getTitles() {
 
-const mult = (multiplier) => {
-  return (nextMultiplier) => {
-    return (nextNextMultiplier) => {
-      
-    }
+  const titles = [];
+
+  const fetch = (page) => {
+    return new Promise((resolve) => {
+      https.get(`https://jsonmock.hackerrank.com/api/movies/search/?Title=waterworld&page=${page}`, (res) => {
+        let rawData = '';
+        res.on('data', (chunk) => { rawData += chunk; });
+        res.on('end', () => {
+          const parsedData = JSON.parse(rawData);
+          resolve(parsedData);
+        });
+      });
+    });
+  };
+  
+  let page = 1;
+
+  while (page < 3) {
+    await fetch(page)
   }
+
+  console.log(titles)
+
 }
 
+getTitles();
 
 
 
 
-
-/*
-For example,
-Given [1,3],[2,6],[8,10],[15,18],
-return [1,6],[8,10],[15,18].
-
-Given [1,3],[2,6],[8,10],[15,18],
-return [1,6],[8,10],[15,18].
-
-constraints: modify input
-edge cases: input values can be positive or negative
-  - if no overlaps return original
-
-visualization:
-
-[1, 3] = start 1, end 3
-[2, 6] = start 2, end 6 -> start 2 < end3 -> combine -> [1, 6]
-
-[1, 6] compare [8, 10]
-
------------------------
-
-[1,3],[2,6],[4,7],[8,10],[15,18]
-
-*/
-
-
-
-// const combineOverlaps = (arr) => {
-  
-//   let i = 0;
-
-//   while (i < arr.length - 1) {
-//     let tuple1 = arr[i]; // 1, 3
-//     let tuple2 = arr[i + 1]; // 2, 6
-
-//     let endOfFirst = tuple1[1]; // 3
-//     let startOfSecond = tuple2[0]; // 2
-    
-//     if (endOfFirst >= startOfSecond) {
-//       arr[i][1] = arr[i + 1][1]; // 1, 6
-//       arr.splice(i + 1, 1);
-//     } else {
-//       i++;
-//     }
-//   }
-
-//   return arr;
-// }
-
-// let testInput = [[1,3],[2,6],[4,7],[8,10],[15,18]];
-
-// console.log(combineOverlaps(testInput));
