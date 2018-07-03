@@ -26,21 +26,14 @@ const getTitles = () => {
     for (let i = 0; i < pages; i++) {
       await fetch(i, titles);
     }
-    console.log(titles)
     return titles;
   }
 
-  return fetchAll(2, titles);
-
-
-
-  
-  // fetch(1, titles)
-  // .then((res) => fetch(2, res))
-  // .then((res) => console.log(titles));
+  fetchAll(2, titles).then((res) => {
+  };
 }
 
-getTitles();
+console.log(getTitles());
 
 
 
