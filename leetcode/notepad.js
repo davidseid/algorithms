@@ -1,10 +1,8 @@
 const https = require('https');
 
-const getTitles = () => {
+const getTitles = async () => {
 
   const titles = [];
-
-
 
   const fetch = (page, results) => {
     return new Promise((resolve) => {
@@ -23,18 +21,29 @@ const getTitles = () => {
   };
 
   const fetchAll = async (pages, titles) => {
-    for (let i = 0; i < pages; i++) {
-      await fetch(i, titles);
-    }
-    return titles;
+    return new Promise((resolve) => {
+      for (let i = 0; i < pages; i++) {
+        fetch(i, titles);
+      }
+      resolve(titles);
+    });
   }
 
-  fetchAll(2, titles).then((res) => {
-  };
+  let promises = await fetchAll(2, []);
+  return promises;
+
+
 }
 
 console.log(getTitles());
 
+/*
+
+  What I want to do:
+
+  have a function which returns an array of the asynchronously compiled information
+  must be done with a callback
+*/
 
 
 
