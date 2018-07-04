@@ -1,49 +1,157 @@
 const https = require('https');
 
-const getTitles = async () => {
-
-  const titles = [];
-
-  const fetch = (page, results) => {
-    return new Promise((resolve) => {
-      https.get(`https://jsonmock.hackerrank.com/api/movies/search/?Title=spiderman&page=${page}`, (res) => {
-        let rawData = '';
-        res.on('data', (chunk) => { rawData += chunk; });
-        res.on('end', () => {
-          const parsedData = JSON.parse(rawData);
-          for (let i = 0; i < parsedData.data.length; i++) {
-            results.push(parsedData.data[i].Title);
-          }
-          resolve(titles);
-        });
+const getNumPages = (keyword) => {
+  return new Promise((resolve) => {
+    https.get(`https://jsonmock.hackerrank.com/api/movies/search/?Title=${keyword}`, (res) => {
+      let rawData = '';
+      res.on('data', (chunk) => {
+        rawData += chunk;
       });
+      res.on('end', () => {
+        let parsedData = JSON.parse(rawData);
+        resolve(parsedData.total_pages);
+      })
     });
-  };
+  });
+};
+  
+const assembleTitles = (data) => {
+  let titles = [];
 
-  const fetchAll = async (pages, titles) => {
-    return new Promise((resolve) => {
-      for (let i = 0; i < pages; i++) {
-        fetch(i, titles);
-      }
-      resolve(titles);
-    });
-  }
+  data.data.forEach((movie) => {
+    titles.push(movie.Title);
+  });
 
-  let promises = await fetchAll(2, []);
-  return promises;
-
-
+  return titles;
 }
 
-console.log(getTitles());
+const fetchTitlesByPage = (keyword, page) => {
+  return new Promise((resolve) => {
+    https.get(`https://jsonmock.hackerrank.com/api/movies/search/?Title=${keyword}&page=${page}`, (res) => {
+      let rawData = '';
+      res.on('data', (chunk) => {
+        rawData += chunk;
+      });
+      res.on('end', () => {
+        let parsedData = JSON.parse(rawData);
+        let titles = assembleTitles(parsedData);
+        resolve(titles);
+      })
+    });
+  })
+}
 
-/*
+const fetchAllTitles = (keyword, numPages) => {
+  let titles = [];
 
-  What I want to do:
+  for (let i = 1; i <= numPages; i++) {
+    titles = titles.concat(fetchTitlesByPage(keyword, i));
+  }
+  return titles;
+}
 
-  have a function which returns an array of the asynchronously compiled information
-  must be done with a callback
-*/
+const flatten = (nestedArr) => {
+  let result = [];
+  for (let i = 0; i < nestedArr.length; i++) {
+    result = result.concat(nestedArr[i]);
+  }
+  return result;
+}
 
+const getTitles = (keyword) => {
+  
+  return new Promise((resolve) => {
+    getNumPages(keyword)
+      .then(res => {
+        return Promise.all(fetchAllTitles(keyword, res));
+      })
+      .then(res => {
+        let flattened = flatten(res);
+        console.log(flattened);
+        resolve(flattened);
+      });
+  });
+};
+
+console.log(getTitles('waterworld'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const assembleTitlesFromData = (data) => {
+//   let titles = [];
+
+//   data.data.forEach((movie) => {
+//     titles.push(movie.Title);
+//   });
+//   return titles;
+// }
+
+// const fetchTitlesByPage = (keyword, page) => {
+//   return new Promise((resolve) => {
+//     https.get(`https://jsonmock.hackerrank.com/api/movies/search/?Title=${keyword}&page=${page}`, (res) => {
+//       let rawData = '';
+//       res.on('data', (chunk) => {
+//         rawData += chunk;
+//       });
+
+//       res.on('end', () => {
+//         let parsedData = JSON.parse(rawData);
+//         resolve(assembleTitlesFromData(parsedData));
+//       });
+//     });
+//   });
+// };
+
+// const fetchAllTitles = (keyword, pages) => {
+//   let titles = [];
+//   for (let i = 1; i <= pages; i++) {
+//     titles = titles.concat(fetchTitlesByPage(keyword, i));
+//   }
+//   return Promise.all(titles)
+//     .then((res) => {
+//       let result = [];
+
+//       for (let i = 0; i < res.length; i++) {
+//         result = result.concat(res[i]);
+//       }
+
+//       result = result.sort();
+      
+//       console.log(result);
+//       return result;
+//     });
+// };
+
+// const getTitles = (keyword) => {
+
+//   let titles = fetchAllTitles(keyword, 2);
+  
+//   return titles;
+  
+// };
+
+// console.log(getTitles('waterworld'));
 
 
