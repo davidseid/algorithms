@@ -13,36 +13,36 @@ class SudokuBoard {
 }
 
 let testBoard = new SudokuBoard();
-testBoard.board[0][0] = 5;
-testBoard.board[0][1] = 3;
-testBoard.board[0][4] = 7;
-testBoard.board[1][0] = 6;
-testBoard.board[1][3] = 1;
-testBoard.board[1][4] = 9;
-testBoard.board[1][5] = 5;
-testBoard.board[2][1] = 9;
-testBoard.board[2][2] = 8;
-testBoard.board[2][7] = 6;
-testBoard.board[3][0] = 8;
-testBoard.board[3][4] = 6;
-testBoard.board[3][8] = 3;
-testBoard.board[4][0] = 4;
-testBoard.board[4][3] = 8;
-testBoard.board[4][5] = 3;
-testBoard.board[4][8] = 1;
-testBoard.board[5][0] = 7;
-testBoard.board[5][4] = 2;
-testBoard.board[5][8] = 6;
-testBoard.board[6][1] = 6;
-testBoard.board[6][6] = 2;
-testBoard.board[6][7] = 8;
-testBoard.board[7][3] = 4;
-testBoard.board[7][4] = 1;
-testBoard.board[7][5] = 9;
-testBoard.board[7][8] = 5;
-testBoard.board[8][4] = 8;
-testBoard.board[8][7] = 7;
-testBoard.board[8][8] = 9;
+testBoard.board[0][0] = '5';
+testBoard.board[0][1] = '3';
+testBoard.board[0][4] = '7';
+testBoard.board[1][0] = '6';
+testBoard.board[1][3] = '1';
+testBoard.board[1][4] = '9';
+testBoard.board[1][5] = '5';
+testBoard.board[2][1] = '9';
+testBoard.board[2][2] = '8';
+testBoard.board[2][7] = '6';
+testBoard.board[3][0] = '8';
+testBoard.board[3][4] = '6';
+testBoard.board[3][8] = '3';
+testBoard.board[4][0] = '4';
+testBoard.board[4][3] = '8';
+testBoard.board[4][5] = '3';
+testBoard.board[4][8] = '1';
+testBoard.board[5][0] = '7';
+testBoard.board[5][4] = '2';
+testBoard.board[5][8] = '6';
+testBoard.board[6][1] = '6';
+testBoard.board[6][6] = '2';
+testBoard.board[6][7] = '8';
+testBoard.board[7][3] = '4';
+testBoard.board[7][4] = '1';
+testBoard.board[7][5] = '9';
+testBoard.board[7][8] = '5';
+testBoard.board[8][4] = '8';
+testBoard.board[8][7] = '7';
+testBoard.board[8][8] = '9';
 
 
 const buildPossibilities = (board) => {
@@ -69,6 +69,7 @@ const buildPossibilities = (board) => {
 
 const calculatePossibilitiesForBox = (board, r, c) => {
   for (let i = 1; i <= 9; i++) {
+    i = i.toString();
     if (inRow(board, r, i) || inCol(board, c, i) || inArea(board, r, c, i)) {
       if (board[r][c][i]) {
         board[r][c][i] = false;
@@ -81,7 +82,7 @@ const calculatePossibilitiesForBox = (board, r, c) => {
 const calculatePossibilities = (board) => {
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
-      if (typeof board[i][j] !== 'number') {
+      if (typeof board[i][j] !== 'string') {
         calculatePossibilitiesForBox(board, i, j);
       }
     }
@@ -95,7 +96,6 @@ const updateBoard = (board, possibilitiesBoard) => {
       let box = possibilitiesBoard[i][j];
       if (box.remaining === 1) {
         let value = Object.keys(box).filter((key) => box[key] === true).pop();
-        value = Number(value)
         board[i][j] = value;
         possibilitiesBoard[i][j] = value;
         updates++;
@@ -164,7 +164,7 @@ const solveSudoku = (board) => {
   let possibilitiesBoard = buildPossibilities(board);
   calculatePossibilities(possibilitiesBoard);  
   
-  for (let i = 0; i < 10; i++) {
+  while (spotsRemaining > 0) {
     let numUpdates = updateBoard(board, possibilitiesBoard);
     spotsRemaining -= numUpdates;
     calculatePossibilities(possibilitiesBoard);
