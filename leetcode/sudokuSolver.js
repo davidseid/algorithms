@@ -1,10 +1,3 @@
-/*
-  input: board (with . in empty spaces)
-  output: return nothing, modify board in place
-  constraints: none
-  edge cases: 9x9, only 1 valid solution
-
-*/
 
 class SudokuBoard {
   constructor() {
@@ -176,8 +169,6 @@ const countSpots = (board) => {
   return count;
 }
 
-
-
 // optimizations:
 //   don't duplicate board
 //   make narrow down pattern
@@ -196,3 +187,17 @@ const solveSudoku = (board) => {
 }
 
 console.log(solveSudoku(testBoard.board));
+
+
+/*
+
+[[".",".","9","7","4","8",".",".","."],
+["7",".",".",".",".",".",".",".","."],
+[".","2",".","1",".","9",".",".","."],
+[".",".","7",".",".",".","2","4","."],
+[".","6","4",".","1",".","5","9","."],
+[".","9","8",".",".",".","3",".","."],
+[".",".",".","8",".","3",".","2","."],
+[".",".",".",".",".",".",".",".","6"],
+[".",".",".","2","7","5","9",".","."]]
+*/
