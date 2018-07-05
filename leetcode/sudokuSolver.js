@@ -45,11 +45,93 @@ testBoard.board[8][7] = 7;
 testBoard.board[8][8] = 9;
 
 
+const buildPossibilities = (board) => {
+  let possibilitiesBoard = new Array(9).fill(null).map((row) => new Array(9));
 
+  for (let i = 0; i < board.length; i++) {
+    let row = board[i];
+    for (let j = 0; j < row.length; j++) {
+      let box = row[j];
+      if (box === '.') {
+        possibilitiesBoard[i][j] = {};
+        
+        for (let k = 1; k <= 9; k++) {
+          possibilitiesBoard[i][j][k] = true;
+        }
 
+      } else {
+        possibilitiesBoard[i][j] = board[i][j];
+      }
+    }
+  }
+  return possibilitiesBoard;
+}
 
-console.log(testBoard);
+const calculatePossibilitiesForBox = (board, r, c) => {
+  
+  for (let i = 1; i <= 9; i++) {
+    if (inRow(board, r, i)) {
+      console.log(r, c, i);
+      board[r][c][i] = false;
+    }
+  }
+}
+
+const calculatePossibilities = (board) => {
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      if (typeof board[i][j] !== 'number') {
+        calculatePossibilitiesForBox(board, i, j);
+      }
+    }
+  }
+}
+
+const updatePossibilities = (board) => {
+  
+}
+
+// const notInArea = (board, r, c, num) => {
+//   let rowStart;
+//   let colStart;
+
+//   if (r <= 2) rowStart = 0;
+//   if (r > 2 && r < 6) rowStart = 3;
+//   if (r > 5) rowStart = 6;
+
+//   if (c <= 2) colStart = 0;
+//   if (c > 2 && c < 6) colStart = 3;
+//   if (c > 5) colStart = 6;
+
+//   for (let i = rowStart; i < rowStart + 3; i++) {
+//     for (let j = colStart; j < colStart + 3; j++) {
+
+//     }
+//   }
+// }
+
+const inRow = (board, r, num) => {
+  
+  for (let i = 0; i < 9; i++) {
+    if (board[r][i] === num) {
+      return true;
+    }
+  }
+  return false;
+}
+
+const inCol = (board, c, num) => {
+
+}
+
 
 const solveSudoku = (board) => {
 
+  let possibilitiesBoard = buildPossibilities(board);
+
+  calculatePossibilities(possibilitiesBoard);  
+  console.log(possibilitiesBoard)
+
 }
+
+console.log(solveSudoku(testBoard.board));
