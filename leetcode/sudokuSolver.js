@@ -53,7 +53,7 @@ const buildPossibilities = (board) => {
     for (let j = 0; j < row.length; j++) {
       let box = row[j];
       if (box === '.') {
-        possibilitiesBoard[i][j] = {};
+        possibilitiesBoard[i][j] = { remaining: 9 };
         
         for (let k = 1; k <= 9; k++) {
           possibilitiesBoard[i][j][k] = true;
@@ -68,11 +68,12 @@ const buildPossibilities = (board) => {
 }
 
 const calculatePossibilitiesForBox = (board, r, c) => {
-  
   for (let i = 1; i <= 9; i++) {
-    if (inRow(board, r, i)) {
-      console.log(r, c, i);
-      board[r][c][i] = false;
+    if (inRow(board, r, i) || inCol(board, c, i) || inArea(board, r, c, i)) {
+      if (board[r][c][i]) {
+        board[r][c][i] = false;
+        board[r][c].remaining--;
+      }
     }
   }
 }
@@ -87,31 +88,46 @@ const calculatePossibilities = (board) => {
   }
 }
 
-const updatePossibilities = (board) => {
-  
+const updateBoard = (board, possibilitiesBoard) => {
+  let updates = 0;
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      let box = possibilitiesBoard[i][j];
+      if (box.remaining === 1) {
+        let value = Object.keys(box).filter((key) => box[key] === true).pop();
+        value = Number(value)
+        board[i][j] = value;
+        possibilitiesBoard[i][j] = value;
+        updates++;
+      }
+    }
+  }
+  return updates;
 }
 
-// const notInArea = (board, r, c, num) => {
-//   let rowStart;
-//   let colStart;
+const inArea = (board, r, c, num) => {
+  let rowStart;
+  let colStart;
 
-//   if (r <= 2) rowStart = 0;
-//   if (r > 2 && r < 6) rowStart = 3;
-//   if (r > 5) rowStart = 6;
+  if (r <= 2) rowStart = 0;
+  if (r > 2 && r < 6) rowStart = 3;
+  if (r > 5) rowStart = 6;
 
-//   if (c <= 2) colStart = 0;
-//   if (c > 2 && c < 6) colStart = 3;
-//   if (c > 5) colStart = 6;
+  if (c <= 2) colStart = 0;
+  if (c > 2 && c < 6) colStart = 3;
+  if (c > 5) colStart = 6;
 
-//   for (let i = rowStart; i < rowStart + 3; i++) {
-//     for (let j = colStart; j < colStart + 3; j++) {
-
-//     }
-//   }
-// }
+  for (let i = rowStart; i < rowStart + 3; i++) {
+    for (let j = colStart; j < colStart + 3; j++) {
+      if (board[i][j] === num) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
 
 const inRow = (board, r, num) => {
-  
   for (let i = 0; i < 9; i++) {
     if (board[r][i] === num) {
       return true;
@@ -121,16 +137,39 @@ const inRow = (board, r, num) => {
 }
 
 const inCol = (board, c, num) => {
+  for (let i = 0; i < 9; i++) {
+    if (board[i][c] === num) {
+      return true;
+    }
+  }
+  return false;
+}
 
+const countSpots = (board) => {
+  let count = 0;
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      if (board[i][j] === '.') {
+        count++;
+      }
+    }
+  }
+  return count;
 }
 
 
 const solveSudoku = (board) => {
 
+  let spotsRemaining = countSpots(board);
   let possibilitiesBoard = buildPossibilities(board);
-
   calculatePossibilities(possibilitiesBoard);  
-  console.log(possibilitiesBoard)
+  
+  for (let i = 0; i < 10; i++) {
+    let numUpdates = updateBoard(board, possibilitiesBoard);
+    spotsRemaining -= numUpdates;
+    calculatePossibilities(possibilitiesBoard);
+    console.log(board)
+  }
 
 }
 
