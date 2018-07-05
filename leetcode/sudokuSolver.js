@@ -46,25 +46,21 @@ testBoard.board[8][8] = '9';
 
 
 const buildPossibilities = (board) => {
-  let possibilitiesBoard = new Array(9).fill(null).map((row) => new Array(9));
 
   for (let i = 0; i < board.length; i++) {
     let row = board[i];
     for (let j = 0; j < row.length; j++) {
       let box = row[j];
       if (box === '.') {
-        possibilitiesBoard[i][j] = { remaining: 9 };
+        board[i][j] = { remaining: 9 };
         
         for (let k = 1; k <= 9; k++) {
-          possibilitiesBoard[i][j][k] = true;
+          board[i][j][k] = true;
         }
 
-      } else {
-        possibilitiesBoard[i][j] = board[i][j];
       }
     }
   }
-  return possibilitiesBoard;
 }
 
 const calculatePossibilitiesForBox = (board, r, c) => {
@@ -74,6 +70,30 @@ const calculatePossibilitiesForBox = (board, r, c) => {
       if (board[r][c][i]) {
         board[r][c][i] = false;
         board[r][c].remaining--;
+      }
+    }
+  }
+}
+
+const narrowBox = (board, r, c) => {
+  let options = Object.keys(board[r][c]);
+
+  for (let i = 0; i < options.length - 1; i++) {
+    let option = options[i];
+    if (inRow(board, r, option) || inCol(board, c, option) || inArea(board, r, c, option)) {
+      if (board[r][c][option]) {
+        board[r][c][option] = false;
+        board[r][c].remaining--;
+      }
+    }
+  }
+}
+
+const narrowPossibilities = (board) => {
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      if (typeof board[i][j] !== 'string') {
+        narrowBox(board, i, j);
       }
     }
   }
@@ -89,15 +109,14 @@ const calculatePossibilities = (board) => {
   }
 }
 
-const updateBoard = (board, possibilitiesBoard) => {
+const updateBoard = (board) => {
   let updates = 0;
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
-      let box = possibilitiesBoard[i][j];
+      let box = board[i][j];
       if (box.remaining === 1) {
         let value = Object.keys(box).filter((key) => box[key] === true).pop();
         board[i][j] = value;
-        possibilitiesBoard[i][j] = value;
         updates++;
       }
     }
@@ -158,19 +177,22 @@ const countSpots = (board) => {
 }
 
 
+
+// optimizations:
+//   don't duplicate board
+//   make narrow down pattern
+// only check remaining empties (store coordinates and use length)
+
 const solveSudoku = (board) => {
 
   let spotsRemaining = countSpots(board);
-  let possibilitiesBoard = buildPossibilities(board);
-  calculatePossibilities(possibilitiesBoard);  
-  
+  buildPossibilities(board);
+  calculatePossibilities(board);
   while (spotsRemaining > 0) {
-    let numUpdates = updateBoard(board, possibilitiesBoard);
+    let numUpdates = updateBoard(board);
     spotsRemaining -= numUpdates;
-    calculatePossibilities(possibilitiesBoard);
-    console.log(board)
+    narrowPossibilities(board);
   }
-
 }
 
 console.log(solveSudoku(testBoard.board));
