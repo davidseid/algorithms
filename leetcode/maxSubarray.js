@@ -39,6 +39,7 @@ const maxSubarray = (nums) => {
     if (sum > max) max = sum;
     pointer++;
   }
+  
   return max;
 }
 
