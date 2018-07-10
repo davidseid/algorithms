@@ -4,11 +4,12 @@
 const deleteDuplicates = (head) => {
 
   let node = head;
-  while (node.next !== null) {
-    if (node.next.val === node.val) {
+  while (node !== null) {
+    if (node.next !== null && node.next.val === node.val) {
       node.next = node.next.next;
+    } else {
+      node = node.next;
     }
-    node = node.next;
   }
   return head;
 }
