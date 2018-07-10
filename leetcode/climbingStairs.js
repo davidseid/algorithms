@@ -11,7 +11,6 @@ const climbStairs = (n, cache = {}) => {
     cache[n] = climbStairs(n - 1, cache) + climbStairs(n - 2, cache)
     return cache[n];
   }
-  
 
 }
 
