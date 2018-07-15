@@ -1,5 +1,4 @@
 const mergeSort = (items) => {
-
   if (items.length === 1) {
     return items;
   } else {
