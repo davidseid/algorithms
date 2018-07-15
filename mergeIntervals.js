@@ -14,6 +14,8 @@ class Interval {
 
 const merge = (intervals) => {
   
+  intervals.sort((a, b) => a.start - b.start);
+
   let i = 0;
 
   while (i < intervals.length - 1) {
@@ -21,7 +23,10 @@ const merge = (intervals) => {
     let nextInterval = intervals[i + 1];
 
     if (currInterval.end >= nextInterval.start) {
-      currInterval.end = nextInterval.end;
+
+      if (currInterval.end < nextInterval.end) {
+        currInterval.end = nextInterval.end;
+      }
       intervals.splice(i + 1, 1);
     } else {
       i++;

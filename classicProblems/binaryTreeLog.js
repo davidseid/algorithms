@@ -14,11 +14,12 @@ myTree.left.right = new BinaryTree('5');
 myTree.right.left = new BinaryTree('6');
 myTree.right.right = new BinaryTree('7');
 
-const treePrinter = (root, path = []) => {
+const treePrinter = (root, rights = 0, path = []) => {
   
+  for (let j = 0; j < rights; j++) {
+    root.val = ' ' + root.val;
+  }
   path.push(root.val);
-  path.forEach((val) => console.log(val));
-  console.log('\n');
   
   if (!root.left && !root.right) {
     path.forEach((val) => console.log(val));
@@ -26,13 +27,13 @@ const treePrinter = (root, path = []) => {
   } else {
     if (root.left) {
       path.forEach((val, i) => path[i] = ' ' + path[i]);
-      treePrinter(root.left, path);
+      treePrinter(root.left, rights, path);
       path.forEach((val, i) => path[i] = path[i].substring(1));
     }
     if (root.right) {
-      path[path.length - 1] = ' ' + path[path.length - 1];
-      treePrinter(root.right, path);
-      path[path.length - 1] = path[path.length - 1].substring(1);
+      rights++;
+      treePrinter(root.right, rights, path);
+      rights--;
     }
   }
   path.pop();
