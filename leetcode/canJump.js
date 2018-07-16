@@ -1,18 +1,14 @@
 const canJump = (nums, index = 0) => {
+  let lowestValidIndex = nums.length - 1;
 
-  let result = false;
-
-  let maxJump = nums[index];
-
-  let target = nums.length - 1;
-
-  if (index + maxJump >= target) return true;
-
-  for (let i = 1; i <= maxJump; i++) {
-    return result || canJump(nums, index + i);
+  for (let i = nums.length - 1; i >= 0; i--) {
+    if (i + nums[i] >= lowestValidIndex) {
+      lowestValidIndex = i;
+    }
   }
 
-  return result;
+  if (lowestValidIndex === 0) return true;
+  return false;
 }
 
-console.log(canJump([2, 0, 0]));
+console.log(canJump([3, 2, 1, 1, 4]));
