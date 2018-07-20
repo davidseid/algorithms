@@ -26,6 +26,10 @@ const trap = (height) => {
     }
   }
 
+  if (inPool) {
+    
+  }
+
   return totalWater;
   
 };
