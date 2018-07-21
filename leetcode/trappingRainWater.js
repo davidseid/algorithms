@@ -30,8 +30,6 @@ const findPools = (height) => {
   }
 
   return pools;
-
-
 }
 
 const trap = (height) => {
