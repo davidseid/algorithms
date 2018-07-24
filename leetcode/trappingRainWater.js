@@ -5,40 +5,36 @@
   1 -> less than 2 so pool starts
 */
 
-const findPools = (height) => {
-  let pools = [];
+const trap = (height) => {
+
+  let water = 0;
 
   let start;
   let end;
-  let level;
-  let inPool = false;
 
   for (let i = 0; i < height.length - 1; i++) {
-    let curr = height[i];
-    let next = height[i + 1];
+    let currHeight = height[i];
+    let nextHeight = height[i + 1];
 
-    if (!inPool && next < curr) {
-      inPool = true;
-      start = i;
-      level = next;
-    } else if (inPool && curr >= level) {
-      inPool = false;
-      end = i;
-      level = curr;
-      pools.push([start, end]);
+    if (!start && nextHeight < currHeight) {
+      start = currHeight;
+      end = nextHeight;
+    } 
+
+    if (start && currHeight >= start) {
+      console.log('end pool');
+      start = end;
+    } else if (start && currHeight >= end) {
+      end = currHeight;
     }
   }
 
-  return pools;
-}
-
-const trap = (height) => {
-
-  const pools = findPools(height);
-  console.log(pools);
-
   
 };
+
+/*
+  102 21013 3212
+*/
 
 let testInput = [0,1,0,2,1,0,1,3,2,1,2,1];
 
