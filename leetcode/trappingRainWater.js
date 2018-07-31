@@ -23,7 +23,7 @@ const trap = (height) => {
 
     if (start && currHeight >= start) {
       console.log('end pool');
-      start = end;
+      start = 
     } else if (start && currHeight >= end) {
       end = currHeight;
     }
