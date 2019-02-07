@@ -1,76 +1,151 @@
 /*
-    Design LRU cache data structure
-    - get and put methods
-
-    get(key) -- gets the value, always positive, of the key if the key exists in the cache, otherwise -1
-    put(key, value) -- sets the value if the key is not already present, when the cache reaches capacity, should invalidate the lru item before inserting new item
-
-    Followup: both in O(1) time complexity
+This should be close to working! Keep at it
  */
 
-
-
+class LRUNode {
+    constructor(key, value) {
+        this.key = key;
+        this.value = value;
+        this.prev = null;
+        this.next = null;
+    }
+}
 
 class LRUCache {
     constructor(capacity) {
-        this.capacity = capacity;
-        this.dictionary = [];
-        this.order = [];
         this.size = 0;
+        this.capacity = capacity;
+        this.map = {};
+        this.head = null;
+        this.tail = null;
     }
 
-    get(key) {
+    keyInMap(key) {
+        if (this.map[key]) return true;
+        return false;
+    }
 
-        let value = this.dictionary[key];
+    getNodeFromMap(key) {
+        return this.map[key];
+    }
 
+    createNode(key, value) {
+        return new LRUNode(key, value);
+    }
 
-
-        if (value) {
-
-            let indexOfItemInCache = this.order.indexOf(key);
-            this.order.splice(indexOfItemInCache, 1);
-            this.order.push(key);
-
-            return value;
-        } else {
-            return -1;
+    addNodeToCache(node) {
+        this.size++;
+        if (this.head === null) {
+            this.head = node;
         }
-
+        this.addNodeToTail(node);
+        this.map[node.key] = node;
     }
 
     put(key, value) {
-
-        let indexOfItemInCache = this.order.indexOf(key);
-
-        if (indexOfItemInCache !== -1) {
-
-            this.order.splice(indexOfItemInCache, 1);
-
+        if (this.keyInMap(key)) {
+            this.map[key].value = value;
+            const node = this.getNodeFromMap(key);
+            this.moveToTail(node);
         } else {
-
-            if (this.size < this.capacity) {
-                this.size++;
-
-            } else {
-                let keyToRemove = this.order[0];
-                this.dictionary[keyToRemove] = -1;
-                this.order.shift();
+            if (this.size >= this.capacity) {
+                this.removeHead();
             }
+            const node = this.createNode(key, value);
+            this.addNodeToCache(node);
         }
+    }
 
-        this.dictionary[key] = value;
-        this.order.push(key);
+    addNodeToTail(node) {
+        if (this.tail !== null) {
+            this.tail.next = node;
+            node.prev = this.tail;
+        }
+        this.tail = node;
+        this.tail.next = null;
+    }
 
-        // console.log(`ON PUT key ${key}, order is ${this.order}`);
-        // console.log(`dict is ${this.dictionary}`);
+    get(key) {
+        if (this.keyInMap(key)) {
+            const node = this.map[key];
+            this.moveToTail(node);
+            console.log(node.value);
+            return node.value;
+        } else {
+            console.log(-1);
+            return -1;
+        }
+    }
+
+    moveToTail(node) {
+        if (node.next !== null) {
+            if (node.prev !== null) {
+                node.prev.next = node.next;
+            } else {
+                this.head = node.next;
+            }
+            node.next.prev = node.prev;
+            this.addNodeToTail(node);
+        }
+    }
+
+    removeHead() {
+        delete this.map[this.head.key];
+        this.size--;
+        this.head = this.head.next;
+        if (this.head !== null) {
+            this.head.prev = null;
+        }
     }
 }
 
-let output = [null,null,null,null,null,null,-1,null,19,17,null,-1,null,null,null,-1,null,-1,5,-1,12,null,null,3,5,5,null,null,1,null,-1,null,30,5,30,null,null,null,-1,null,-1,24,null,null,18,null,null,null,null,-1,null,null,18,null,null,-1,null,null,null,null,null,18,null,null,-1,null,4,29,30,null,12,-1,null,null,null,null,29,null,null,null,null,17,-1,18,null,null,null,-1,null,null,null,20,null,null,null,-1,18,18,null,null,null,null,20,null,null,null,null,null,null,null];
-let expected = [null,null,null,null,null,null,-1,null,19,17,null,-1,null,null,null,-1,null,-1,5,-1,12,null,null,3,5,5,null,null,1,null,-1,null,30,5,30,null,null,null,-1,null,-1,24,null,null,18,null,null,null,null,-1,null,null,18,null,null,-1,null,null,null,null,null,18,null,null,-1,null,4,29,30,null,12,-1,null,null,null,null,29,null,null,null,null,17,22,18,null,null,null,-1,null,null,null,20,null,null,null,-1,18,18,null,null,null,null,20,null,null,null,null,null,null,null];
-
-for (let i = 0; i < output.length; i++) {
-    if (output[i] !== expected[i]) {
-        console.log(i, output[i], expected[i]);
-    }
-}
+let cache = new LRUCache(10); 
+cache.put(10, 13);
+cache.put(3, 17);
+cache.put(6, 11);
+cache.put(10, 5);
+cache.put(9, 10);
+cache.get(13);
+cache.put(2, 19);
+cache.get(2);
+cache.get(3);
+cache.put(5, 25);
+cache.get(8);
+cache.put(9, 22);
+cache.put(5, 5);
+cache.put(1, 30);
+cache.get(11);
+cache.put(9, 12);
+cache.get(7);
+cache.get(5);
+cache.get(8);
+cache.get(9);
+cache.put(4, 30);
+cache.put(9, 3);
+cache.get(9);
+cache.get(10);
+cache.get(10);
+cache.put(6, 14);
+cache.put(3, 1);
+cache.get(3);
+cache.put(10, 11);
+cache.get(8);
+cache.put(2, 14);
+cache.get(1);
+cache.get(5);
+cache.get(4);
+cache.put(11, 4);
+cache.put(12, 24);
+cache.put(5, 18);
+cache.get(13);
+cache.put(7, 23);
+cache.get(8);
+cache.get(12);
+cache.put(3, 27);
+cache.put(2, 12);
+cache.get(5);
+cache.put(2, 9);
+cache.put(13, 4);
+cache.put(8, 18);
+cache.put(1, 7);
+cache.get(6);
