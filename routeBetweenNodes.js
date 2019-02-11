@@ -5,7 +5,6 @@
 
 const isRoute = (graph, start, end) => {
   // use bfs to search from start, once the end is found, return true, otherwise return false;
-  let result = false;
   let queue = [];
 
   if (start === end) return true;
