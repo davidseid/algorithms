@@ -1,25 +1,18 @@
-package main
+package algorithms
 
 import (
-	"fmt"
 	"strconv"
 )
-
-func main() {
-	for i := 1; i < 6; i++ {
-		fmt.Println(countAndSay(i))
-	}
-}
 
 // Recursive solution
 // Time Complexity: O(n) or O(m*n) with m being string length? not sure
 // Space Complexity: O(n) - Recursive call stack is n
-func countAndSay(n int) string {
+func CountAndSay(n int) string {
 	if n == 1 {
 		return "1"
 	}
 
-	lastSaid := countAndSay(n - 1)
+	lastSaid := CountAndSay(n - 1)
 
 	var count int
 	var num string
