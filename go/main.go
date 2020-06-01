@@ -7,7 +7,6 @@ import (
 )
 
 func main() {
-
-	arr := []int{-2, 1, -3, 4, -1, 2, 1, -5, 4}
-	fmt.Println(algorithms.MaxSubArray(arr))
+	arr := []int{1, 2, 3}
+	fmt.Println(algorithms.PlusOne(arr))
 }
