@@ -6,7 +6,26 @@ package algorithms
 // Then, solve with constant space
 
 func SetZeroes(matrix [][]int) {
+	for _, row := range matrix {
+		if hasZero(row) {
+			zeroRow(row)
+		}
+	}
+}
 
+func hasZero(row []int) bool {
+	for _, value := range row {
+		if value == 0 {
+			return true
+		}
+	}
+	return false
+}
+
+func zeroRow(row []int) {
+	for col := range row {
+		row[col] = 0
+	}
 }
 
 // Approach:
