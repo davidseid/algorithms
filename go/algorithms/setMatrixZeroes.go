@@ -6,25 +6,89 @@ package algorithms
 // Then, solve with constant space
 
 func SetZeroes(matrix [][]int) {
-	for _, row := range matrix {
-		if hasZero(row) {
-			zeroRow(row)
-		}
+	var shouldZeroFirstRow bool
+	var shouldZeroFirstCol bool
+
+	if firstRowHasZeroes(matrix) {
+		shouldZeroFirstRow = true
+	}
+
+	if firstColHasZeroes(matrix) {
+		shouldZeroFirstCol = true
+	}
+
+	markMatrix(matrix)
+
+	zeroColumns(matrix)
+	zeroRows(matrix)
+
+	if shouldZeroFirstRow {
+		zeroFirstRow(matrix)
+	}
+
+	if shouldZeroFirstCol {
+		zeroFirstCol(matrix)
 	}
 }
 
-func hasZero(row []int) bool {
-	for _, value := range row {
-		if value == 0 {
+func firstRowHasZeroes(matrix [][]int) bool {
+	for col := range matrix[0] {
+		if matrix[0][col] == 0 {
 			return true
 		}
 	}
 	return false
 }
 
-func zeroRow(row []int) {
-	for col := range row {
-		row[col] = 0
+func firstColHasZeroes(matrix [][]int) bool {
+	for row := range matrix {
+		if matrix[row][0] == 0 {
+			return true
+		}
+	}
+	return false
+}
+
+func markMatrix(matrix [][]int) {
+	for row := range matrix[1:] {
+		for col := 1; col < len(matrix[0]); col++ {
+			if matrix[row][col] == 0 {
+				matrix[0][col] = 0
+				matrix[row][0] = 0
+			}
+		}
+	}
+}
+
+func zeroColumns(matrix [][]int) {
+	for col := 1; col < len(matrix[0]); col++ {
+		if matrix[0][col] == 0 {
+			for row := 1; row < len(matrix); row++ {
+				matrix[row][col] = 0
+			}
+		}
+	}
+}
+
+func zeroRows(matrix [][]int) {
+	for row := 1; row < len(matrix); row++ {
+		if matrix[row][0] == 0 {
+			for col := 1; col < len(matrix[row]); col++ {
+				matrix[row][col] = 0
+			}
+		}
+	}
+}
+
+func zeroFirstRow(matrix [][]int) {
+	for col := range matrix[0] {
+		matrix[0][col] = 0
+	}
+}
+
+func zeroFirstCol(matrix [][]int) {
+	for row := range matrix {
+		matrix[row][0] = 0
 	}
 }
 
