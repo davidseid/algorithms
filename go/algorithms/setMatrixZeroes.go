@@ -1,5 +1,7 @@
 package algorithms
 
+import "fmt"
+
 // https://leetcode.com/problems/set-matrix-zeroes/
 // Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it in-place.
 // Solve in place
@@ -18,6 +20,8 @@ func SetZeroes(matrix [][]int) {
 	}
 
 	markMatrix(matrix)
+	fmt.Println("MARKED MATRIX")
+	fmt.Println(matrix)
 
 	zeroColumns(matrix)
 	zeroRows(matrix)
@@ -50,7 +54,7 @@ func firstColHasZeroes(matrix [][]int) bool {
 }
 
 func markMatrix(matrix [][]int) {
-	for row := range matrix[1:] {
+	for row := 1; row < len(matrix); row++ {
 		for col := 1; col < len(matrix[0]); col++ {
 			if matrix[row][col] == 0 {
 				matrix[0][col] = 0

@@ -8,9 +8,10 @@ import (
 
 func main() {
 	matrix := [][]int{
-		[]int{0, 1, 2, 0},
-		[]int{3, 4, 5, 2},
-		[]int{1, 3, 1, 5},
+		[]int{-5, 7, 2147483647, 3},
+		[]int{0, 3, 6, -2147483648},
+		[]int{8, 3, -3, -6},
+		[]int{-9, -9, 8, 0},
 	}
 	fmt.Println(matrix)
 	algorithms.SetZeroes(matrix)
