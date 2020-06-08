@@ -26,11 +26,51 @@ First, iterate the array counting number of 0's, 1's, and 2's, then overwrite ar
 Could you come up with a one-pass algorithm using only constant space?
 */
 
-func testSortColors(t *testing.T) {
-	input := []int{2, 0, 2, 1, 1, 0}
+func sortColors(nums []int) {
+	red := 0
+	white := 1
+	blue := 2
+	var reds int
+	var whites int
+	var blues int
+
+	for _, color := range nums {
+		if color == red {
+			reds++
+		}
+
+		if color == white {
+			whites++
+		}
+
+		if color == blue {
+			blues++
+		}
+	}
+
+	for i := range nums {
+		if reds > 0 {
+			nums[i] = red
+			reds--
+			continue
+		}
+
+		if whites > 0 {
+			nums[i] = white
+			whites--
+			continue
+		}
+
+		nums[i] = blue
+		blues--
+	}
+}
+
+func TestSortColors(t *testing.T) {
+	actual := []int{2, 0, 2, 1, 1, 0}
 	expected := []int{0, 0, 1, 1, 2, 2}
 
-	actual := sortColors(input)
+	sortColors(actual)
 
 	if !reflect.DeepEqual(actual, expected) {
 		t.Errorf("Got %v, expected %v", actual, expected)
