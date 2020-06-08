@@ -25,45 +25,54 @@ A rather straight forward solution is a two-pass algorithm using counting sort.
 First, iterate the array counting number of 0's, 1's, and 2's, then overwrite array with total number of 0's, then 1's and followed by 2's.
 Could you come up with a one-pass algorithm using only constant space?
 */
+var counts struct {
+	Reds   int
+	Whites int
+	Blues  int
+}
+
+const (
+	red = iota
+	white
+	blue
+)
 
 func sortColors(nums []int) {
-	red := 0
-	white := 1
-	blue := 2
-	var reds int
-	var whites int
-	var blues int
 
 	for _, color := range nums {
 		if color == red {
-			reds++
+			counts.Reds++
 		}
 
 		if color == white {
-			whites++
+			counts.Whites++
 		}
 
 		if color == blue {
-			blues++
+			counts.Blues++
 		}
 	}
 
 	for i := range nums {
-		if reds > 0 {
+		if counts.Reds > 0 {
 			nums[i] = red
-			reds--
+			counts.Reds--
 			continue
 		}
 
-		if whites > 0 {
+		if counts.Whites > 0 {
 			nums[i] = white
-			whites--
+			counts.Whites--
 			continue
 		}
 
 		nums[i] = blue
-		blues--
+		counts.Blues--
 	}
+}
+
+func countColors(nums []int) {
+
 }
 
 func TestSortColors(t *testing.T) {
