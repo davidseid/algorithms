@@ -1,5 +1,10 @@
 package algorithms
 
+import (
+	"reflect"
+	"testing"
+)
+
 /*
 Source: https://leetcode.com/problems/sort-colors/
 
@@ -13,12 +18,21 @@ Example:
 
 Input: [2,0,2,1,1,0]
 Output: [0,0,1,1,2,2]
+
 Follow up:
 
 A rather straight forward solution is a two-pass algorithm using counting sort.
 First, iterate the array counting number of 0's, 1's, and 2's, then overwrite array with total number of 0's, then 1's and followed by 2's.
 Could you come up with a one-pass algorithm using only constant space?
 */
-func sortColors(nums []int) {
 
+func testSortColors(t *testing.T) {
+	input := []int{2, 0, 2, 1, 1, 0}
+	expected := []int{0, 0, 1, 1, 2, 2}
+
+	actual := sortColors(input)
+
+	if !reflect.DeepEqual(actual, expected) {
+		t.Errorf("Got %v, expected %v", actual, expected)
+	}
 }
