@@ -26,19 +26,39 @@ First, iterate the array counting number of 0's, 1's, and 2's, then overwrite ar
 Could you come up with a one-pass algorithm using only constant space?
 */
 
-type counts struct {
-	Reds   int
-	Whites int
-	Blues  int
+func sortColors(nums []int) {
+	mid := nums[len(nums)/2]
+	i := 0
+	j := 0
+	k := len(nums)
+
+	for j < k {
+		if nums[j] < mid {
+			nums[i], nums[j] = nums[j], nums[i]
+			i++
+			j++
+		} else if nums[j] > mid {
+			k--
+			nums[j], nums[k] = nums[k], nums[j]
+		} else {
+			j++
+		}
+	}
 }
 
-const (
-	red = iota
-	white
-	blue
-)
-
 // Naive solution, two pass and constant space
+
+// type counts struct {
+// 	Reds   int
+// 	Whites int
+// 	Blues  int
+// }
+
+// const (
+// 	red = iota
+// 	white
+// 	blue
+// )
 // func sortColors(nums []int) {
 
 // 	counts := countColors(nums)
