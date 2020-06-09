@@ -33,22 +33,22 @@ func sortColors(nums []int) {
 
 	curr := 0
 
-	for currentIndexIsLessThanArrLength(curr, high, nums) {
+	for currentIndexIsLessThanHighIndex(curr, high) {
 		if currentValueIsLessThanMidValue(curr, mid, nums) {
 			swap(low, curr, nums)
 			low++
 			curr++
 		} else if currentValueIsGreaterThanMidValue(curr, mid, nums) {
 			high--
-			swap(curr, high, nums)
+			swap(high, curr, nums)
 		} else {
 			curr++
 		}
 	}
 }
 
-func currentIndexIsLessThanArrLength(curr int, high int, nums []int) bool {
-	return nums[curr] < nums[high]
+func currentIndexIsLessThanHighIndex(curr int, high int) bool {
+	return curr < high
 }
 
 func currentValueIsLessThanMidValue(curr int, mid int, nums []int) bool {
