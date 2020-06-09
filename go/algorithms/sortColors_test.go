@@ -26,109 +26,78 @@ First, iterate the array counting number of 0's, 1's, and 2's, then overwrite ar
 Could you come up with a one-pass algorithm using only constant space?
 */
 
+type counts struct {
+	Reds   int
+	Whites int
+	Blues  int
+}
+
+const (
+	red = iota
+	white
+	blue
+)
+
 func sortColors(nums []int) {
-	low := 0
-	mid := len(nums) / 2
-	high := len(nums)
 
-	curr := 0
+	counts := countColors(nums)
 
-	for currentIndexIsLessThanHighIndex(curr, high) {
-		if currentValueIsLessThanMidValue(curr, mid, nums) {
-			swap(low, curr, nums)
-			low++
-			curr++
+	orderColors(nums, counts)
+}
+
+func countColors(nums []int) counts {
+	var counts = counts{}
+
+	for _, color := range nums {
+		if color == red {
+			counts.Reds++
+		}
+
+		if color == white {
+			counts.Whites++
+		}
+
+		if color == blue {
+			counts.Blues++
+		}
+	}
+
+	return counts
+}
+
+func orderColors(nums []int, counts counts) {
+	for i := range nums {
+		if counts.Reds > 0 {
+			nums[i] = red
+			counts.Reds--
 			continue
 		}
 
-		if currentValueIsGreaterThanMidValue(curr, mid, nums) {
-			high--
-			swap(high, curr, nums)
+		if counts.Whites > 0 {
+			nums[i] = white
+			counts.Whites--
 			continue
 		}
 
-		curr++
+		nums[i] = blue
+		counts.Blues--
 	}
 }
-
-func currentIndexIsLessThanHighIndex(curr int, high int) bool {
-	return curr < high
-}
-
-func currentValueIsLessThanMidValue(curr int, mid int, nums []int) bool {
-	return nums[curr] < nums[mid]
-}
-
-func currentValueIsGreaterThanMidValue(curr int, mid int, nums []int) bool {
-	return nums[curr] > nums[mid]
-}
-
-func swap(a int, b int, nums []int) {
-	nums[a], nums[b] = nums[b], nums[a]
-}
-
-// Naive solution, two pass and constant space
-
-// type counts struct {
-// 	Reds   int
-// 	Whites int
-// 	Blues  int
-// }
-
-// const (
-// 	red = iota
-// 	white
-// 	blue
-// )
-// func sortColors(nums []int) {
-
-// 	counts := countColors(nums)
-
-// 	orderColors(nums, counts)
-// }
-
-// func countColors(nums []int) counts {
-// 	var counts = counts{}
-
-// 	for _, color := range nums {
-// 		if color == red {
-// 			counts.Reds++
-// 		}
-
-// 		if color == white {
-// 			counts.Whites++
-// 		}
-
-// 		if color == blue {
-// 			counts.Blues++
-// 		}
-// 	}
-
-// 	return counts
-// }
-
-// func orderColors(nums []int, counts counts) {
-// 	for i := range nums {
-// 		if counts.Reds > 0 {
-// 			nums[i] = red
-// 			counts.Reds--
-// 			continue
-// 		}
-
-// 		if counts.Whites > 0 {
-// 			nums[i] = white
-// 			counts.Whites--
-// 			continue
-// 		}
-
-// 		nums[i] = blue
-// 		counts.Blues--
-// 	}
-// }
 
 func TestSortColors(t *testing.T) {
 	actual := []int{2, 0, 2, 1, 1, 0}
 	expected := []int{0, 0, 1, 1, 2, 2}
+
+	sortColors(actual)
+
+	if !reflect.DeepEqual(actual, expected) {
+		t.Errorf("Got %v, expected %v", actual, expected)
+	}
+}
+
+func TestSortColorsWithSmallInput(t *testing.T) {
+	actual := []int{1, 0, 2}
+	expected := []int{0, 1, 2}
 
 	sortColors(actual)
 
