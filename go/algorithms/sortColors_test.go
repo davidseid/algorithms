@@ -38,51 +38,52 @@ const (
 	blue
 )
 
-func sortColors(nums []int) {
+// Naive solution, two pass and constant space
+// func sortColors(nums []int) {
 
-	counts := countColors(nums)
+// 	counts := countColors(nums)
 
-	orderColors(nums, counts)
-}
+// 	orderColors(nums, counts)
+// }
 
-func countColors(nums []int) counts {
-	var counts = counts{}
+// func countColors(nums []int) counts {
+// 	var counts = counts{}
 
-	for _, color := range nums {
-		if color == red {
-			counts.Reds++
-		}
+// 	for _, color := range nums {
+// 		if color == red {
+// 			counts.Reds++
+// 		}
 
-		if color == white {
-			counts.Whites++
-		}
+// 		if color == white {
+// 			counts.Whites++
+// 		}
 
-		if color == blue {
-			counts.Blues++
-		}
-	}
+// 		if color == blue {
+// 			counts.Blues++
+// 		}
+// 	}
 
-	return counts
-}
+// 	return counts
+// }
 
-func orderColors(nums []int, counts counts) {
-	for i := range nums {
-		if counts.Reds > 0 {
-			nums[i] = red
-			counts.Reds--
-			continue
-		}
+// func orderColors(nums []int, counts counts) {
+// 	for i := range nums {
+// 		if counts.Reds > 0 {
+// 			nums[i] = red
+// 			counts.Reds--
+// 			continue
+// 		}
 
-		if counts.Whites > 0 {
-			nums[i] = white
-			counts.Whites--
-			continue
-		}
+// 		if counts.Whites > 0 {
+// 			nums[i] = white
+// 			counts.Whites--
+// 			continue
+// 		}
 
-		nums[i] = blue
-		counts.Blues--
-	}
-}
+// 		nums[i] = blue
+// 		counts.Blues--
+// 	}
+// }
 
 func TestSortColors(t *testing.T) {
 	actual := []int{2, 0, 2, 1, 1, 0}
