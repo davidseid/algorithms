@@ -38,12 +38,16 @@ func sortColors(nums []int) {
 			swap(low, curr, nums)
 			low++
 			curr++
-		} else if currentValueIsGreaterThanMidValue(curr, mid, nums) {
+			continue
+		}
+
+		if currentValueIsGreaterThanMidValue(curr, mid, nums) {
 			high--
 			swap(high, curr, nums)
-		} else {
-			curr++
+			continue
 		}
+
+		curr++
 	}
 }
 
