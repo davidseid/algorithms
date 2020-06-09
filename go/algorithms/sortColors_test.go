@@ -27,23 +27,40 @@ Could you come up with a one-pass algorithm using only constant space?
 */
 
 func sortColors(nums []int) {
-	mid := len(nums) / 2
 	low := 0
-	curr := 0
+	mid := len(nums) / 2
 	high := len(nums)
 
-	for curr < high {
-		if nums[curr] < nums[mid] {
-			nums[low], nums[curr] = nums[curr], nums[low]
+	curr := 0
+
+	for currentIndexIsLessThanArrLength(curr, high, nums) {
+		if currentValueIsLessThanMidValue(curr, mid, nums) {
+			swap(low, curr, nums)
 			low++
 			curr++
-		} else if nums[curr] > nums[mid] {
+		} else if currentValueIsGreaterThanMidValue(curr, mid, nums) {
 			high--
-			nums[curr], nums[high] = nums[high], nums[curr]
+			swap(curr, high, nums)
 		} else {
 			curr++
 		}
 	}
+}
+
+func currentIndexIsLessThanArrLength(curr int, high int, nums []int) bool {
+	return nums[curr] < nums[high]
+}
+
+func currentValueIsLessThanMidValue(curr int, mid int, nums []int) bool {
+	return nums[curr] < nums[mid]
+}
+
+func currentValueIsGreaterThanMidValue(curr int, mid int, nums []int) bool {
+	return nums[curr] > nums[mid]
+}
+
+func swap(a int, b int, nums []int) {
+	nums[a], nums[b] = nums[b], nums[a]
 }
 
 // Naive solution, two pass and constant space
