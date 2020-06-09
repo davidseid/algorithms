@@ -27,21 +27,21 @@ Could you come up with a one-pass algorithm using only constant space?
 */
 
 func sortColors(nums []int) {
-	mid := nums[len(nums)/2]
-	i := 0
-	j := 0
-	k := len(nums)
+	mid := len(nums) / 2
+	low := 0
+	curr := 0
+	high := len(nums)
 
-	for j < k {
-		if nums[j] < mid {
-			nums[i], nums[j] = nums[j], nums[i]
-			i++
-			j++
-		} else if nums[j] > mid {
-			k--
-			nums[j], nums[k] = nums[k], nums[j]
+	for curr < high {
+		if nums[curr] < nums[mid] {
+			nums[low], nums[curr] = nums[curr], nums[low]
+			low++
+			curr++
+		} else if nums[curr] > nums[mid] {
+			high--
+			nums[curr], nums[high] = nums[high], nums[curr]
 		} else {
-			j++
+			curr++
 		}
 	}
 }
