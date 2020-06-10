@@ -15,17 +15,36 @@ Note: The solution set must not contain duplicate subsets.
 
 /*
 Rationale:
-Initialize result with empty value.
-For each number in input
-	loop again, add an entry each time
+For each element in the input, fork a subset that includes it and one that does not
+This can be done recursively with the base case being that there are no more elements in the input to iterate over
+
+Example:
+Begin with 1, 2, 3 and an empty subset
+
+Call the power set again on 2, 3 with a subset of {} and a subset of {1}
+The next time the first call will result in {}, {2}, the second will be {1},{1,2} and so on
+
 */
 
 func subsets(nums []int) [][]int {
-	result := [][]int{
-		{},
+	result := [][]int{}
+
+	currSubset := []int{}
+
+	getSubsets(currSubset, nums, &result)
+	return result
+}
+
+func getSubsets(currSubset []int, numsRemaining []int, subsets *[][]int) {
+	if len(numsRemaining) == 0 {
+		*subsets = append(*subsets, currSubset)
+		return
 	}
 
-	return result
+	subsetWithNext := append(currSubset, numsRemaining[0])
+
+	getSubsets(currSubset, numsRemaining[1:], subsets)
+	getSubsets(subsetWithNext, numsRemaining[1:], subsets)
 }
 
 func TestSubsets(t *testing.T) {
