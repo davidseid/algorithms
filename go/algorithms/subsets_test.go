@@ -31,20 +31,20 @@ func subsets(nums []int) [][]int {
 
 	currSubset := []int{}
 
-	getSubsets(currSubset, nums, &result)
+	getSubsets(currSubset, nums, result)
 	return result
 }
 
-func getSubsets(currSubset []int, numsRemaining []int, subsets *[][]int) {
+func getSubsets(currSubset []int, numsRemaining []int, subsets [][]int) [][]int {
 	if len(numsRemaining) == 0 {
-		*subsets = append(*subsets, currSubset)
-		return
+		return subsets
 	}
 
 	subsetWithNext := append(currSubset, numsRemaining[0])
 
-	getSubsets(currSubset, numsRemaining[1:], subsets)
-	getSubsets(subsetWithNext, numsRemaining[1:], subsets)
+	subsets = append(subsets, getSubsets(currSubset, numsRemaining[1:], subsets)...)
+	subsets = append(subsets, getSubsets(subsetWithNext, numsRemaining[1:], subsets)...)
+	return subsets
 }
 
 func TestSubsets(t *testing.T) {
