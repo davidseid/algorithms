@@ -5,10 +5,27 @@ import (
 	"testing"
 )
 
+/*
+Source: https://leetcode.com/problems/subsets/
+
+Given a set of distinct integers, nums, return all possible subsets (the power set).
+
+Note: The solution set must not contain duplicate subsets.
+*/
+
+/*
+Rationale:
+Initialize result with empty value.
+For each number in input
+	loop again, add an entry each time
+*/
+
 func subsets(nums []int) [][]int {
-	return [][]int{
-		nums,
+	result := [][]int{
+		{},
 	}
+
+	return result
 }
 
 func TestSubsets(t *testing.T) {
