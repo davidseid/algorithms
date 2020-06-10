@@ -5,6 +5,12 @@ import (
 	"testing"
 )
 
+func subsets(nums []int) [][]int {
+	return [][]int{
+		nums,
+	}
+}
+
 func TestSubsets(t *testing.T) {
 	input := []int{1, 2, 3}
 
