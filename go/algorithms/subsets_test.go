@@ -1,6 +1,7 @@
 package algorithms
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -31,19 +32,21 @@ func subsets(nums []int) [][]int {
 
 	currSubset := []int{}
 
-	getSubsets(currSubset, nums, result)
+	result = getSubsets(nums, 0, currSubset, result)
 	return result
 }
 
-func getSubsets(currSubset []int, numsRemaining []int, subsets [][]int) [][]int {
-	if len(numsRemaining) == 0 {
+func getSubsets(nums []int, index int, curr []int, subsets [][]int) [][]int {
+	if index == len(nums) {
+		fmt.Println(curr)
+		subsets = append(subsets, curr)
 		return subsets
 	}
 
-	subsetWithNext := append(currSubset, numsRemaining[0])
+	currWithNext := append(curr, nums[index])
 
-	subsets = append(subsets, getSubsets(currSubset, numsRemaining[1:], subsets)...)
-	subsets = append(subsets, getSubsets(subsetWithNext, numsRemaining[1:], subsets)...)
+	subsets = getSubsets(nums, index+1, currWithNext, subsets)
+	subsets = getSubsets(nums, index+1, curr, subsets)
 	return subsets
 }
 
