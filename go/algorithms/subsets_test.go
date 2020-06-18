@@ -1,7 +1,10 @@
 package algorithms
 
 import (
+	"fmt"
+	"math"
 	"reflect"
+	"strconv"
 	"testing"
 )
 
@@ -33,30 +36,72 @@ Time complexity: O(N*2^n) Exponential because we have two branches for each elem
 Space complexity: O(N*2^n) Exponential because the total storage is represented by the size of the output and we are copying the result each time.
 However, in terms of auxiliary space it could be possible to optimize this to use a bitmap / integer to hold the values...
 
-Followup: Solve with bitmask
+Followup:
+- Solve iteratively
+- Solve with bitmask
 */
 
+// class Solution:
+//     def subsets(self, nums: List[int]) -> List[List[int]]:
+//         n = len(nums)
+//         output = []
+
+//         for i in range(2**n, 2**(n + 1)):
+//             # generate bitmask, from 0..00 to 1..11
+//             bitmask = bin(i)[3:]
+
+//             # append subset corresponding to that bitmask
+//             output.append([nums[j] for j in range(n) if bitmask[j] == '1'])
+
+//         return output
+
 func subsets(nums []int) [][]int {
-	result := [][]int{}
-	currSubset := []int{}
+	n := float64(len(nums))
+	output := [][]int{}
 
-	return getSubsets(nums, 0, currSubset, result)
-}
+	for i := math.Pow(2, n); i < math.Pow(2, n+1); i++ {
+		bitmask := bin(i)[3:]
+		fmt.Println(bitmask)
 
-func getSubsets(nums []int, index int, curr []int, subsets [][]int) [][]int {
-	if index == len(nums) {
-		subsets = append(subsets, curr)
-		return subsets
+		subset := []int{}
+
+		for j := 0; j < int(n); j++ {
+			if len(bitmask) > j && bitmask[j] == '1' {
+				subset = append(subset, nums[j])
+			}
+		}
+		output = append(output, subset)
 	}
 
-	currWithNext := make([]int, len(curr))
-	copy(currWithNext, curr)
-	currWithNext = append(currWithNext, nums[index])
-
-	subsets = getSubsets(nums, index+1, currWithNext, subsets)
-	subsets = getSubsets(nums, index+1, curr, subsets)
-	return subsets
+	return output
 }
+
+func bin(num float64) string {
+	n := int64(num)
+	return strconv.FormatInt(n, 2)
+}
+
+// func subsets(nums []int) [][]int {
+// 	result := [][]int{}
+// 	currSubset := []int{}
+
+// 	return getSubsets(nums, 0, currSubset, result)
+// }
+
+// func getSubsets(nums []int, index int, curr []int, subsets [][]int) [][]int {
+// 	if index == len(nums) {
+// 		subsets = append(subsets, curr)
+// 		return subsets
+// 	}
+
+// 	currWithNext := make([]int, len(curr))
+// 	copy(currWithNext, curr)
+// 	currWithNext = append(currWithNext, nums[index])
+
+// 	subsets = getSubsets(nums, index+1, currWithNext, subsets)
+// 	subsets = getSubsets(nums, index+1, curr, subsets)
+// 	return subsets
+// }
 
 func TestSubsets(t *testing.T) {
 	input := []int{1, 2, 3}
