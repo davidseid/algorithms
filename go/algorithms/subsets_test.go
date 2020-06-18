@@ -42,6 +42,7 @@ func subsets(nums []int) [][]int {
 func getSubsets(nums []int, index int, curr []int, subsets [][]int) [][]int {
 	if index == len(nums) {
 		fmt.Println(curr)
+		// sort.Ints(curr)
 		subsets = append(subsets, curr)
 		return subsets
 	}
@@ -71,13 +72,13 @@ func TestSubsets(t *testing.T) {
 	input := []int{1, 2, 3}
 
 	expected := [][]int{
-		{3},
-		{1},
-		{2},
 		{1, 2, 3},
-		{1, 3},
-		{2, 3},
 		{1, 2},
+		{1, 3},
+		{1},
+		{2, 3},
+		{2},
+		{3},
 		{},
 	}
 
