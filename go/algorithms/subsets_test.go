@@ -29,9 +29,11 @@ Lessons learned:
 - Better to make an empty array of the appropriate length, use the built-in copy(dest,src) to fill it, and then use append
 - Sorting nested arrays can be done by implementing the Sort interface for a matrix
 
-Time complexity: O(N*2^n) Exponential because we have two branches for each element
-Space complexity: O(N*2^n) Exponential because the total storage is represented by the size of the output.
+Time complexity: O(N*2^n) Exponential because we have two branches for each element and we have to make a copy each time.
+Space complexity: O(N*2^n) Exponential because the total storage is represented by the size of the output and we are copying the result each time.
 However, in terms of auxiliary space it could be possible to optimize this to use a bitmap / integer to hold the values...
+
+Followup: Solve with bitmask
 */
 
 func subsets(nums []int) [][]int {
