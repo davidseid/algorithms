@@ -3,6 +3,7 @@ package algorithms
 import (
 	"fmt"
 	"reflect"
+	"sort"
 	"testing"
 )
 
@@ -33,12 +34,15 @@ func subsets(nums []int) [][]int {
 	currSubset := []int{}
 
 	result = getSubsets(nums, 0, currSubset, result)
+
+	sortResult(result)
 	return result
 }
 
 func getSubsets(nums []int, index int, curr []int, subsets [][]int) [][]int {
 	if index == len(nums) {
 		fmt.Println(curr)
+		sort.Ints(curr)
 		subsets = append(subsets, curr)
 		return subsets
 	}
@@ -48,6 +52,18 @@ func getSubsets(nums []int, index int, curr []int, subsets [][]int) [][]int {
 	subsets = getSubsets(nums, index+1, currWithNext, subsets)
 	subsets = getSubsets(nums, index+1, curr, subsets)
 	return subsets
+}
+
+func sortResult(matrix [][]int) {
+	sort.Slice(matrix[:], func(i, j int) bool {
+		for x := range matrix[i] {
+			if matrix[i][x] == matrix[j][x] {
+				continue
+			}
+			return matrix[i][x] < matrix[j][x]
+		}
+		return false
+	})
 }
 
 func TestSubsets(t *testing.T) {
