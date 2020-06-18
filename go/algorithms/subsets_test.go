@@ -35,19 +35,20 @@ func subsets(nums []int) [][]int {
 
 	result = getSubsets(nums, 0, currSubset, result)
 
-	sortResult(result)
+	// sortResult(result)
 	return result
 }
 
 func getSubsets(nums []int, index int, curr []int, subsets [][]int) [][]int {
 	if index == len(nums) {
 		fmt.Println(curr)
-		sort.Ints(curr)
 		subsets = append(subsets, curr)
 		return subsets
 	}
 
-	currWithNext := append(curr, nums[index])
+	currWithNext := make([]int, len(curr))
+	copy(currWithNext, curr)
+	currWithNext = append(currWithNext, nums[index])
 
 	subsets = getSubsets(nums, index+1, currWithNext, subsets)
 	subsets = getSubsets(nums, index+1, curr, subsets)
