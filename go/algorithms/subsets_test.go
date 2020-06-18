@@ -1,7 +1,6 @@
 package algorithms
 
 import (
-	"fmt"
 	"reflect"
 	"testing"
 )
@@ -25,6 +24,14 @@ Begin with 1, 2, 3 and an empty subset
 Call the power set again on 2, 3 with a subset of {} and a subset of {1}
 The next time the first call will result in {}, {2}, the second will be {1},{1,2} and so on
 
+Lessons learned:
+- Go's built-in append function manipulates the underlying array even when the result assigned to a new variable.
+- Better to make an empty array of the appropriate length, use the built-in copy(dest,src) to fill it, and then use append
+- Sorting nested arrays can be done by implementing the Sort interface for a matrix
+
+Time complexity: O(2^n) Exponential because we have two branches for each element
+Space complexity: O(2^n) Exponential because the total storage is represented by the size of the output.
+However, in terms of auxiliary space it could be possible to optimize this to use a bitmap / integer to hold the values...
 */
 
 func subsets(nums []int) [][]int {
@@ -36,7 +43,6 @@ func subsets(nums []int) [][]int {
 
 func getSubsets(nums []int, index int, curr []int, subsets [][]int) [][]int {
 	if index == len(nums) {
-		fmt.Println(curr)
 		subsets = append(subsets, curr)
 		return subsets
 	}
