@@ -1,10 +1,7 @@
 package algorithms
 
 import (
-	"fmt"
-	"math"
 	"reflect"
-	"strconv"
 	"testing"
 )
 
@@ -38,35 +35,62 @@ However, in terms of auxiliary space it could be possible to optimize this to us
 
 Followup:
 - Solve iteratively
-- Solve with bitmask
 */
 
-// BITMASK SOLUTION
+// ITERATIVE SOLUTION
 func subsets(nums []int) [][]int {
-	n := float64(len(nums))
-	output := [][]int{}
-
-	for i := math.Pow(2, n); i < math.Pow(2, n+1); i++ {
-		bitmask := bin(i)[1:]
-		fmt.Println(bitmask)
-
-		subset := []int{}
-
-		for j := 0; j < int(n); j++ {
-			if len(bitmask) > j && bitmask[j] == '1' {
-				subset = append(subset, nums[j])
-			}
-		}
-		output = append(output, subset)
+	results := [][]int{
+		[]int{},
 	}
 
-	return output
+	for _, num := range nums {
+		nextSubsets := deepCopy(results)
+
+		for _, subset := range nextSubsets {
+			subset = append(subset, num)
+			results = append(results, subset)
+		}
+	}
+
+	return results
 }
 
-func bin(num float64) string {
-	n := int64(num)
-	return strconv.FormatInt(n, 2)
+func deepCopy(src [][]int) [][]int {
+	nestedCopy := make([][]int, len(src))
+
+	for _, v := range src {
+		dupe := make([]int, len(v))
+		copy(dupe, v)
+		nestedCopy = append(nestedCopy, dupe)
+	}
+
+	return nestedCopy
 }
+
+// BITMASK SOLUTION
+// func subsets(nums []int) [][]int {
+// 	n := float64(len(nums))
+// 	output := [][]int{}
+
+// 	for i := math.Pow(2, n); i < math.Pow(2, n+1); i++ {
+// 		bitmask := bin(i)[1:]
+// 		subset := []int{}
+
+// 		for j := 0; j < int(n); j++ {
+// 			if len(bitmask) > j && bitmask[j] == '1' {
+// 				subset = append(subset, nums[j])
+// 			}
+// 		}
+// 		output = append(output, subset)
+// 	}
+
+// 	return output
+// }
+
+// func bin(num float64) string {
+// 	n := int64(num)
+// 	return strconv.FormatInt(n, 2)
+// }
 
 // RECURSIVE SOLUTION
 // func subsets(nums []int) [][]int {
