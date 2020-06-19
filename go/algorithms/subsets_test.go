@@ -41,13 +41,14 @@ Followup:
 - Solve with bitmask
 */
 
+// BITMASK SOLUTION
 func subsets(nums []int) [][]int {
 	n := float64(len(nums))
 	output := [][]int{}
 
 	for i := math.Pow(2, n); i < math.Pow(2, n+1); i++ {
-		fmt.Println(i)
-		bitmask := bin(i)[3:]
+		bitmask := bin(i)[1:]
+		fmt.Println(bitmask)
 
 		subset := []int{}
 
@@ -67,6 +68,7 @@ func bin(num float64) string {
 	return strconv.FormatInt(n, 2)
 }
 
+// RECURSIVE SOLUTION
 // func subsets(nums []int) [][]int {
 // 	result := [][]int{}
 // 	currSubset := []int{}
