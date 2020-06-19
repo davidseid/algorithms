@@ -46,8 +46,8 @@ func subsets(nums []int) [][]int {
 	output := [][]int{}
 
 	for i := math.Pow(2, n); i < math.Pow(2, n+1); i++ {
+		fmt.Println(i)
 		bitmask := bin(i)[3:]
-		fmt.Println(bitmask)
 
 		subset := []int{}
 
