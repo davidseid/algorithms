@@ -60,10 +60,10 @@ func subsets(nums []int) [][]int {
 func deepCopy(src [][]int) [][]int {
 	nestedCopy := make([][]int, len(src))
 
-	for _, v := range src {
+	for i, v := range src {
 		dupe := make([]int, len(v))
 		copy(dupe, v)
-		nestedCopy = append(nestedCopy, dupe)
+		nestedCopy[i] = dupe
 	}
 
 	return nestedCopy
