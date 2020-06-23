@@ -34,36 +34,42 @@ Space complexity: O(N*2^n) Exponential because the total storage is represented 
 However, in terms of auxiliary space it could be possible to optimize this to use a bitmap / integer to hold the values...
 
 Followup:
-- Rewrite recursive solution
 - Rewrite bitmap solution
 */
 
-// REWRITE RECURSIVE SOLUTION
+// REWRITE BITMASK SOLUTION
 func subsets(nums []int) [][]int {
-	emptySubset := []int{}
 	results := [][]int{}
-
-	getSubsets(&results, &nums, 0, &emptySubset)
 
 	return results
 }
 
-func getSubsets(results *[][]int, nums *[]int, currIndex int, currSubset *[]int) {
-	if currIndex >= len(*nums) {
-		*results = append(*results, *currSubset)
-		return
-	}
+// // REWRITE RECURSIVE SOLUTION
+// func subsets(nums []int) [][]int {
+// 	emptySubset := []int{}
+// 	results := [][]int{}
 
-	newNum := (*nums)[currIndex]
-	currIndex++
+// 	getSubsets(&results, &nums, 0, &emptySubset)
 
-	nextSubset := make([]int, len(*currSubset))
-	copy(nextSubset, *currSubset)
-	nextSubset = append(nextSubset, newNum)
+// 	return results
+// }
 
-	getSubsets(results, nums, currIndex, currSubset)
-	getSubsets(results, nums, currIndex, &nextSubset)
-}
+// func getSubsets(results *[][]int, nums *[]int, currIndex int, currSubset *[]int) {
+// 	if currIndex >= len(*nums) {
+// 		*results = append(*results, *currSubset)
+// 		return
+// 	}
+
+// 	newNum := (*nums)[currIndex]
+// 	currIndex++
+
+// 	nextSubset := make([]int, len(*currSubset))
+// 	copy(nextSubset, *currSubset)
+// 	nextSubset = append(nextSubset, newNum)
+
+// 	getSubsets(results, nums, currIndex, currSubset)
+// 	getSubsets(results, nums, currIndex, &nextSubset)
+// }
 
 // // ITERATIVE SOLUTION
 // func subsets(nums []int) [][]int {
