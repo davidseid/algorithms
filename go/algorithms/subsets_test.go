@@ -34,15 +34,15 @@ Lessons learned:
 Time complexity: O(N*2^n) Exponential because we have two branches for each element and we have to make a copy each time.
 Space complexity: O(N*2^n) Exponential because the total storage is represented by the size of the output and we are copying the result each time.
 However, in terms of auxiliary space it could be possible to optimize this to use a bitmap / integer to hold the values...
-
-Followup:
-- Rewrite bitmap solution
 */
 
 // REWRITE BITMASK SOLUTION
 func subsets(nums []int) [][]int {
 	results := [][]int{}
 
+	// interesting trick here with the bitmask to get each bitmask with the write length
+	// rather than loop from 0 - 2^n, loop from 2^n - 2^n+1 and then chop off the first 1...
+	// could have used an array instead
 	for i := int(math.Pow(2, float64(len(nums)))); i < int(math.Pow(2, float64(len(nums)+1))); i++ {
 		bin := strconv.FormatInt(int64(i), 2)[1:]
 
