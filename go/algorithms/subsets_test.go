@@ -40,7 +40,29 @@ Followup:
 
 // REWRITE RECURSIVE SOLUTION
 func subsets(nums []int) [][]int {
-	return [][]int{[]int{}}
+	emptySubset := []int{}
+	results := [][]int{}
+
+	getSubsets(&results, &nums, 0, &emptySubset)
+
+	return results
+}
+
+func getSubsets(results *[][]int, nums *[]int, currIndex int, currSubset *[]int) {
+	if currIndex >= len(*nums) {
+		*results = append(*results, *currSubset)
+		return
+	}
+
+	newNum := (*nums)[currIndex]
+	currIndex++
+
+	nextSubset := make([]int, len(*currSubset))
+	copy(nextSubset, *currSubset)
+	nextSubset = append(nextSubset, newNum)
+
+	getSubsets(results, nums, currIndex, currSubset)
+	getSubsets(results, nums, currIndex, &nextSubset)
 }
 
 // // ITERATIVE SOLUTION
