@@ -34,7 +34,9 @@ Space complexity: O(N*2^n) Exponential because the total storage is represented 
 However, in terms of auxiliary space it could be possible to optimize this to use a bitmap / integer to hold the values...
 
 Followup:
-- Solve iteratively
+- Fix iterative solution
+- Rewrite recursive solution
+- Rewrite bitmap solution
 */
 
 // ITERATIVE SOLUTION
