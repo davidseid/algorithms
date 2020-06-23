@@ -34,40 +34,44 @@ Space complexity: O(N*2^n) Exponential because the total storage is represented 
 However, in terms of auxiliary space it could be possible to optimize this to use a bitmap / integer to hold the values...
 
 Followup:
-- Fix iterative solution
 - Rewrite recursive solution
 - Rewrite bitmap solution
 */
 
-// ITERATIVE SOLUTION
+// REWRITE RECURSIVE SOLUTION
 func subsets(nums []int) [][]int {
-	results := [][]int{
-		[]int{},
-	}
-
-	for _, num := range nums {
-		nextSubsets := deepCopy(results)
-
-		for _, subset := range nextSubsets {
-			subset = append(subset, num)
-			results = append(results, subset)
-		}
-	}
-
-	return results
+	return [][]int{[]int{}}
 }
 
-func deepCopy(src [][]int) [][]int {
-	nestedCopy := make([][]int, len(src))
+// // ITERATIVE SOLUTION
+// func subsets(nums []int) [][]int {
+// 	results := [][]int{
+// 		[]int{},
+// 	}
 
-	for i, v := range src {
-		dupe := make([]int, len(v))
-		copy(dupe, v)
-		nestedCopy[i] = dupe
-	}
+// 	for _, num := range nums {
+// 		nextSubsets := deepCopy(results)
 
-	return nestedCopy
-}
+// 		for _, subset := range nextSubsets {
+// 			subset = append(subset, num)
+// 			results = append(results, subset)
+// 		}
+// 	}
+
+// 	return results
+// }
+
+// func deepCopy(src [][]int) [][]int {
+// 	nestedCopy := make([][]int, len(src))
+
+// 	for i, v := range src {
+// 		dupe := make([]int, len(v))
+// 		copy(dupe, v)
+// 		nestedCopy[i] = dupe
+// 	}
+
+// 	return nestedCopy
+// }
 
 // BITMASK SOLUTION
 // func subsets(nums []int) [][]int {
