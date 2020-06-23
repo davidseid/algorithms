@@ -1,7 +1,9 @@
 package algorithms
 
 import (
+	"math"
 	"reflect"
+	"strconv"
 	"testing"
 )
 
@@ -40,6 +42,20 @@ Followup:
 // REWRITE BITMASK SOLUTION
 func subsets(nums []int) [][]int {
 	results := [][]int{}
+
+	for i := int(math.Pow(2, float64(len(nums)))); i < int(math.Pow(2, float64(len(nums)+1))); i++ {
+		bin := strconv.FormatInt(int64(i), 2)[1:]
+
+		subset := []int{}
+
+		for i := 0; i < len(bin); i++ {
+			if string(bin[i]) == "1" {
+				subset = append(subset, nums[i])
+			}
+		}
+
+		results = append(results, subset)
+	}
 
 	return results
 }
