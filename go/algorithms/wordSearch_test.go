@@ -29,3 +29,7 @@ board and word consists only of lowercase and uppercase English letters.
 1 <= board[i].length <= 200
 1 <= word.length <= 10^3
 */
+
+func exist(board [][]byte, word string) bool {
+	return true
+}
