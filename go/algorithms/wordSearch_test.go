@@ -48,4 +48,16 @@ func TestExists(t *testing.T) {
 	if !exist(board, word) {
 		t.Errorf("Expected %s to exist", word)
 	}
+
+	word = "SEE"
+
+	if !exist(board, word) {
+		t.Errorf("Expected %s to exist", word)
+	}
+
+	word = "ABCB"
+
+	if exist(board, word) {
+		t.Errorf("Expected %s to not exist", word)
+	}
 }
