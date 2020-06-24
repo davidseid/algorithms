@@ -1,5 +1,7 @@
 package algorithms
 
+import "testing"
+
 /*
 
 Source: https://leetcode.com/problems/word-search/
@@ -32,4 +34,18 @@ board and word consists only of lowercase and uppercase English letters.
 
 func exist(board [][]byte, word string) bool {
 	return true
+}
+
+func TestExists(t *testing.T) {
+	board := [][]byte{
+		[]byte("ABCE"),
+		[]byte("SFCS"),
+		[]byte("ADEE"),
+	}
+
+	word := "ABBCED"
+
+	if !exist(board, word) {
+		t.Errorf("Expected %s to exist", word)
+	}
 }
