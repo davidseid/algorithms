@@ -1,6 +1,9 @@
 package algorithms
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 /*
 
@@ -34,7 +37,48 @@ board and word consists only of lowercase and uppercase English letters.
 */
 
 func exist(board [][]byte, word string) bool {
-	return true
+	for row := range board {
+		for col := range board[row] {
+			if isPath(board, word, 0, row, col) == true {
+				return true
+			}
+		}
+	}
+
+	return false
+}
+
+func isPath(board [][]byte, word string, i int, row int, col int) bool {
+	fmt.Println(row, col)
+	if board[row][col] == word[i] {
+		board[row][col] = 0 // blackout board spot to prevent repeats
+
+		if row-1 >= 0 {
+			if isPath(board, word, i+1, row-1, col) {
+				return true
+			}
+		}
+
+		if col+1 < len(board[row]) {
+			if isPath(board, word, i+1, row, col+1) {
+				return true
+			}
+		}
+
+		if row+1 < len(board) {
+			if isPath(board, word, i+1, row+1, col) {
+				return true
+			}
+		}
+
+		if col-1 >= 0 {
+			if isPath(board, word, i+1, row, col-1) {
+				return true
+			}
+		}
+	}
+
+	return false
 }
 
 func TestExists(t *testing.T) {
