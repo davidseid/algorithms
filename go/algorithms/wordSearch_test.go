@@ -49,12 +49,15 @@ func exist(board [][]byte, word string) bool {
 }
 
 func isPath(board [][]byte, word string, i int, row int, col int) bool {
-
 	if i >= len(word) {
 		return true
 	}
 
 	if board[row][col] == word[i] {
+		if i == len(word)-1 {
+			return true
+		}
+
 		board[row][col] = 0 // blackout board spot to prevent repeats
 
 		if row-1 >= 0 {
