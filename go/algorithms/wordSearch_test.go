@@ -39,6 +39,9 @@ Followup:
 Optimize by backup cleanup rather than copying matrix each recurse (CHECK)
 Optimize by changing base case. Rather than attempt to check path on each side,
 if an adjacent square matches, if it ends the word just return, otherwise, continue
+
+This is probably not worth it in terms of readability, may be better to take the middle ground,
+only recurse in if the next square is a match, but the base case is if we've reached the end...
 */
 
 func exist(board [][]byte, word string) bool {
