@@ -97,11 +97,11 @@ func TestExists(t *testing.T) {
 		t.Errorf("Expected %s to exist", word)
 	}
 
-	// word = "SEE"
+	word = "SEE"
 
-	// if !exist(board, word) {
-	// 	t.Errorf("Expected %s to exist", word)
-	// }
+	if !exist(board, word) {
+		t.Errorf("Expected %s to exist", word)
+	}
 
 	// word = "ABCB"
 
