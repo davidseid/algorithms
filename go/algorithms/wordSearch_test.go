@@ -58,34 +58,46 @@ func isPath(board [][]byte, word string, i int, row int, col int) bool {
 			return true
 		}
 
-		board[row][col] = 0 // blackout board spot to prevent repeats
+		boardCopy := deepCopyMatrix(board)
+		boardCopy[row][col] = 0 // blackout boardCopy spot to prevent repeats
 
 		if row-1 >= 0 {
-			if isPath(board, word, i+1, row-1, col) {
+			if isPath(boardCopy, word, i+1, row-1, col) {
 				return true
 			}
 		}
 
-		if col+1 < len(board[row]) {
-			if isPath(board, word, i+1, row, col+1) {
+		if col+1 < len(boardCopy[row]) {
+			if isPath(boardCopy, word, i+1, row, col+1) {
 				return true
 			}
 		}
 
-		if row+1 < len(board) {
-			if isPath(board, word, i+1, row+1, col) {
+		if row+1 < len(boardCopy) {
+			if isPath(boardCopy, word, i+1, row+1, col) {
 				return true
 			}
 		}
 
 		if col-1 >= 0 {
-			if isPath(board, word, i+1, row, col-1) {
+			if isPath(boardCopy, word, i+1, row, col-1) {
 				return true
 			}
 		}
 	}
 
 	return false
+}
+
+func deepCopyMatrix(original [][]byte) [][]byte {
+	matrixCopy := make([][]byte, len(original))
+
+	for i := range original {
+		matrixCopy[i] = make([]byte, len(original[i]))
+		copy(matrixCopy[i], original[i])
+	}
+
+	return matrixCopy
 }
 
 func TestExists(t *testing.T) {
