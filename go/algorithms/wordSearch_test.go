@@ -1,6 +1,7 @@
 package algorithms
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -97,15 +98,29 @@ func TestExists(t *testing.T) {
 		t.Errorf("Expected %s to exist", word)
 	}
 
+	board = [][]byte{
+		[]byte("ABCE"),
+		[]byte("SFCS"),
+		[]byte("ADEE"),
+	}
+
 	word = "SEE"
+
+	fmt.Println(board)
 
 	if !exist(board, word) {
 		t.Errorf("Expected %s to exist", word)
 	}
 
-	// word = "ABCB"
+	board = [][]byte{
+		[]byte("ABCE"),
+		[]byte("SFCS"),
+		[]byte("ADEE"),
+	}
 
-	// if exist(board, word) {
-	// 	t.Errorf("Expected %s to not exist", word)
-	// }
+	word = "ABCB"
+
+	if exist(board, word) {
+		t.Errorf("Expected %s to not exist", word)
+	}
 }
