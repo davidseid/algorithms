@@ -34,6 +34,9 @@ board and word consists only of lowercase and uppercase English letters.
 1 <= board.length <= 200
 1 <= board[i].length <= 200
 1 <= word.length <= 10^3
+
+Followup:
+Optimize by backup cleanup rather than copying matrix each recurse
 */
 
 func exist(board [][]byte, word string) bool {
