@@ -136,4 +136,16 @@ func TestExists(t *testing.T) {
 	if !exist(board, word) {
 		t.Errorf("Expected %s to exist", word)
 	}
+
+	board = [][]byte{
+		[]byte("CAA"),
+		[]byte("AAA"),
+		[]byte("BCD"),
+	}
+
+	word = "AAB"
+
+	if !exist(board, word) {
+		t.Errorf("Expected %s to exist", word)
+	}
 }
