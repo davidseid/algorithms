@@ -61,32 +61,38 @@ func isPath(board [][]byte, word string, i int, row int, col int) bool {
 			return true
 		}
 
-		boardCopy := deepCopyMatrix(board)
-		boardCopy[row][col] = 0 // blackout boardCopy spot to prevent repeats
+		// boardCopy := deepCopyMatrix(board)
+		originalValue := board[row][col]
+		board[row][col] = 0 // blackout board spot to prevent repeats
+
+		defer func() {
+			board[row][col] = originalValue
+		}()
 
 		if row-1 >= 0 {
-			if isPath(boardCopy, word, i+1, row-1, col) {
+			if isPath(board, word, i+1, row-1, col) {
 				return true
 			}
 		}
 
-		if col+1 < len(boardCopy[row]) {
-			if isPath(boardCopy, word, i+1, row, col+1) {
+		if col+1 < len(board[row]) {
+			if isPath(board, word, i+1, row, col+1) {
 				return true
 			}
 		}
 
-		if row+1 < len(boardCopy) {
-			if isPath(boardCopy, word, i+1, row+1, col) {
+		if row+1 < len(board) {
+			if isPath(board, word, i+1, row+1, col) {
 				return true
 			}
 		}
 
 		if col-1 >= 0 {
-			if isPath(boardCopy, word, i+1, row, col-1) {
+			if isPath(board, word, i+1, row, col-1) {
 				return true
 			}
 		}
+
 	}
 
 	return false
