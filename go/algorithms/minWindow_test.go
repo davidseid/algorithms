@@ -1,6 +1,9 @@
 package algorithms
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 /*
 Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
@@ -16,6 +19,17 @@ If there is such window, you are guaranteed that there will always be only one u
 */
 
 func minWindow(s string, t string) string {
+	charToIndex := map[string]int{}
+
+	for _, v := range t {
+		charToIndex[string(v)] = -1
+	}
+
+	windows := [][]int{}
+
+	indexToChar := map[int]string{}
+
+	fmt.Println(charToIndex)
 	return ""
 }
 
