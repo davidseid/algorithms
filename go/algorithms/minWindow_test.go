@@ -1,7 +1,6 @@
 package algorithms
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -26,10 +25,31 @@ func minWindow(s string, t string) string {
 	}
 
 	windows := [][]int{}
-
 	indexToChar := map[int]string{}
+	charsFound := 0
 
-	fmt.Println(charToIndex)
+	i := 0
+
+	for i < len(s) {
+		currChar := string(s[i])
+		if charIndex, ok := charToIndex[currChar]; ok {
+
+			if charIndex == -1 {
+				// add it to the map
+				// add it to the indexToChar
+				// increment end
+			} else {
+				// get old index
+				// update charToIndex
+				// update indexToChar (old and new)
+			}
+
+			// if charsFound == len(t)
+			// add window based on indexToChar
+		}
+		i++
+	}
+
 	return ""
 }
 
