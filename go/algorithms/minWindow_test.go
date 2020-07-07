@@ -18,37 +18,6 @@ If there is such window, you are guaranteed that there will always be only one u
 */
 
 func minWindow(s string, t string) string {
-	charToIndex := map[string]int{}
-
-	for _, v := range t {
-		charToIndex[string(v)] = -1
-	}
-
-	windows := [][]int{}
-	indexToChar := map[int]string{}
-	charsFound := 0
-
-	i := 0
-
-	for i < len(s) {
-		currChar := string(s[i])
-		if charIndex, ok := charToIndex[currChar]; ok {
-
-			if charIndex == -1 {
-				// add it to the map
-				// add it to the indexToChar
-				// increment end
-			} else {
-				// get old index
-				// update charToIndex
-				// update indexToChar (old and new)
-			}
-
-			// if charsFound == len(t)
-			// add window based on indexToChar
-		}
-		i++
-	}
 
 	return ""
 }
