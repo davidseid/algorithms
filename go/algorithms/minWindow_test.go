@@ -34,8 +34,50 @@ func minWindow(s string, t string) string {
 		requiredCharacters[string(char)] = true
 	}
 
+	isValidWindow := false
 	characterCountsInWindow := map[string]int{}
 	minWindow := ""
+	left := 0
+	right := 0
+
+	for left < len(s) {
+		if !isValidWindow {
+			right++
+			if right >= len(s) {
+				return minWindow
+			}
+
+			if _, ok := requiredCharacters[string(s[right])]; ok {
+				characterCountsInWindow[string(s[right])] = characterCountsInWindow[string(s[right])] + 1
+
+				isNowValid := true
+
+				for _, v := range characterCountsInWindow {
+					if v <= 1 {
+						isNowValid = false
+					}
+				}
+
+				isValidWindow = isNowValid
+
+				window := s[left:right]
+
+				if len(window) < len(minWindow) {
+					minWindow = window
+				}
+			}
+		} else {
+			if _, ok := requiredCharacters[string(s[left])]; ok {
+				characterCountsInWindow[string(s[left])] = characterCountsInWindow[string(s[left])] - 1
+				left++
+				if characterCountsInWindow[string(s[left])] < 1 {
+					isValidWindow = false
+				} else {
+					minWindow = minWindow[left:right]
+				}
+			}
+		}
+	}
 
 	return minWindow
 }
