@@ -1,7 +1,6 @@
 package algorithms
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -35,9 +34,10 @@ func minWindow(s string, t string) string {
 		requiredCharacters[string(char)] = true
 	}
 
-	fmt.Println(requiredCharacters)
+	characterCountsInWindow := map[string]int{}
+	minWindow := ""
 
-	return ""
+	return minWindow
 }
 
 func TestMinWindow(test *testing.T) {
