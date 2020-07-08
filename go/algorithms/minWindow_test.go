@@ -1,6 +1,7 @@
 package algorithms
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -32,10 +33,12 @@ func minWindow(s string, t string) string {
 
 	for _, char := range t {
 		requiredChar := string(char)
-		if count, ok := requiredCharacterCounts[requiredChar]; ok {
+		if count, ok := requiredCharacterCounts[requiredChar]; !ok {
+			fmt.Println(count)
+			requiredCharacterCounts[requiredChar] = 1
+		} else {
 			requiredCharacterCounts[requiredChar] = count + 1
 		}
-		requiredCharacterCounts[requiredChar] = 1
 	}
 
 	isValidWindow := false
@@ -51,7 +54,7 @@ func minWindow(s string, t string) string {
 			isNowValid := true
 
 			for requiredChar, requiredCount := range requiredCharacterCounts {
-				if characterCountsInWindow[requiredChar] == requiredCount {
+				if characterCountsInWindow[requiredChar] < requiredCount {
 					isNowValid = false
 				}
 			}
@@ -73,7 +76,7 @@ func minWindow(s string, t string) string {
 				leftChar := string(s[left])
 				if _, ok := requiredCharacterCounts[leftChar]; ok {
 					characterCountsInWindow[leftChar] = characterCountsInWindow[leftChar] - 1
-					if characterCountsInWindow[leftChar] < 1 {
+					if characterCountsInWindow[leftChar] < requiredCharacterCounts[leftChar] {
 						isValidWindow = false
 					}
 				}
@@ -99,11 +102,37 @@ func TestMinWindow(test *testing.T) {
 	}
 }
 
-func TestMinWindowWithSmallerSThanT(test *testing.T) {
+func TestMinWindowWithDuplicateRequiredChars(test *testing.T) {
 	s := "a"
 	t := "aa"
 
 	expected := ""
+
+	actual := minWindow(s, t)
+
+	if actual != expected {
+		test.Errorf("Got %s, want %s", actual, expected)
+	}
+}
+
+func TestMinWindowWithStringEqualToRequiredChars(test *testing.T) {
+	s := "a"
+	t := "a"
+
+	expected := "a"
+
+	actual := minWindow(s, t)
+
+	if actual != expected {
+		test.Errorf("Got %s, want %s", actual, expected)
+	}
+}
+
+func TestMinWindowWithStringEqualToRequiredCharsWithDuplicates(test *testing.T) {
+	s := "aa"
+	t := "aa"
+
+	expected := "aa"
 
 	actual := minWindow(s, t)
 
