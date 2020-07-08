@@ -28,10 +28,14 @@ Sliding Window Algorithm:
 */
 
 func minWindow(s string, t string) string {
-	requiredCharacters := map[string]bool{}
+	requiredCharacterCounts := map[string]int{}
 
 	for _, char := range t {
-		requiredCharacters[string(char)] = true
+		requiredChar := string(char)
+		if count, ok := requiredCharacterCounts[requiredChar]; ok {
+			requiredCharacterCounts[requiredChar] = count + 1
+		}
+		requiredCharacterCounts[requiredChar] = 1
 	}
 
 	isValidWindow := false
@@ -41,12 +45,13 @@ func minWindow(s string, t string) string {
 	right := 0
 
 	for right < len(s) {
-		if _, ok := requiredCharacters[string(s[right])]; ok {
-			characterCountsInWindow[string(s[right])] = characterCountsInWindow[string(s[right])] + 1
+		rightChar := string(s[right])
+		if _, ok := requiredCharacterCounts[rightChar]; ok {
+			characterCountsInWindow[rightChar] = characterCountsInWindow[rightChar] + 1
 			isNowValid := true
 
-			for k := range requiredCharacters {
-				if characterCountsInWindow[k] < 1 {
+			for requiredChar, requiredCount := range requiredCharacterCounts {
+				if characterCountsInWindow[requiredChar] == requiredCount {
 					isNowValid = false
 				}
 			}
@@ -65,9 +70,10 @@ func minWindow(s string, t string) string {
 				if len(minWindow) == 0 || len(window) < len(minWindow) {
 					minWindow = window
 				}
-				if _, ok := requiredCharacters[string(s[left])]; ok {
-					characterCountsInWindow[string(s[left])] = characterCountsInWindow[string(s[left])] - 1
-					if characterCountsInWindow[string(s[left])] < 1 {
+				leftChar := string(s[left])
+				if _, ok := requiredCharacterCounts[leftChar]; ok {
+					characterCountsInWindow[leftChar] = characterCountsInWindow[leftChar] - 1
+					if characterCountsInWindow[leftChar] < 1 {
 						isValidWindow = false
 					}
 				}
