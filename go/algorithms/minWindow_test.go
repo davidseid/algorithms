@@ -1,7 +1,6 @@
 package algorithms
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -42,11 +41,9 @@ func minWindow(s string, t string) string {
 	right := 0
 
 	for right < len(s) {
-		fmt.Println("CURR MIN WINDOW", minWindow)
 		if _, ok := requiredCharacters[string(s[right])]; ok {
 			characterCountsInWindow[string(s[right])] = characterCountsInWindow[string(s[right])] + 1
 			isNowValid := true
-			// fmt.Println(characterCountsInWindow)
 
 			for k := range requiredCharacters {
 				if characterCountsInWindow[k] < 1 {
@@ -64,8 +61,6 @@ func minWindow(s string, t string) string {
 				} else {
 					window = s[left : right+1]
 				}
-				fmt.Println("FOUND VALID WINDOW")
-				fmt.Println(window)
 
 				if len(minWindow) == 0 || len(window) < len(minWindow) {
 					minWindow = window
