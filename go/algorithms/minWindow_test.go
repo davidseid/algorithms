@@ -1,6 +1,7 @@
 package algorithms
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -40,43 +41,45 @@ func minWindow(s string, t string) string {
 	left := 0
 	right := 0
 
-	for left < len(s) {
-		if !isValidWindow {
-			right++
-			if right >= len(s) {
-				return minWindow
+	for right < len(s) {
+		fmt.Println("CURR MIN WINDOW", minWindow)
+		if _, ok := requiredCharacters[string(s[right])]; ok {
+			characterCountsInWindow[string(s[right])] = characterCountsInWindow[string(s[right])] + 1
+			isNowValid := true
+			// fmt.Println(characterCountsInWindow)
+
+			for k := range requiredCharacters {
+				if characterCountsInWindow[k] < 1 {
+					isNowValid = false
+				}
 			}
 
-			if _, ok := requiredCharacters[string(s[right])]; ok {
-				characterCountsInWindow[string(s[right])] = characterCountsInWindow[string(s[right])] + 1
+			isValidWindow = isNowValid
 
-				isNowValid := true
+			for isValidWindow && left <= right {
+				var window string
 
-				for _, v := range characterCountsInWindow {
-					if v <= 1 {
-						isNowValid = false
-					}
+				if right+1 == len(s) {
+					window = s[left:]
+				} else {
+					window = s[left : right+1]
 				}
+				fmt.Println("FOUND VALID WINDOW")
+				fmt.Println(window)
 
-				isValidWindow = isNowValid
-
-				window := s[left:right]
-
-				if len(window) < len(minWindow) {
+				if len(minWindow) == 0 || len(window) < len(minWindow) {
 					minWindow = window
 				}
-			}
-		} else {
-			if _, ok := requiredCharacters[string(s[left])]; ok {
-				characterCountsInWindow[string(s[left])] = characterCountsInWindow[string(s[left])] - 1
-				left++
-				if characterCountsInWindow[string(s[left])] < 1 {
-					isValidWindow = false
-				} else {
-					minWindow = minWindow[left:right]
+				if _, ok := requiredCharacters[string(s[left])]; ok {
+					characterCountsInWindow[string(s[left])] = characterCountsInWindow[string(s[left])] - 1
+					if characterCountsInWindow[string(s[left])] < 1 {
+						isValidWindow = false
+					}
 				}
+				left++
 			}
 		}
+		right++
 	}
 
 	return minWindow
