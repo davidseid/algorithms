@@ -92,3 +92,16 @@ func TestMinWindow(test *testing.T) {
 		test.Errorf("Got %s, want %s", actual, expected)
 	}
 }
+
+func TestMinWindowWithSmallerSThanT(test *testing.T) {
+	s := "a"
+	t := "aa"
+
+	expected := ""
+
+	actual := minWindow(s, t)
+
+	if actual != expected {
+		test.Errorf("Got %s, want %s", actual, expected)
+	}
+}
