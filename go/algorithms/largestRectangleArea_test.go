@@ -1,6 +1,8 @@
 package algorithms
 
-import "testing"
+import (
+	"testing"
+)
 
 /*
 Source: https://leetcode.com/problems/largest-rectangle-in-histogram/
@@ -24,7 +26,8 @@ func largestRectangleArea(hist []int) int {
 		largestInSubset := v
 		min := v
 
-		for j, k := range hist[1:] {
+		for j := i; j < len(hist); j++ {
+			k := hist[j]
 			if k < min {
 				min = k
 			}
