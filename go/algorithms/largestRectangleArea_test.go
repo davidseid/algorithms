@@ -20,6 +20,27 @@ Output: 10
 func largestRectangleArea(hist []int) int {
 	largestArea := 0
 
+	for i, v := range hist {
+		largestInSubset := v
+		min := v
+
+		for j, k := range hist[1:] {
+			if k < min {
+				min = k
+			}
+
+			largestAcrossMin := min * (j + 1 - i)
+
+			if largestAcrossMin > largestInSubset {
+				largestInSubset = largestAcrossMin
+			}
+		}
+
+		if largestInSubset > largestArea {
+			largestArea = largestInSubset
+		}
+	}
+
 	return largestArea
 }
 
