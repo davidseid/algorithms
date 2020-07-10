@@ -1,5 +1,7 @@
 package algorithms
 
+import "testing"
+
 /*
 Source: https://leetcode.com/problems/largest-rectangle-in-histogram/
 
@@ -14,3 +16,14 @@ Example:
 Input: [2,1,5,6,2,3]
 Output: 10
 */
+
+func TestLargestRectangleArea(t *testing.T) {
+	histogram := []int{2, 1, 5, 6, 2, 3}
+
+	expected := 10
+	actual := largestRectangleArea(histogram)
+
+	if actual != expected {
+		t.Errorf("got %d, want %d", actual, expected)
+	}
+}
