@@ -17,6 +17,12 @@ Input: [2,1,5,6,2,3]
 Output: 10
 */
 
+func largestRectangleArea(hist []int) int {
+	largestArea := 0
+
+	return largestArea
+}
+
 func TestLargestRectangleArea(t *testing.T) {
 	histogram := []int{2, 1, 5, 6, 2, 3}
 
