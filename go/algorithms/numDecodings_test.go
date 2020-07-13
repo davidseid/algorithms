@@ -31,6 +31,11 @@ Explanation: It could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
 
 /*
 Solved using recursing, time complexity is O(n^2), space complexity is O(n)
+
+Follow up ideas:
+- Can this be improved with go routines?
+- What is the most efficient way to handle the bytes / strings / number conversions?
+- How would we do this more statelessly?
 */
 
 func TestNumDecodingsBasic(t *testing.T) {
@@ -100,7 +105,6 @@ func countDecodings(s string, count *int) {
 		}
 
 		if intPair >= 1 && intPair <= 26 {
-
 			countDecodings(string(s[2:]), count)
 		}
 	}
