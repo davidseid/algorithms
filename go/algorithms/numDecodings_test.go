@@ -51,5 +51,29 @@ func TestNumDecodingsAdvanced(t *testing.T) {
 }
 
 func numDecodings(s string) int {
+	decodings := 0
+
+	countDecodings(s, &decodings)
+
+	return decodings
+}
+
+func countDecodings(s string, count *int) {
+	if len(s) == 0 {
+		*count++
+	}
+
+	single := s[0]
+	if string(single) != "0" {
+		countDecodings(s[1:], count)
+	}
+
+	if len(s) > 1 {
+		pair := s[0:2]
+
+		if string(pair) > "1" && string(pair) < "26" {
+			countDecodings(s[2:], count)
+		}
+	}
 
 }
