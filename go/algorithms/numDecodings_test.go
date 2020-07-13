@@ -1,6 +1,9 @@
 package algorithms
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 /*
 Source: https://leetcode.com/problems/decode-ways/
@@ -61,19 +64,21 @@ func numDecodings(s string) int {
 func countDecodings(s string, count *int) {
 	if len(s) == 0 {
 		*count++
+		return
 	}
 
-	single := s[0]
-	if string(single) != "0" {
-		countDecodings(s[1:], count)
+	single := string(s[0])
+	fmt.Println(single)
+	if single != "0" {
+		countDecodings(string(s[1:]), count)
 	}
 
 	if len(s) > 1 {
-		pair := s[0:2]
+		pair := string(s[0:2])
+		fmt.Println(pair)
 
-		if string(pair) > "1" && string(pair) < "26" {
-			countDecodings(s[2:], count)
+		if pair > "1" && pair < "26" {
+			countDecodings(string(s[2:]), count)
 		}
 	}
-
 }
