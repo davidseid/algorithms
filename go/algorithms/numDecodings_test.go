@@ -49,3 +49,7 @@ func TestNumDecodingsAdvanced(t *testing.T) {
 		t.Errorf("got %d, expected %d", actual, expected)
 	}
 }
+
+func numDecodings(s string) int {
+
+}
