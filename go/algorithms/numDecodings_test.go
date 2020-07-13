@@ -70,6 +70,8 @@ func countDecodings(s string, count *int) {
 	single := string(s[0])
 	if single != "0" {
 		countDecodings(string(s[1:]), count)
+	} else {
+		return
 	}
 
 	if len(s) > 1 {
