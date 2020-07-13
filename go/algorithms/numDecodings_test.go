@@ -53,6 +53,18 @@ func TestNumDecodingsAdvanced(t *testing.T) {
 	}
 }
 
+func TestNumDecodingsTricky(t *testing.T) {
+	encoded := "01"
+
+	expected := 0
+
+	actual := numDecodings(encoded)
+
+	if actual != expected {
+		t.Errorf("got %d, expected %d", actual, expected)
+	}
+}
+
 func numDecodings(s string) int {
 	decodings := 0
 
