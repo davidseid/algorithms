@@ -1,7 +1,7 @@
 package algorithms
 
 import (
-	"fmt"
+	"strconv"
 	"testing"
 )
 
@@ -68,16 +68,21 @@ func countDecodings(s string, count *int) {
 	}
 
 	single := string(s[0])
-	fmt.Println(single)
 	if single != "0" {
 		countDecodings(string(s[1:]), count)
 	}
 
 	if len(s) > 1 {
 		pair := string(s[0:2])
-		fmt.Println(pair)
 
-		if pair > "1" && pair < "26" {
+		intPair, err := strconv.Atoi(pair)
+
+		if err != nil {
+			panic("Invalid input")
+		}
+
+		if intPair >= 1 && intPair <= 26 {
+
 			countDecodings(string(s[2:]), count)
 		}
 	}
