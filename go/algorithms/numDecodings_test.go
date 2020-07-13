@@ -37,3 +37,15 @@ func TestNumDecodingsBasic(t *testing.T) {
 		t.Errorf("got %d, expected %d", actual, expected)
 	}
 }
+
+func TestNumDecodingsAdvanced(t *testing.T) {
+	encoded := "226"
+
+	expected := 3
+
+	actual := numDecodings(encoded)
+
+	if actual != expected {
+		t.Errorf("got %d, expected %d", actual, expected)
+	}
+}
