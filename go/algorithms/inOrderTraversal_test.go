@@ -1,4 +1,9 @@
-import "testing"
+package algorithms
+
+import (
+	"reflect"
+	"testing"
+)
 
 /**
 94. Binary Tree Inorder Traversal
@@ -27,7 +32,7 @@ Follow up: Recursive solution is trivial, could you do it iteratively?
 */
 
 func inorderTraversal(root *TreeNode) []int {
-
+	return []int{}
 }
 
 type TreeNode struct {
@@ -37,5 +42,21 @@ type TreeNode struct {
 }
 
 func TestInOrderTraversal(t *testing.T) {
+	tree := &TreeNode{
+		Val: 1,
+		Left: &TreeNode{
+			Val: 2,
+			Left: &TreeNode{
+				Val: 3,
+			},
+		},
+	}
 
+	expected := []int{1, 2, 3}
+
+	actual := inorderTraversal(tree)
+
+	if !reflect.DeepEqual(actual, expected) {
+		t.Errorf("got %v, want %v", actual, expected)
+	}
 }
