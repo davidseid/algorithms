@@ -26,6 +26,11 @@ Follow up:
 - Can I do it more functionally by having traverse return arrays of ints
 	and the main function accumulate them?
 
+Solution Comments:
+Trivial recursive solution.
+Time complexity is O(n) with n being number of nodes because we must travel to every node
+Space complexity is O(n) with n being the recursion depth, which in the worst case is equal to the number of nodes
+
  * Definition for a binary tree node.
  * type TreeNode struct {
  *     Val int
