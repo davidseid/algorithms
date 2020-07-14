@@ -52,7 +52,7 @@ func TestInOrderTraversal(t *testing.T) {
 		},
 	}
 
-	expected := []int{1, 2, 3}
+	expected := []int{1, 3, 2}
 
 	actual := inorderTraversal(tree)
 
