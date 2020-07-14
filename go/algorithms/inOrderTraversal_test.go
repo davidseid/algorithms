@@ -43,6 +43,27 @@ Space complexity is O(n) with n being the recursion depth, which in the worst ca
  * }
 */
 
+// iterative
+// func iterativeInOrderTraversal(root *TreeNode) []int {
+// 	nodes := []*TreeNode{}
+// 	traversed := []int{}
+
+// 	// while true
+
+// 	// if there is a left node
+// 	// push the current node onto the nodes stack
+// 	// make the left node the current node
+
+// 	// if node on the stack
+// 	// pop it off, add the current value
+// 	// set the current node to the right if it exists
+
+// 	// if there is a right node
+// 	// push the current node onto the stack
+// 	// make the right node the current node
+// }
+
+// Recursive
 func inorderTraversal(root *TreeNode) []int {
 	traversed := []int{}
 
