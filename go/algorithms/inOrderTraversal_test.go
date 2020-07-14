@@ -39,6 +39,18 @@ func inorderTraversal(root *TreeNode) []int {
 	return traversed
 }
 
+func traverse(node *TreeNode, traversed *[]int) {
+	if node.Left != nil {
+		traverse(node.Left, traversed)
+	}
+
+	*traversed = append(*traversed, node.Val)
+
+	if node.Right != nil {
+		traverse(node.Right, traversed)
+	}
+}
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
@@ -48,7 +60,7 @@ type TreeNode struct {
 func TestInOrderTraversal(t *testing.T) {
 	tree := &TreeNode{
 		Val: 1,
-		Left: &TreeNode{
+		Right: &TreeNode{
 			Val: 2,
 			Left: &TreeNode{
 				Val: 3,
