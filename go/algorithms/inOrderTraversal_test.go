@@ -1,3 +1,5 @@
+import "testing"
+
 /**
 94. Binary Tree Inorder Traversal
 Source: https://leetcode.com/problems/binary-tree-inorder-traversal/
@@ -25,5 +27,15 @@ Follow up: Recursive solution is trivial, could you do it iteratively?
 */
 
 func inorderTraversal(root *TreeNode) []int {
+
+}
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+func TestInOrderTraversal(t *testing.T) {
 
 }
