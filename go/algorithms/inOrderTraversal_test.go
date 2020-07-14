@@ -32,7 +32,11 @@ Follow up: Recursive solution is trivial, could you do it iteratively?
 */
 
 func inorderTraversal(root *TreeNode) []int {
-	return []int{}
+	traversed := []int{}
+
+	traverse(root, &traversed)
+
+	return traversed
 }
 
 type TreeNode struct {
