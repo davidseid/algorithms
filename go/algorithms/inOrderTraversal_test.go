@@ -23,8 +23,12 @@ Input: [1,null,2,3]
 Output: [1,3,2]
 Follow up:
 - Recursive solution is trivial, could you do it iteratively?
+	- iterative solution should save memory
 - Can I do it more functionally by having traverse return arrays of ints
 	and the main function accumulate them?
+	- In this case it may not help but it may be useful for other algorithms,
+	- In this case it would actually make it less performant
+- Can the two branch work be done in parallel with go routines?
 
 Solution Comments:
 Trivial recursive solution.
