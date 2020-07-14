@@ -34,7 +34,9 @@ Follow up: Recursive solution is trivial, could you do it iteratively?
 func inorderTraversal(root *TreeNode) []int {
 	traversed := []int{}
 
-	traverse(root, &traversed)
+	if root != nil {
+		traverse(root, &traversed)
+	}
 
 	return traversed
 }
@@ -69,6 +71,18 @@ func TestInOrderTraversal(t *testing.T) {
 	}
 
 	expected := []int{1, 3, 2}
+
+	actual := inorderTraversal(tree)
+
+	if !reflect.DeepEqual(actual, expected) {
+		t.Errorf("got %v, want %v", actual, expected)
+	}
+}
+
+func TestInOrderTraversalWithEmptyTree(t *testing.T) {
+	var tree *TreeNode
+
+	expected := []int{}
 
 	actual := inorderTraversal(tree)
 
