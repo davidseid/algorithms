@@ -21,7 +21,10 @@ Input: [1,null,2,3]
    3
 
 Output: [1,3,2]
-Follow up: Recursive solution is trivial, could you do it iteratively?
+Follow up:
+- Recursive solution is trivial, could you do it iteratively?
+- Can I do it more functionally by having traverse return arrays of ints
+	and the main function accumulate them?
 
  * Definition for a binary tree node.
  * type TreeNode struct {
