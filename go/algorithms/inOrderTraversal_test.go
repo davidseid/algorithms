@@ -49,39 +49,21 @@ func inorderTraversal(root *TreeNode) []int {
 	traversed := []int{}
 	currentNode := root
 
-	for true {
-		if currentNode.Left != nil {
+	for currentNode != nil || len(nodeStack) > 0 {
+		for currentNode != nil {
 			nodeStack = append(nodeStack, currentNode)
 			currentNode = currentNode.Left
-		} else if len(nodeStack) > 0 {
-			currentNode := nodeStack[len(nodeStack)-1]
-			nodeStack = nodeStack[:len(nodeStack)-1]
-
-			traversed = append(traversed, currentNode.Val)
-
-			if currentNode.Right != nil {
-				currentNode = currentNode.Right
-			}
-		} else {
-			break
 		}
+
+		currentNode = nodeStack[len(nodeStack)-1]
+		nodeStack = nodeStack[:len(nodeStack)-1]
+
+		traversed = append(traversed, currentNode.Val)
+
+		currentNode = currentNode.Right
 	}
 
 	return traversed
-
-	// while true
-
-	// if there is a left node
-	// push the current node onto the nodes stack
-	// make the left node the current node
-
-	// if node on the stack
-	// pop it off, add the current value
-	// set the current node to the right if it exists
-
-	// if there is a right node
-	// push the current node onto the stack
-	// make the right node the current node
 }
 
 // Recursive
