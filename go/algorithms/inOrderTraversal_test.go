@@ -44,9 +44,30 @@ Space complexity is O(n) with n being the recursion depth, which in the worst ca
 */
 
 // Iterative
-func iterativeInOrderTraversal(root *TreeNode) []int {
-	nodes := []*TreeNode{}
+func inorderTraversal(root *TreeNode) []int {
+	nodeStack := []*TreeNode{}
 	traversed := []int{}
+	currentNode := root
+
+	for true {
+		if currentNode.Left != nil {
+			nodeStack = append(nodeStack, currentNode)
+			currentNode = currentNode.Left
+		} else if len(nodeStack) > 0 {
+			currentNode := nodeStack[len(nodeStack)-1]
+			nodeStack = nodeStack[:len(nodeStack)-1]
+
+			traversed = append(traversed, currentNode.Val)
+
+			if currentNode.Right != nil {
+				currentNode = currentNode.Right
+			}
+		} else {
+			break
+		}
+	}
+
+	return traversed
 
 	// while true
 
