@@ -58,20 +58,24 @@ func (s stack) pop() *TreeNode {
 	return popped
 }
 
+func (s stack) size() int {
+	return len(s.nodes)
+}
+
 // Iterative
 func inorderTraversal(root *TreeNode) []int {
-	nodeStack := []*TreeNode{}
+	nodeStack := stack{}
 	traversed := []int{}
 	currentNode := root
 
-	for currentNode != nil || len(nodeStack) > 0 {
+	for currentNode != nil || nodeStack.size() > 0 {
 		for currentNode != nil {
-			nodeStack = append(nodeStack, currentNode)
+			nodeStack.nodes = append(nodeStack.nodes, currentNode)
 			currentNode = currentNode.Left
 		}
 
-		currentNode = nodeStack[len(nodeStack)-1]
-		nodeStack = nodeStack[:len(nodeStack)-1]
+		currentNode = nodeStack.nodes[len(nodeStack.nodes)-1]
+		nodeStack.nodes = nodeStack.nodes[:len(nodeStack.nodes)-1]
 
 		traversed = append(traversed, currentNode.Val)
 
