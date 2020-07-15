@@ -44,16 +44,16 @@ Space complexity is O(n) with n being the recursion depth, which in the worst ca
 */
 
 type stack struct {
-	values []int
+	nodes []*TreeNode
 }
 
-func (s stack) push(val int) {
-	s.values = append(s.values, val)
+func (s stack) push(node *TreeNode) {
+	s.nodes = append(s.nodes, node)
 }
 
-func (s stack) pop() int {
-	popped := s.values[len(s.values)-1]
-	s.values = s.values[:len(s.values)-1]
+func (s stack) pop() *TreeNode {
+	popped := s.nodes[len(s.nodes)-1]
+	s.nodes = s.nodes[:len(s.nodes)-1]
 
 	return popped
 }
