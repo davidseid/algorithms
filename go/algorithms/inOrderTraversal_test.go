@@ -47,18 +47,18 @@ type stack struct {
 	nodes []*TreeNode
 }
 
-func (s stack) push(node *TreeNode) {
+func (s *stack) push(node *TreeNode) {
 	s.nodes = append(s.nodes, node)
 }
 
-func (s stack) pop() *TreeNode {
+func (s *stack) pop() *TreeNode {
 	popped := s.nodes[len(s.nodes)-1]
 	s.nodes = s.nodes[:len(s.nodes)-1]
 
 	return popped
 }
 
-func (s stack) size() int {
+func (s *stack) size() int {
 	return len(s.nodes)
 }
 
@@ -70,7 +70,7 @@ func inorderTraversal(root *TreeNode) []int {
 
 	for currentNode != nil || nodeStack.size() > 0 {
 		for currentNode != nil {
-			nodeStack.nodes = append(nodeStack.nodes, currentNode)
+			nodeStack.push(currentNode)
 			currentNode = currentNode.Left
 		}
 
