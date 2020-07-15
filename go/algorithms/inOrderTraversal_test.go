@@ -74,8 +74,7 @@ func inorderTraversal(root *TreeNode) []int {
 			currentNode = currentNode.Left
 		}
 
-		currentNode = nodeStack.nodes[len(nodeStack.nodes)-1]
-		nodeStack.nodes = nodeStack.nodes[:len(nodeStack.nodes)-1]
+		currentNode = nodeStack.pop()
 
 		traversed = append(traversed, currentNode.Val)
 
