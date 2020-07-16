@@ -55,7 +55,11 @@ func isValidSubtree(node *TreeNode, min *int, max *int) bool {
 			return false
 		}
 
-		if !isValidSubtree(node.Left, nil, &node.Val) {
+		if max == nil {
+			max = &node.Val
+		}
+
+		if !isValidSubtree(node.Left, nil, max) {
 			return false
 		}
 	}
@@ -71,7 +75,11 @@ func isValidSubtree(node *TreeNode, min *int, max *int) bool {
 			return false
 		}
 
-		if !isValidSubtree(node.Right, &node.Val, nil) {
+		if min == nil {
+			min = &node.Val
+		}
+
+		if !isValidSubtree(node.Right, min, nil) {
 			return false
 		}
 	}
