@@ -26,6 +26,10 @@ Both the left and right subtrees must also be binary search trees.
  * }
  */
 func isValidBST(root *TreeNode) bool {
+
+	if root == nil {
+		return true
+	}
 	return isValidSubtree(root, nil, nil)
 }
 
