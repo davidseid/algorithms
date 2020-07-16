@@ -27,6 +27,19 @@ Both the left and right subtrees must also be binary search trees.
  *     Right *TreeNode
  * }
  */
+
+/*
+Rationale:
+- This is a recursive solution
+- Time complexity is O(n), we must visit each node
+- Space complexity is O(n) since we must keep up to the entire tree in the worst case
+
+Followup:
+- How about an iterative solution with a stack?
+- How about using inorder traversal to simplify this?
+- Can go routines help? Well they don't change the amount of resources needed obviously,
+- but they do allow parallelization which could speed it up? Each call is a go routine
+*/
 func isValidBST(root *TreeNode) bool {
 	return isValidSubtree(root, nil, nil)
 }
