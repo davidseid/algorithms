@@ -32,7 +32,7 @@ func isValidBST(root *TreeNode) bool {
 func isValidSubtree(node *TreeNode, min *int, max *int) bool {
 
 	if node.Left != nil {
-		if node.Val >= node.Left.Val {
+		if node.Val <= node.Left.Val {
 			return false
 		}
 
@@ -46,7 +46,7 @@ func isValidSubtree(node *TreeNode, min *int, max *int) bool {
 	}
 
 	if node.Right != nil {
-		if node.Val <= node.Right.Val {
+		if node.Val >= node.Right.Val {
 			return false
 		}
 
