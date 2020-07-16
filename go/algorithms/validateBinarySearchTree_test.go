@@ -1,3 +1,7 @@
+package algorithms
+
+import "testing"
+
 /*
 98. Validate Binary Search Tree
 
@@ -22,5 +26,25 @@ Both the left and right subtrees must also be binary search trees.
  * }
  */
 func isValidBST(root *TreeNode) bool {
+	return true
+}
 
+func TestIsValidBSTBasic(t *testing.T) {
+	tree := &TreeNode{
+		Val: 2,
+		Left: &TreeNode{
+			Val: 1,
+		},
+		Right: &TreeNode{
+			Val: 3,
+		},
+	}
+
+	expected := true
+
+	actual := isValidBST(tree)
+
+	if actual != expected {
+		t.Errorf("got %v, want %v", actual, expected)
+	}
 }
