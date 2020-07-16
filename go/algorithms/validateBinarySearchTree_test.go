@@ -163,15 +163,15 @@ func TestIsValidBSTMoreMoreAdvanced(t *testing.T) {
 			Val: 1,
 			Right: &TreeNode{
 				Val: 2,
+				Right: &TreeNode{
+					Val: 3,
+				},
 			},
 		},
 		Right: &TreeNode{
 			Val: 5,
 			Left: &TreeNode{
 				Val: 4,
-				Right: &TreeNode{
-					Val: 3,
-				},
 			},
 			Right: &TreeNode{
 				Val: 6,
