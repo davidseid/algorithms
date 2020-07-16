@@ -1,7 +1,6 @@
 package algorithms
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -29,62 +28,31 @@ Both the left and right subtrees must also be binary search trees.
  * }
  */
 func isValidBST(root *TreeNode) bool {
-	if root == nil {
-		return true
-	}
-
 	return isValidSubtree(root, nil, nil)
 }
 
 func isValidSubtree(node *TreeNode, min *int, max *int) bool {
-	fmt.Println("Current Node", *node)
-	if min != nil {
-		fmt.Println("min", *min)
+	if node == nil {
+		return true
 	}
 
-	if max != nil {
-		fmt.Println("max", *max)
+	val := node.Val
+
+	if min != nil && val <= *min {
+		return false
 	}
 
-	if node.Left != nil {
-		if node.Val <= node.Left.Val {
-			return false
-		}
-
-		if min != nil && node.Left.Val <= *min {
-			return false
-		}
-
-		if max == nil {
-			max = &node.Val
-		}
-
-		if !isValidSubtree(node.Left, nil, max) {
-			return false
-		}
+	if max != nil && val >= *max {
+		return false
 	}
 
-	fmt.Println("Left side is valid for node", *node)
-
-	if node.Right != nil {
-		if node.Val >= node.Right.Val {
-			return false
-		}
-
-		if max != nil && node.Right.Val >= *max {
-			return false
-		}
-
-		if min == nil {
-			min = &node.Val
-		}
-
-		if !isValidSubtree(node.Right, min, nil) {
-			return false
-		}
+	if !isValidSubtree(node.Right, &val, max) {
+		return false
 	}
 
-	fmt.Println("Right side is valid for node", *node)
+	if !isValidSubtree(node.Left, min, &val) {
+		return false
+	}
 
 	return true
 }
