@@ -48,3 +48,29 @@ func TestIsValidBSTBasic(t *testing.T) {
 		t.Errorf("got %v, want %v", actual, expected)
 	}
 }
+
+func TestIsValidBSTAdvanced(t *testing.T) {
+	tree := &TreeNode{
+		Val: 5,
+		Left: &TreeNode{
+			Val: 1,
+		},
+		Right: &TreeNode{
+			Val: 4,
+			Left: &TreeNode{
+				Val: 3,
+			},
+			Right: &TreeNode{
+				Val: 6,
+			},
+		},
+	}
+
+	expected := false
+
+	actual := isValidBST(tree)
+
+	if actual != expected {
+		t.Errorf("got %v, want %v", actual, expected)
+	}
+}
