@@ -26,6 +26,39 @@ Both the left and right subtrees must also be binary search trees.
  * }
  */
 func isValidBST(root *TreeNode) bool {
+	return isValidSubtree(root, nil, nil)
+}
+
+func isValidSubtree(node *TreeNode, min *int, max *int) bool {
+
+	if node.Left != nil {
+		if node.Val >= node.Left.Val {
+			return false
+		}
+
+		if min != nil && node.Left.Val <= *min {
+			return false
+		}
+
+		if !isValidSubtree(node.Left, &node.Left.Val, &node.Val) {
+			return false
+		}
+	}
+
+	if node.Right != nil {
+		if node.Val <= node.Right.Val {
+			return false
+		}
+
+		if max != nil && node.Right.Val >= *max {
+			return false
+		}
+
+		if !isValidSubtree(node.Right, &node.Val, &node.Right.Val) {
+			return false
+		}
+	}
+
 	return true
 }
 
