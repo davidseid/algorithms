@@ -1,6 +1,8 @@
 package algorithms
 
-import "testing"
+import (
+	"testing"
+)
 
 /*
 64. Minimum Path Sum
@@ -23,7 +25,7 @@ Explanation: Because the path 1→3→1→1→1 minimizes the sum.
 */
 
 func minPathSum(grid [][]int) int {
-	min := 0
+	min := -1
 
 	getMinPathSum(grid, 0, 0, grid[0][0], &min)
 	return min
@@ -31,7 +33,7 @@ func minPathSum(grid [][]int) int {
 
 func getMinPathSum(grid [][]int, row int, col int, sum int, min *int) {
 	if row+1 >= len(grid) && col+1 >= len(grid[0]) {
-		if sum < *min {
+		if *min < 0 || sum < *min {
 			*min = sum
 		}
 	}
