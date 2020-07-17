@@ -25,36 +25,26 @@ Explanation: Because the path 1→3→1→1→1 minimizes the sum.
 */
 
 func minPathSum(grid [][]int) int {
+	min := -1
 
-	min := getMinPathSum(grid, 0, 0, grid[0][0], -1)
+	getMinPathSum(grid, 0, 0, grid[0][0], &min)
 	return min
 }
 
-func getMinPathSum(grid [][]int, row int, col int, sum int, min int) int {
-
+func getMinPathSum(grid [][]int, row int, col int, sum int, min *int) {
 	if row+1 >= len(grid) && col+1 >= len(grid[0]) {
-		if min < 0 || sum < min {
-			return sum
-		} else {
-			return min
+		if *min < 0 || sum < *min {
+			*min = sum
 		}
 	}
 
-	var min1 int
-	var min2 int
-
 	if row+1 < len(grid) {
-		min1 = getMinPathSum(grid, row+1, col, sum+grid[row+1][col], min)
+		getMinPathSum(grid, row+1, col, sum+grid[row+1][col], min)
 	}
 
 	if col+1 < len(grid[0]) {
-		min2 = getMinPathSum(grid, row, col+1, sum+grid[row][col+1], min)
+		getMinPathSum(grid, row, col+1, sum+grid[row][col+1], min)
 	}
-
-	if min1 < min2 {
-		return min1
-	}
-	return min2
 }
 
 func TestMinPathSum(t *testing.T) {
