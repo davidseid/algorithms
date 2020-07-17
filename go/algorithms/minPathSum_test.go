@@ -1,6 +1,7 @@
 package algorithms
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -26,12 +27,20 @@ Explanation: Because the path 1→3→1→1→1 minimizes the sum.
 
 func minPathSum(grid [][]int) int {
 	min := -1
+	memo := map[string]int{}
 
-	getMinPathSum(grid, 0, 0, grid[0][0], &min)
+	getMinPathSum(grid, 0, 0, grid[0][0], &min, memo)
 	return min
 }
 
-func getMinPathSum(grid [][]int, row int, col int, sum int, min *int) {
+func getMinPathSum(grid [][]int, row int, col int, sum int, min *int, memo map[string]int) {
+
+	key := fmt.Sprintf("%d,%d", row, col)
+
+	if pathMin, ok := memo[key]; ok {
+		*min = pathMin
+	}
+
 	if row+1 >= len(grid) && col+1 >= len(grid[0]) {
 		if *min < 0 || sum < *min {
 			*min = sum
@@ -39,12 +48,13 @@ func getMinPathSum(grid [][]int, row int, col int, sum int, min *int) {
 	}
 
 	if row+1 < len(grid) {
-		getMinPathSum(grid, row+1, col, sum+grid[row+1][col], min)
+		getMinPathSum(grid, row+1, col, sum+grid[row+1][col], min, memo)
 	}
 
 	if col+1 < len(grid[0]) {
-		getMinPathSum(grid, row, col+1, sum+grid[row][col+1], min)
+		getMinPathSum(grid, row, col+1, sum+grid[row][col+1], min, memo)
 	}
+	memo[key] = *min
 }
 
 func TestMinPathSum(t *testing.T) {
