@@ -39,6 +39,11 @@ and if their opposite children are mirrors.
 - Space Complexity: O(n) with n = number of nodes
 */
 
+/*
+Approach 2: Iterative
+Rationale:
+*/
+
 func TestIsSymmetric(t *testing.T) {
 	tree := &TreeNode{
 		Val: 1,
@@ -97,34 +102,60 @@ func TestIsSymmetric2(t *testing.T) {
 	}
 }
 
+type Queue struct {
+	Values []int
+}
+
+func (q *Queue) Enqueue(val int) {
+	q.Values = append([]int{val}, q.Values...)
+}
+
+func (q *Queue) Dequeue() int {
+	dequeued := q.Values[len(q.Values)-1]
+	q.Values = q.Values[:len(q.Values)-1]
+	return dequeued
+}
+
 func isSymmetric(root *TreeNode) bool {
-	if root == nil {
-		return true
-	}
+	// do concurrently rather than search the whole thing, so you can fail out early
 
-	return areMirrors(root.Left, root.Right)
+	// if left and right are nil return true
+
+	// if left and right are not nil and not equal return false
+
+	// if left.Left != right.Right || left.Right != right.Left return false
+
 }
 
-func areMirrors(left *TreeNode, right *TreeNode) bool {
-	if left == nil && right == nil {
-		return true
-	}
+// Recursive
+// func isSymmetric(root *TreeNode) bool {
+// 	if root == nil {
+// 		return true
+// 	}
 
-	if left != nil && right != nil {
-		if left.Val != right.Val {
-			return false
-		}
+// 	return areMirrors(root.Left, root.Right)
+// }
 
-		if !areMirrors(left.Left, right.Right) {
-			return false
-		}
+// func areMirrors(left *TreeNode, right *TreeNode) bool {
+// 	if left == nil && right == nil {
+// 		return true
+// 	}
 
-		if !areMirrors(left.Right, right.Left) {
-			return false
-		}
+// 	if left != nil && right != nil {
+// 		if left.Val != right.Val {
+// 			return false
+// 		}
 
-		return true
-	}
+// 		if !areMirrors(left.Left, right.Right) {
+// 			return false
+// 		}
 
-	return false
-}
+// 		if !areMirrors(left.Right, right.Left) {
+// 			return false
+// 		}
+
+// 		return true
+// 	}
+
+// 	return false
+// }
