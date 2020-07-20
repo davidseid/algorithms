@@ -42,6 +42,12 @@ and if their opposite children are mirrors.
 /*
 Approach 2: Iterative
 Rationale:
+- Iteratively check for symmetry using a queue to maintain order,
+similar to BFS of a tree, except that we add the nodes in odd orders
+- This implementation uses an inefficent queue that uses a slice
+- This is inefficient because slices/arrays require all indexes to shift
+when appending to the front of the queue. A linked list is more optimal.
+
 */
 
 func TestIsSymmetric(t *testing.T) {
