@@ -116,8 +116,42 @@ func (q *Queue) Dequeue() *TreeNode {
 	return dequeued
 }
 
-func isSymmetric(root *TreeNode) bool {
+func (q *Queue) IsEmpty() bool {
+	if len(q.Values) == 0 {
+		return true
+	}
+	return false
+}
 
+func isSymmetric(root *TreeNode) bool {
+	queue := Queue{}
+
+	queue.Enqueue(root)
+	queue.Enqueue(root)
+
+	for !queue.IsEmpty() {
+		left := queue.Dequeue()
+		right := queue.Dequeue()
+
+		if left == nil && right == nil {
+			continue
+		}
+
+		if left == nil || right == nil {
+			return false
+		}
+
+		if left.Val != right.Val {
+			return false
+		}
+
+		queue.Enqueue(left.Left)
+		queue.Enqueue(right.Right)
+		queue.Enqueue(left.Right)
+		queue.Enqueue(right.Left)
+	}
+
+	return true
 }
 
 // Recursive
