@@ -27,5 +27,33 @@ But the following [1,2,2,null,3,null,3] is not:
 */
 
 func TestIsSymmetric(t *testing.T) {
+	tree := &TreeNode{
+		Val: 1,
+		Left: &TreeNode{
+			Val: 2,
+			Left: &TreeNode{
+				Val: 3,
+			},
+			Right: &TreeNode{
+				Val: 4,
+			},
+		},
+		Right: &TreeNode{
+			Val: 2,
+			Left: &TreeNode{
+				Val: 4,
+			},
+			Right: &TreeNode{
+				Val: 4,
+			},
+		},
+	}
 
+	actual := isSymmetric(tree)
+
+	expected := true
+
+	if actual != expected {
+		t.Errorf("Expected %v, got %v", expected, actual)
+	}
 }
