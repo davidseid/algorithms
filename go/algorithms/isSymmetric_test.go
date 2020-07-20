@@ -83,3 +83,7 @@ func TestIsSymmetric2(t *testing.T) {
 		t.Errorf("Expected %v, got %v", expected, actual)
 	}
 }
+
+func isSymmetric(root *TreeNode) bool {
+
+}
