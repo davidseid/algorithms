@@ -28,6 +28,17 @@ But the following [1,2,2,null,3,null,3] is not:
    3    3
 */
 
+/*
+Approach 1: Recursive
+Rationale:
+- Recursively check if both sides are mirrors
+- First check if the left and right of the root are mirrors
+- To check if two nodes are mirrors, check if they are both the same,
+and if their opposite children are mirrors.
+- Time Complexity: O(n) with n = number of nodes
+- Space Complexity: O(n) with n = number of nodes
+*/
+
 func TestIsSymmetric(t *testing.T) {
 	tree := &TreeNode{
 		Val: 1,
