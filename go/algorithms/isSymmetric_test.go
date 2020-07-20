@@ -103,27 +103,20 @@ func TestIsSymmetric2(t *testing.T) {
 }
 
 type Queue struct {
-	Values []int
+	Values []*TreeNode
 }
 
-func (q *Queue) Enqueue(val int) {
-	q.Values = append([]int{val}, q.Values...)
+func (q *Queue) Enqueue(val *TreeNode) {
+	q.Values = append([]*TreeNode{val}, q.Values...)
 }
 
-func (q *Queue) Dequeue() int {
+func (q *Queue) Dequeue() *TreeNode {
 	dequeued := q.Values[len(q.Values)-1]
 	q.Values = q.Values[:len(q.Values)-1]
 	return dequeued
 }
 
 func isSymmetric(root *TreeNode) bool {
-	// do concurrently rather than search the whole thing, so you can fail out early
-
-	// if left and right are nil return true
-
-	// if left and right are not nil and not equal return false
-
-	// if left.Left != right.Right || left.Right != right.Left return false
 
 }
 
