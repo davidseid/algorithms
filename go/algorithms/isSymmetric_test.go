@@ -91,3 +91,27 @@ func isSymmetric(root *TreeNode) bool {
 
 	return areMirrors(root.Left, root.Right)
 }
+
+func areMirrors(left *TreeNode, right *TreeNode) bool {
+	if left == nil && right == nil {
+		return true
+	}
+
+	if left != nil && right != nil {
+		if left.Val != right.Val {
+			return false
+		}
+
+		if !areMirrors(left.Left, right.Right) {
+			return false
+		}
+
+		if !areMirrors(left.Right, right.Left) {
+			return false
+		}
+
+		return true
+	}
+
+	return false
+}
