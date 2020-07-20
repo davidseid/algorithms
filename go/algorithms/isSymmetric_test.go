@@ -85,5 +85,9 @@ func TestIsSymmetric2(t *testing.T) {
 }
 
 func isSymmetric(root *TreeNode) bool {
+	if root == nil {
+		return true
+	}
 
+	return areMirrors(root.Left, root.Right)
 }
