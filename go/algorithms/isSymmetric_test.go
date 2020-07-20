@@ -57,3 +57,29 @@ func TestIsSymmetric(t *testing.T) {
 		t.Errorf("Expected %v, got %v", expected, actual)
 	}
 }
+
+func TestIsSymmetric2(t *testing.T) {
+	tree := &TreeNode{
+		Val: 1,
+		Left: &TreeNode{
+			Val: 2,
+			Right: &TreeNode{
+				Val: 3,
+			},
+		},
+		Right: &TreeNode{
+			Val: 2,
+			Right: &TreeNode{
+				Val: 3,
+			},
+		},
+	}
+
+	actual := isSymmetric(tree)
+
+	expected := false
+
+	if actual != expected {
+		t.Errorf("Expected %v, got %v", expected, actual)
+	}
+}
