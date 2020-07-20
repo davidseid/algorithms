@@ -1,6 +1,8 @@
 package algorithms
 
-import "testing"
+import (
+	"testing"
+)
 
 /*
 101. Symmetric Tree
@@ -44,7 +46,7 @@ func TestIsSymmetric(t *testing.T) {
 				Val: 4,
 			},
 			Right: &TreeNode{
-				Val: 4,
+				Val: 3,
 			},
 		},
 	}
