@@ -34,7 +34,26 @@ Explanation: There exist two distinct solutions to the 4-queens puzzle as shown 
 
 func solveNQueens(n int) [][]string {
 
-	return [][]string{}
+	board := makeBoard(n)
+
+	solutions := [][]string{}
+
+	placeQueen(&board, n, &solutions)
+
+	return solutions
+}
+
+func makeBoard(n int) [][]string {
+	board := [][]string{}
+
+	for i := 0; i < n; i++ {
+		board = append(board, make([]string, n))
+	}
+
+	return board
+}
+
+func placeQueen(board *[][]string, queensRemaining int, solutions *[][]string) {
 }
 
 func TestSolveNQueens(t *testing.T) {
