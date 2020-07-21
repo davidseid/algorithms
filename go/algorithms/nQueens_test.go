@@ -1,5 +1,11 @@
 package algorithms
 
+import (
+	"testing"
+
+	"github.com/go-test/deep"
+)
+
 /*
 51. N-Queens
 https://leetcode.com/problems/n-queens/
@@ -29,4 +35,29 @@ Explanation: There exist two distinct solutions to the 4-queens puzzle as shown 
 func solveNQueens(n int) [][]string {
 
 	return [][]string{}
+}
+
+func TestSolveNQueens(t *testing.T) {
+	input := 4
+
+	expected := [][]string{
+		[]string{
+			".Q..",
+			"...Q",
+			"Q...",
+			"..Q.",
+		},
+		[]string{
+			"..Q.",
+			"Q...",
+			"...Q",
+			".Q..",
+		},
+	}
+
+	actual := solveNQueens(input)
+
+	if diff := deep.Equal(actual, expected); diff != nil {
+		t.Error(diff)
+	}
 }
