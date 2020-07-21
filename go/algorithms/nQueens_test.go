@@ -43,17 +43,20 @@ func solveNQueens(n int) [][]string {
 	return solutions
 }
 
-func makeBoard(n int) [][]string {
-	board := [][]string{}
+func makeBoard(n int) []string {
+	board := []string{}
 
 	for i := 0; i < n; i++ {
-		board = append(board, make([]string, n))
+		board = append(board, "....")
 	}
 
 	return board
 }
 
-func placeQueen(board *[][]string, queensRemaining int, solutions *[][]string) {
+func placeQueen(board *[]string, queensRemaining int, solutions *[][]string) {
+	if queensRemaining == 0 {
+		*solutions = append(*solutions, *board)
+	}
 }
 
 func TestSolveNQueens(t *testing.T) {
