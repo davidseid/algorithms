@@ -38,7 +38,7 @@ func solveNQueens(n int) [][]string {
 
 	solutions := [][]string{}
 
-	placeQueen(&board, n, &solutions)
+	placeQueen(&board, 0, 0, n, &solutions)
 
 	return solutions
 }
@@ -53,10 +53,35 @@ func makeBoard(n int) []string {
 	return board
 }
 
-func placeQueen(board *[]string, queensRemaining int, solutions *[][]string) {
+func placeQueen(board *[]string, row int, col int, queensRemaining int, solutions *[][]string) {
 	if queensRemaining == 0 {
+		cleanedBoard := cleanBoard(*board)
 		*solutions = append(*solutions, *board)
 	}
+
+	for r := row; r < len(*board); r++ {
+		for c := col; c < len((*board)[0]); c++ {
+			if spaceIsEmpty(board, r, c) {
+				// placeQueen
+				(*board)[r] = (*board)[r][:c] + "Q" + (*board)[r][c+1:]
+				// mark board
+				// defer cleanup
+				// call palceQueen on this
+			}
+		}
+	}
+}
+
+func cleanBoard(board *[]string) []string {
+	return []string{}
+}
+
+func spaceIsEmpty(board *[]string, row int, col int) bool {
+	if string((*board)[row][col]) == "." {
+		return true
+	}
+
+	return false
 }
 
 func TestSolveNQueens(t *testing.T) {
