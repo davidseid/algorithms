@@ -25,3 +25,8 @@ Output: [
 ]
 Explanation: There exist two distinct solutions to the 4-queens puzzle as shown above.
 */
+
+func solveNQueens(n int) [][]string {
+
+	return [][]string{}
+}
