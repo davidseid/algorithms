@@ -1,6 +1,8 @@
 package algorithms
 
 import (
+	"fmt"
+	"strconv"
 	"testing"
 
 	"github.com/go-test/deep"
@@ -60,16 +62,18 @@ func placeQueen(board *[]string, row int, col int, queensRemaining int, solution
 		return
 	}
 
-	for r := row; r < len(*board); r++ {
-		for c := col; c < len((*board)[0]); c++ {
+	for r := 0; r < len(*board); r++ {
+		for c := 0; c < len((*board)[0]); c++ {
 			if spaceIsEmpty(board, r, c) {
 				(*board)[r] = (*board)[r][:c] + "Q" + (*board)[r][c+1:]
 				markBoard(board, r, c)
-				defer unmarkBoard(board, r, c)
 				placeQueen(board, r, c, queensRemaining-1, solutions)
+				(*board)[r] = (*board)[r][:c] + "0" + (*board)[r][c+1:]
+				unmarkBoard(board, r, c)
 			}
 		}
 	}
+
 }
 
 func cleanBoard(board *[]string) {
@@ -93,7 +97,7 @@ func markHorizontal(board *[]string, row int) {
 		if string((*board)[row][col]) != "Q" {
 			current := int((*board)[row][col])
 			current++
-			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
 		}
 	}
 }
@@ -103,7 +107,7 @@ func markVertical(board *[]string, col int) {
 		if string((*board)[row][col]) != "Q" {
 			current := int((*board)[row][col])
 			current++
-			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
 		}
 	}
 }
@@ -112,9 +116,15 @@ func markDiagonals(board *[]string, r int, c int) {
 	col := c + 1
 	for row := r + 1; row < len(*board); row++ {
 		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
-			current := int((*board)[row][col])
+
+			fmt.Println((*board)[row][col])
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic("FOUND INVALID NUMBER")
+			}
 			current++
-			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
 			col++
 		} else {
 			break
@@ -124,9 +134,13 @@ func markDiagonals(board *[]string, r int, c int) {
 	col = c - 1
 	for row := r + 1; row < len(*board); row++ {
 		if col >= 0 && string((*board)[row][col]) != "Q" {
-			current := int((*board)[row][col])
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic("FOUND INVALID NUMBER")
+			}
 			current++
-			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
 			col--
 		} else {
 			break
@@ -136,9 +150,13 @@ func markDiagonals(board *[]string, r int, c int) {
 	col = c + 1
 	for row := r - 1; row >= 0; row-- {
 		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
-			current := int((*board)[row][col])
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic("FOUND INVALID NUMBER")
+			}
 			current++
-			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
 			col++
 		} else {
 			break
@@ -147,10 +165,14 @@ func markDiagonals(board *[]string, r int, c int) {
 
 	col = c - 1
 	for row := r - 1; row >= 0; row-- {
-		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
-			current := int((*board)[row][col])
+		if col >= 0 && string((*board)[row][col]) != "Q" {
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic("FOUND INVALID NUMBER")
+			}
 			current++
-			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
 			col--
 		} else {
 			break
@@ -167,9 +189,13 @@ func unmarkBoard(board *[]string, row int, col int) {
 func unmarkHorizontal(board *[]string, row int) {
 	for col := 0; col < len((*board)[row]); col++ {
 		if string((*board)[row][col]) != "Q" {
-			current := int((*board)[row][col])
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic("FOUND INVALID NUMBER")
+			}
 			current--
-			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
 		}
 	}
 }
@@ -177,9 +203,13 @@ func unmarkHorizontal(board *[]string, row int) {
 func unmarkVertical(board *[]string, col int) {
 	for row := range *board {
 		if string((*board)[row][col]) != "Q" {
-			current := int((*board)[row][col])
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic("FOUND INVALID NUMBER")
+			}
 			current--
-			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
 		}
 	}
 }
@@ -188,9 +218,13 @@ func unmarkDiagonals(board *[]string, r int, c int) {
 	col := c + 1
 	for row := r + 1; row < len(*board); row++ {
 		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
-			current := int((*board)[row][col])
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic("FOUND INVALID NUMBER")
+			}
 			current--
-			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
 			col++
 		} else {
 			break
@@ -200,9 +234,13 @@ func unmarkDiagonals(board *[]string, r int, c int) {
 	col = c - 1
 	for row := r + 1; row < len(*board); row++ {
 		if col >= 0 && string((*board)[row][col]) != "Q" {
-			current := int((*board)[row][col])
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic("FOUND INVALID NUMBER")
+			}
 			current--
-			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
 			col--
 		} else {
 			break
@@ -212,9 +250,13 @@ func unmarkDiagonals(board *[]string, r int, c int) {
 	col = c + 1
 	for row := r - 1; row >= 0; row-- {
 		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
-			current := int((*board)[row][col])
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic("FOUND INVALID NUMBER")
+			}
 			current--
-			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
 			col++
 		} else {
 			break
@@ -223,10 +265,14 @@ func unmarkDiagonals(board *[]string, r int, c int) {
 
 	col = c - 1
 	for row := r - 1; row >= 0; row-- {
-		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
-			current := int((*board)[row][col])
+		if col >= 0 && string((*board)[row][col]) != "Q" {
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic("FOUND INVALID NUMBER")
+			}
 			current--
-			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
 			col--
 		} else {
 			break
