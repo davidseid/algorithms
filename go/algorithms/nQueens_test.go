@@ -85,7 +85,7 @@ func cleanBoard(board *[]string) {
 func markBoard(board *[]string, row int, col int) {
 	markHorizontal(board, row)
 	markVertical(board, col)
-	markDiagonal(board, row, col)
+	markDiagonals(board, row, col)
 }
 
 func markHorizontal(board *[]string, row int) {
@@ -104,6 +104,56 @@ func markVertical(board *[]string, col int) {
 			current := int((*board)[row][col])
 			current++
 			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+		}
+	}
+}
+
+func markDiagonals(board *[]string, r int, c int) {
+	col := c + 1
+	for row := r + 1; row < len(*board); row++ {
+		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
+			current := int((*board)[row][col])
+			current++
+			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			col++
+		} else {
+			break
+		}
+	}
+
+	col = c - 1
+	for row := r + 1; row < len(*board); row++ {
+		if col >= 0 && string((*board)[row][col]) != "Q" {
+			current := int((*board)[row][col])
+			current++
+			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			col--
+		} else {
+			break
+		}
+	}
+
+	col = c + 1
+	for row := r - 1; row >= 0; row-- {
+		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
+			current := int((*board)[row][col])
+			current++
+			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			col++
+		} else {
+			break
+		}
+	}
+
+	col = c - 1
+	for row := r - 1; row >= 0; row-- {
+		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
+			current := int((*board)[row][col])
+			current++
+			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			col--
+		} else {
+			break
 		}
 	}
 }
