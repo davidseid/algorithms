@@ -47,7 +47,7 @@ func makeBoard(n int) []string {
 	board := []string{}
 
 	for i := 0; i < n; i++ {
-		board = append(board, "....")
+		board = append(board, "0000")
 	}
 
 	return board
@@ -64,8 +64,9 @@ func placeQueen(board *[]string, row int, col int, queensRemaining int, solution
 		for c := col; c < len((*board)[0]); c++ {
 			if spaceIsEmpty(board, r, c) {
 				(*board)[r] = (*board)[r][:c] + "Q" + (*board)[r][c+1:]
-				// mark board
-				// defer cleanup
+				markBoard(board, r, c)
+				defer unmarkBoard(board, r, c)
+
 				// call palceQueen on this
 			}
 		}
@@ -158,8 +159,83 @@ func markDiagonals(board *[]string, r int, c int) {
 	}
 }
 
+func unmarkBoard(board *[]string, row int, col int) {
+	unmarkHorizontal(board, row)
+	unmarkVertical(board, col)
+	unmarkDiagonals(board, row, col)
+}
+
+func unmarkHorizontal(board *[]string, row int) {
+	for col := 0; col < len((*board)[row]); col++ {
+		if string((*board)[row][col]) != "Q" {
+			current := int((*board)[row][col])
+			current--
+			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+		}
+	}
+}
+
+func unmarkVertical(board *[]string, col int) {
+	for row := range *board {
+		if string((*board)[row][col]) != "Q" {
+			current := int((*board)[row][col])
+			current--
+			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+		}
+	}
+}
+
+func unmarkDiagonals(board *[]string, r int, c int) {
+	col := c + 1
+	for row := r + 1; row < len(*board); row++ {
+		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
+			current := int((*board)[row][col])
+			current--
+			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			col++
+		} else {
+			break
+		}
+	}
+
+	col = c - 1
+	for row := r + 1; row < len(*board); row++ {
+		if col >= 0 && string((*board)[row][col]) != "Q" {
+			current := int((*board)[row][col])
+			current--
+			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			col--
+		} else {
+			break
+		}
+	}
+
+	col = c + 1
+	for row := r - 1; row >= 0; row-- {
+		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
+			current := int((*board)[row][col])
+			current--
+			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			col++
+		} else {
+			break
+		}
+	}
+
+	col = c - 1
+	for row := r - 1; row >= 0; row-- {
+		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
+			current := int((*board)[row][col])
+			current--
+			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+			col--
+		} else {
+			break
+		}
+	}
+}
 func spaceIsEmpty(board *[]string, row int, col int) bool {
-	if string((*board)[row][col]) == "." {
+	if string((*board)[row][col]) == "0" {
 		return true
 	}
 
