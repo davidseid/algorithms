@@ -82,6 +82,22 @@ func cleanBoard(board *[]string) {
 	}
 }
 
+func markBoard(board *[]string, row int, col int) {
+	markHorizontal(board, row)
+	markVertical(board, col)
+	markDiagonal(board, row, col)
+}
+
+func markHorizontal(board *[]string, row int) {
+	for col := 0; col < len((*board)[row]); col++ {
+		if string((*board)[row][col]) != "Q" {
+			current := int((*board)[row][col])
+			current++
+			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+		}
+	}
+}
+
 func spaceIsEmpty(board *[]string, row int, col int) bool {
 	if string((*board)[row][col]) == "." {
 		return true
