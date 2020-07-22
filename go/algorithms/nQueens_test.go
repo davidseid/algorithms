@@ -98,6 +98,16 @@ func markHorizontal(board *[]string, row int) {
 	}
 }
 
+func markVertical(board *[]string, col int) {
+	for row := range *board {
+		if string((*board)[row][col]) != "Q" {
+			current := int((*board)[row][col])
+			current++
+			(*board)[row] = (*board)[row][:col] + string(current) + (*board)[row][col+1:]
+		}
+	}
+}
+
 func spaceIsEmpty(board *[]string, row int, col int) bool {
 	if string((*board)[row][col]) == "." {
 		return true
