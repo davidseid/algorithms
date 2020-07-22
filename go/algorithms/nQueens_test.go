@@ -66,8 +66,7 @@ func placeQueen(board *[]string, row int, col int, queensRemaining int, solution
 				(*board)[r] = (*board)[r][:c] + "Q" + (*board)[r][c+1:]
 				markBoard(board, r, c)
 				defer unmarkBoard(board, r, c)
-
-				// call palceQueen on this
+				placeQueen(board, r, c, queensRemaining-1, solutions)
 			}
 		}
 	}
