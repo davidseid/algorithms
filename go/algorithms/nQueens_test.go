@@ -55,14 +55,14 @@ func makeBoard(n int) []string {
 
 func placeQueen(board *[]string, row int, col int, queensRemaining int, solutions *[][]string) {
 	if queensRemaining == 0 {
-		cleanedBoard := cleanBoard(*board)
+		cleanBoard(board)
 		*solutions = append(*solutions, *board)
+		return
 	}
 
 	for r := row; r < len(*board); r++ {
 		for c := col; c < len((*board)[0]); c++ {
 			if spaceIsEmpty(board, r, c) {
-				// placeQueen
 				(*board)[r] = (*board)[r][:c] + "Q" + (*board)[r][c+1:]
 				// mark board
 				// defer cleanup
@@ -72,8 +72,14 @@ func placeQueen(board *[]string, row int, col int, queensRemaining int, solution
 	}
 }
 
-func cleanBoard(board *[]string) []string {
-	return []string{}
+func cleanBoard(board *[]string) {
+	for row := range *board {
+		for col := 0; col < len((*board)[0]); col++ {
+			if string((*board)[row][col]) != "Q" {
+				(*board)[row] = (*board)[row][:col] + "." + (*board)[row][col+1:]
+			}
+		}
+	}
 }
 
 func spaceIsEmpty(board *[]string, row int, col int) bool {
