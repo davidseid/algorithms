@@ -34,261 +34,8 @@ Output: [
 Explanation: There exist two distinct solutions to the 4-queens puzzle as shown above.
 */
 
-func solveNQueens(n int) [][]string {
-
-	board := makeBoard(n)
-
-	solutions := [][]string{}
-
-	placeQueen(&board, 0, 0, n, &solutions)
-
-	return solutions
-}
-
-func makeBoard(n int) []string {
-	board := []string{}
-
-	for i := 0; i < n; i++ {
-		board = append(board, "0000")
-	}
-
-	return board
-}
-
-func placeQueen(board *[]string, row int, col int, queensRemaining int, solutions *[][]string) {
-	if queensRemaining == 0 {
-		cleanBoard(board)
-		*solutions = append(*solutions, *board)
-		return
-	}
-
-	for r := 0; r < len(*board); r++ {
-		for c := 0; c < len((*board)[0]); c++ {
-			if spaceIsEmpty(board, r, c) {
-				(*board)[r] = (*board)[r][:c] + "Q" + (*board)[r][c+1:]
-				markBoard(board, r, c)
-				placeQueen(board, r, c, queensRemaining-1, solutions)
-				(*board)[r] = (*board)[r][:c] + "0" + (*board)[r][c+1:]
-				unmarkBoard(board, r, c)
-			}
-		}
-	}
-
-}
-
-func cleanBoard(board *[]string) {
-	for row := range *board {
-		for col := 0; col < len((*board)[0]); col++ {
-			if string((*board)[row][col]) != "Q" {
-				(*board)[row] = (*board)[row][:col] + "." + (*board)[row][col+1:]
-			}
-		}
-	}
-}
-
-func markBoard(board *[]string, row int, col int) {
-	markHorizontal(board, row)
-	markVertical(board, col)
-	markDiagonals(board, row, col)
-}
-
-func markHorizontal(board *[]string, row int) {
-	for col := 0; col < len((*board)[row]); col++ {
-		if string((*board)[row][col]) != "Q" {
-			current := int((*board)[row][col])
-			current++
-			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
-		}
-	}
-}
-
-func markVertical(board *[]string, col int) {
-	for row := range *board {
-		if string((*board)[row][col]) != "Q" {
-			current := int((*board)[row][col])
-			current++
-			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
-		}
-	}
-}
-
-func markDiagonals(board *[]string, r int, c int) {
-	col := c + 1
-	for row := r + 1; row < len(*board); row++ {
-		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
-
-			fmt.Println((*board)[row][col])
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic("FOUND INVALID NUMBER")
-			}
-			current++
-			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
-			col++
-		} else {
-			break
-		}
-	}
-
-	col = c - 1
-	for row := r + 1; row < len(*board); row++ {
-		if col >= 0 && string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic("FOUND INVALID NUMBER")
-			}
-			current++
-			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
-			col--
-		} else {
-			break
-		}
-	}
-
-	col = c + 1
-	for row := r - 1; row >= 0; row-- {
-		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic("FOUND INVALID NUMBER")
-			}
-			current++
-			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
-			col++
-		} else {
-			break
-		}
-	}
-
-	col = c - 1
-	for row := r - 1; row >= 0; row-- {
-		if col >= 0 && string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic("FOUND INVALID NUMBER")
-			}
-			current++
-			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
-			col--
-		} else {
-			break
-		}
-	}
-}
-
-func unmarkBoard(board *[]string, row int, col int) {
-	unmarkHorizontal(board, row)
-	unmarkVertical(board, col)
-	unmarkDiagonals(board, row, col)
-}
-
-func unmarkHorizontal(board *[]string, row int) {
-	for col := 0; col < len((*board)[row]); col++ {
-		if string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic("FOUND INVALID NUMBER")
-			}
-			current--
-			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
-		}
-	}
-}
-
-func unmarkVertical(board *[]string, col int) {
-	for row := range *board {
-		if string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic("FOUND INVALID NUMBER")
-			}
-			current--
-			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
-		}
-	}
-}
-
-func unmarkDiagonals(board *[]string, r int, c int) {
-	col := c + 1
-	for row := r + 1; row < len(*board); row++ {
-		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic("FOUND INVALID NUMBER")
-			}
-			current--
-			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
-			col++
-		} else {
-			break
-		}
-	}
-
-	col = c - 1
-	for row := r + 1; row < len(*board); row++ {
-		if col >= 0 && string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic("FOUND INVALID NUMBER")
-			}
-			current--
-			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
-			col--
-		} else {
-			break
-		}
-	}
-
-	col = c + 1
-	for row := r - 1; row >= 0; row-- {
-		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic("FOUND INVALID NUMBER")
-			}
-			current--
-			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
-			col++
-		} else {
-			break
-		}
-	}
-
-	col = c - 1
-	for row := r - 1; row >= 0; row-- {
-		if col >= 0 && string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic("FOUND INVALID NUMBER")
-			}
-			current--
-			(*board)[row] = (*board)[row][:col] + strconv.Itoa(current) + (*board)[row][col+1:]
-			col--
-		} else {
-			break
-		}
-	}
-}
-func spaceIsEmpty(board *[]string, row int, col int) bool {
-	if string((*board)[row][col]) == "0" {
-		return true
-	}
-
-	return false
-}
-
 func TestSolveNQueens(t *testing.T) {
-	input := 4
+	input := 1
 
 	expected := [][]string{
 		[]string{
@@ -310,4 +57,314 @@ func TestSolveNQueens(t *testing.T) {
 	if diff := deep.Equal(actual, expected); diff != nil {
 		t.Error(diff)
 	}
+}
+
+func solveNQueens(n int) [][]string {
+	board := makeBoard(n)
+	solutions := [][]string{}
+
+	placeQueen(&board, 0, 0, n, &solutions)
+
+	return solutions
+}
+
+func makeBoard(n int) []string {
+	board := []string{}
+	row := ""
+
+	for i := 0; i < n; i++ {
+		row = "0"
+	}
+
+	for i := 0; i < n; i++ {
+		board = append(board, row)
+	}
+
+	return board
+}
+
+func placeQueen(board *[]string, row int, col int, queensRemaining int, solutions *[][]string) {
+	fmt.Println(*board)
+	if queensRemaining == 0 {
+		cleanedBoard := cleanBoard(board)
+		*solutions = append(*solutions, cleanedBoard)
+		return
+	}
+
+	for r := row; r < len(*board); r++ {
+		for c := col; c < len((*board)[0]); c++ {
+			if spaceIsEmpty(board, r, c) {
+				fmt.Println("Placing queen")
+				fmt.Println(*board)
+				(*board)[r] = updateRow((*board)[r], c, "Q")
+				fmt.Println("Placed queen")
+				fmt.Println(*board)
+				markBoard(board, r, c)
+				fmt.Println("Marked board")
+				fmt.Println(*board)
+				placeQueen(board, r, c, queensRemaining-1, solutions)
+				(*board)[r] = updateRow((*board)[r], c, "0")
+				unmarkBoard(board, r, c)
+				fmt.Println("Removed queen and unmarked board")
+			}
+		}
+	}
+
+}
+
+func updateRow(old string, col int, val string) string {
+	newString := ""
+
+	for i := 0; i < len(old); i++ {
+		if i == col {
+			newString += val
+		} else {
+			newString += string(old[i])
+		}
+	}
+
+	return newString
+}
+
+func cleanBoard(board *[]string) []string {
+
+	cleanedBoard := make([]string, len(*board))
+	for row := range *board {
+		for col := 0; col < len((*board)[0]); col++ {
+			if string((*board)[row][col]) != "Q" {
+				fmt.Println((*board)[row])
+				cleanedBoard[row] = updateRow((*board)[row], col, ".")
+			}
+		}
+	}
+	return cleanedBoard
+}
+
+func markBoard(board *[]string, row int, col int) {
+	markHorizontal(board, row)
+	fmt.Println("MARKED HORIZONTAL")
+	fmt.Println(*board)
+	markVertical(board, col)
+	fmt.Println("MARKED Vertical")
+	fmt.Println(*board)
+	markDiagonals(board, row, col)
+	fmt.Println("MARKED diagonal")
+	fmt.Println(*board)
+}
+
+func markHorizontal(board *[]string, row int) {
+	for col := 0; col < len((*board)[row]); col++ {
+		if string((*board)[row][col]) != "Q" {
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic(err)
+			}
+			current++
+			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
+		}
+	}
+}
+
+func markVertical(board *[]string, col int) {
+	for row := range *board {
+		if string((*board)[row][col]) != "Q" {
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic(err)
+			}
+			current++
+			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
+		}
+	}
+}
+
+func markDiagonals(board *[]string, r int, c int) {
+	col := c + 1
+	for row := r + 1; row < len(*board); row++ {
+		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
+
+			fmt.Println((*board)[row][col])
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic(err)
+			}
+			current++
+			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
+			col++
+		} else {
+			break
+		}
+	}
+
+	col = c - 1
+	for row := r + 1; row < len(*board); row++ {
+		if col >= 0 && string((*board)[row][col]) != "Q" {
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic(err)
+			}
+			current++
+			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
+			col--
+		} else {
+			break
+		}
+	}
+
+	col = c + 1
+	for row := r - 1; row >= 0; row-- {
+		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic(err)
+			}
+			current++
+			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
+			col++
+		} else {
+			break
+		}
+	}
+
+	col = c - 1
+	for row := r - 1; row >= 0; row-- {
+		if col >= 0 && string((*board)[row][col]) != "Q" {
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic(err)
+			}
+			current++
+			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
+			col--
+		} else {
+			break
+		}
+	}
+}
+
+func unmarkBoard(board *[]string, row int, col int) {
+	unmarkHorizontal(board, row)
+	unmarkVertical(board, col)
+	unmarkDiagonals(board, row, col)
+}
+
+func unmarkHorizontal(board *[]string, row int) {
+	for col := 0; col < len((*board)[row]); col++ {
+		if string((*board)[row][col]) != "Q" {
+			fmt.Println(string((*board)[row][col]))
+			current, err := strconv.Atoi(string((*board)[row][col]))
+			fmt.Println(current, err)
+			if err != nil {
+				panic(err)
+			}
+			if string((*board)[row][col]) != "0" {
+				current--
+			}
+			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
+		}
+	}
+}
+
+func unmarkVertical(board *[]string, col int) {
+	for row := range *board {
+		if string((*board)[row][col]) != "Q" {
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic(err)
+			}
+			if string((*board)[row][col]) != "0" {
+				current--
+			}
+			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
+		}
+	}
+}
+
+func unmarkDiagonals(board *[]string, r int, c int) {
+	col := c + 1
+	for row := r + 1; row < len(*board); row++ {
+		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic(err)
+			}
+			if string((*board)[row][col]) != "0" {
+				current--
+			}
+			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
+			col++
+		} else {
+			break
+		}
+	}
+
+	col = c - 1
+	for row := r + 1; row < len(*board); row++ {
+		if col >= 0 && string((*board)[row][col]) != "Q" {
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic(err)
+			}
+			if string((*board)[row][col]) != "0" {
+				current--
+			}
+			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
+			col--
+		} else {
+			break
+		}
+	}
+
+	col = c + 1
+	for row := r - 1; row >= 0; row-- {
+		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic(err)
+			}
+			if string((*board)[row][col]) != "0" {
+				current--
+			}
+			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
+			col++
+		} else {
+			break
+		}
+	}
+
+	col = c - 1
+	for row := r - 1; row >= 0; row-- {
+		if col >= 0 && string((*board)[row][col]) != "Q" {
+			current, err := strconv.Atoi(string((*board)[row][col]))
+
+			if err != nil {
+				panic(err)
+			}
+			if string((*board)[row][col]) != "0" {
+				current--
+			}
+
+			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
+			col--
+		} else {
+			break
+		}
+	}
+}
+func spaceIsEmpty(board *[]string, row int, col int) bool {
+	if string((*board)[row][col]) == "0" {
+		return true
+	}
+
+	return false
 }
