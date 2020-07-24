@@ -40,6 +40,18 @@ A simpler to implement algorithm would be to copy the board on each recursive st
 but that would be less space efficient. However, the board marking and unmarking
 is very inefficient in this implementation because it uses an array of strings as the board,
 indexing into strings and modifying strings is inefficient because they are immutable in golang.
+
+This was done because the answer is expected as an array of strings, however it is not worth the
+inefficiency, considering I'm using numbers to track the marking anyway.
+
+Some followup optimizations to explore:
+- Use [][]int data structure instead, and only convert to a solution format at the end.
+- Try to use a different system of marking, do we need to keep track of the numbers in this way
+or can we just scan if it is safe before placing.
+- Do we even need to scan the whole board or can we do only part of the board
+- How can we take advantage of mirroring/rotating the solution to find additional solutions?
+
+Goal is to speed it up enough to pass leetcode test
 */
 
 func TestSolveNQueens(t *testing.T) {
