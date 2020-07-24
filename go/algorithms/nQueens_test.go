@@ -82,13 +82,7 @@ func makeBoard(n int) []string {
 	return board
 }
 
-func printBoard(board *[]string) {
-	for row := range *board {
-	}
-}
-
 func placeQueen(board *[]string, row int, col int, queensRemaining int, solutions *[][]string) {
-	printBoard(board)
 	if queensRemaining == 0 {
 		cleanedBoard := cleanBoard(board)
 		*solutions = append(*solutions, cleanedBoard)
