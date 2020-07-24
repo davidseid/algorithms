@@ -1,7 +1,6 @@
 package algorithms
 
 import (
-	"fmt"
 	"strconv"
 	"testing"
 
@@ -64,8 +63,6 @@ func solveNQueens(n int) [][]string {
 	solutions := [][]string{}
 
 	placeQueen(&board, 0, 0, n, &solutions)
-	fmt.Println("SOLUTIONS")
-	fmt.Println(solutions)
 
 	return solutions
 }
@@ -87,18 +84,14 @@ func makeBoard(n int) []string {
 
 func printBoard(board *[]string) {
 	for row := range *board {
-		fmt.Println((*board)[row])
 	}
 }
 
 func placeQueen(board *[]string, row int, col int, queensRemaining int, solutions *[][]string) {
-	fmt.Println("Attempting to place a queen on board")
 	printBoard(board)
 	if queensRemaining == 0 {
-		fmt.Println("FOUND SOLUTION")
 		cleanedBoard := cleanBoard(board)
 		*solutions = append(*solutions, cleanedBoard)
-		fmt.Println(*solutions)
 		return
 	}
 
@@ -142,10 +135,7 @@ func cleanBoard(board *[]string) []string {
 				cleanedRow += "."
 			}
 		}
-		fmt.Println(cleanedRow)
-		fmt.Println(len(cleanedRow))
 		cleanedBoard = append(cleanedBoard, cleanedRow)
-		fmt.Println(len(cleanedBoard))
 	}
 	return cleanedBoard
 }
