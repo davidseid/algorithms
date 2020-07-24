@@ -1,6 +1,7 @@
 package algorithms
 
 import (
+	"fmt"
 	"strconv"
 	"testing"
 
@@ -63,6 +64,8 @@ func solveNQueens(n int) [][]string {
 	solutions := [][]string{}
 
 	placeQueen(&board, 0, 0, n, &solutions)
+	fmt.Println("SOLUTIONS")
+	fmt.Println(solutions)
 
 	return solutions
 }
@@ -82,10 +85,20 @@ func makeBoard(n int) []string {
 	return board
 }
 
+func printBoard(board *[]string) {
+	for row := range *board {
+		fmt.Println((*board)[row])
+	}
+}
+
 func placeQueen(board *[]string, row int, col int, queensRemaining int, solutions *[][]string) {
+	fmt.Println("Attempting to place a queen on board")
+	printBoard(board)
 	if queensRemaining == 0 {
+		fmt.Println("FOUND SOLUTION")
 		cleanedBoard := cleanBoard(board)
 		*solutions = append(*solutions, cleanedBoard)
+		fmt.Println(*solutions)
 		return
 	}
 
@@ -94,7 +107,7 @@ func placeQueen(board *[]string, row int, col int, queensRemaining int, solution
 			if spaceIsEmpty(board, r, c) {
 				(*board)[r] = updateRow((*board)[r], c, "Q")
 				markBoard(board, r, c)
-				placeQueen(board, r, c, queensRemaining-1, solutions)
+				placeQueen(board, row+1, 0, queensRemaining-1, solutions)
 				(*board)[r] = updateRow((*board)[r], c, "0")
 				unmarkBoard(board, r, c)
 			}
@@ -119,15 +132,20 @@ func updateRow(old string, col int, val string) string {
 
 func cleanBoard(board *[]string) []string {
 
-	cleanedBoard := make([]string, len(*board))
+	cleanedBoard := []string{}
 	for row := range *board {
+		cleanedRow := ""
 		for col := 0; col < len((*board)[0]); col++ {
-			if string((*board)[row][col]) != "Q" {
-				cleanedBoard[row] = updateRow((*board)[row], col, ".")
+			if string((*board)[row][col]) == "Q" {
+				cleanedRow += "Q"
 			} else {
-				cleanedBoard[row] = updateRow((*board)[row], col, "Q")
+				cleanedRow += "."
 			}
 		}
+		fmt.Println(cleanedRow)
+		fmt.Println(len(cleanedRow))
+		cleanedBoard = append(cleanedBoard, cleanedRow)
+		fmt.Println(len(cleanedBoard))
 	}
 	return cleanedBoard
 }
