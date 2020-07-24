@@ -1,7 +1,6 @@
 package algorithms
 
 import (
-	"fmt"
 	"strconv"
 	"testing"
 
@@ -35,7 +34,7 @@ Explanation: There exist two distinct solutions to the 4-queens puzzle as shown 
 */
 
 func TestSolveNQueens(t *testing.T) {
-	input := 1
+	input := 4
 
 	expected := [][]string{
 		[]string{
@@ -73,7 +72,7 @@ func makeBoard(n int) []string {
 	row := ""
 
 	for i := 0; i < n; i++ {
-		row = "0"
+		row += "0"
 	}
 
 	for i := 0; i < n; i++ {
@@ -84,7 +83,6 @@ func makeBoard(n int) []string {
 }
 
 func placeQueen(board *[]string, row int, col int, queensRemaining int, solutions *[][]string) {
-	fmt.Println(*board)
 	if queensRemaining == 0 {
 		cleanedBoard := cleanBoard(board)
 		*solutions = append(*solutions, cleanedBoard)
@@ -94,18 +92,11 @@ func placeQueen(board *[]string, row int, col int, queensRemaining int, solution
 	for r := row; r < len(*board); r++ {
 		for c := col; c < len((*board)[0]); c++ {
 			if spaceIsEmpty(board, r, c) {
-				fmt.Println("Placing queen")
-				fmt.Println(*board)
 				(*board)[r] = updateRow((*board)[r], c, "Q")
-				fmt.Println("Placed queen")
-				fmt.Println(*board)
 				markBoard(board, r, c)
-				fmt.Println("Marked board")
-				fmt.Println(*board)
 				placeQueen(board, r, c, queensRemaining-1, solutions)
 				(*board)[r] = updateRow((*board)[r], c, "0")
 				unmarkBoard(board, r, c)
-				fmt.Println("Removed queen and unmarked board")
 			}
 		}
 	}
@@ -132,8 +123,9 @@ func cleanBoard(board *[]string) []string {
 	for row := range *board {
 		for col := 0; col < len((*board)[0]); col++ {
 			if string((*board)[row][col]) != "Q" {
-				fmt.Println((*board)[row])
 				cleanedBoard[row] = updateRow((*board)[row], col, ".")
+			} else {
+				cleanedBoard[row] = updateRow((*board)[row], col, "Q")
 			}
 		}
 	}
@@ -142,14 +134,8 @@ func cleanBoard(board *[]string) []string {
 
 func markBoard(board *[]string, row int, col int) {
 	markHorizontal(board, row)
-	fmt.Println("MARKED HORIZONTAL")
-	fmt.Println(*board)
 	markVertical(board, col)
-	fmt.Println("MARKED Vertical")
-	fmt.Println(*board)
 	markDiagonals(board, row, col)
-	fmt.Println("MARKED diagonal")
-	fmt.Println(*board)
 }
 
 func markHorizontal(board *[]string, row int) {
@@ -185,7 +171,6 @@ func markDiagonals(board *[]string, r int, c int) {
 	for row := r + 1; row < len(*board); row++ {
 		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
 
-			fmt.Println((*board)[row][col])
 			current, err := strconv.Atoi(string((*board)[row][col]))
 
 			if err != nil {
@@ -257,9 +242,7 @@ func unmarkBoard(board *[]string, row int, col int) {
 func unmarkHorizontal(board *[]string, row int) {
 	for col := 0; col < len((*board)[row]); col++ {
 		if string((*board)[row][col]) != "Q" {
-			fmt.Println(string((*board)[row][col]))
 			current, err := strconv.Atoi(string((*board)[row][col]))
-			fmt.Println(current, err)
 			if err != nil {
 				panic(err)
 			}
