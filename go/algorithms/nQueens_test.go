@@ -33,6 +33,15 @@ Output: [
 Explanation: There exist two distinct solutions to the 4-queens puzzle as shown above.
 */
 
+/*
+Rationale:
+- This is an initial implementation using recursion and backtracking.
+A simpler to implement algorithm would be to copy the board on each recursive step,
+but that would be less space efficient. However, the board marking and unmarking
+is very inefficient in this implementation because it uses an array of strings as the board,
+indexing into strings and modifying strings is inefficient because they are immutable in golang.
+*/
+
 func TestSolveNQueens(t *testing.T) {
 	input := 4
 
