@@ -83,14 +83,15 @@ func solveNQueens(n int) [][]string {
 
 	solutions := [][]string{}
 
-	solve(solutions, board, 0)
+	solve(&solutions, board, 0)
 	return solutions
 }
 
-func solve(solutions [][]string, board []string, row int) {
+func solve(solutions *[][]string, board []string, row int) {
 	if row == len(board) {
 		constructed := construct(board)
-		solutions = append(solutions, constructed)
+		*solutions = append(*solutions, constructed)
+		return
 	}
 
 	for col := 0; col < len(board); col++ {
