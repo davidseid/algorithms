@@ -43,6 +43,19 @@ indexing into strings and modifying strings is inefficient because they are immu
 This was done because the answer is expected as an array of strings, however it is not worth the
 inefficiency, considering I'm using numbers to track the marking anyway.
 
+Updated solution rationale:
+- Start on the first row, for each column in that row, try to place a queen
+- if can place a queen, recurse in with that board and the next column.
+- when you come out, backtrack
+- the base case is when you've gone past the last row
+- A key insight here is that if you must place n queens on an n*n board, there must be exactly
+one queen per row.
+- Because we only go row by row, we only need to check three things to know if it is a valid spot:
+-- is the column in the rows leading up to this open?
+-- is the 45 degree angle up from the spot open?
+-- is the 135 degree angle up/left from the spot open?
+- Abandons the marking system, we just place the queen, and check for validity when we need to.
+
 Some followup optimizations to explore:
 - Use [][]int data structure instead, and only convert to a solution format at the end.
 - Try to use a different system of marking, do we need to keep track of the numbers in this way
@@ -124,6 +137,7 @@ func isValid(board []string, row int, col int) bool {
 	return true
 }
 
+// convert to simple copy
 func construct(board []string) []string {
 	path := []string{}
 	for i := range board {
@@ -148,6 +162,7 @@ func makeBoard(n int) []string {
 	return board
 }
 
+// switch this out
 func updateRow(old string, col int, val string) string {
 	newString := ""
 
