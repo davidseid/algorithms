@@ -54,16 +54,7 @@ one queen per row.
 -- is the column in the rows leading up to this open?
 -- is the 45 degree angle up from the spot open?
 -- is the 135 degree angle up/left from the spot open?
-- Abandons the marking system, we just place the queen, and check for validity when we need to.
-
-Some followup optimizations to explore:
-- Use [][]int data structure instead, and only convert to a solution format at the end.
-- Try to use a different system of marking, do we need to keep track of the numbers in this way
-or can we just scan if it is safe before placing.
-- Do we even need to scan the whole board or can we do only part of the board
-- How can we take advantage of mirroring/rotating the solution to find additional solutions?
-
-Goal is to speed it up enough to pass leetcode test
+- Abandons the marking system, we just place the queen, and check for validity when we need to
 */
 
 func TestSolveNQueens(t *testing.T) {
