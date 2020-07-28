@@ -96,11 +96,12 @@ func solveNQueens(n int) [][]string {
 
 	solutions := [][]string{}
 
-	solve(&solutions, board, 0)
+	solve(&solutions, &board, 0)
 	return solutions
 }
 
-func solve(solutions *[][]string, board []string, row int) {
+func solve(solutions *[][]string, pBoard *[]string, row int) {
+	board := *pBoard
 	if row == len(board) {
 		constructed := construct(board)
 		*solutions = append(*solutions, constructed)
@@ -108,15 +109,16 @@ func solve(solutions *[][]string, board []string, row int) {
 	}
 
 	for col := 0; col < len(board); col++ {
-		if isValid(board, row, col) {
+		if isValid(&board, row, col) {
 			board[row] = updateRow(board[row], col, "Q")
-			solve(solutions, board, row+1)
+			solve(solutions, &board, row+1)
 			board[row] = updateRow(board[row], col, ".")
 		}
 	}
 }
 
-func isValid(board []string, row int, col int) bool {
+func isValid(pBoard *[]string, row int, col int) bool {
+	board := *pBoard
 	for i := 0; i < row; i++ {
 		if string(board[i][col]) == "Q" {
 			return false
