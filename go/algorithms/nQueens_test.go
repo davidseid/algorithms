@@ -1,7 +1,6 @@
 package algorithms
 
 import (
-	"strconv"
 	"testing"
 
 	"github.com/go-test/deep"
@@ -54,60 +53,6 @@ or can we just scan if it is safe before placing.
 Goal is to speed it up enough to pass leetcode test
 */
 
-func solveNQueens(n int) [][]string {
-	board := makeBoard(n)
-
-	solutions := [][]string{}
-
-	solve(solutions, board, 0)
-	return solutions
-}
-
-func solve(solutions [][]string, board []string, row int) {
-	if row == len(board) {
-		constructed := construct(board)
-		solutions = append(solutions, constructed)
-	}
-
-	for col := 0; col < len(board); col++ {
-		if isValid(board, row, col) {
-			board[row][col] = "Q"
-			solve(solutions, board, row+1)
-			board[row][col] = "."
-		}
-	}
-}
-
-func isValid(board []string, row int, col int) bool {
-	for i := 0; i < row; i++ {
-		if board[i][col] == "Q" {
-			return false
-		}
-	}
-
-	for i, j := row-1, col+1; i >= 0 && j < len(board); i, j = i-1, j+1 {
-		if board[i][j] == "Q" {
-			return false
-		}
-	}
-
-	for i, j := row-1, col-1; i >= 0 && j >= 0; i, j = i-1, j-1 {
-		if board[i][j] == "Q" {
-			return false
-		}
-	}
-	return true
-}
-
-func construct(board []string) []string {
-	path := []string{}
-	for i := range board {
-		path = append(path, board[i])
-	}
-
-	return path
-}
-
 func TestSolveNQueens(t *testing.T) {
 	input := 4
 
@@ -133,14 +78,59 @@ func TestSolveNQueens(t *testing.T) {
 	}
 }
 
-// func solveNQueens(n int) [][]string {
-// 	board := makeBoard(n)
-// 	solutions := [][]string{}
+func solveNQueens(n int) [][]string {
+	board := makeBoard(n)
 
-// 	placeQueen(&board, 0, 0, n, &solutions)
+	solutions := [][]string{}
 
-// 	return solutions
-// }
+	solve(solutions, board, 0)
+	return solutions
+}
+
+func solve(solutions [][]string, board []string, row int) {
+	if row == len(board) {
+		constructed := construct(board)
+		solutions = append(solutions, constructed)
+	}
+
+	for col := 0; col < len(board); col++ {
+		if isValid(board, row, col) {
+			board[row] = updateRow(board[row], col, "Q")
+			solve(solutions, board, row+1)
+			board[row] = updateRow(board[row], col, ".")
+		}
+	}
+}
+
+func isValid(board []string, row int, col int) bool {
+	for i := 0; i < row; i++ {
+		if string(board[i][col]) == "Q" {
+			return false
+		}
+	}
+
+	for i, j := row-1, col+1; i >= 0 && j < len(board); i, j = i-1, j+1 {
+		if string(board[i][j]) == "Q" {
+			return false
+		}
+	}
+
+	for i, j := row-1, col-1; i >= 0 && j >= 0; i, j = i-1, j-1 {
+		if string(board[i][j]) == "Q" {
+			return false
+		}
+	}
+	return true
+}
+
+func construct(board []string) []string {
+	path := []string{}
+	for i := range board {
+		path = append(path, board[i])
+	}
+
+	return path
+}
 
 func makeBoard(n int) []string {
 	board := []string{}
@@ -157,27 +147,6 @@ func makeBoard(n int) []string {
 	return board
 }
 
-func placeQueen(board *[]string, row int, col int, queensRemaining int, solutions *[][]string) {
-	if queensRemaining == 0 {
-		cleanedBoard := cleanBoard(board)
-		*solutions = append(*solutions, cleanedBoard)
-		return
-	}
-
-	for r := row; r < len(*board); r++ {
-		for c := col; c < len((*board)[0]); c++ {
-			if spaceIsEmpty(board, r, c) {
-				(*board)[r] = updateRow((*board)[r], c, "Q")
-				markBoard(board, r, c)
-				placeQueen(board, row+1, 0, queensRemaining-1, solutions)
-				(*board)[r] = updateRow((*board)[r], c, "0")
-				unmarkBoard(board, r, c)
-			}
-		}
-	}
-
-}
-
 func updateRow(old string, col int, val string) string {
 	newString := ""
 
@@ -190,241 +159,4 @@ func updateRow(old string, col int, val string) string {
 	}
 
 	return newString
-}
-
-func cleanBoard(board *[]string) []string {
-
-	cleanedBoard := []string{}
-	for row := range *board {
-		cleanedRow := ""
-		for col := 0; col < len((*board)[0]); col++ {
-			if string((*board)[row][col]) == "Q" {
-				cleanedRow += "Q"
-			} else {
-				cleanedRow += "."
-			}
-		}
-		cleanedBoard = append(cleanedBoard, cleanedRow)
-	}
-	return cleanedBoard
-}
-
-func markBoard(board *[]string, row int, col int) {
-	markHorizontal(board, row)
-	markVertical(board, col)
-	markDiagonals(board, row, col)
-}
-
-func markHorizontal(board *[]string, row int) {
-	for col := 0; col < len((*board)[row]); col++ {
-		if string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic(err)
-			}
-			current++
-			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
-		}
-	}
-}
-
-func markVertical(board *[]string, col int) {
-	for row := range *board {
-		if string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic(err)
-			}
-			current++
-			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
-		}
-	}
-}
-
-func markDiagonals(board *[]string, r int, c int) {
-	col := c + 1
-	for row := r + 1; row < len(*board); row++ {
-		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
-
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic(err)
-			}
-			current++
-			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
-			col++
-		} else {
-			break
-		}
-	}
-
-	col = c - 1
-	for row := r + 1; row < len(*board); row++ {
-		if col >= 0 && string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic(err)
-			}
-			current++
-			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
-			col--
-		} else {
-			break
-		}
-	}
-
-	col = c + 1
-	for row := r - 1; row >= 0; row-- {
-		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic(err)
-			}
-			current++
-			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
-			col++
-		} else {
-			break
-		}
-	}
-
-	col = c - 1
-	for row := r - 1; row >= 0; row-- {
-		if col >= 0 && string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic(err)
-			}
-			current++
-			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
-			col--
-		} else {
-			break
-		}
-	}
-}
-
-func unmarkBoard(board *[]string, row int, col int) {
-	unmarkHorizontal(board, row)
-	unmarkVertical(board, col)
-	unmarkDiagonals(board, row, col)
-}
-
-func unmarkHorizontal(board *[]string, row int) {
-	for col := 0; col < len((*board)[row]); col++ {
-		if string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-			if err != nil {
-				panic(err)
-			}
-			if string((*board)[row][col]) != "0" {
-				current--
-			}
-			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
-		}
-	}
-}
-
-func unmarkVertical(board *[]string, col int) {
-	for row := range *board {
-		if string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic(err)
-			}
-			if string((*board)[row][col]) != "0" {
-				current--
-			}
-			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
-		}
-	}
-}
-
-func unmarkDiagonals(board *[]string, r int, c int) {
-	col := c + 1
-	for row := r + 1; row < len(*board); row++ {
-		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic(err)
-			}
-			if string((*board)[row][col]) != "0" {
-				current--
-			}
-			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
-			col++
-		} else {
-			break
-		}
-	}
-
-	col = c - 1
-	for row := r + 1; row < len(*board); row++ {
-		if col >= 0 && string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic(err)
-			}
-			if string((*board)[row][col]) != "0" {
-				current--
-			}
-			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
-			col--
-		} else {
-			break
-		}
-	}
-
-	col = c + 1
-	for row := r - 1; row >= 0; row-- {
-		if col < len((*board)[0]) && string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic(err)
-			}
-			if string((*board)[row][col]) != "0" {
-				current--
-			}
-			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
-			col++
-		} else {
-			break
-		}
-	}
-
-	col = c - 1
-	for row := r - 1; row >= 0; row-- {
-		if col >= 0 && string((*board)[row][col]) != "Q" {
-			current, err := strconv.Atoi(string((*board)[row][col]))
-
-			if err != nil {
-				panic(err)
-			}
-			if string((*board)[row][col]) != "0" {
-				current--
-			}
-
-			(*board)[row] = updateRow((*board)[row], col, strconv.Itoa(current))
-			col--
-		} else {
-			break
-		}
-	}
-}
-func spaceIsEmpty(board *[]string, row int, col int) bool {
-	if string((*board)[row][col]) == "0" {
-		return true
-	}
-
-	return false
 }
