@@ -100,7 +100,7 @@ func solveNQueens(n int) [][]string {
 	return solutions
 }
 
-func solve(solutions *[][]string, pBoard *[]string, row int) {
+func solve(solutions *[][]string, pBoard *[][]int, row int) {
 	board := *pBoard
 	if row == len(board) {
 		constructed := construct(board)
@@ -110,29 +110,29 @@ func solve(solutions *[][]string, pBoard *[]string, row int) {
 
 	for col := 0; col < len(board); col++ {
 		if isValid(&board, row, col) {
-			board[row] = updateRow(board[row], col, "Q")
+			board[row][col] = 1
 			solve(solutions, &board, row+1)
-			board[row] = updateRow(board[row], col, ".")
+			board[row][col] = 0
 		}
 	}
 }
 
-func isValid(pBoard *[]string, row int, col int) bool {
+func isValid(pBoard *[][]int, row int, col int) bool {
 	board := *pBoard
 	for i := 0; i < row; i++ {
-		if string(board[i][col]) == "Q" {
+		if board[i][col] == 1 {
 			return false
 		}
 	}
 
 	for i, j := row-1, col+1; i >= 0 && j < len(board); i, j = i-1, j+1 {
-		if string(board[i][j]) == "Q" {
+		if board[i][j] == 1 {
 			return false
 		}
 	}
 
 	for i, j := row-1, col-1; i >= 0 && j >= 0; i, j = i-1, j-1 {
-		if string(board[i][j]) == "Q" {
+		if board[i][j] == 1 {
 			return false
 		}
 	}
@@ -140,41 +140,33 @@ func isValid(pBoard *[]string, row int, col int) bool {
 }
 
 // convert to simple copy
-func construct(board []string) []string {
+func construct(board [][]int) []string {
 	path := []string{}
 	for i := range board {
-		path = append(path, board[i])
+		row := ""
+		for j := range board[i] {
+			if board[i][j] == 1 {
+				row += "Q"
+			} else {
+				row += "."
+			}
+		}
+		path = append(path, row)
 	}
 
 	return path
 }
 
-func makeBoard(n int) []string {
-	board := []string{}
-	row := ""
+func makeBoard(n int) [][]int {
+	board := [][]int{}
 
 	for i := 0; i < n; i++ {
-		row += "."
-	}
-
-	for i := 0; i < n; i++ {
+		row := []int{}
+		for i := 0; i < n; i++ {
+			row = append(row, 0)
+		}
 		board = append(board, row)
 	}
 
 	return board
-}
-
-// switch this out
-func updateRow(old string, col int, val string) string {
-	newString := ""
-
-	for i := 0; i < len(old); i++ {
-		if i == col {
-			newString += val
-		} else {
-			newString += string(old[i])
-		}
-	}
-
-	return newString
 }
