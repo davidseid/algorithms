@@ -54,6 +54,60 @@ or can we just scan if it is safe before placing.
 Goal is to speed it up enough to pass leetcode test
 */
 
+func solveNQueens(n int) [][]string {
+	board := makeBoard(n)
+
+	solutions := [][]string{}
+
+	solve(solutions, board, 0)
+	return solutions
+}
+
+func solve(solutions [][]string, board []string, row int) {
+	if row == len(board) {
+		constructed := construct(board)
+		solutions = append(solutions, constructed)
+	}
+
+	for col := 0; col < len(board); col++ {
+		if isValid(board, row, col) {
+			board[row][col] = "Q"
+			solve(solutions, board, row+1)
+			board[row][col] = "."
+		}
+	}
+}
+
+func isValid(board []string, row int, col int) bool {
+	for i := 0; i < row; i++ {
+		if board[i][col] == "Q" {
+			return false
+		}
+	}
+
+	for i, j := row-1, col+1; i >= 0 && j < len(board); i, j = i-1, j+1 {
+		if board[i][j] == "Q" {
+			return false
+		}
+	}
+
+	for i, j := row-1, col-1; i >= 0 && j >= 0; i, j = i-1, j-1 {
+		if board[i][j] == "Q" {
+			return false
+		}
+	}
+	return true
+}
+
+func construct(board []string) []string {
+	path := []string{}
+	for i := range board {
+		path = append(path, board[i])
+	}
+
+	return path
+}
+
 func TestSolveNQueens(t *testing.T) {
 	input := 4
 
@@ -79,21 +133,21 @@ func TestSolveNQueens(t *testing.T) {
 	}
 }
 
-func solveNQueens(n int) [][]string {
-	board := makeBoard(n)
-	solutions := [][]string{}
+// func solveNQueens(n int) [][]string {
+// 	board := makeBoard(n)
+// 	solutions := [][]string{}
 
-	placeQueen(&board, 0, 0, n, &solutions)
+// 	placeQueen(&board, 0, 0, n, &solutions)
 
-	return solutions
-}
+// 	return solutions
+// }
 
 func makeBoard(n int) []string {
 	board := []string{}
 	row := ""
 
 	for i := 0; i < n; i++ {
-		row += "0"
+		row += "."
 	}
 
 	for i := 0; i < n; i++ {
