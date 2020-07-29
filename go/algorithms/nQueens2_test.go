@@ -44,7 +44,7 @@ func TestNQueens2(t *testing.T) {
 }
 
 func totalNQueens(n int) int {
-	board := makeBoard(n)
+	board := makeBoard2(n)
 	numSolutions := 0
 
 	solveNQueens2(&numSolutions, &board, 0)
@@ -59,7 +59,7 @@ func solveNQueens2(numSolutions *int, pBoard *[][]int, row int) {
 	}
 
 	for col := 0; col < len(board); col++ {
-		if isValid(&board, row, col) {
+		if isValid2(&board, row, col) {
 			board[row][col] = 1
 			solveNQueens2(numSolutions, &board, row+1)
 			board[row][col] = 0
