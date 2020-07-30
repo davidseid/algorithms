@@ -72,7 +72,6 @@ func TestInsertInterval2(t *testing.T) {
 
 func insert(intervals [][]int, newInterval []int) [][]int {
 	result := [][]int{}
-
 	i := 0
 
 	// move through any intervals that end before new begins
@@ -84,10 +83,11 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 	// move through intervals where the start is less than the new end
 	// updating the new interval as we go
 	for i < len(intervals) && intervals[i][0] <= newInterval[1] {
-		newStart := min(newInterval[0], intervals[i][0])
-		newEnd := max(newInterval[1], intervals[i][1])
+		newInterval = []int{
+			min(newInterval[0], intervals[i][0]),
+			max(newInterval[1], intervals[i][1]),
+		}
 
-		newInterval = []int{newStart, newEnd}
 		i++
 	}
 
