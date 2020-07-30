@@ -75,11 +75,14 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 
 	i := 0
 
+	// move through any intervals that end before new begins
 	for i < len(intervals) && intervals[i][1] < newInterval[0] {
 		result = append(result, intervals[i])
 		i++
 	}
 
+	// move through intervals where the start is less than the new end
+	// updating the new interval as we go
 	for i < len(intervals) && intervals[i][0] <= newInterval[1] {
 		newStart := min(newInterval[0], intervals[i][0])
 		newEnd := max(newInterval[1], intervals[i][1])
@@ -88,6 +91,7 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 		i++
 	}
 
+	// add the newinterval and everything after
 	result = append(result, newInterval)
 	result = append(result, intervals[i:]...)
 
