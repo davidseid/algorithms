@@ -24,6 +24,13 @@ Example 2:
 Input: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
 Output: [[1,2],[3,10],[12,16]]
 Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
+
+Rationale:
+- Iterate through the first bunch that are clearly before the interval, append them to the result
+- Once some merging is necessary, iterate through the intervals and modifying our new interval as appropriate
+- Then add the new interval plus anything that is left over
+- Time Complexity: O(n), we must iterate through all the intervals once
+- Space Complexity: O(n), we must maintain a copy of the array that matches the size of the array
 */
 
 func TestInsertInterval(t *testing.T) {
