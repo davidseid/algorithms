@@ -1,6 +1,7 @@
 package algorithms
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/go-test/deep"
@@ -65,88 +66,52 @@ func TestInsertInterval2(t *testing.T) {
 
 	actual := insert(intervals, newInterval)
 
+	fmt.Println(actual)
+
 	if diff := deep.Equal(actual, expected); diff != nil {
 		t.Error(diff)
 	}
 }
 
 func insert(intervals [][]int, newInterval []int) [][]int {
+	result := [][]int{}
+
 	i := 0
-	currStart, currEnd := intervals[i][0], intervals[i][1]
 
-	newStart, newEnd := newInterval[0], newInterval[1]
-
-	if newStart < currStart && newEnd < currStart {
-		result := [][]int{
-			newInterval,
-		}
-
-		result = append(result, intervals[1:]...)
-		return result
+	for i < len(intervals) && intervals[i][1] < newInterval[0] {
+		result = append(result, intervals[i])
+		i++
 	}
 
-	if newStart < currStart && newEnd <= currEnd {
-		intervals[i][0] = newStart
-		return intervals
+	for i < len(intervals) && intervals[i][0] <= newInterval[1] {
+		newStart := min(newInterval[0], intervals[i][0])
+		newEnd := max(newInterval[1], intervals[i][1])
+
+		newInterval = []int{newStart, newEnd}
+		i++
 	}
 
-	if newStart < currStart && newEnd > currEnd {
-		intervals[i][0] = newStart
+	result = append(result, newInterval)
 
-		for i < len(intervals)-1 {
-			next := intervals[i+1]
-
-			if newEnd < next[0] {
-				intervals[i][1] = newEnd
-				return intervals
-			}
-
-			if newEnd >= next[0] && newEnd <= next[1] {
-				intervals[i][1] = next[1]
-				result := intervals[0 : i+1]
-				result = append(result, intervals[i+1:]...)
-				return result
-			}
-
-			if newEnd >= next[0] && newEnd > next[1] {
-				newIntervals := intervals[0 : i+1]
-				newIntervals = append(newIntervals, intervals[i+1:]...)
-				intervals = newIntervals
-				i++
-			}
-		}
+	for i < len(intervals) {
+		result = append(result, intervals[i])
+		i++
 	}
 
-	if newStart >= currStart && newEnd <= currEnd {
-		return intervals
+	return result
+
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
 	}
+	return b
+}
 
-	if newStart > currStart && newEnd >= currEnd {
-		for i < len(intervals)-1 {
-			next := intervals[i+1]
-
-			if newEnd < next[0] {
-				intervals[i][1] = newEnd
-				return intervals
-			}
-
-			if newEnd >= next[0] && newEnd <= next[1] {
-				intervals[i][1] = next[1]
-				result := intervals[0 : i+1]
-				result = append(result, intervals[i+1:]...)
-				return result
-			}
-
-			if newEnd >= next[0] && newEnd > next[1] {
-				newIntervals := intervals[0 : i+1]
-				newIntervals = append(newIntervals, intervals[i+1:]...)
-				intervals = newIntervals
-				i++
-			}
-		}
+func min(a, b int) int {
+	if a < b {
+		return a
 	}
-
-	intervals[i][1] = newEnd
-
-	return intervals
+	return b
 }
