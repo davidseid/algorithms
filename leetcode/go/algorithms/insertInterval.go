@@ -1,5 +1,11 @@
 package algorithms
 
+import (
+	"testing"
+
+	"github.com/go-test/deep"
+)
+
 /*
 57. Insert Interval
 
@@ -19,3 +25,23 @@ Input: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
 Output: [[1,2],[3,10],[12,16]]
 Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
 */
+
+func TestInsertInterval(t *testing.T) {
+	intervals := [][]int{
+		[]int{1, 3},
+		[]int{6, 9},
+	}
+
+	newInterval := []int{2, 5}
+
+	expected := [][]int{
+		[]int{1, 5},
+		[]int{6, 9},
+	}
+
+	actual := insert(intervals, newInterval)
+
+	if diff := deep.Equal(actual, expected); diff != nil {
+		t.Error(diff)
+	}
+}
