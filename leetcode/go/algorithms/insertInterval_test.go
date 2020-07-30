@@ -71,5 +71,82 @@ func TestInsertInterval2(t *testing.T) {
 }
 
 func insert(intervals [][]int, newInterval []int) [][]int {
+	i := 0
+	currStart, currEnd := intervals[i][0], intervals[i][1]
 
+	newStart, newEnd := newInterval[0], newInterval[1]
+
+	if newStart < currStart && newEnd < currStart {
+		result := [][]int{
+			newInterval,
+		}
+
+		result = append(result, intervals[1:]...)
+		return result
+	}
+
+	if newStart < currStart && newEnd <= currEnd {
+		intervals[i][0] = newStart
+		return intervals
+	}
+
+	if newStart < currStart && newEnd > currEnd {
+		intervals[i][0] = newStart
+
+		for i < len(intervals)-1 {
+			next := intervals[i+1]
+
+			if newEnd < next[0] {
+				intervals[i][1] = newEnd
+				return intervals
+			}
+
+			if newEnd >= next[0] && newEnd <= next[1] {
+				intervals[i][1] = next[1]
+				result := intervals[0 : i+1]
+				result = append(result, intervals[i+1:]...)
+				return result
+			}
+
+			if newEnd >= next[0] && newEnd > next[1] {
+				newIntervals := intervals[0 : i+1]
+				newIntervals = append(newIntervals, intervals[i+1:]...)
+				intervals = newIntervals
+				i++
+			}
+		}
+	}
+
+	if newStart >= currStart && newEnd <= currEnd {
+		return intervals
+	}
+
+	if newStart > currStart && newEnd >= currEnd {
+		for i < len(intervals)-1 {
+			next := intervals[i+1]
+
+			if newEnd < next[0] {
+				intervals[i][1] = newEnd
+				return intervals
+			}
+
+			if newEnd >= next[0] && newEnd <= next[1] {
+				intervals[i][1] = next[1]
+				result := intervals[0 : i+1]
+				result = append(result, intervals[i+1:]...)
+				return result
+			}
+
+			if newEnd >= next[0] && newEnd > next[1] {
+				newIntervals := intervals[0 : i+1]
+				newIntervals = append(newIntervals, intervals[i+1:]...)
+				intervals = newIntervals
+				i++
+			}
+		}
+	}
+
+	intervals[i][1] = newEnd
+
+	return intervals
 }
