@@ -1,7 +1,6 @@
 package algorithms
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/go-test/deep"
@@ -66,8 +65,6 @@ func TestInsertInterval2(t *testing.T) {
 
 	actual := insert(intervals, newInterval)
 
-	fmt.Println(actual)
-
 	if diff := deep.Equal(actual, expected); diff != nil {
 		t.Error(diff)
 	}
@@ -92,11 +89,7 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 	}
 
 	result = append(result, newInterval)
-
-	for i < len(intervals) {
-		result = append(result, intervals[i])
-		i++
-	}
+	result = append(result, intervals[i:]...)
 
 	return result
 
