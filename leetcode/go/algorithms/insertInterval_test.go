@@ -45,3 +45,7 @@ func TestInsertInterval(t *testing.T) {
 		t.Error(diff)
 	}
 }
+
+func insert(intervals [][]int, newInterval []int) [][]int {
+
+}
