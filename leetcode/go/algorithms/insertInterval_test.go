@@ -46,6 +46,30 @@ func TestInsertInterval(t *testing.T) {
 	}
 }
 
+func TestInsertInterval2(t *testing.T) {
+	intervals := [][]int{
+		[]int{1, 2},
+		[]int{3, 5},
+		[]int{6, 7},
+		[]int{8, 10},
+		[]int{12, 16},
+	}
+
+	newInterval := []int{4, 8}
+
+	expected := [][]int{
+		[]int{1, 2},
+		[]int{3, 10},
+		[]int{12, 16},
+	}
+
+	actual := insert(intervals, newInterval)
+
+	if diff := deep.Equal(actual, expected); diff != nil {
+		t.Error(diff)
+	}
+}
+
 func insert(intervals [][]int, newInterval []int) [][]int {
 
 }
