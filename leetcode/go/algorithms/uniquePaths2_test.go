@@ -1,7 +1,6 @@
 package algorithms
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -69,16 +68,51 @@ func TestDynamicProgrammingUniquePaths2(t *testing.T) {
 
 // Dynamic Programming Solution
 func uniquePathsWithObstacles(obstacleGrid [][]int) int {
+
+	m := len(obstacleGrid)
+
+	if m == 0 {
+		return 0
+	}
+
+	n := len(obstacleGrid[0])
+
+	if obstacleGrid[0][0] == 1 && obstacleGrid[m-1][n-1] == 1 {
+		return 0
+	}
+
 	// initialize dp board
 	dp := [][]int{}
 
-	for i := 0; i < len(obstacleGrid); i++ {
-		dp = append(dp, []int{})
+	for i := 0; i < m; i++ {
+		row := []int{}
+
+		for j := 0; j < n; j++ {
+			row = append(row, 0)
+		}
+		dp = append(dp, row)
 	}
 
-	fmt.Println(dp)
-	// initialize first row
-	// initialize first col
+	// initialize end
+	dp[m-1][n-1] = 1
+
+	// initialize last row
+	for col := n - 2; col >= 0; col-- {
+		if obstacleGrid[m-1][col] == 1 {
+			dp[m-1][col] = 0
+		} else {
+			dp[m-1][col] = dp[m-1][col+1]
+		}
+	}
+	// initialize last col
+
+	for row := m - 2; row >= 0; row-- {
+		if obstacleGrid[row][n-1] == 1 {
+			dp[row][n-1] = 0
+		} else {
+			dp[row][n-1] = dp[row+1][n-1]
+		}
+	}
 
 	// populate board
 	// return last position of the board
