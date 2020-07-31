@@ -64,6 +64,11 @@ func TestDynamicProgrammingUniquePaths2(t *testing.T) {
 	}
 }
 
+// Dynamic Programming Solution
+func uniquePathsWithObstacles(obstacleGrid [][]int) int {
+
+}
+
 // Recursive Solution
 // Time complexity: O(2^mm) For each cell, we may branch in two directions
 // Space complexity: O(2^mn) Each recursive call increases the call stack
