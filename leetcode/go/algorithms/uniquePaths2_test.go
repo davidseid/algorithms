@@ -67,6 +67,8 @@ func TestDynamicProgrammingUniquePaths2(t *testing.T) {
 }
 
 // Dynamic Programming Solution
+// Time Complexity: O(m*n), we must look at each cell once
+// Space Complexity: O(m*n), we must make a copy of the grid
 func uniquePathsWithObstacles(obstacleGrid [][]int) int {
 
 	m := len(obstacleGrid)
