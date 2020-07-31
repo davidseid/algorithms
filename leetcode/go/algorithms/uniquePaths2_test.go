@@ -1,6 +1,9 @@
 package algorithms
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 /*
 63. Unique Paths II
@@ -66,7 +69,20 @@ func TestDynamicProgrammingUniquePaths2(t *testing.T) {
 
 // Dynamic Programming Solution
 func uniquePathsWithObstacles(obstacleGrid [][]int) int {
+	// initialize dp board
+	dp := [][]int{}
 
+	for i := 0; i < len(obstacleGrid); i++ {
+		dp = append(dp, []int{})
+	}
+
+	fmt.Println(dp)
+	// initialize first row
+	// initialize first col
+
+	// populate board
+	// return last position of the board
+	return dp[0][0]
 }
 
 // Recursive Solution
