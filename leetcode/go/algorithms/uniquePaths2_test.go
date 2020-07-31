@@ -48,7 +48,25 @@ func TestRecursiveUniquePaths2(t *testing.T) {
 	}
 }
 
+func TestDynamicProgrammingUniquePaths2(t *testing.T) {
+	input := [][]int{
+		[]int{0, 0, 0},
+		[]int{0, 1, 0},
+		[]int{0, 0, 0},
+	}
+
+	expected := 2
+
+	actual := uniquePathsWithObstacles(input)
+
+	if actual != expected {
+		t.Errorf("Got %d, wanted %d", actual, expected)
+	}
+}
+
 // Recursive Solution
+// Time complexity: O(2^mm) For each cell, we may branch in two directions
+// Space complexity: O(2^mn) Each recursive call increases the call stack
 func recursiveUniquePathsWithObstacles(obstacleGrid [][]int) int {
 	m := len(obstacleGrid)
 
