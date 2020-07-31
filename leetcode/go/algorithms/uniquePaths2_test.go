@@ -47,3 +47,7 @@ func TestUniquePaths2(t *testing.T) {
 		t.Errorf("Got %d, wanted %d", actual, expected)
 	}
 }
+
+func uniquePathsWithObstacles(obstacleGrid [][]int) {
+
+}
