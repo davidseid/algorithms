@@ -48,6 +48,39 @@ func TestUniquePaths2(t *testing.T) {
 	}
 }
 
-func uniquePathsWithObstacles(obstacleGrid [][]int) {
+// Recursive Solution
+func uniquePathsWithObstacles(obstacleGrid [][]int) int {
+	m := len(obstacleGrid)
 
+	if m == 0 {
+		return 0
+	}
+
+	n := len(obstacleGrid[0])
+
+	if obstacleGrid[0][0] == 1 {
+		return 0
+	}
+
+	return countUniquePaths(&obstacleGrid, 0, 0, m, n)
+}
+
+func countUniquePaths(pGrid *[][]int, row int, col int, m int, n int) int {
+	grid := *pGrid
+
+	if row == m-1 && col == n-1 && grid[row][col] != 1 {
+		return 1
+	}
+
+	paths := 0
+
+	if row+1 < m && grid[row+1][col] != 1 {
+		paths += countUniquePaths(pGrid, row+1, col, m, n)
+	}
+
+	if col+1 < n && grid[row][col+1] != 1 {
+		paths += countUniquePaths(pGrid, row, col+1, m, n)
+	}
+
+	return paths
 }
