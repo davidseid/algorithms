@@ -32,7 +32,7 @@ There are two ways to reach the bottom-right corner:
 2. Down -> Down -> Right -> Right
 */
 
-func TestUniquePaths2(t *testing.T) {
+func TestRecursiveUniquePaths2(t *testing.T) {
 	input := [][]int{
 		[]int{0, 0, 0},
 		[]int{0, 1, 0},
@@ -41,7 +41,7 @@ func TestUniquePaths2(t *testing.T) {
 
 	expected := 2
 
-	actual := uniquePathsWithObstacles(input)
+	actual := recursiveUniquePathsWithObstacles(input)
 
 	if actual != expected {
 		t.Errorf("Got %d, wanted %d", actual, expected)
@@ -49,7 +49,7 @@ func TestUniquePaths2(t *testing.T) {
 }
 
 // Recursive Solution
-func uniquePathsWithObstacles(obstacleGrid [][]int) int {
+func recursiveUniquePathsWithObstacles(obstacleGrid [][]int) int {
 	m := len(obstacleGrid)
 
 	if m == 0 {
