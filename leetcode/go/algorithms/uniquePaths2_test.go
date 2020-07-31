@@ -1,5 +1,7 @@
 package algorithms
 
+import "testing"
+
 /*
 63. Unique Paths II
 https://leetcode.com/problems/unique-paths-ii/
@@ -29,3 +31,19 @@ There are two ways to reach the bottom-right corner:
 1. Right -> Right -> Down -> Down
 2. Down -> Down -> Right -> Right
 */
+
+func TestUniquePaths2(t *testing.T) {
+	input := [][]int{
+		[]int{0, 0, 0},
+		[]int{0, 1, 0},
+		[]int{0, 0, 0},
+	}
+
+	expected := 2
+
+	actual := uniquePathsWithObstacles(input)
+
+	if actual != expected {
+		t.Errorf("Got %d, wanted %d", actual, expected)
+	}
+}
