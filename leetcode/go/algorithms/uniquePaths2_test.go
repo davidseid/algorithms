@@ -77,11 +77,10 @@ func uniquePathsWithObstacles(obstacleGrid [][]int) int {
 
 	n := len(obstacleGrid[0])
 
-	if obstacleGrid[0][0] == 1 && obstacleGrid[m-1][n-1] == 1 {
+	if obstacleGrid[0][0] == 1 || obstacleGrid[m-1][n-1] == 1 {
 		return 0
 	}
 
-	// initialize dp board
 	dp := [][]int{}
 
 	for i := 0; i < m; i++ {
@@ -93,10 +92,8 @@ func uniquePathsWithObstacles(obstacleGrid [][]int) int {
 		dp = append(dp, row)
 	}
 
-	// initialize end
 	dp[m-1][n-1] = 1
 
-	// initialize last row
 	for col := n - 2; col >= 0; col-- {
 		if obstacleGrid[m-1][col] == 1 {
 			dp[m-1][col] = 0
@@ -104,7 +101,6 @@ func uniquePathsWithObstacles(obstacleGrid [][]int) int {
 			dp[m-1][col] = dp[m-1][col+1]
 		}
 	}
-	// initialize last col
 
 	for row := m - 2; row >= 0; row-- {
 		if obstacleGrid[row][n-1] == 1 {
@@ -114,8 +110,19 @@ func uniquePathsWithObstacles(obstacleGrid [][]int) int {
 		}
 	}
 
-	// populate board
-	// return last position of the board
+	for row := m - 2; row >= 0; row-- {
+		for col := n - 2; col >= 0; col-- {
+			if obstacleGrid[row][col] == 1 {
+				dp[row][col] = 0
+			} else {
+				rightPaths := dp[row][col+1]
+				downPaths := dp[row+1][col]
+
+				dp[row][col] = rightPaths + downPaths
+			}
+		}
+	}
+
 	return dp[0][0]
 }
 
@@ -157,3 +164,10 @@ func countUniquePaths(pGrid *[][]int, row int, col int, m int, n int) int {
 
 	return paths
 }
+
+// func printBoard(grid [][]int) {
+// 	for _, row := range grid {
+// 		fmt.Println(row)
+// 	}
+// 	fmt.Println("------")
+// }
