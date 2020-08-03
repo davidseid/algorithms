@@ -1,4 +1,4 @@
-package algorithms
+package levelorder
 
 import (
 	"testing"
@@ -34,6 +34,12 @@ return its level order traversal as:
  *     Right *TreeNode
  * }
  */
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
 
 func TestLevelOrder(t *testing.T) {
 	input := &TreeNode{
