@@ -74,14 +74,21 @@ func TestLevelOrder(t *testing.T) {
 func levelOrder(root *TreeNode) [][]int {
 	queue := []*TreeNode{root}
 	levels := [][]int{}
-	nextQueue := []*TreeNode{}
 
 	for len(queue) != 0 {
 		values := []int{}
+		nextQueue := []*TreeNode{}
 
 		for _, node := range queue {
 			values = append(values, node.Val)
-			nextQueue = append(nextQueue, node.Left, node.Right)
+
+			if node.Left != nil {
+				nextQueue = append(nextQueue, node.Left)
+			}
+
+			if node.Right != nil {
+				nextQueue = append(nextQueue, node.Right)
+			}
 		}
 
 		queue = nextQueue
