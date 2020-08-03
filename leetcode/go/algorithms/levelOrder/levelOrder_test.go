@@ -72,8 +72,13 @@ func TestLevelOrder(t *testing.T) {
 }
 
 func levelOrder(root *TreeNode) [][]int {
-	queue := []*TreeNode{root}
 	levels := [][]int{}
+
+	if root == nil {
+		return levels
+	}
+
+	queue := []*TreeNode{root}
 
 	for len(queue) != 0 {
 		values := []int{}
