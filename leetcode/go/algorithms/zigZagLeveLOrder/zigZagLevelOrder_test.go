@@ -93,6 +93,13 @@ func TestZigZagLevelOrder2(t *testing.T) {
 	}
 }
 
+func prependInt(x []int, y int) []int {
+	x = append(x, 0)
+	copy(x[1:], x)
+	x[0] = y
+	return x
+}
+
 func zigzagLevelOrder(root *TreeNode) [][]int {
 	levels := [][]int{}
 
@@ -110,7 +117,7 @@ func zigzagLevelOrder(root *TreeNode) [][]int {
 		for _, node := range queue {
 
 			if zig == false {
-				levelOrder = append([]int{node.Val}, levelOrder...)
+				levelOrder = prependInt(levelOrder, node.Val)
 			} else {
 				levelOrder = append(levelOrder, node.Val)
 			}
