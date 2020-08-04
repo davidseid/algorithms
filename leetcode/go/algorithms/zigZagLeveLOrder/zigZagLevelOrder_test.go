@@ -63,6 +63,36 @@ func TestZigZagLevelOrder(t *testing.T) {
 	}
 }
 
+func TestZigZagLevelOrder2(t *testing.T) {
+	input := &TreeNode{
+		Val: 1,
+		Left: &TreeNode{
+			Val: 2,
+			Left: &TreeNode{
+				Val: 4,
+			},
+		},
+		Right: &TreeNode{
+			Val: 3,
+			Right: &TreeNode{
+				Val: 5,
+			},
+		},
+	}
+
+	expected := [][]int{
+		[]int{1},
+		[]int{3, 2},
+		[]int{4, 5},
+	}
+
+	actual := zigzagLevelOrder(input)
+
+	if diff := deep.Equal(actual, expected); diff != nil {
+		t.Error(diff)
+	}
+}
+
 func zigzagLevelOrder(root *TreeNode) [][]int {
 	levels := [][]int{}
 
