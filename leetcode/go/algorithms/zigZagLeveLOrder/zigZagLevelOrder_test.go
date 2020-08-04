@@ -56,14 +56,14 @@ func TestZigZagLevelOrder(t *testing.T) {
 		[]int{15, 7},
 	}
 
-	actual := zigZagLevelOrder(input)
+	actual := zigzagLevelOrder(input)
 
 	if diff := deep.Equal(actual, expected); diff != nil {
 		t.Error(diff)
 	}
 }
 
-func zigZagLevelOrder(root *TreeNode) [][]int {
+func zigzagLevelOrder(root *TreeNode) [][]int {
 	levels := [][]int{}
 
 	if root == nil {
