@@ -64,5 +64,46 @@ func TestZigZagLevelOrder(t *testing.T) {
 }
 
 func zigZagLevelOrder(root *TreeNode) [][]int {
+	levels := [][]int{}
 
+	if root == nil {
+		return levels
+	}
+
+	queue := []*TreeNode{root}
+	zig := true
+
+	for len(queue) != 0 {
+		levelOrder := []int{}
+		nextQueue := []*TreeNode{}
+
+		for _, node := range queue {
+			levelOrder = append(levelOrder, node.Val)
+
+			if zig == true {
+				if node.Left != nil {
+					nextQueue = append(nextQueue, node.Left)
+				}
+
+				if node.Right != nil {
+					nextQueue = append(nextQueue, node.Right)
+				}
+
+			} else {
+				if node.Right != nil {
+					nextQueue = append(nextQueue, node.Right)
+				}
+
+				if node.Left != nil {
+					nextQueue = append(nextQueue, node.Left)
+				}
+			}
+
+			levels = append(levels, levelOrder)
+			queue = nextQueue
+			zig = !zig
+		}
+	}
+
+	return levels
 }
