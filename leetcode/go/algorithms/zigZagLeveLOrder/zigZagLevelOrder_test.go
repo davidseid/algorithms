@@ -52,7 +52,7 @@ func TestZigZagLevelOrder(t *testing.T) {
 
 	expected := [][]int{
 		[]int{3},
-		[]int{20, 19},
+		[]int{20, 9},
 		[]int{15, 7},
 	}
 
@@ -80,7 +80,7 @@ func zigZagLevelOrder(root *TreeNode) [][]int {
 		for _, node := range queue {
 			levelOrder = append(levelOrder, node.Val)
 
-			if zig == true {
+			if zig == false {
 				if node.Left != nil {
 					nextQueue = append(nextQueue, node.Left)
 				}
@@ -98,11 +98,11 @@ func zigZagLevelOrder(root *TreeNode) [][]int {
 					nextQueue = append(nextQueue, node.Left)
 				}
 			}
-
-			levels = append(levels, levelOrder)
-			queue = nextQueue
-			zig = !zig
 		}
+
+		levels = append(levels, levelOrder)
+		queue = nextQueue
+		zig = !zig
 	}
 
 	return levels
