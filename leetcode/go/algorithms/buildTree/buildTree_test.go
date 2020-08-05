@@ -96,3 +96,26 @@ func buildSubtrees(node *TreeNode, poIndex *int, preorder []int, inorder []int) 
 		buildSubtrees(node.Right, poIndex, preorder, inorder)
 	}
 }
+
+func getLeftAndRight(nodeValue int, inorder []int) ([]int, []int) {
+
+	left := []int{}
+	right := []int{}
+
+	appendingLeft := true
+
+	for i := 0; i < len(inorder); i++ {
+		if inorder[i] == nodeValue {
+			appendingLeft = false
+			continue
+		}
+
+		if appendingLeft == true {
+			left = append(left, inorder[i])
+		} else {
+			right = append(right, inorder[i])
+		}
+	}
+
+	return left, right
+}
