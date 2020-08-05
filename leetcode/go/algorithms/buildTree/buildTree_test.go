@@ -1,5 +1,11 @@
 package buildTree
 
+import (
+	"testing"
+
+	"github.com/go-test/deep"
+)
+
 /*
 105. Construct Binary Tree from Preorder and Inorder Traversal
 https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
@@ -21,3 +27,36 @@ Return the following binary tree:
     /  \
    15   7
 */
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+func TestBuildTree(t *testing.T) {
+	preorder := []int{3, 9, 20, 15, 7}
+	inorder := []int{9, 3, 15, 20, 7}
+
+	expected := &TreeNode{
+		Val: 3,
+		Left: &TreeNode{
+			Val: 9,
+		},
+		Right: &TreeNode{
+			Val: 20,
+			Left: &TreeNode{
+				Val: 15,
+			},
+			Right: &TreeNode{
+				Val: 7,
+			},
+		},
+	}
+
+	actual := buildTree(preorder, inorder)
+
+	if diff := deep.Equal(actual, expected); diff != nil {
+		t.Error(diff)
+	}
+}
