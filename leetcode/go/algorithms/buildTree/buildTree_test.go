@@ -62,5 +62,15 @@ func TestBuildTree(t *testing.T) {
 }
 
 func buildTree(preorder []int, inorder []int) *TreeNode {
+	if len(preorder) == 0 {
+		return nil
+	}
 
+	root := &TreeNode{
+		Val: preorder[0],
+	}
+
+	buildSubtrees(root, 0, preorder, inorder)
+
+	return root
 }
