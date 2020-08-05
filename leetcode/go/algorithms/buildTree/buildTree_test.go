@@ -78,5 +78,21 @@ func buildTree(preorder []int, inorder []int) *TreeNode {
 }
 
 func buildSubtrees(node *TreeNode, poIndex *int, preorder []int, inorder []int) {
+	left, right := getLeftAndRight(node.Val, inorder)
 
+	if len(left) != 0 {
+		*poIndex = *poIndex + 1
+		node.Left = &TreeNode{
+			Val: preorder[*poIndex],
+		}
+		buildSubtrees(node.Left, poIndex, preorder, inorder)
+	}
+
+	if len(right) != 0 {
+		*poIndex = *poIndex + 1
+		node.Right = &TreeNode{
+			Val: preorder[*poIndex],
+		}
+		buildSubtrees(node.Right, poIndex, preorder, inorder)
+	}
 }
