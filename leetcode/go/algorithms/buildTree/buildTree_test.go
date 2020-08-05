@@ -60,3 +60,7 @@ func TestBuildTree(t *testing.T) {
 		t.Error(diff)
 	}
 }
+
+func buildTree(preorder []int, inorder []int) *TreeNode {
+
+}
