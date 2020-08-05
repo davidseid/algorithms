@@ -66,11 +66,17 @@ func buildTree(preorder []int, inorder []int) *TreeNode {
 		return nil
 	}
 
+	initialPreorderIndex := 0
+
 	root := &TreeNode{
-		Val: preorder[0],
+		Val: preorder[initialPreorderIndex],
 	}
 
-	buildSubtrees(root, 0, preorder, inorder)
+	buildSubtrees(root, &initialPreorderIndex, preorder, inorder)
 
 	return root
+}
+
+func buildSubtrees(node *TreeNode, poIndex *int, preorder []int, inorder []int) {
+
 }
