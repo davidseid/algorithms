@@ -35,6 +35,15 @@ Rationale:
 - If the left preorder array is not empty, use the next inorder on the left
 - If the right preorder array is not empty, use the next inorder on the right
 - Base case is when the left and right arrays are empty, meaning that node has no children
+
+Time Complexity:
+- Must iterate through each in the preorder O(n)
+- But for each, we must scan the left and right sides of the inorder O(n)
+- O(n^2)
+
+Space Complexity:
+- Must build a tree, one for each node O(n)
+- Maybe we can save space with pointers to the arrays...
 */
 
 type TreeNode struct {
