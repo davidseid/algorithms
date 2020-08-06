@@ -26,6 +26,15 @@ Return the following binary tree:
   9  20
     /  \
    15   7
+
+Rationale:
+- Start with first in preorder as root
+- Use current preorder value to find all elements
+  to left and right in inorder array.
+- Recursively build subtrees using the next inorder value
+- If the left preorder array is not empty, use the next inorder on the left
+- If the right preorder array is not empty, use the next inorder on the right
+- Base case is when the left and right arrays are empty, meaning that node has no children
 */
 
 type TreeNode struct {
