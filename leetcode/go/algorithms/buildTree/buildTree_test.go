@@ -43,7 +43,8 @@ Time Complexity:
 
 Space Complexity:
 - Must build a tree, one for each node O(n)
-- Maybe we can save space with pointers to the arrays...
+- Using pointers instead of arrays saves some memory but incraeses the time, probably not worth it.
+- O(n^2) because we need to create new slices for the left and right each time?
 */
 
 type TreeNode struct {
