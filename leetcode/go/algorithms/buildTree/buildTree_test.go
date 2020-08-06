@@ -40,6 +40,8 @@ Time Complexity:
 - Must iterate through each in the preorder O(n)
 - But for each, we must scan the left and right sides of the inorder O(n)
 - O(n^2)
+- The scanning can be avoided by simply hashing the inorder by index, so we can get the index by value in O(1) time
+- This reduces the time complexity to O(n)
 
 Space Complexity:
 - Must build a tree, one for each node O(n)
