@@ -36,7 +36,8 @@ We build a node for each number in the sorted array input, however building a no
 
 Optimization: This can be improved if rather than copy the array, we just use start/end pointers on the initial array
 
-
+Space Complexity: O(n^2)
+We build left and right arrays for each node. This can also be optimized by using indices instead of copying the array
 */
 
 type TreeNode struct {
