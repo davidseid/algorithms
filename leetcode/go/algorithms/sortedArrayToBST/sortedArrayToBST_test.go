@@ -73,30 +73,22 @@ func TestSortedArrayToBST(t *testing.T) {
 }
 
 func sortedArrayToBST(nums []int) *TreeNode {
-	return buildBST(nums)
+	return buildBST(nums, 0, len(nums)-1)
 }
 
-func buildBST(nums []int) *TreeNode {
-	if len(nums) == 0 {
+func buildBST(nums []int, start int, end int) *TreeNode {
+	if start >= end {
 		return nil
 	}
 
-	mi := len(nums) / 2
-	mid := nums[mi]
-
-	left := nums[:mi]
-	right := []int{}
-
-	if mi < len(nums)-1 {
-		right = nums[mi+1:]
-	}
+	mi := (end - start) / 2
 
 	node := &TreeNode{
-		Val: mid,
+		Val: nums[mi],
 	}
 
-	node.Left = buildBST(left)
-	node.Right = buildBST(right)
+	node.Left = buildBST(nums, 0, mi)
+	node.Right = buildBST(nums, mi+1, len(nums)-1)
 
 	return node
 }
