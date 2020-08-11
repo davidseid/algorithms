@@ -1,6 +1,7 @@
 package sortedArrayToBST
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/go-test/deep"
@@ -77,18 +78,18 @@ func sortedArrayToBST(nums []int) *TreeNode {
 }
 
 func buildBST(nums []int, start int, end int) *TreeNode {
-	if start >= end {
+	if start > end {
 		return nil
 	}
 
-	mi := (end - start) / 2
+	mi := ((end - start) / 2) + start
 
 	node := &TreeNode{
 		Val: nums[mi],
 	}
 
-	node.Left = buildBST(nums, 0, mi)
-	node.Right = buildBST(nums, mi+1, len(nums)-1)
+	node.Left = buildBST(nums, start, mi-1)
+	node.Right = buildBST(nums, mi+1, end)
 
 	return node
 }
