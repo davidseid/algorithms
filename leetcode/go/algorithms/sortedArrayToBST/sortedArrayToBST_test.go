@@ -25,6 +25,12 @@ One possible answer is: [0,-3,9,-10,null,5], which represents the following heig
    -3   9
    /   /
  -10  5
+
+Rationale:
+In order to keep it balanced, recursively divide the sorted array in half along a pivot number.
+The pivot number is the node value, and the left and right subtrees of the node use left
+and right halves of the sorted array as inputs.
+
 */
 
 type TreeNode struct {
