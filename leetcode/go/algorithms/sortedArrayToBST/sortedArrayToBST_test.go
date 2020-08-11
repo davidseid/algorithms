@@ -58,3 +58,7 @@ func TestSortedArrayToBST(t *testing.T) {
 		t.Error(diff)
 	}
 }
+
+func sortedArrayToBST(nums []int) *TreeNode {
+
+}
