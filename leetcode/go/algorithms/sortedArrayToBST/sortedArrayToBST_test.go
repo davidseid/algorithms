@@ -60,10 +60,7 @@ func TestSortedArrayToBST(t *testing.T) {
 }
 
 func sortedArrayToBST(nums []int) *TreeNode {
-
-	root := buildBST(nums)
-
-	return root
+	return buildBST(nums)
 }
 
 func buildBST(nums []int) *TreeNode {
