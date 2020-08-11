@@ -31,6 +31,12 @@ In order to keep it balanced, recursively divide the sorted array in half along 
 The pivot number is the node value, and the left and right subtrees of the node use left
 and right halves of the sorted array as inputs.
 
+Time Complexity: O(n^2)
+We build a node for each number in the sorted array input, however building a node involves making a new array for the left and right
+
+Optimization: This can be improved if rather than copy the array, we just use start/end pointers on the initial array
+
+
 */
 
 type TreeNode struct {
