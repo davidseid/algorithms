@@ -67,6 +67,18 @@ func TestSimplifyPath2(t *testing.T) {
 	}
 }
 
+func TestSimplifyPath3(t *testing.T) {
+	input := "/home//foo/"
+
+	expected := "/home/foo"
+
+	actual := simplifyPath(input)
+
+	if actual != expected {
+		t.Errorf("Got %s, want %s", actual, expected)
+	}
+}
+
 func simplifyPath(path string) string {
 
 }
