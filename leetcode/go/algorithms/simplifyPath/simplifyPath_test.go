@@ -1,5 +1,7 @@
 package simplifyPath
 
+import "testing"
+
 /*
 71. Simplify Path
 https://leetcode.com/problems/simplify-path/
@@ -40,6 +42,18 @@ Example 6:
 Input: "/a//b////c/d//././/.."
 Output: "/a/b/c"
 */
+
+func TestSimplifyPath(t *testing.T) {
+	input := "/home/"
+
+	expected := "/home"
+
+	actual := simplifyPath(input)
+
+	if actual != expected {
+		t.Errorf("Got %s, want %s", actual, expected)
+	}
+}
 
 func simplifyPath(path string) string {
 
