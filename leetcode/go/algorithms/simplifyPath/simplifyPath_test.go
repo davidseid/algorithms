@@ -125,4 +125,17 @@ func TestSimplifyPath6(t *testing.T) {
 
 func simplifyPath(path string) string {
 
+	// loop through the string
+	// if .
+	// if ./
+	// remove
+	// if ../
+	// if index > 0/1
+	// remove that plus previous */
+	// if /
+	// if //
+	// remove next slashes
+	// if / at end
+	// remove it
+
 }
