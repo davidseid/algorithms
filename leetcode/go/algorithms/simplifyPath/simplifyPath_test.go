@@ -101,6 +101,19 @@ func TestSimplifyPath5(t *testing.T) {
 	if actual != expected {
 		t.Errorf("Got %s, want %s", actual, expected)
 	}
+}
+
+func TestSimplifyPath6(t *testing.T) {
+	input := "/a//b////c/d//././/.."
+
+	expected := "/a/b/c"
+
+	actual := simplifyPath(input)
+
+	if actual != expected {
+		t.Errorf("Got %s, want %s", actual, expected)
+	}
+}
 
 func simplifyPath(path string) string {
 
