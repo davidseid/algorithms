@@ -43,6 +43,14 @@ Input: "/a//b////c/d//././/.."
 Output: "/a/b/c"
 */
 
+/*
+Rationale:
+- Remove ./
+- On ../, remove and remove prior directory (unless it is the root)
+- On consecutive /, collapse to 1
+- Remote trailing slashes
+*/
+
 func TestSimplifyPath(t *testing.T) {
 	input := "/home/"
 
