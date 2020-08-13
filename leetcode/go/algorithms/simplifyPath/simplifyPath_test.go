@@ -1,6 +1,9 @@
 package simplifyPath
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 /*
 71. Simplify Path
@@ -125,6 +128,14 @@ func TestSimplifyPath6(t *testing.T) {
 
 func simplifyPath(path string) string {
 
+	split := strings.Split(path, "/")
+
+	joined := strings.Join(split, "/")
+
+	if len(joined) > 1 {
+		joined = strings.TrimRight(joined, "/")
+	}
+
 	// loop through the string
 	// if .
 	// if ./
@@ -138,4 +149,16 @@ func simplifyPath(path string) string {
 	// if / at end
 	// remove it
 
+	return joined
+
 }
+
+// func removeTrailingSlash(path string) string {
+// 	if len(string) > 1 {
+// 		lastChar := string(path[len(path)-1])
+
+// 		if lastChar == "/" {
+// 			return path[:]
+// 		}
+// 	}
+// }
