@@ -1,6 +1,7 @@
 package simplifyPath
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 )
@@ -130,11 +131,28 @@ func simplifyPath(path string) string {
 
 	split := strings.Split(path, "/")
 
-	joined := strings.Join(split, "/")
+	simplified := []string{}
 
-	if len(joined) > 1 {
-		joined = strings.TrimRight(joined, "/")
+	for i := 0; i < len(split)-1; i++ {
+		curr := split[i]
+		next := split[i+1]
+
+		if curr == "." || curr == ".." || curr == "" {
+			continue
+		}
+
+		if next == ".." {
+			continue
+		}
+
+		simplified = append(simplified, curr)
 	}
+
+	fmt.Println(simplified)
+
+	joined := strings.Join(simplified, "/")
+
+	joined = "/" + joined
 
 	// loop through the string
 	// if .
