@@ -126,72 +126,60 @@ func TestSimplifyPath6(t *testing.T) {
 	}
 }
 
+type stack struct {
+	Values []string
+}
+
+func (s *stack) IsEmpty() bool {
+	if len(s.Values) > 0 {
+		return false
+	}
+	return true
+}
+
+func (s *stack) Push(dir string) {
+	s.Values = append(s.Values, dir)
+}
+
+func (s *stack) Pop() string {
+	if len(s.Values) > 0 {
+		popped := s.Values[len(s.Values)-1]
+		s.Values = s.Values[:len(s.Values)-1]
+		return popped
+	} else {
+		return ""
+	}
+}
+
 func simplifyPath(path string) string {
+	dirStack := stack{}
+	skip := map[string]bool{
+		".":  true,
+		"..": true,
+		"":   true,
+	}
 
-	split := strings.Split(path, "/")
-
-	simplified := []string{}
-
-	i := len(split) - 1
-
-	for i >= 0 {
-		curr := split[i]
-
-		if curr == "." || curr == "" {
-			i--
+	for _, dir := range strings.Split(path, "/") {
+		if dir == ".." && !dirStack.IsEmpty() {
+			dirStack.Pop()
 			continue
 		}
 
-		numToRemove := 0
-
-		for curr == ".." {
-			if i-1 > 0 {
-				numToRemove++
-			}
-			i--
-			curr = split[i]
+		if _, ok := skip[dir]; !ok {
+			dirStack.Push(dir)
+			continue
 		}
-
-		for i >= 0 && numToRemove > 0 {
-			numToRemove--
-			i--
-		}
-
-		simplified = append(simplified, split[i])
-		i--
 	}
 
-	for i, j := 0, len(simplified)-1; i < j; i, j = i+1, j-1 {
-		simplified[i], simplified[j] = simplified[j], simplified[i]
+	result := ""
+
+	for !dirStack.IsEmpty() {
+		result = "/" + dirStack.Pop() + result
 	}
 
-	joined := strings.Join(simplified, "/")
+	if len(result) == 0 {
+		return "/"
+	}
 
-	joined = "/" + joined
-
-	// loop through the string
-	// if .
-	// if ./
-	// remove
-	// if ../
-	// if index > 0/1
-	// remove that plus previous */
-	// if /
-	// if //
-	// remove next slashes
-	// if / at end
-	// remove it
-
-	return joined
-
+	return result
 }
-
-// func removeTrailingSlash(path string) string {
-// 	if len(string) > 1 {
-// 		lastChar := string(path[len(path)-1])
-
-// 		if lastChar == "/" {
-// 			return path[:]
-// 		}
-// 	}
-// }
