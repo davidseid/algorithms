@@ -1,5 +1,7 @@
 package editDistance
 
+import "testing"
+
 /*
 72. Edit Distance
 https://leetcode.com/problems/edit-distance/
@@ -30,6 +32,14 @@ enention -> exention (replace 'n' with 'x')
 exention -> exection (replace 'n' with 'c')
 exection -> execution (insert 'u')
 */
+
+func TestMinDistance(t *testing.T) {
+	actual := minDistance("horse", "ros")
+
+	if actual != 3 {
+		t.Errorf("Got %d, want %d", actual, 3)
+	}
+}
 
 func minDistance(word1 string, word2 string) int {
 
