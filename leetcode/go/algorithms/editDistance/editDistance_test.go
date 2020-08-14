@@ -41,6 +41,14 @@ func TestMinDistance(t *testing.T) {
 	}
 }
 
+func TestMinDistance2(t *testing.T) {
+	actual := minDistance("intention", "execution")
+
+	if actual != 5 {
+		t.Errorf("Got %d, want %d", actual, 5)
+	}
+}
+
 func minDistance(word1 string, word2 string) int {
 
 }
