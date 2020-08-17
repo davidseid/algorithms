@@ -61,9 +61,30 @@ func findRow(matrix [][]int, target int) []int {
 
 	if target >= matrix[pivot][0] {
 		return findRow(matrix[pivot:], target)
-	} else {
-		return findRow(matrix[:pivot], target)
 	}
+
+	return findRow(matrix[:pivot], target)
+
+}
+
+func findCol(row []int, target int) bool {
+	n := len(row)
+
+	if n == 1 {
+		if row[0] == target {
+			return true
+		}
+
+		return false
+	}
+
+	pivot := n / 2
+
+	if target >= row[pivot] {
+		return findCol(row[pivot:], target)
+	}
+
+	return findCol(row[:pivot], target)
 }
 
 func TestSearchMatrix(t *testing.T) {
