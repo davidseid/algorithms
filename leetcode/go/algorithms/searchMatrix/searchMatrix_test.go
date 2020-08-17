@@ -32,6 +32,17 @@ matrix = [
 ]
 target = 13
 Output: false
+
+Rationale:
+Use binary search on the matrix, twice. Use binary search to find the row where the target may be.
+Use binary search on the row to find the target if it exists.
+
+Optimizations:
+Initial implementation copied the matrix slices, the optimization used a pointer to a matrix
+and used start and end arguments as opposed to capturing slices. Surprisingly, this took more memory
+not less. It appears golang slices are already optimized for this usage, since they are already
+pointing at an underlying array, they are themselves just managing the indices pointing to subsets of the array.
+
 */
 
 func searchMatrix(matrix [][]int, target int) bool {
