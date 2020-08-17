@@ -48,3 +48,20 @@ func TestSearchMatrix(t *testing.T) {
 		t.Errorf("Got %v, want %v", actual, expected)
 	}
 }
+
+func TestSearchMatrix2(t *testing.T) {
+	matrix := [][]int{
+		{1, 3, 5, 7},
+		{10, 11, 16, 20},
+		{23, 30, 34, 50},
+	}
+
+	target := 13
+
+	actual := searchMatrix(matrix, target)
+	expected := false
+
+	if actual != expected {
+		t.Errorf("Got %v, want %v", actual, expected)
+	}
+}
