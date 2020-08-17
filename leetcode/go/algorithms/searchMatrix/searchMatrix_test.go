@@ -1,6 +1,8 @@
 package searchMatrix
 
-import "testing"
+import (
+	"testing"
+)
 
 /*
 74. Search a 2D Matrix
@@ -45,21 +47,21 @@ func searchMatrix(matrix [][]int, target int) bool {
 		return false
 	}
 
-	row := findRow(&matrix, 0, n, target)
+	row := findRow(&matrix, 0, m, target)
 
-	return findCol(row, target)
+	return findCol(&matrix, row, 0, n, target)
 }
 
-func findRow(pMatrix *[][]int, start int, end int, target int) []int {
+func findRow(pMatrix *[][]int, start int, end int, target int) int {
 	matrix := *pMatrix
 
 	m := end - start
 
 	if m == 1 {
-		return matrix[0]
+		return start
 	}
 
-	pivot := m / 2
+	pivot := m/2 + start
 
 	if target >= matrix[pivot][0] {
 		return findRow(pMatrix, pivot, end, target)
@@ -69,24 +71,25 @@ func findRow(pMatrix *[][]int, start int, end int, target int) []int {
 
 }
 
-func findCol(row []int, target int) bool {
-	n := len(row)
+func findCol(pMatrix *[][]int, row int, start int, end int, target int) bool {
+	matrix := *pMatrix
+	n := end - start
 
 	if n == 1 {
-		if row[0] == target {
+		if matrix[row][start] == target {
 			return true
 		}
 
 		return false
 	}
 
-	pivot := n / 2
+	pivot := n/2 + start
 
-	if target >= row[pivot] {
-		return findCol(row[pivot:], target)
+	if target >= matrix[row][pivot] {
+		return findCol(pMatrix, row, pivot, end, target)
 	}
 
-	return findCol(row[:pivot], target)
+	return findCol(pMatrix, row, start, pivot, target)
 }
 
 func TestSearchMatrix(t *testing.T) {
