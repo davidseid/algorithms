@@ -33,7 +33,21 @@ Output: false
 */
 
 func searchMatrix(matrix [][]int, target int) bool {
+	m := len(matrix)
 
+	if m == 0 {
+		return false
+	}
+
+	n := len(matrix[0])
+
+	if n == 0 {
+		return false
+	}
+
+	row := findRow(matrix, target)
+
+	return findCol(row, target)
 }
 
 func TestSearchMatrix(t *testing.T) {
