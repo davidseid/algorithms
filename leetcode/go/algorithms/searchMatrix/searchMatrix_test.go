@@ -45,13 +45,15 @@ func searchMatrix(matrix [][]int, target int) bool {
 		return false
 	}
 
-	row := findRow(matrix, target)
+	row := findRow(&matrix, 0, n, target)
 
 	return findCol(row, target)
 }
 
-func findRow(matrix [][]int, target int) []int {
-	m := len(matrix)
+func findRow(pMatrix *[][]int, start int, end int, target int) []int {
+	matrix := *pMatrix
+
+	m := end - start
 
 	if m == 1 {
 		return matrix[0]
@@ -60,10 +62,10 @@ func findRow(matrix [][]int, target int) []int {
 	pivot := m / 2
 
 	if target >= matrix[pivot][0] {
-		return findRow(matrix[pivot:], target)
+		return findRow(pMatrix, pivot, end, target)
 	}
 
-	return findRow(matrix[:pivot], target)
+	return findRow(pMatrix, start, pivot, target)
 
 }
 
