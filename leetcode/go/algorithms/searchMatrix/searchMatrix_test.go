@@ -1,5 +1,7 @@
 package searchMatrix
 
+import "testing"
+
 /*
 74. Search a 2D Matrix
 https://leetcode.com/problems/search-a-2d-matrix/
@@ -29,3 +31,20 @@ matrix = [
 target = 13
 Output: false
 */
+
+func TestSearchMatrix(t *testing.T) {
+	matrix := [][]int{
+		{1, 3, 5, 7},
+		{10, 11, 16, 20},
+		{23, 30, 34, 50},
+	}
+
+	target := 3
+
+	actual := searchMatrix(matrix, target)
+	expected := true
+
+	if actual != expected {
+		t.Errorf("Got %v, want %v", actual, expected)
+	}
+}
