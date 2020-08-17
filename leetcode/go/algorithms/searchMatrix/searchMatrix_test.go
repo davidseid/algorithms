@@ -50,6 +50,22 @@ func searchMatrix(matrix [][]int, target int) bool {
 	return findCol(row, target)
 }
 
+func findRow(matrix [][]int, target int) []int {
+	m := len(matrix)
+
+	if m == 1 {
+		return matrix[0]
+	}
+
+	pivot := m / 2
+
+	if target >= matrix[pivot][0] {
+		return findRow(matrix[pivot:], target)
+	} else {
+		return findRow(matrix[:pivot], target)
+	}
+}
+
 func TestSearchMatrix(t *testing.T) {
 	matrix := [][]int{
 		{1, 3, 5, 7},
