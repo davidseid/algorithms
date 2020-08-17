@@ -32,6 +32,10 @@ target = 13
 Output: false
 */
 
+func searchMatrix(matrix [][]int, target int) bool {
+
+}
+
 func TestSearchMatrix(t *testing.T) {
 	matrix := [][]int{
 		{1, 3, 5, 7},
