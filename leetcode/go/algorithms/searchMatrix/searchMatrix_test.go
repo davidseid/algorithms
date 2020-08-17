@@ -44,10 +44,10 @@ not less. It appears golang slices are already optimized for this usage, since t
 pointing at an underlying array, they are themselves just managing the indices pointing to subsets of the array.
 
 Time Complexity:
-O(logn) + O(logm), since we need to use binary search on both m and then n
+O(logn) + O(logm) = O(logmn), since we need to use binary search on both m and then n.
 
 Space Complexity:
-O(logn) + O(logm) since we make a recursive call on each part of the binary search.
+O(logn) + O(logm) = O(logmn) since we make a recursive call on each part of the binary search.
 */
 
 func searchMatrix(matrix [][]int, target int) bool {
