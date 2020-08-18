@@ -37,6 +37,19 @@ Constraints:
 
 1 <= n <= 20
 1 <= k <= n
+
+
+Rationale:
+- Initial approach is recursive solution, each time choosing one of the next
+possible choices, until we have chosen 3. It works but is inefficient because
+we are unnecessarily copying the current slice into a next slice on each iteration,
+and additionally copying the remaining choices into a new set of choices.
+This is too expensive for time and memory.
+
+Optimization ideas:
+Instead of using the actual array of choices and actual array of curr combination,
+could instead maintain array of the indexes to turn on, once we've reached 3, use them to grab the
+relevant numbers and add to the combinations
 */
 
 func combine(n int, k int) [][]int {
