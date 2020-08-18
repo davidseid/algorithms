@@ -8,8 +8,6 @@ Given two integers n and k, return all possible combinations of k numbers out of
 
 You may return the answer in any order.
 
-
-
 Example 1:
 
 Input: n = 4, k = 2
@@ -33,3 +31,7 @@ Constraints:
 1 <= n <= 20
 1 <= k <= n
 */
+
+func combine(n int, k int) [][]int {
+
+}
