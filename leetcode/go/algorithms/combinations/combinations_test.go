@@ -59,4 +59,16 @@ func TestCombine(t *testing.T) {
 			t.Error(diff)
 		}
 	})
+
+	t.Run("should return all possible combinations of k numbers from 1..n when n and k are 1", func(t *testing.T) {
+		expected := [][]int{
+			{1},
+		}
+
+		actual := combine(1, 1)
+
+		if diff := deep.Equal(actual, expected); diff != nil {
+			t.Error(diff)
+		}
+	})
 }
