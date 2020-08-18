@@ -1,6 +1,7 @@
 package combinations
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/go-test/deep"
@@ -50,8 +51,31 @@ func combine(n int, k int) [][]int {
 	curr := []int{}
 
 	getCombinations(curr, choices, k, &combinations)
-
+	fmt.Println(combinations)
 	return combinations
+}
+
+func getCombinations(curr []int, choices []int, remaining int, combinations *[][]int) {
+
+	if remaining == 0 {
+		*combinations = append(*combinations, curr)
+		return
+	}
+
+	for i, v := range choices {
+
+		next := make([]int, len(curr))
+		copy(next, curr)
+		next = append(next, v)
+
+		nextChoices := []int{}
+
+		for j := i + 1; j < len(choices); j++ {
+			nextChoices = append(nextChoices, choices[j])
+		}
+
+		getCombinations(next, nextChoices, remaining-1, combinations)
+	}
 }
 
 func TestCombine(t *testing.T) {
