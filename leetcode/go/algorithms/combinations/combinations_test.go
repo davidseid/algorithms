@@ -49,6 +49,12 @@ Optimization ideas:
 Instead of using the actual array of choices and actual array of curr combination,
 could instead maintain array of the indexes to turn on, once we've reached 3, use them to grab the
 relevant numbers and add to the combinations
+
+Time Complexity:
+O(n^k), recursively we need n branches at a depth of k, very expensive algorithm
+
+Space Complexity:
+O(n^k), due to the recursive stack
 */
 
 func combine(n int, k int) [][]int {
@@ -78,7 +84,6 @@ func getCombinations(curr []int, start int, choices []int, remaining int, combin
 		curr = append(curr, choices[i])
 		getCombinations(curr, i+1, choices, remaining-1, combinations)
 		curr = curr[:len(curr)-1]
-
 	}
 }
 
