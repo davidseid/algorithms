@@ -39,7 +39,19 @@ Constraints:
 */
 
 func combine(n int, k int) [][]int {
+	combinations := [][]int{}
 
+	choices := []int{}
+
+	for i := 1; i <= n; i++ {
+		choices = append(choices, i)
+	}
+
+	curr := []int{}
+
+	getCombinations(curr, choices, k, &combinations)
+
+	return combinations
 }
 
 func TestCombine(t *testing.T) {
