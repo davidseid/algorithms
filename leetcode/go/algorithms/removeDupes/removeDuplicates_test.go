@@ -39,3 +39,7 @@ for (int i = 0; i < len; i++) {
     print(nums[i]);
 }
 */
+
+func removeDuplicates(nums []int) int {
+
+}
