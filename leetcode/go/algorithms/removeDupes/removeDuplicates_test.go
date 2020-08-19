@@ -58,7 +58,7 @@ func TestRemoveDuplicates(t *testing.T) {
 
 		actual := removeDuplicates(nums)
 
-		if diff := deep.Equal(nums, expected); diff != nil {
+		if diff := deep.Equal(nums[:len(expected)], expected); diff != nil {
 			t.Error(diff)
 		}
 
@@ -74,7 +74,7 @@ func TestRemoveDuplicates(t *testing.T) {
 
 		actual := removeDuplicates(nums)
 
-		if diff := deep.Equal(nums, expected); diff != nil {
+		if diff := deep.Equal(nums[:len(expected)], expected); diff != nil {
 			t.Error(diff)
 		}
 
