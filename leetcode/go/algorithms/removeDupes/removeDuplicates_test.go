@@ -66,4 +66,20 @@ func TestRemoveDuplicates(t *testing.T) {
 			t.Errorf("Got %v, want %v", actual, expected)
 		}
 	})
+
+	t.Run("should remove duplicates 2", func(t *testing.T) {
+		nums := []int{0, 0, 1, 1, 1, 1, 2, 3, 3}
+
+		expected := []int{0, 0, 1, 1, 2, 3, 3}
+
+		actual := removeDuplicates(nums)
+
+		if diff := deep.Equal(nums, expected); diff != nil {
+			t.Error(diff)
+		}
+
+		if len(expected) != actual {
+			t.Errorf("Got %v, want %v", actual, expected)
+		}
+	})
 }
