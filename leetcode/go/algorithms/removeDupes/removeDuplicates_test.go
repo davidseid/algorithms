@@ -44,6 +44,18 @@ int len = removeDuplicates(nums);
 for (int i = 0; i < len; i++) {
     print(nums[i]);
 }
+
+Rationale:
+- Use two pointers to iterate through the input
+The first pointer tracks the current position for setting
+The second pointer tracks the current position for getting
+If the current number to get is greater than the number two behind,
+then it is a candidate to set, so we set it and increment the setting pointer
+Otherwise just increment the getting pointer
+
+Optimization:
+- Optimized by returning early if the input has 2 or less numbers since we won't need to modify
+- Optimized by starting our pointers at index 2, since we can ignore the first two
 */
 
 func removeDuplicates(nums []int) int {
