@@ -56,6 +56,10 @@ Otherwise just increment the getting pointer
 Optimization:
 - Optimized by returning early if the input has 2 or less numbers since we won't need to modify
 - Optimized by starting our pointers at index 2, since we can ignore the first two
+
+Time Complexity:
+O(n) - We must visit each value only once
+O(1) - Does not require any extra space in proportion to n, only our two pointers
 */
 
 func removeDuplicates(nums []int) int {
