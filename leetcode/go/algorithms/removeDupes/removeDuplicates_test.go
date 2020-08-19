@@ -1,5 +1,11 @@
 package removedupes
 
+import (
+	"testing"
+
+	"github.com/go-test/deep"
+)
+
 /*
 80. Remove Duplicates from Sorted Array II
 https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/
@@ -42,4 +48,22 @@ for (int i = 0; i < len; i++) {
 
 func removeDuplicates(nums []int) int {
 
+}
+
+func TestRemoveDuplicates(t *testing.T) {
+	t.Run("should remove duplicates", func(t *testing.T) {
+		nums := []int{1, 1, 1, 2, 2, 3}
+
+		expected := []int{1, 1, 2, 2, 3}
+
+		actual := removeDuplicates(nums)
+
+		if diff := deep.Equal(nums, expected); diff != nil {
+			t.Error(diff)
+		}
+
+		if len(expected) != actual {
+			t.Errorf("Got %v, want %v", actual, expected)
+		}
+	})
 }
