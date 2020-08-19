@@ -47,11 +47,17 @@ for (int i = 0; i < len; i++) {
 */
 
 func removeDuplicates(nums []int) int {
-	i := 0
+	i := 2
 
-	for _, n := range nums {
-		if i < 2 || n > nums[i-2] {
-			nums[i] = n
+	len := len(nums)
+
+	if len <= 2 {
+		return len
+	}
+
+	for n := 2; n < len; n++ {
+		if nums[n] > nums[i-2] {
+			nums[i] = nums[n]
 			i++
 		}
 	}
