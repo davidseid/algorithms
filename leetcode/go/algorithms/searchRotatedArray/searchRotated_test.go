@@ -27,7 +27,42 @@ Would this affect the run-time complexity? How and why?
 */
 
 func search(nums []int, target int) bool {
+	left := 0
+	right := len(nums) - 1
 
+	for left <= right {
+		mid := ((right - left) / 2) + left
+
+		if nums[mid] == target {
+			return true
+		}
+
+		if nums[left] == nums[mid] && nums[right] == nums[mid] {
+			left++
+			right--
+			continue
+		}
+
+		if nums[left] <= nums[mid] {
+			if nums[left] <= target && nums[mid] > target {
+				right = mid - 1
+			} else {
+				left = mid + 1
+			}
+			continue
+		}
+
+		if nums[left] > nums[mid] {
+			if nums[mid] < target && nums[right] >= target {
+				left = mid + 1
+			} else {
+				right = mid - 1
+			}
+			continue
+		}
+	}
+
+	return false
 }
 
 func TestSearchRotatedSortedArray2(t *testing.T) {
