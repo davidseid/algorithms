@@ -31,7 +31,6 @@ func search(nums []int, target int) bool {
 }
 
 func TestSearchRotatedSortedArray2(t *testing.T) {
-
 	t.Run("should be true if target in array", func(t *testing.T) {
 		nums := []int{2, 5, 6, 0, 0, 1, 2}
 		target := 0
@@ -55,5 +54,4 @@ func TestSearchRotatedSortedArray2(t *testing.T) {
 			t.Errorf("Got %v, want %v", actual, expected)
 		}
 	})
-
 }
