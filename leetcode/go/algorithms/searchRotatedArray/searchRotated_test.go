@@ -1,5 +1,7 @@
 package searchrotatedarray
 
+import "testing"
+
 /*
 81. Search in Rotated Sorted Array II
 https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
@@ -26,4 +28,16 @@ Would this affect the run-time complexity? How and why?
 
 func search(nums []int, target int) bool {
 
+}
+
+func TestSearchRotatedSortedArray2(t *testing.T) {
+	nums := []int{2, 5, 6, 0, 0, 1, 2}
+	target := 0
+
+	actual := search(nums, target)
+	expected := true
+
+	if actual != expected {
+		t.Errorf("Got %v, want %v", actual, expected)
+	}
 }
