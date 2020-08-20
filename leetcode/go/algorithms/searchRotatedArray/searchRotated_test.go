@@ -24,6 +24,14 @@ Follow up:
 
 This is a follow up problem to Search in Rotated Sorted Array, where nums may contain duplicates.
 Would this affect the run-time complexity? How and why?
+
+Rationale:
+- Using a while loop to track left and right pointers, narrow in on the possible target.
+- Because it is rotated, we must check to see if the left side is sorted, normal binary search,
+if the left is unsorted, then that means the right is sorted, so we can check if it is on the right side,
+and if so search right, otherwise search left
+- Caveat is that because of duplicates, we may end up with the left, mid, and right being equal, in which case we can
+narrow the range on each side by one until that is not the case.
 */
 
 func search(nums []int, target int) bool {
