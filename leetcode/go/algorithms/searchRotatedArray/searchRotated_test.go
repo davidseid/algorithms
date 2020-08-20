@@ -32,6 +32,13 @@ if the left is unsorted, then that means the right is sorted, so we can check if
 and if so search right, otherwise search left
 - Caveat is that because of duplicates, we may end up with the left, mid, and right being equal, in which case we can
 narrow the range on each side by one until that is not the case.
+
+Time Complexity:
+- O(n) in the worst case because of duplicates. Imagine all duplicates, we'd have to examine each number
+- Average or best case may be closer to O(log n)
+
+Space complexity:
+- O(1) because we are not using recursive call stack, just maintaining left, right, and mid pointers and examining the values.
 */
 
 func search(nums []int, target int) bool {
