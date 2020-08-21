@@ -2,6 +2,8 @@ package removeduplicates
 
 import (
 	"testing"
+
+	"github.com/go-test/deep"
 )
 
 /*
@@ -59,5 +61,11 @@ func TestDeleteDuplicates(t *testing.T) {
 		nums := []int{1, 2, 3, 3, 4, 4, 5}
 		input := buildLinkedListFromArray(nums)
 
+		expected := buildLinkedListFromArray([]int{1, 2, 5})
+
+		actual := deleteDuplicates(input)
+		if diff := deep.Equal(actual, expected); diff != nil {
+			t.Error(diff)
+		}
 	})
 }
