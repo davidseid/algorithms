@@ -54,6 +54,11 @@ O(n), we must visit each node once
 
 Space Complexity:
 O(1), we modify in place, and only need pointers to the fakeHead, the tail, and the current node
+
+Takeaways/Followup:
+Struggled with this one and ended up looking at another solution in order to solve with constant space. Need to revisit.
+The key insight I missed was to initialize a fakeHead. Need to also spend more time in the planning stage, don't attempt to code
+until I have a clear algorithm in my mind.
 */
 
 /**
