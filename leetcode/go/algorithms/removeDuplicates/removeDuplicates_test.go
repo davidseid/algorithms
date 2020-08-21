@@ -68,4 +68,16 @@ func TestDeleteDuplicates(t *testing.T) {
 			t.Error(diff)
 		}
 	})
+
+	t.Run("should delete nodes with duplicate numbers from list 2", func(t *testing.T) {
+		nums := []int{1, 1, 1, 2, 3}
+		input := buildLinkedListFromArray(nums)
+
+		expected := buildLinkedListFromArray([]int{2, 3})
+
+		actual := deleteDuplicates(input)
+		if diff := deep.Equal(actual, expected); diff != nil {
+			t.Error(diff)
+		}
+	})
 }
