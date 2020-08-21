@@ -38,7 +38,28 @@ type ListNode struct {
 }
 
 func deleteDuplicates(head *ListNode) *ListNode {
-	return &ListNode{}
+	if head == nil {
+		return nil
+	}
+
+	fakeHead := &ListNode{}
+	fakeHead.Next = head
+
+	pre := fakeHead
+	cur := head
+
+	for cur != nil {
+		for cur.Next != nil && cur.Val == cur.Next.Val {
+			cur = cur.Next
+		}
+		if pre.Next == cur {
+			pre = pre.Next
+		} else {
+			pre.Next = cur.Next
+		}
+		cur = cur.Next
+	}
+	return fakeHead.Next
 }
 
 func buildLinkedListFromArray(arr []int) *ListNode {
