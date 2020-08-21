@@ -17,3 +17,14 @@ Example 2:
 Input: 1->1->1->2->3
 Output: 2->3
 */
+
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func deleteDuplicates(head *ListNode) *ListNode {
+
+}
