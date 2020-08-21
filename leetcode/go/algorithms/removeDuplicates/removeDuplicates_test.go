@@ -48,6 +48,12 @@ Otherwise, we jump the tail to next non-dupe
 Either way, we crawl to the next node
 
 In the end, we return the fakeHead.Next
+
+Time Complexity:
+O(n), we must visit each node once
+
+Space Complexity:
+O(1), we modify in place, and only need pointers to the fakeHead, the tail, and the current node
 */
 
 /**
