@@ -1,5 +1,9 @@
 package removeduplicates
 
+import (
+	"testing"
+)
+
 /*
 82. Remove Duplicates from Sorted List II
 https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/
@@ -25,6 +29,35 @@ Output: 2->3
  *     Next *ListNode
  * }
  */
-func deleteDuplicates(head *ListNode) *ListNode {
 
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+func deleteDuplicates(head *ListNode) *ListNode {
+	return &ListNode{}
+}
+
+func buildLinkedListFromArray(arr []int) *ListNode {
+	ll := &ListNode{}
+	curr := ll
+
+	for i := range arr {
+		curr.Val = arr[i]
+		if i < len(arr)-1 {
+			curr.Next = &ListNode{}
+			curr = curr.Next
+		}
+	}
+
+	return ll
+}
+
+func TestDeleteDuplicates(t *testing.T) {
+	t.Run("should delete nodes with duplicate numbers from list", func(t *testing.T) {
+		nums := []int{1, 2, 3, 3, 4, 4, 5}
+		input := buildLinkedListFromArray(nums)
+
+	})
 }
