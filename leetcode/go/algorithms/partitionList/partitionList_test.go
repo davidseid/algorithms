@@ -26,7 +26,35 @@ type ListNode struct {
 }
 
 func partition(head *ListNode, x int) *ListNode {
+	if head == nil {
+		return nil
+	}
 
+	dummyHead := &ListNode{
+		Next: head,
+	}
+
+	lastBefore := dummyHead
+	var lastAfter *ListNode
+	curr := head
+
+	for curr != nil {
+		next := curr.Next
+		if curr.Val < x {
+			heldLastBeforeNext := lastBefore.Next
+			lastBefore.Next = curr
+			lastBefore = lastBefore.Next
+			lastBefore.Next = heldLastBeforeNext
+		} else {
+			if lastAfter != nil {
+				lastAfter.Next = curr
+			}
+			lastAfter = curr
+		}
+		curr = next
+	}
+
+	return dummyHead.Next
 }
 
 func makeLinkedList(arr []int) *ListNode {
