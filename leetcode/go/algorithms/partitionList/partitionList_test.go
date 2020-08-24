@@ -1,5 +1,7 @@
 package partitionList
 
+import "testing"
+
 /*
 86. Partition List
 https://leetcode.com/problems/partition-list/
@@ -21,4 +23,31 @@ type ListNode struct {
 
 func partition(head *ListNode, x int) *ListNode {
 
+}
+
+func makeLinkedList(arr []int) *ListNode {
+	if len(arr) == 0 {
+		return nil
+	}
+
+	head := &ListNode{
+		Val:  arr[0],
+		Next: &ListNode{},
+	}
+
+	curr := head.Next
+
+	for _, v := range arr[1:] {
+		curr.Val = v
+		curr.Next = &ListNode{}
+		curr = curr.Next
+	}
+
+	return head
+}
+
+func TestPartition(t *testing.T) {
+	t.Run("should partition a linked list", func(t *testing.T) {
+
+	})
 }
