@@ -18,6 +18,12 @@ Example:
 
 Input: head = 1->4->3->2->5->2, x = 3
 Output: 1->2->2->4->3->5
+
+Rationale:
+Make two dummy heads to build out the two sides of the LinkedList.
+As we iterate through the linked list, append the node to either the smaller or the larger.
+At the end, point the smaller to the larger (skipping the fake head of the larger)
+Return the smaller (skipping the fake head).
 */
 
 type ListNode struct {
@@ -26,7 +32,6 @@ type ListNode struct {
 }
 
 func partition(head *ListNode, x int) *ListNode {
-
 	smallerHead := &ListNode{}
 	biggerHead := &ListNode{}
 
