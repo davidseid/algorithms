@@ -1,6 +1,7 @@
 package partitionList
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/go-test/deep"
@@ -23,6 +24,15 @@ Output: 1->2->2->4->3->5
 type ListNode struct {
 	Val  int
 	Next *ListNode
+}
+
+func printList(head *ListNode) {
+	curr := head
+
+	for curr != nil {
+		fmt.Println(curr.Val)
+		curr = curr.Next
+	}
 }
 
 func partition(head *ListNode, x int) *ListNode {
