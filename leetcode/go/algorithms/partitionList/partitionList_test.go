@@ -1,6 +1,10 @@
 package partitionList
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/go-test/deep"
+)
 
 /*
 86. Partition List
@@ -48,6 +52,14 @@ func makeLinkedList(arr []int) *ListNode {
 
 func TestPartition(t *testing.T) {
 	t.Run("should partition a linked list", func(t *testing.T) {
+		input := makeLinkedList([]int{1, 4, 3, 2, 5, 2})
 
+		actual := partition(input, 3)
+
+		expected := makeLinkedList([]int{1, 2, 2, 4, 3, 5})
+
+		if diff := deep.Equal(actual, expected); diff != nil {
+			t.Error(diff)
+		}
 	})
 }
