@@ -36,6 +36,7 @@ func printList(head *ListNode) {
 }
 
 func partition(head *ListNode, x int) *ListNode {
+	printList(head)
 	if head == nil {
 		return nil
 	}
@@ -49,6 +50,11 @@ func partition(head *ListNode, x int) *ListNode {
 	curr := head
 
 	for curr != nil {
+		fmt.Println("LinkedList")
+		printList(dummyHead)
+		fmt.Println("LastBefore", *lastBefore)
+		fmt.Println("LastAfter", *lastAfter)
+		fmt.Println("Curr", curr)
 		next := curr.Next
 		if curr.Val < x {
 			heldLastBeforeNext := lastBefore.Next
@@ -73,15 +79,15 @@ func makeLinkedList(arr []int) *ListNode {
 	}
 
 	head := &ListNode{
-		Val:  arr[0],
-		Next: &ListNode{},
+		Val: arr[0],
 	}
 
-	curr := head.Next
+	curr := head
 
 	for _, v := range arr[1:] {
-		curr.Val = v
-		curr.Next = &ListNode{}
+		curr.Next = &ListNode{
+			Val: v,
+		}
 		curr = curr.Next
 	}
 
