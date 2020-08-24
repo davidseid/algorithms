@@ -1,7 +1,6 @@
-package partitionList
+package partitionlist
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/go-test/deep"
@@ -26,51 +25,27 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func printList(head *ListNode) {
-	curr := head
-
-	for curr != nil {
-		fmt.Println(curr.Val)
-		curr = curr.Next
-	}
-}
-
 func partition(head *ListNode, x int) *ListNode {
-	printList(head)
-	if head == nil {
-		return nil
-	}
 
-	dummyHead := &ListNode{
-		Next: head,
-	}
+	smallerHead := &ListNode{}
+	biggerHead := &ListNode{}
 
-	lastBefore := dummyHead
-	var lastAfter *ListNode
-	curr := head
+	smaller := smallerHead
+	bigger := biggerHead
 
-	for curr != nil {
-		fmt.Println("LinkedList")
-		printList(dummyHead)
-		fmt.Println("LastBefore", *lastBefore)
-		fmt.Println("LastAfter", *lastAfter)
-		fmt.Println("Curr", curr)
-		next := curr.Next
-		if curr.Val < x {
-			heldLastBeforeNext := lastBefore.Next
-			lastBefore.Next = curr
-			lastBefore = lastBefore.Next
-			lastBefore.Next = heldLastBeforeNext
+	for head != nil {
+		if head.Val < x {
+			smaller.Next = head
+			smaller = smaller.Next
 		} else {
-			if lastAfter != nil {
-				lastAfter.Next = curr
-			}
-			lastAfter = curr
+			bigger.Next = head
+			bigger = bigger.Next
 		}
-		curr = next
+		head = head.Next
 	}
-
-	return dummyHead.Next
+	smaller.Next = biggerHead.Next
+	bigger.Next = nil
+	return smallerHead.Next
 }
 
 func makeLinkedList(arr []int) *ListNode {
