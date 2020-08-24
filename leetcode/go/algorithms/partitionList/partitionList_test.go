@@ -24,6 +24,12 @@ Make two dummy heads to build out the two sides of the LinkedList.
 As we iterate through the linked list, append the node to either the smaller or the larger.
 At the end, point the smaller to the larger (skipping the fake head of the larger)
 Return the smaller (skipping the fake head).
+
+Time Complexity:
+O(n) We need to iterate through all the nodes in the list once.
+
+Space Complexity:
+O(1), We need two dummy head nodes
 */
 
 type ListNode struct {
