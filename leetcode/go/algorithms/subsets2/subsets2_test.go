@@ -1,6 +1,8 @@
 package subsets2
 
 import (
+	"fmt"
+	"sort"
 	"testing"
 
 	"github.com/go-test/deep"
@@ -34,6 +36,8 @@ func TestSubsetsWithDup(t *testing.T) {
 
 		actual := subsetsWithDup(input)
 
+		fmt.Println(actual)
+
 		expected := [][]int{
 			{2},
 			{1},
@@ -50,5 +54,32 @@ func TestSubsetsWithDup(t *testing.T) {
 }
 
 func subsetsWithDup(nums []int) [][]int {
+	subsets := [][]int{}
+	sort.Ints(nums)
+	collectSubsets(nums, 0, []int{}, &subsets, make(map[string]bool))
 
+	return subsets
+}
+
+func collectSubsets(nums []int, i int, curr []int, subsets *[][]int, seen map[string]bool) {
+	if i >= len(nums) {
+		key := ""
+		for _, v := range curr {
+			key += string(v)
+		}
+
+		if _, ok := seen[key]; !ok {
+			*subsets = append(*subsets, curr)
+			seen[key] = true
+		}
+		return
+	}
+
+	collectSubsets(nums, i+1, curr, subsets, seen)
+
+	next := make([]int, len(curr))
+	copy(next, curr)
+	next = append(next, nums[i])
+
+	collectSubsets(nums, i+1, next, subsets, seen)
 }
