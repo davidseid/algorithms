@@ -28,6 +28,14 @@ Output:
   [1,2],
   []
 ]
+
+Rationale:
+Recursively collect subsets by either choosing or not choosing each value.
+Hacky way to avoid dupes is to maintain a map of "seen" values, unfortunately requiring
+we stringify each subset into a key for lookup prior to storing. This is likely not an efficient approach.
+We also must sort the array prior to collecting the subsets, otherwise we would have to sort each subset prior
+to checking the key.
+
 */
 
 func TestSubsetsWithDup(t *testing.T) {
