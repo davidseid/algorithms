@@ -36,6 +36,12 @@ we stringify each subset into a key for lookup prior to storing. This is likely 
 We also must sort the array prior to collecting the subsets, otherwise we would have to sort each subset prior
 to checking the key.
 
+Time Complexity:
+O(n * 2^n), we have two branches with a depth of n. The O(nlogn) initial sort is neglible, however we also iterate
+through each subset to create a key, which add significant complexity.
+
+Space Complexity:
+O(n * 2^n), same reason as above, the recursive calls and the n-sized map.
 */
 
 func TestSubsetsWithDup(t *testing.T) {
