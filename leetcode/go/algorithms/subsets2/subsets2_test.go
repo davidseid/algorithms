@@ -42,6 +42,10 @@ through each subset to create a key, which add significant complexity.
 
 Space Complexity:
 O(n * 2^n), same reason as above, the recursive calls and the n-sized map.
+
+Followup:
+There is probably a clever way to ensure we don't run into dupes without having to use the map. We may not be able to avoid
+the initial sort, but perhaps that combined with an algorithm change regarding when we recurse could lead to a O(2^n) solution.
 */
 
 func TestSubsetsWithDup(t *testing.T) {
