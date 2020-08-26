@@ -2,6 +2,7 @@ package subsets2
 
 import (
 	"fmt"
+	"sort"
 	"testing"
 
 	"github.com/go-test/deep"
@@ -71,9 +72,24 @@ func TestSubsetsWithDup(t *testing.T) {
 }
 
 func subsetsWithDup(nums []int) [][]int {
-	subsets := [][]int{}
+	totalSet := [][]int{{}}
+	sort.Ints(nums)
 
-	getSubsets(nums, 0, []int{}, subsets)
-
-	return subsets
+	i := 0
+	for i < len(nums) {
+		count := 0
+		for count+i < len(nums) && nums[count+i] == nums[i] {
+			count++
+		}
+		previousN := len(totalSet)
+		for k := 0; k < previousN; k++ {
+			instance := totalSet[k]
+			for j := 0; j < count; j++ {
+				instance = append(instance, nums[i])
+				totalSet = append(totalSet, instance)
+			}
+		}
+		i += count
+	}
+	return totalSet
 }
