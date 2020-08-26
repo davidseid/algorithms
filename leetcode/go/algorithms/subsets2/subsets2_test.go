@@ -71,4 +71,9 @@ func TestSubsetsWithDup(t *testing.T) {
 }
 
 func subsetsWithDup(nums []int) [][]int {
+	subsets := [][]int{}
+
+	getSubsets(nums, 0, []int{}, subsets)
+
+	return subsets
 }
