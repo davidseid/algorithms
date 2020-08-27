@@ -84,9 +84,10 @@ func subsetsWithDup(nums []int) [][]int {
 }
 
 func getSubsets(nums []int, i int, pSubset *[]int, pSubsets *[][]int) {
-	fmt.Println(nums, i, *pSubset, *pSubsets)
 	if i >= len(nums) {
-		*pSubsets = append(*pSubsets, *pSubset)
+		subset := make([]int, len(*pSubset))
+		copy(subset, *pSubset)
+		*pSubsets = append(*pSubsets, subset)
 		return
 	}
 
@@ -98,18 +99,14 @@ func getSubsets(nums []int, i int, pSubset *[]int, pSubsets *[][]int) {
 	}
 
 	for j := 0; j <= count; j++ {
-		next := make([]int, len(*pSubset))
-		copy(next, *pSubset)
+
+		originalLength := len(*pSubset)
 
 		for k := 0; k < j; k++ {
-			next = append(next, nums[i])
+			*pSubset = append(*pSubset, nums[i])
 		}
-		// for k := 0; k < j; k++ {
-		// 	*pSubset = append(*pSubset, nums[i])
-		// }
-		// fmt.Println("Subset for next recursive call")
-		// fmt.Println(*pSubset)
-		getSubsets(nums, i+1, &next, pSubsets)
-		// *pSubset = (*pSubset)[:len(*pSubset)-j]
+		getSubsets(nums, i+1, pSubset, pSubsets)
+
+		*pSubset = (*pSubset)[:originalLength]
 	}
 }
