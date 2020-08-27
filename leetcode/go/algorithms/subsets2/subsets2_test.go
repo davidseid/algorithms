@@ -46,6 +46,13 @@ O(n * 2^n), same reason as above, the recursive calls and the n-sized map.
 Followup:
 There is probably a clever way to ensure we don't run into dupes without having to use the map. We may not be able to avoid
 the initial sort, but perhaps that combined with an algorithm change regarding when we recurse could lead to a O(2^n) solution.
+
+*Update*
+Removed map maintaining duplicates, instead optimized algorithm to branch n+1 times according to the number of dupes in the current index.
+This means, if there are 3 duplicates, branch once without any, and then branch adding 1, 2, and all three of the duplicates. Then start
+again at the next index. Adding backtracking further improves the memory usage of this algorithm. New time and space complexity
+are O(2^n) in the worst case. Although the branching increases when we see dupes, the index advances, so the overall complexity does not
+increase.
 */
 
 func TestSubsetsWithDup(t *testing.T) {
