@@ -72,24 +72,44 @@ func TestSubsetsWithDup(t *testing.T) {
 }
 
 func subsetsWithDup(nums []int) [][]int {
-	totalSet := [][]int{{}}
+
+	subsets := [][]int{}
 	sort.Ints(nums)
 
-	i := 0
-	for i < len(nums) {
-		count := 0
-		for count+i < len(nums) && nums[count+i] == nums[i] {
-			count++
-		}
-		previousN := len(totalSet)
-		for k := 0; k < previousN; k++ {
-			instance := totalSet[k]
-			for j := 0; j < count; j++ {
-				instance = append(instance, nums[i])
-				totalSet = append(totalSet, instance)
-			}
-		}
-		i += count
+	subset := []int{}
+
+	getSubsets(nums, 0, &subset, &subsets)
+
+	return subsets
+}
+
+func getSubsets(nums []int, i int, pSubset *[]int, pSubsets *[][]int) {
+	fmt.Println(nums, i, *pSubset, *pSubsets)
+	if i >= len(nums) {
+		*pSubsets = append(*pSubsets, *pSubset)
+		return
 	}
-	return totalSet
+
+	count := 1
+
+	for i+1 < len(nums) && nums[i] == nums[i+1] {
+		i++
+		count++
+	}
+
+	for j := 0; j <= count; j++ {
+		next := make([]int, len(*pSubset))
+		copy(next, *pSubset)
+
+		for k := 0; k < j; k++ {
+			next = append(next, nums[i])
+		}
+		// for k := 0; k < j; k++ {
+		// 	*pSubset = append(*pSubset, nums[i])
+		// }
+		// fmt.Println("Subset for next recursive call")
+		// fmt.Println(*pSubset)
+		getSubsets(nums, i+1, &next, pSubsets)
+		// *pSubset = (*pSubset)[:len(*pSubset)-j]
+	}
 }
