@@ -53,6 +53,15 @@ This means, if there are 3 duplicates, branch once without any, and then branch 
 again at the next index. Adding backtracking further improves the memory usage of this algorithm. New time and space complexity
 are O(2^n) in the worst case. Although the branching increases when we see dupes, the index advances, so the overall complexity does not
 increase.
+
+Another improvement would be to implement an iterative solution to further save memory used in the recursive calls. This can be done with a while
+loop, and an otherwise similar algorithm.
+
+A few lessons learned include, be careful with backtracking. If we use backtracking, be sure we are not also using the pointed to subsets in our
+result, because we may backtrack off of the last one. Instead we should copy it.
+
+Additionally, don't rush the details when figuring out how to grab the next group, be particularly careful about indexing into a slice, and making sure
+we don't index into an out of bounds range.
 */
 
 func TestSubsetsWithDup(t *testing.T) {
