@@ -1,6 +1,10 @@
 package reverseLinkedList2
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/go-test/deep"
+)
 
 /*
 92. Reverse Linked List II
@@ -40,5 +44,13 @@ func buildLinkedList(nums []int) *ListNode {
 }
 
 func TestReverseBetween(t *testing.T) {
+	input := buildLinkedList([]int{1, 2, 3, 4, 5})
 
+	actual := reverseBetween(input, 2, 4)
+
+	expected := buildLinkedList([]int{1, 4, 3, 2, 5})
+
+	if diff := deep.Equal(actual, expected); diff != nil {
+		t.Error(diff)
+	}
 }
