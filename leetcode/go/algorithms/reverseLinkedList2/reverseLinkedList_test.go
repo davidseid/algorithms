@@ -26,7 +26,23 @@ type ListNode struct {
 }
 
 func reverseBetween(head *ListNode, m int, n int) *ListNode {
+	// if the first node is indexed at 1
+	// from the node at m index to the node at n index
+	// reverse them
 
+	// initialize five pointers:
+	// head
+	// beforeM
+	// m
+	// n
+	// afterN
+
+	// iterate through, marking pointers
+
+	// once we reach m, we should be reversing the pointers as we go
+	// once we reach n, we should point beforeM to n, point m to afterN, then we can stop
+
+	// edge cases, m is the first node, so we need a dummyhead
 }
 
 func buildLinkedList(nums []int) *ListNode {
