@@ -19,6 +19,18 @@ Example:
 
 Input: 1->2->3->4->5->NULL, m = 2, n = 4
 Output: 1->4->3->2->5->NULL
+
+Rationale:
+Solved it in a single pass by using an initial for loop to reach m, then
+save pointers for the node before M and the M node. Then loop from m to n,
+reversing all the pointers, and the once we reach the node after n, we just
+point beforeM to n, and m to afterN. We don't need to iterate further.
+
+Two edge cases to be careful of are when m and n are the same, in which case
+there is nothing to reverse so we just return the head. Another is when m = 1,
+since the initial head may not be the result head, we have to use a dummyHead
+to maintain a pointer that we can return.
+
 */
 
 type ListNode struct {
