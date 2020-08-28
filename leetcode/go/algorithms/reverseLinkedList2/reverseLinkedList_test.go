@@ -1,6 +1,7 @@
 package reverseLinkedList2
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/go-test/deep"
@@ -52,15 +53,18 @@ func reverseBetween(head *ListNode, m int, n int) *ListNode {
 	curr = mNode.Next
 	index = m + 1
 
-	for curr != nil && index < n {
+	for curr != nil && index <= n {
 		next := curr.Next
 		curr.Next = prev
+
+		prev = curr
 		curr = next
+
 		index++
 	}
 
-	mNode.Next = curr.Next
-	beforeMNode.Next = curr
+	mNode.Next = curr
+	beforeMNode.Next = prev
 
 	return dummyHead.Next
 }
@@ -79,10 +83,19 @@ func buildLinkedList(nums []int) *ListNode {
 	return dummyHead.Next
 }
 
+func printLinkedList(head *ListNode) {
+	curr := head
+	for curr != nil {
+		fmt.Println(curr)
+		curr = curr.Next
+	}
+}
+
 func TestReverseBetween(t *testing.T) {
 	input := buildLinkedList([]int{1, 2, 3, 4, 5})
 
 	actual := reverseBetween(input, 2, 4)
+	printLinkedList(actual)
 
 	expected := buildLinkedList([]int{1, 4, 3, 2, 5})
 
