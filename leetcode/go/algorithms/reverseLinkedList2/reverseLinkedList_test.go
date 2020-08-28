@@ -31,6 +31,12 @@ there is nothing to reverse so we just return the head. Another is when m = 1,
 since the initial head may not be the result head, we have to use a dummyHead
 to maintain a pointer that we can return.
 
+Time Complexity:
+O(n), we only need to iterate through the linked list once in the worst case. Actually,
+we only need to iterate up through the nth node, since everything else remains in order.
+
+Space Complexity:
+O(1), we only maintain a few pointers, a dummy head, beforeM, and m, and then some curr, prev pointers. Constant space.
 */
 
 type ListNode struct {
