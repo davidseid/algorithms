@@ -37,6 +37,10 @@ we only need to iterate up through the nth node, since everything else remains i
 
 Space Complexity:
 O(1), we only maintain a few pointers, a dummy head, beforeM, and m, and then some curr, prev pointers. Constant space.
+
+Followup:
+The solution seems pretty optimal, although the logic can probably be cleaned up to use a single loop as opposed to two separate
+loops. We need to be careful about the mode switching there, but I imagine it is doable.
 */
 
 type ListNode struct {
