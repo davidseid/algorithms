@@ -48,7 +48,37 @@ type Node struct {
 }
 
 func connect(root *Node) *Node {
+	if root == nil {
+		return root
+	}
 
+	queue := []*Node{root}
+
+	for len(queue) > 0 {
+		nextQueue := []*Node{}
+
+		for i, v := range queue {
+			if i+1 < len(queue) {
+				v.Next = queue[i+1]
+			} else {
+				v.Next = nil
+			}
+		}
+
+		for _, v := range queue {
+			if v.Left != nil {
+				nextQueue = append(nextQueue, v.Left)
+			}
+
+			if v.Right != nil {
+				nextQueue = append(nextQueue, v.Right)
+			}
+		}
+
+		queue = nextQueue
+	}
+
+	return root
 }
 
 func TestConnect(t *testing.T) {
