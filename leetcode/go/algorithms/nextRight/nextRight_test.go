@@ -40,3 +40,7 @@ type Node struct {
 	Right *Node
 	Next  *Node
 }
+
+func connect(root *Node) *Node {
+
+}
