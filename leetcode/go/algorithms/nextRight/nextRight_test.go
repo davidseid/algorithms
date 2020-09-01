@@ -1,5 +1,7 @@
 package nextRight
 
+import "testing"
+
 /*
 116. Populating Next Right Pointers in Each Node
 
@@ -43,4 +45,10 @@ type Node struct {
 
 func connect(root *Node) *Node {
 
+}
+
+func TestConnect(t *testing.T) {
+	t.Run("should connect next pointers", func(t *testing.T) {
+
+	})
 }
