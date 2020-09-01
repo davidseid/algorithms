@@ -49,6 +49,9 @@ then if the left or right are not nil, append them to the next queue. Repeate un
 Time Complexity:
 O(n), we must touch each node once in order to link it and access its children
 
+Space Complexity:
+O(n), we must build up a queue that holds the nodes at the current level, which results in n nodes
+
 Followup:
 
 */
