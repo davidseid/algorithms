@@ -40,6 +40,16 @@ Output: [1,#,2,3,#,4,5,6,7,#]
 Explanation: Given the above perfect binary tree (Figure A), your function should populate each next pointer to point to its next right node, just like in Figure B. The serialized output is in level order as connected by the next pointers, with '#' signifying the end of each level.
 */
 
+/*
+Rationale:
+Use a Breadth First Search to link the nodes of each level. First initialize an array with the root,
+then use a while loop as long as the array as nodes in it, iterate through the nodes and link them left to right,
+then if the left or right are not nil, append them to the next queue. Repeate until there is nothing in the queue.
+
+Followup:
+
+*/
+
 type Node struct {
 	Val   int
 	Left  *Node
@@ -63,9 +73,7 @@ func connect(root *Node) *Node {
 			} else {
 				v.Next = nil
 			}
-		}
 
-		for _, v := range queue {
 			if v.Left != nil {
 				nextQueue = append(nextQueue, v.Left)
 			}
