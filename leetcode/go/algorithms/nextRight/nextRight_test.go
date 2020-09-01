@@ -46,6 +46,9 @@ Use a Breadth First Search to link the nodes of each level. First initialize an 
 then use a while loop as long as the array as nodes in it, iterate through the nodes and link them left to right,
 then if the left or right are not nil, append them to the next queue. Repeate until there is nothing in the queue.
 
+Time Complexity:
+O(n), we must touch each node once in order to link it and access its children
+
 Followup:
 
 */
