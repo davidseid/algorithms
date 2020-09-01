@@ -1,6 +1,10 @@
 package nextRight
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/go-test/deep"
+)
 
 /*
 116. Populating Next Right Pointers in Each Node
@@ -49,6 +53,62 @@ func connect(root *Node) *Node {
 
 func TestConnect(t *testing.T) {
 	t.Run("should connect next pointers", func(t *testing.T) {
+		input := &Node{
+			Val: 1,
+			Left: &Node{
+				Val: 2,
+				Left: &Node{
+					Val: 4,
+				},
+				Right: &Node{
+					Val: 5,
+				},
+			},
+			Right: &Node{
+				Val: 3,
+				Left: &Node{
+					Val: 6,
+				},
+				Right: &Node{
+					Val: 7,
+				},
+			},
+		}
 
+		actual := connect(input)
+
+		expected := &Node{
+			Val: 1,
+			Left: &Node{
+				Val: 2,
+				Left: &Node{
+					Val: 4,
+				},
+				Right: &Node{
+					Val: 5,
+				},
+			},
+			Right: &Node{
+				Val: 3,
+				Left: &Node{
+					Val: 6,
+				},
+				Right: &Node{
+					Val:  7,
+					Next: nil,
+				},
+				Next: nil,
+			},
+			Next: nil,
+		}
+
+		expected.Left.Next = expected.Right
+		expected.Left.Left.Next = expected.Left.Right
+		expected.Left.Right.Next = expected.Right.Left
+		expected.Right.Left.Next = expected.Right.Right
+
+		if diff := deep.Equal(actual, expected); diff != nil {
+			t.Error(diff)
+		}
 	})
 }
