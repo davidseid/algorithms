@@ -50,6 +50,12 @@ O(n), we must build up a queue that holds the nodes at the current level, which 
 Followup:
 Find a way to do this in constant space (possibly with recursion?)
 
+Optimzations:
+Implemented iterative solution using nested while loops, the first to track the left most node in the level, moving down one each time
+The inner while loop builds the links and moves to the right across each level's children
+
+This is now a constance space solution, still O(n) time complexity.
+
 */
 
 type Node struct {
