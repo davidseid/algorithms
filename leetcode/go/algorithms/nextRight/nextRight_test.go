@@ -60,32 +60,24 @@ type Node struct {
 }
 
 func connect(root *Node) *Node {
-	if root == nil {
-		return root
-	}
+	leftMostInLevel := root
 
-	queue := []*Node{root}
+	for leftMostInLevel != nil && leftMostInLevel.Left != nil {
+		curr := leftMostInLevel
 
-	for len(queue) > 0 {
-		nextQueue := []*Node{}
+		for curr != nil {
+			curr.Left.Next = curr.Right
 
-		for i, v := range queue {
-			if i+1 < len(queue) {
-				v.Next = queue[i+1]
+			if curr.Next == nil {
+				curr.Right.Next = nil
 			} else {
-				v.Next = nil
+				curr.Right.Next = curr.Next.Left
 			}
 
-			if v.Left != nil {
-				nextQueue = append(nextQueue, v.Left)
-			}
-
-			if v.Right != nil {
-				nextQueue = append(nextQueue, v.Right)
-			}
+			curr = curr.Next
 		}
 
-		queue = nextQueue
+		leftMostInLevel = leftMostInLevel.Left
 	}
 
 	return root
