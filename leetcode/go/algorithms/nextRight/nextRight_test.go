@@ -23,17 +23,12 @@ Populate each next pointer to point to its next right node. If there is no next 
 
 Initially, all next pointers are set to NULL.
 
-
-
 Follow up:
 
 You may only use constant extra space.
 Recursive approach is fine, you may assume implicit stack space does not count as extra space for this problem.
 
-
 Example 1:
-
-
 
 Input: root = [1,2,3,4,5,6,7]
 Output: [1,#,2,3,#,4,5,6,7,#]
