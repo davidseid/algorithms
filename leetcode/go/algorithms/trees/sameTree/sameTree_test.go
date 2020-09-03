@@ -45,6 +45,11 @@ Simple recursvie solution, if either of the nodes is nil, they both must be, oth
 If neither are nil, if the values are the same and recursive calls to isSameTree on the left and right nodes of each
 return true, then return true, otherwise return false
 
+Time Complexity:
+O(n), we iterate through the smallest of the trees fully.
+
+Space Complexity:
+O(n), due to recursive call stack, a recursive call for each node
 */
 
 type TreeNode struct {
