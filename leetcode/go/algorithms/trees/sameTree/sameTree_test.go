@@ -36,3 +36,9 @@ Input:     1         1
 
 Output: false
 */
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
