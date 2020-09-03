@@ -91,4 +91,26 @@ func TestSameTree(t *testing.T) {
 			t.Errorf("Got %v, want %v", actual, expected)
 		}
 	})
+
+	t.Run("should return false when trees are not the same 2", func(t *testing.T) {
+		tree1 := &TreeNode{
+			Val:   1,
+			Left:  &TreeNode{Val: 2},
+			Right: &TreeNode{Val: 1},
+		}
+
+		tree2 := &TreeNode{
+			Val:   1,
+			Left:  &TreeNode{Val: 1},
+			Right: &TreeNode{Val: 2},
+		}
+
+		actual := isSameTree(tree1, tree2)
+
+		expected := false
+
+		if actual != expected {
+			t.Errorf("Got %v, want %v", actual, expected)
+		}
+	})
 }
