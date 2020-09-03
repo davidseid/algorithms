@@ -50,7 +50,7 @@ func isSameTree(p *TreeNode, q *TreeNode) bool {
 }
 
 func TestSameTree(t *testing.T) {
-	t.Run("should evaluate whether two trees are identical", func(t *testing.T) {
+	t.Run("should return true when two trees are identical", func(t *testing.T) {
 		tree1 := &TreeNode{
 			Val:   1,
 			Left:  &TreeNode{Val: 2},
@@ -66,6 +66,26 @@ func TestSameTree(t *testing.T) {
 		actual := isSameTree(tree1, tree2)
 
 		expected := true
+
+		if actual != expected {
+			t.Errorf("Got %v, want %v", actual, expected)
+		}
+	})
+
+	t.Run("should return false when trees are not the same", func(t *testing.T) {
+		tree1 := &TreeNode{
+			Val:  1,
+			Left: &TreeNode{Val: 2},
+		}
+
+		tree2 := &TreeNode{
+			Val:   1,
+			Right: &TreeNode{Val: 2},
+		}
+
+		actual := isSameTree(tree1, tree2)
+
+		expected := false
 
 		if actual != expected {
 			t.Errorf("Got %v, want %v", actual, expected)
