@@ -39,6 +39,14 @@ Input:     1         1
 Output: false
 */
 
+/*
+Rationale:
+Simple recursvie solution, if either of the nodes is nil, they both must be, otherwise return false
+If neither are nil, if the values are the same and recursive calls to isSameTree on the left and right nodes of each
+return true, then return true, otherwise return false
+
+*/
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
