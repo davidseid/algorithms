@@ -86,7 +86,21 @@ func generateSubTrees(fakeRoot *TreeNode, node *TreeNode, remaining []int, trees
 }
 
 func copyTree(original *TreeNode) *TreeNode {
+	newRoot := &TreeNode{}
+	copySubTree(original, newRoot)
+	return newRoot
+}
 
+func copySubTree(originalNode *TreeNode, copyNode *TreeNode) {
+	if originalNode.Right != nil {
+		copyNode.Right = &TreeNode{Val: originalNode.Right.Val}
+		copySubTree(originalNode.Right, copyNode.Right)
+	}
+
+	if originalNode.Left != nil {
+		copyNode.Left = &TreeNode{Val: originalNode.Left.Val}
+		copySubTree(originalNode.Left, copyNode.Left)
+	}
 }
 
 func TestGenerateTrees(t *testing.T) {
