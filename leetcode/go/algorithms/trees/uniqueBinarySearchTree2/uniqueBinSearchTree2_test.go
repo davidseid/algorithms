@@ -1,5 +1,11 @@
 package uniqueBinarySearchTree2
 
+import (
+	"testing"
+
+	"github.com/go-test/deep"
+)
+
 /*
 95. Unique Binary Search Trees II
 https://leetcode.com/problems/unique-binary-search-trees-ii/
@@ -40,4 +46,24 @@ type TreeNode struct {
 
 func generateTrees(n int) []*TreeNode {
 
+}
+
+func TestGenerateTrees(t *testing.T) {
+	t.Run("should generate all unique BSTs", func(t *testing.T) {
+		input := 3
+
+		expected := []*TreeNode{
+			&TreeNode{Val: 1, Right: &TreeNode{Val: 3, Left: &TreeNode{Val: 2}}},
+			&TreeNode{Val: 3, Left: &TreeNode{Val: 2, Left: &TreeNode{Val: 1}}},
+			&TreeNode{Val: 3, Left: &TreeNode{Val: 1, Right: &TreeNode{Val: 2}}},
+			&TreeNode{Val: 2, Left: &TreeNode{Val: 1}, Right: &TreeNode{Val: 2}},
+			&TreeNode{Val: 1, Right: &TreeNode{Val: 2, Right: &TreeNode{Val: 3}}},
+		}
+
+		actual := generateTrees(input)
+
+		if diff := deep.Equal(actual, expected); diff != nil {
+			t.Error(diff)
+		}
+	})
 }
