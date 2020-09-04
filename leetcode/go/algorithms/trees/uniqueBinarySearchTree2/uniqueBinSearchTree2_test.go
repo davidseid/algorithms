@@ -48,6 +48,14 @@ func generateTrees(n int) []*TreeNode {
 
 }
 
+func generateSubTrees(fakeRoot *TreeNode, node *TreeNode, remaining []int, trees []*TreeNode) {
+
+}
+
+func copyTree(original *TreeNode) *TreeNode {
+
+}
+
 func TestGenerateTrees(t *testing.T) {
 	t.Run("should generate all unique BSTs", func(t *testing.T) {
 		input := 3
