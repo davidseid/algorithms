@@ -37,3 +37,7 @@ type TreeNode struct {
 	Left  *TreeNode
 	Right *TreeNode
 }
+
+func generateTrees(n int) []*TreeNode {
+
+}
