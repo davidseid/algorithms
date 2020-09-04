@@ -31,3 +31,9 @@ Constraints:
 
 0 <= n <= 8
 */
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
