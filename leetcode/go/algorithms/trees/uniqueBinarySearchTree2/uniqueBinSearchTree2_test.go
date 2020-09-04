@@ -45,7 +45,16 @@ type TreeNode struct {
 }
 
 func generateTrees(n int) []*TreeNode {
+	trees := []*TreeNode{}
+	fakeRoot := &TreeNode{Val: -1}
 
+	remaining := []int{}
+	for i := 1; i <= n; i++ {
+		remaining = append(remaining, i)
+	}
+
+	generateSubTrees(fakeRoot, fakeRoot, remaining, trees)
+	return trees
 }
 
 func generateSubTrees(fakeRoot *TreeNode, node *TreeNode, remaining []int, trees []*TreeNode) {
