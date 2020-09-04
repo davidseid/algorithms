@@ -58,7 +58,31 @@ func generateTrees(n int) []*TreeNode {
 }
 
 func generateSubTrees(fakeRoot *TreeNode, node *TreeNode, remaining []int, trees []*TreeNode) {
+	if len(remaining) == 0 {
+		tree := copyTree(fakeRoot.Right)
+		trees = append(trees, tree)
+	}
 
+	for i, v := range remaining {
+
+		next := make([]int, len(remaining)-1)
+		next = append(next, remaining[0:i]...)
+
+		if i < len(remaining)-1 {
+			next = append(next, remaining[i+1])
+		}
+
+		if v > node.Val {
+
+			node.Right = &TreeNode{Val: v}
+			generateSubTrees(fakeRoot, node.Right, next, trees)
+			node.Right = nil
+		} else {
+			node.Left = &TreeNode{Val: v}
+			generateSubTrees(fakeRoot, node.Left, next, trees)
+			node.Left = nil
+		}
+	}
 }
 
 func copyTree(original *TreeNode) *TreeNode {
