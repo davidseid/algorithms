@@ -62,6 +62,13 @@ Space Complexity:
 Also not certain, probably matches the time complexity given the recursive calls and the extra lists we are building.
 
 Takeaways:
+This algorithm takes a different approach to what I intuitively came up with at first. Rather than maintaining a tree
+and using backtracking to try to build it out (which failed because each side did not know when the other was done), this
+algorithm sort of builds from the bottom up.
+
+Additionally, the inner recursive algorithm returns a list, meaning each call builds on other lists, rather than maintaining
+a pointer to a single list and appending it as we go. This is a more elegant solution. Need to practice writing from scratch
+until I fully understand it.
 */
 
 type TreeNode struct {
