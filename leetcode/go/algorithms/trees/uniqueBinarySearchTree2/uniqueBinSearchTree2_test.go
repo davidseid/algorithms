@@ -50,11 +50,13 @@ For each index in start to end, recursively call helper on the left and right si
 generate a list of each side. Then do two nested loops (for each left, for each right) to create a
 root, and then append left and right to it, then add it to the result and return at the end.
 
-
-
 Followup:
+Awesome algorithm but need to review and make sure I understand how to build this from scratch,
+was pretty different from my original approach.
 
 Time Complexity:
+Not certain, but seems like O(2^n). For each value in n we make recursive calls to build lists for left and right,
+which means we do recursive branching to the depth of n.
 
 Space Complexity:
 
