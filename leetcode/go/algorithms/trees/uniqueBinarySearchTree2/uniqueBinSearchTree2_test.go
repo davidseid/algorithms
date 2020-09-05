@@ -38,6 +38,10 @@ Constraints:
 0 <= n <= 8
 */
 
+/*
+Algorithm mistake, need to separate into left and right each time
+*/
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
@@ -45,62 +49,33 @@ type TreeNode struct {
 }
 
 func generateTrees(n int) []*TreeNode {
-	trees := []*TreeNode{}
-	fakeRoot := &TreeNode{Val: -1}
 
-	remaining := []int{}
-	for i := 1; i <= n; i++ {
-		remaining = append(remaining, i)
+	if n == 0 {
+		return []*TreeNode{}
 	}
-
-	generateSubTrees(fakeRoot, fakeRoot, remaining, trees)
-	return trees
+	return genTreeList(1, n)
 }
 
-func generateSubTrees(fakeRoot *TreeNode, node *TreeNode, remaining []int, trees []*TreeNode) {
-	if len(remaining) == 0 {
-		tree := copyTree(fakeRoot.Right)
-		trees = append(trees, tree)
+func genTreeList(start int, end int) []*TreeNode {
+	list := []*TreeNode{}
+
+	if start > end {
+		list = append(list, nil)
 	}
 
-	for i, v := range remaining {
-
-		next := make([]int, len(remaining)-1)
-		next = append(next, remaining[0:i]...)
-
-		if i < len(remaining)-1 {
-			next = append(next, remaining[i+1])
-		}
-
-		if v > node.Val {
-
-			node.Right = &TreeNode{Val: v}
-			generateSubTrees(fakeRoot, node.Right, next, trees)
-			node.Right = nil
-		} else {
-			node.Left = &TreeNode{Val: v}
-			generateSubTrees(fakeRoot, node.Left, next, trees)
-			node.Left = nil
+	for idx := start; idx <= end; idx++ {
+		leftList := genTreeList(start, idx-1)
+		rightList := genTreeList(idx+1, end)
+		for _, left := range leftList {
+			for _, right := range rightList {
+				root := &TreeNode{Val: idx}
+				root.Left = left
+				root.Right = right
+				list = append(list, root)
+			}
 		}
 	}
-}
-
-func copyTree(original *TreeNode) *TreeNode {
-	newRoot := &TreeNode{}
-	copySubTree(original, newRoot)
-	return newRoot
-}
-
-func copySubTree(originalNode *TreeNode, copyNode *TreeNode) {
-	if originalNode.Right != nil {
-		copyNode.Right = &TreeNode{Val: originalNode.Right.Val}
-		copySubTree(originalNode.Right, copyNode.Right)
-	}
-
-	if originalNode.Left != nil {
-		copyNode.Left = &TreeNode{Val: originalNode.Left.Val}
-		copySubTree(originalNode.Left, copyNode.Left)
-	}
+	return list
 }
 
 func TestGenerateTrees(t *testing.T) {
