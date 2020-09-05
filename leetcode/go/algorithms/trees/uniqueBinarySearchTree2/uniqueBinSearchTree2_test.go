@@ -59,6 +59,7 @@ Not certain, but seems like O(2^n). For each value in n we make recursive calls 
 which means we do recursive branching to the depth of n.
 
 Space Complexity:
+Also not certain, probably matches the time complexity given the recursive calls and the extra lists we are building.
 
 Takeaways:
 */
