@@ -48,6 +48,10 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+/*
+Credit:
+https://leetcode.com/problems/unique-binary-search-trees-ii/discuss/31494/A-simple-recursive-solution
+*/
 func generateTrees(n int) []*TreeNode {
 
 	if n == 0 {
