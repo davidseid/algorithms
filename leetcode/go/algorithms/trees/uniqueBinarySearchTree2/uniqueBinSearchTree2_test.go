@@ -39,7 +39,26 @@ Constraints:
 */
 
 /*
-Algorithm mistake, need to separate into left and right each time
+Rationale:
+Main algorithm that returns empty slice if n == 0, otherwise call
+recursive inner algorithm with 1 and n
+
+Base case of recursive algorithm is when start is greater than end,
+this means there are no more nodes left and our remainder list should only include nil
+
+For each index in start to end, recursively call helper on the left and right sides of the index to
+generate a list of each side. Then do two nested loops (for each left, for each right) to create a
+root, and then append left and right to it, then add it to the result and return at the end.
+
+
+
+Followup:
+
+Time Complexity:
+
+Space Complexity:
+
+Takeaways:
 */
 
 type TreeNode struct {
