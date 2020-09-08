@@ -36,7 +36,34 @@ type TreeNode struct {
 }
 
 func buildTree(inorder []int, postorder []int) *TreeNode {
+	nextRoot := len(postorder) - 1
+	return buildSubTree(0, len(inorder), &nextRoot, inorder, postorder)
+}
 
+func buildSubTree(start int, end int, nextRootIndex *int, inorder []int, postorder []int) *TreeNode {
+
+	if start >= end || *nextRootIndex < 0 {
+		return nil
+	}
+
+	root := &TreeNode{
+		Val: postorder[*nextRootIndex],
+	}
+
+	var pivot int
+
+	for i := start; i < end; i++ {
+		if inorder[i] == root.Val {
+			pivot = i
+		}
+	}
+
+	*nextRootIndex--
+	root.Right = buildSubTree(pivot+1, end, nextRootIndex, inorder, postorder)
+	*nextRootIndex--
+	root.Left = buildSubTree(start, pivot, nextRootIndex, inorder, postorder)
+
+	return root
 }
 
 func TestBuildTree(t *testing.T) {
