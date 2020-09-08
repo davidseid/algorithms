@@ -29,6 +29,15 @@ Return the following binary tree:
    15   7
 */
 
+/*
+Rationale:
+The last value in the post order is the root.
+
+Recursively, grab the next root from the post order, use that to divide up the
+inorder and recursively call again. The base case is when the start > end or the nextRoot is greater than the
+length of the post order.
+*/
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
