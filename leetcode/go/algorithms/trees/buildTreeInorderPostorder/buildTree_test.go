@@ -38,6 +38,7 @@ inorder and recursively call again. The base case is when the start > end or the
 length of the post order.
 
 Time Complexity: O(n) with n being the length of the post/inorder arrays
+Space Complexity: O(n) with n being the length of the post/inorder arrays, since we need to build the tree
 */
 
 type TreeNode struct {
