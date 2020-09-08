@@ -22,3 +22,9 @@ Return the following binary tree:
     /  \
    15   7
 */
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
