@@ -39,6 +39,10 @@ length of the post order.
 
 Time Complexity: O(n) with n being the length of the post/inorder arrays
 Space Complexity: O(n) with n being the length of the post/inorder arrays, since we need to build the tree
+
+Followup:
+Need to redo this problem since I failed to catch the key insight of identifying the root from the post order list,
+also had some trouble with the implementation, particularly around keeping the index in range.
 */
 
 type TreeNode struct {
