@@ -28,3 +28,7 @@ type TreeNode struct {
 	Left  *TreeNode
 	Right *TreeNode
 }
+
+func buildTree(inorder []int, postorder []int) *TreeNode {
+
+}
