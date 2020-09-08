@@ -40,7 +40,6 @@ func buildTree(inorder []int, postorder []int) *TreeNode {
 }
 
 func buildSubTree(start int, end int, nextRootIndex int, inorder []int, postorder []int) *TreeNode {
-
 	if nextRootIndex >= len(postorder) || start > end {
 		return nil
 	}
