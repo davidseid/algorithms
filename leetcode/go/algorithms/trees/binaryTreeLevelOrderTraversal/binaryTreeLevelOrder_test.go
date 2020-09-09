@@ -1,5 +1,11 @@
 package binaryTreeLevelOrderTraversal
 
+import (
+	"testing"
+
+	"github.com/go-test/deep"
+)
+
 /*
 107. Binary Tree Level Order Traversal II
 
@@ -30,4 +36,26 @@ type TreeNode struct {
 
 func levelOrderBottom(root *TreeNode) [][]int {
 
+}
+
+func TestLevelOrderBottom(t *testing.T) {
+	t.Run("should build bottom-up level order traversal node values", func(t *testing.T) {
+		input := &TreeNode{
+			Val:   3,
+			Left:  &TreeNode{Val: 9},
+			Right: &TreeNode{Val: 20, Left: &TreeNode{Val: 15}, Right: &TreeNode{Val: 7}},
+		}
+
+		actual := levelOrderBottom(input)
+
+		expected := [][]int{
+			{15, 7},
+			{9, 20},
+			{3},
+		}
+
+		if diff := deep.Equal(actual, expected); diff != nil {
+			t.Error(diff)
+		}
+	})
 }
