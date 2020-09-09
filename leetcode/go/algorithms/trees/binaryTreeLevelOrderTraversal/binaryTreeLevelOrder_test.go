@@ -22,6 +22,12 @@ return its bottom-up level order traversal as:
 ]
 */
 
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
 func levelOrderBottom(root *TreeNode) [][]int {
-    
+
 }
