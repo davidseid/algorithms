@@ -52,6 +52,15 @@ func (q *Queue) Size() int {
 	return len(q.nodes)
 }
 
+func (q *Queue) enqueueAnyChildren(node *TreeNode) {
+	if node.Left != nil {
+		q.Enqueue(node.Left)
+	}
+	if node.Right != nil {
+		q.Enqueue(node.Right)
+	}
+}
+
 func levelOrderBottom(root *TreeNode) [][]int {
 	levelOrder := [][]int{}
 
@@ -63,7 +72,7 @@ func levelOrderBottom(root *TreeNode) [][]int {
 		for i := 0; i < size; i++ {
 			node := q.Dequeue()
 			level = append(level, node.Val)
-			enqueueAnyChildren(&q, node)
+			q.enqueueAnyChildren(node)
 		}
 		levelOrder = append(levelOrder, level)
 	}
@@ -79,15 +88,6 @@ func initializeQueue(root *TreeNode) Queue {
 		q.Enqueue(root)
 	}
 	return q
-}
-
-func enqueueAnyChildren(q *Queue, node *TreeNode) {
-	if node.Left != nil {
-		q.Enqueue(node.Left)
-	}
-	if node.Right != nil {
-		q.Enqueue(node.Right)
-	}
 }
 
 func reverseLevels(levelOrder [][]int) {
