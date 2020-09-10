@@ -38,6 +38,10 @@ Then simply reverse the levels to get a bottom up list
 Time Complexity:
 O(n) - We must traverse each node in the binary tree. We must also pass through each level once more (O(log(n))), in order to reverse
 the levels, but that does not add to the overall asymptotic time.
+
+Space Complexity:
+O(n) - We build an array of levels containing each node in the tree, we also maintain a queue, but it only
+ever has as many nodes as exist in a level.
 */
 
 type TreeNode struct {
