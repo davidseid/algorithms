@@ -34,6 +34,10 @@ Breadth first search to traverse nodes from top to bottom by level, assembling t
 with a custom queue data structure.
 
 Then simply reverse the levels to get a bottom up list
+
+Time Complexity:
+O(n) - We must traverse each node in the binary tree. We must also pass through each level once more (O(log(n))), in order to reverse
+the levels, but that does not add to the overall asymptotic time.
 */
 
 type TreeNode struct {
