@@ -28,6 +28,14 @@ return its bottom-up level order traversal as:
 ]
 */
 
+/*
+Rationale:
+Breadth first search to traverse nodes from top to bottom by level, assembling the nodes for each level using an iterative approach
+with a custom queue data structure.
+
+Then simply reverse the levels to get a bottom up list
+*/
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
