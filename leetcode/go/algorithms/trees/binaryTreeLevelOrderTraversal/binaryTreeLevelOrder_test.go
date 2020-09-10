@@ -67,7 +67,6 @@ func levelOrderBottom(root *TreeNode) [][]int {
 		level := []int{}
 		for i := 0; i < size; i++ {
 			node := q.Dequeue()
-
 			level = append(level, node.Val)
 
 			if node.Left != nil {
@@ -77,7 +76,11 @@ func levelOrderBottom(root *TreeNode) [][]int {
 				q.Enqueue(node.Right)
 			}
 		}
-		levelOrder = append([][]int{level}, levelOrder...)
+		levelOrder = append(levelOrder, level)
+	}
+
+	for i, j := 0, len(levelOrder)-1; i < j; i, j = i+1, j-1 {
+		levelOrder[i], levelOrder[j] = levelOrder[j], levelOrder[i]
 	}
 	return levelOrder
 }
