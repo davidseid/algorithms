@@ -79,10 +79,14 @@ func levelOrderBottom(root *TreeNode) [][]int {
 		levelOrder = append(levelOrder, level)
 	}
 
+	reverseLevels(levelOrder)
+	return levelOrder
+}
+
+func reverseLevels(levelOrder [][]int) {
 	for i, j := 0, len(levelOrder)-1; i < j; i, j = i+1, j-1 {
 		levelOrder[i], levelOrder[j] = levelOrder[j], levelOrder[i]
 	}
-	return levelOrder
 }
 
 func TestLevelOrderBottom(t *testing.T) {
