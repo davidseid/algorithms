@@ -34,6 +34,24 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+type Queue struct {
+	nodes []*TreeNode
+}
+
+func (q *Queue) enqueue(node *TreeNode) {
+	q.nodes = append(q.nodes, node)
+}
+
+func (q *Queue) dequeue() *TreeNode {
+	node := q.nodes[0]
+	q.nodes = q.nodes[1:]
+	return node
+}
+
+func (q *Queue) size() int {
+	return len(q.nodes)
+}
+
 func levelOrderBottom(root *TreeNode) [][]int {
 	levelOrder := [][]int{}
 
