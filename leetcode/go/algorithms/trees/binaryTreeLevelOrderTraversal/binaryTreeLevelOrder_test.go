@@ -55,10 +55,6 @@ func (q *Queue) Size() int {
 func levelOrderBottom(root *TreeNode) [][]int {
 	levelOrder := [][]int{}
 
-	if root == nil {
-		return levelOrder
-	}
-
 	q := initializeQueue(root)
 
 	for q.Size() > 0 {
@@ -84,7 +80,10 @@ func levelOrderBottom(root *TreeNode) [][]int {
 
 func initializeQueue(root *TreeNode) Queue {
 	q := Queue{}
-	q.Enqueue(root)
+
+	if root != nil {
+		q.Enqueue(root)
+	}
 	return q
 }
 
