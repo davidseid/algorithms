@@ -8,6 +8,14 @@ import (
 
 /*
 Merge sort
+
+Rationale:
+Divide and Conquer algorithm using recursion.
+Using pointers, divide up the array in half, and mergeSort each half,
+the base case being when the length of the array is 1 we do nothing.
+
+After merging each half, we merge them together, but each side is already sorted so we
+can do this in m+n time, they are effectively two queues.
 */
 
 func mergeSort(arr []int, low int, high int) {
