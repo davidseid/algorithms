@@ -11,7 +11,18 @@ Merge sort
 */
 
 func mergeSort(arr []int) {
+	if len(arr) == 1 {
+		return
+	}
 
+	mid := len(arr) / 2
+	front := arr[:mid]
+	back := arr[mid+1:]
+
+	mergeSort(front)
+	mergeSort(back)
+
+	merge(front, back)
 }
 
 func merge(arr1 []int, arr2 []int) []int {
