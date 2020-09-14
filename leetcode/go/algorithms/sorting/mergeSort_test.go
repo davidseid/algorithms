@@ -16,6 +16,9 @@ the base case being when the length of the array is 1 we do nothing.
 
 After merging each half, we merge them together, but each side is already sorted so we
 can do this in m+n time, they are effectively two queues.
+
+Time Complexity: O(nlog(n))
+Space Compleixty: O(nlog(n)) In-place, just must maintain pointers and a logn recursive stack.
 */
 
 func mergeSort(arr []int, low int, high int) {
