@@ -25,8 +25,22 @@ func mergeSort(arr []int) {
 	merge(front, back)
 }
 
-func merge(arr1 []int, arr2 []int) []int {
+func merge(front []int, back []int) []int {
+	result := []int{}
 
+	fi := 0
+	bi := 0
+
+	for fi < len(front) || bi < len(back) {
+		if fi < len(front) && front[fi] <= back[bi] {
+			result = append(result, front[fi])
+			fi++
+		} else {
+			result = append(result, back[bi])
+			bi++
+		}
+	}
+	return result
 }
 
 func TestMergeSort(t *testing.T) {
