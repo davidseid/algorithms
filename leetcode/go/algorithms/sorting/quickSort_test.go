@@ -22,6 +22,22 @@ func quickSort(arr []int) {
 	}
 }
 
+func partition(arr []int) int {
+	left := 0
+	right := len(arr) - 1
+
+	for i := range arr {
+		if arr[i] < arr[right] {
+			arr[left], arr[i] = arr[i], arr[left]
+			left++
+		}
+	}
+
+	arr[left], arr[right] = arr[right], arr[left]
+
+	return left
+}
+
 func TestQuickSort(t *testing.T) {
 	t.Run("should sort an array without dupes", func(t *testing.T) {
 		input := []int{5, 3, 1, -3, 9, 6, 7}
