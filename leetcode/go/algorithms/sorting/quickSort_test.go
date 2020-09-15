@@ -28,6 +28,8 @@ At the end of the iteration, move the pivot element to that index and return tha
 Time Complexity: O(nlog(n)) in the average case. This is the case because on average the pivot index will roughly
 evenly divide the array, resulting in logn recursive calls, each of which require an iteration loop. It can be worse O(n^2)
 if we consistently pick the worst pivot point.
+
+Space Complexity: O(1), we only need to maintain pointers, this is an in-place sort that makes use of swapping.
 */
 
 func quickSort(arr []int) {
