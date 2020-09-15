@@ -11,6 +11,9 @@ Quicksort
 
 */
 
+func quickSort(arr []int, low int, high int) {
+}
+
 func TestQuickSort(t *testing.T) {
 	t.Run("should sort an array without dupes", func(t *testing.T) {
 		input := []int{5, 3, 1, -3, 9, 6, 7}
