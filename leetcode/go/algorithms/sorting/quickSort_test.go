@@ -12,7 +12,14 @@ Quicksort
 */
 
 func quickSort(arr []int) {
+	if len(arr) > 0 {
+		p := partition(arr)
+		quickSort(arr[:p])
 
+		if p < len(arr)-1 {
+			quickSort(arr[p+1:])
+		}
+	}
 }
 
 func TestQuickSort(t *testing.T) {
