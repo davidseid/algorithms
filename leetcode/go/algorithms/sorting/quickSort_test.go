@@ -25,7 +25,9 @@ that is higher than the pivot element.
 
 At the end of the iteration, move the pivot element to that index and return that index as the parition point
 
-
+Time Complexity: O(nlog(n)) in the average case. This is the case because on average the pivot index will roughly
+evenly divide the array, resulting in logn recursive calls, each of which require an iteration loop. It can be worse O(n^2)
+if we consistently pick the worst pivot point.
 */
 
 func quickSort(arr []int) {
