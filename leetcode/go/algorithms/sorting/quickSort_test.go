@@ -17,6 +17,8 @@ and the greater are on the write (the two sides need not be sorted themselves)
 
 Then call quick sort on each side of the pivot.
 
+Note: I don't believe this is a stable sort due to the random pivot pick and swapping.
+
 Key Insight:
 The pivot itself will be moved due to swapping. It is easiest to start with
 or move the pivot element to the end, then we can keep a pointer for where the left side is
