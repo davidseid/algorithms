@@ -9,6 +9,23 @@ import (
 /*
 Quicksort
 
+Rationale:
+Divide and Conquer recursive algorithm.
+Choose a pivot point (can be anything, random is best on average).
+Swap the elements so that all the elements less than the pivot element are left
+and the greater are on the write (the two sides need not be sorted themselves)
+
+Then call quick sort on each side of the pivot.
+
+Key Insight:
+The pivot itself will be moved due to swapping. It is easiest to start with
+or move the pivot element to the end, then we can keep a pointer for where the left side is
+that will eventually be swapped with the right. This left pointer is the first element in the array
+that is higher than the pivot element.
+
+At the end of the iteration, move the pivot element to that index and return that index as the parition point
+
+
 */
 
 func quickSort(arr []int) {
