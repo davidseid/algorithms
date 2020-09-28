@@ -1,5 +1,12 @@
 package datastructures
 
+import (
+	"fmt"
+	"testing"
+
+	"github.com/go-test/deep"
+)
+
 type minHeap []int
 
 func (mh *minHeap) getParent(n int) int {
@@ -44,4 +51,20 @@ func makeHeap(items []int) minHeap {
 		heap.insert(v)
 	}
 	return heap
+}
+
+func TestMinHeap(t *testing.T) {
+	t.Run("should build a min heap", func(t *testing.T) {
+		input := []int{5, 3, 7, 9, 2, 31, 19, 2}
+
+		actual := makeHeap(input)
+
+		expected := minHeap{5, 2, 3, 2, 7, 31, 19, 9}
+
+		if diff := deep.Equal(actual, expected); diff != nil {
+			fmt.Println(actual, expected)
+			t.Error(diff)
+		}
+
+	})
 }
