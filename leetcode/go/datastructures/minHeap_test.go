@@ -10,7 +10,7 @@ import (
 type minHeap []int
 
 func (mh *minHeap) getParent(i int) int {
-	if i == 0 {
+	if i == 1 {
 		return -1
 	}
 
@@ -46,8 +46,9 @@ func (mh *minHeap) swap(a, b int) {
 }
 
 func makeHeap(items []int) minHeap {
-	var heap minHeap
+	heap := minHeap{0}
 	for _, v := range items {
+		fmt.Println(heap)
 		heap.insert(v)
 	}
 	return heap
@@ -59,7 +60,7 @@ func TestMinHeap(t *testing.T) {
 
 		actual := makeHeap(input)
 
-		expected := minHeap{1, 5, 3, 8, 9, 7, 6}
+		expected := minHeap{0, 1, 5, 3, 8, 9, 7, 6}
 
 		if diff := deep.Equal(actual, expected); diff != nil {
 			fmt.Println(actual, expected)
