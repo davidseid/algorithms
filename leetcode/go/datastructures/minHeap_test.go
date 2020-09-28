@@ -9,20 +9,20 @@ import (
 
 type minHeap []int
 
-func (mh *minHeap) getParent(n int) int {
-	if n == 1 {
+func (mh *minHeap) getParent(i int) int {
+	if i == 0 {
 		return -1
 	}
 
-	return n / 2
+	return i / 2
 }
 
-func (mh *minHeap) getYoungerChild(n int) int {
-	return 2 * n
+func (mh *minHeap) getLeftChild(i int) int {
+	return 2 * i
 }
 
-func (mh *minHeap) getOlderChild(n int) int {
-	return (2 * n) + 1
+func (mh *minHeap) getRightChild(i int) int {
+	return (2 * i) + 1
 }
 
 func (mh *minHeap) insert(item int) {
@@ -30,14 +30,14 @@ func (mh *minHeap) insert(item int) {
 	mh.bubbleUp(len(*mh) - 1)
 }
 
-func (mh *minHeap) bubbleUp(p int) {
-	if mh.getParent(p) == -1 {
+func (mh *minHeap) bubbleUp(i int) {
+	if mh.getParent(i) == -1 {
 		return
 	}
 
-	if (*mh)[mh.getParent(p)] > (*mh)[p] {
-		mh.swap(p, mh.getParent(p))
-		mh.bubbleUp(mh.getParent(p))
+	if (*mh)[mh.getParent(i)] > (*mh)[i] {
+		mh.swap(i, mh.getParent(i))
+		mh.bubbleUp(mh.getParent(i))
 	}
 }
 
@@ -55,16 +55,15 @@ func makeHeap(items []int) minHeap {
 
 func TestMinHeap(t *testing.T) {
 	t.Run("should build a min heap", func(t *testing.T) {
-		input := []int{5, 3, 7, 9, 2, 31, 19, 2}
+		input := []int{1, 5, 6, 8, 9, 7, 3}
 
 		actual := makeHeap(input)
 
-		expected := minHeap{5, 2, 3, 2, 7, 31, 19, 9}
+		expected := minHeap{1, 5, 3, 8, 9, 7, 6}
 
 		if diff := deep.Equal(actual, expected); diff != nil {
 			fmt.Println(actual, expected)
 			t.Error(diff)
 		}
-
 	})
 }
