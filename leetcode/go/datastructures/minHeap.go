@@ -37,3 +37,11 @@ func (mh *minHeap) bubbleUp(p int) {
 func (mh *minHeap) swap(a, b int) {
 	(*mh)[a], (*mh)[b] = (*mh)[b], (*mh)[a]
 }
+
+func makeHeap(items []int) minHeap {
+	var heap minHeap
+	for _, v := range items {
+		heap.insert(v)
+	}
+	return heap
+}
