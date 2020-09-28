@@ -33,3 +33,7 @@ func (mh *minHeap) bubbleUp(p int) {
 		mh.bubbleUp(mh.getParent(p))
 	}
 }
+
+func (mh *minHeap) swap(a, b int) {
+	(*mh)[a], (*mh)[b] = (*mh)[b], (*mh)[a]
+}
