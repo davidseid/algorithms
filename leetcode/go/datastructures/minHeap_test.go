@@ -54,6 +54,41 @@ func makeHeap(items []int) minHeap {
 	return heap
 }
 
+func (mh *minHeap) extractMin() int {
+	// swap root and bottom right
+	// pop off the bottom right
+	// bubble down the root
+
+	if len(*mh) < 2 {
+		return -1
+	}
+
+	min := (*mh)[1]
+	mh.swap(1, len(*mh)-1)
+	*mh = (*mh)[:len(*mh)-1]
+	mh.bubbleDown(1)
+	return min
+}
+
+func (mh *minHeap) bubbleDown(i int) {
+	target := i
+	left := mh.getLeftChild(i)
+	right := mh.getRightChild(i)
+
+	if (*mh)[target] > (*mh)[left] {
+		target = (*mh)[left]
+	}
+
+	if (*mh)[target] > (*mh)[right] {
+		target = (*mh)[right]
+	}
+
+	if target != i {
+		mh.swap(i, target)
+		mh.bubbleDown(target)
+	}
+}
+
 func TestMinHeap(t *testing.T) {
 	t.Run("should build a min heap", func(t *testing.T) {
 		input := []int{1, 5, 6, 8, 9, 7, 3}
