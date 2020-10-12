@@ -35,7 +35,7 @@ func (mh *minHeap) getRightChild(i int) int {
 	return (2 * i) + 1
 }
 
-func (mh *minHeap) insert(item int) {
+func (mh *minHeap) Insert(item int) {
 	*mh = append(*mh, item)
 	mh.bubbleUp(len(*mh) - 1)
 }
@@ -58,12 +58,12 @@ func (mh *minHeap) swap(a, b int) {
 func makeHeap(items []int) minHeap {
 	heap := minHeap{0}
 	for _, v := range items {
-		heap.insert(v)
+		heap.Insert(v)
 	}
 	return heap
 }
 
-func (mh *minHeap) extractMin() int {
+func (mh *minHeap) ExtractMin() int {
 	if len(*mh) < 2 {
 		return -1
 	}
@@ -98,7 +98,7 @@ func heapSort(items []int) []int {
 	heap := makeHeap(items)
 
 	for i := range items {
-		items[i] = heap.extractMin()
+		items[i] = heap.ExtractMin()
 	}
 	return items
 }
@@ -121,7 +121,7 @@ func TestMinHeap(t *testing.T) {
 		heap := makeHeap([]int{1, 5, 6, 8, 9, 7, 3})
 
 		expected := 1
-		actual := heap.extractMin()
+		actual := heap.ExtractMin()
 
 		if actual != expected {
 			t.Errorf("Got %d, expected %d", actual, expected)
