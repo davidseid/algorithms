@@ -7,6 +7,13 @@ import (
 	"github.com/go-test/deep"
 )
 
+/*
+Lessons learned from implementation:
+HeapSort itself is simple to implement once a heap is built,
+simply iterate through the range of numbers and repeatedly extract the minimum.
+Since extract minimum is a O(logn) operation, heapsort is O(nlogn)
+*/
+
 type minHeap []int
 
 func (mh *minHeap) getParent(i int) int {
