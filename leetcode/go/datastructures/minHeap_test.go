@@ -11,7 +11,10 @@ import (
 Lessons learned from implementation:
 HeapSort itself is simple to implement once a heap is built,
 simply iterate through the range of numbers and repeatedly extract the minimum.
-Since extract minimum is a O(logn) operation, heapsort is O(nlogn)
+Since extract minimum is a O(logn) operation, heapsort is O(nlogn).
+
+One trick to simplify heap implementatin is to pad the front of the array with
+a 0 value. This prevents extra handling around range errors when accessing the parent of an index.
 */
 
 type minHeap []int
