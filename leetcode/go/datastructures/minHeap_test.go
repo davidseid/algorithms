@@ -75,12 +75,12 @@ func (mh *minHeap) bubbleDown(i int) {
 	left := mh.getLeftChild(i)
 	right := mh.getRightChild(i)
 
-	if (*mh)[target] > (*mh)[left] {
-		target = (*mh)[left]
+	if left < len(*mh) && (*mh)[target] > (*mh)[left] {
+		target = left
 	}
 
-	if (*mh)[target] > (*mh)[right] {
-		target = (*mh)[right]
+	if right < len(*mh) && (*mh)[target] > (*mh)[right] {
+		target = right
 	}
 
 	if target != i {
@@ -100,6 +100,17 @@ func TestMinHeap(t *testing.T) {
 		if diff := deep.Equal(actual, expected); diff != nil {
 			fmt.Println(actual, expected)
 			t.Error(diff)
+		}
+	})
+
+	t.Run("should extract minimimum from a min heap", func(t *testing.T) {
+		heap := makeHeap([]int{1, 5, 6, 8, 9, 7, 3})
+
+		expected := 1
+		actual := heap.extractMin()
+
+		if actual != expected {
+			t.Errorf("Got %d, expected %d", actual, expected)
 		}
 	})
 }
