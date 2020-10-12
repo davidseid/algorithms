@@ -85,6 +85,15 @@ func (mh *minHeap) bubbleDown(i int) {
 	}
 }
 
+func heapSort(items []int) []int {
+	heap := makeHeap(items)
+
+	for i := range items {
+		items[i] = heap.extractMin()
+	}
+	return items
+}
+
 func TestMinHeap(t *testing.T) {
 	t.Run("should build a min heap", func(t *testing.T) {
 		input := []int{1, 5, 6, 8, 9, 7, 3}
@@ -107,6 +116,15 @@ func TestMinHeap(t *testing.T) {
 
 		if actual != expected {
 			t.Errorf("Got %d, expected %d", actual, expected)
+		}
+	})
+
+	t.Run("should enable heap sorting", func(t *testing.T) {
+		actual := heapSort([]int{1, 5, 6, 8, 9, 7, 3})
+		expected := []int{1, 3, 5, 6, 7, 8, 9}
+
+		if diff := deep.Equal(actual, expected); diff != nil {
+			t.Error(diff)
 		}
 	})
 }
