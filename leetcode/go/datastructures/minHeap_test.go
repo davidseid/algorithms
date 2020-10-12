@@ -58,7 +58,6 @@ func (mh *minHeap) swap(a, b int) {
 func makeHeap(items []int) minHeap {
 	heap := minHeap{0}
 	for _, v := range items {
-		fmt.Println(heap)
 		heap.insert(v)
 	}
 	return heap
