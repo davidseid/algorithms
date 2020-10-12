@@ -55,10 +55,6 @@ func makeHeap(items []int) minHeap {
 }
 
 func (mh *minHeap) extractMin() int {
-	// swap root and bottom right
-	// pop off the bottom right
-	// bubble down the root
-
 	if len(*mh) < 2 {
 		return -1
 	}
