@@ -19,3 +19,41 @@ func TestMergeSort2(t *testing.T) {
 		}
 	})
 }
+
+func mergeSort2(arr []int) []int {
+	if len(arr) == 1 {
+		return arr
+	}
+
+	mid := len(arr) / 2
+	return merge2(mergeSort2(arr[:mid]), mergeSort2(arr[mid:]))
+}
+
+func merge2(left, right []int) []int {
+	result := []int{}
+
+	l := 0
+	r := 0
+
+	for l < len(left) && r < len(right) {
+		if left[l] < right[r] {
+			result = append(result, left[l])
+			l++
+			continue
+		}
+		result = append(result, right[r])
+		r++
+	}
+
+	for l < len(left) {
+		result = append(result, left[l])
+		l++
+	}
+
+	for r < len(right) {
+		result = append(result, right[r])
+		r++
+	}
+
+	return result
+}
