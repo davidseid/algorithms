@@ -1,6 +1,7 @@
 package sorting
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/go-test/deep"
@@ -29,10 +30,15 @@ func (mh *minHeap2) Insert(val int) {
 
 func (mh *minHeap2) bubbleUp(i int) {
 	parentIndex := mh.getParent(i)
+
+	if parentIndex == -1 {
+		return
+	}
 	if (*mh)[i] < (*mh)[parentIndex] {
 		mh.swap(i, parentIndex)
+		mh.bubbleUp(parentIndex)
+
 	}
-	mh.bubbleUp(parentIndex)
 }
 
 func (mh *minHeap2) swap(a, b int) {
@@ -40,6 +46,9 @@ func (mh *minHeap2) swap(a, b int) {
 }
 
 func (mh *minHeap2) getParent(i int) int {
+	if i == 1 {
+		return -1
+	}
 	return i / 2
 }
 
@@ -48,9 +57,6 @@ func (mh *minHeap2) getChildren(i int) (left, right int) {
 }
 
 func (mh *minHeap2) ExtractMin() int {
-	// swap root and end
-	// grab end
-	// bubbledown root
 	if len(*mh) < 2 {
 		panic("Nothing left in the heap")
 	}
@@ -67,16 +73,18 @@ func (mh *minHeap2) bubbleDown(i int) {
 	target := i
 	left, right := mh.getChildren(i)
 
-	if (*mh)[i] > (*mh)[left] {
+	if left < len(*mh) && (*mh)[target] > (*mh)[left] {
 		target = left
 	}
 
-	if (*mh)[i] > (*mh)[right] {
+	if right < len(*mh) && (*mh)[target] > (*mh)[right] {
 		target = right
 	}
 
-	mh.swap(i, target)
-	mh.bubbleDown(target)
+	if target != i {
+		mh.swap(i, target)
+		mh.bubbleDown(target)
+	}
 }
 
 func buildHeap(arr []int) minHeap2 {
@@ -90,11 +98,12 @@ func buildHeap(arr []int) minHeap2 {
 
 func heapSort2(arr []int) []int {
 	minHeap := buildHeap(arr)
+	fmt.Println(minHeap)
 
 	result := []int{}
 
-	for range minHeap {
-		result = append(result, minHeap.ExtractMin())
+	for i := range minHeap {
+		result[i] = minHeap.ExtractMin()
 	}
 	return result
 }
