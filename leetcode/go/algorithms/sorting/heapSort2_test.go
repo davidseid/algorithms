@@ -22,6 +22,18 @@ func TestHeapSort2(t *testing.T) {
 
 type minHeap2 []int
 
+func (*mh minHeap2) Insert(val int) {
+
+}
+
+func buildHeap(arr []int) minHeap2 {
+	heap := minHeap2{}
+	
+	for _, v := range arr {
+		heap.Insert(v)
+	}
+}
+
 func heapSort2(arr []int) []int {
 	minHeap := buildHeap(arr)
 
