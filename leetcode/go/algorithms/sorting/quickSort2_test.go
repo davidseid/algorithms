@@ -19,3 +19,14 @@ func TestQuickSort2(t *testing.T) {
 		}
 	})
 }
+
+func quickSort2(arr []int) []int {
+	p := partition(arr)
+
+	quickSort(arr[:p])
+
+	if p < len(arr)-1 {
+		quickSort(arr[p+1:])
+	}
+	return arr
+}
