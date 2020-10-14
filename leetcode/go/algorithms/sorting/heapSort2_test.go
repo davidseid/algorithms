@@ -22,13 +22,30 @@ func TestHeapSort2(t *testing.T) {
 
 type minHeap2 []int
 
-func (*mh minHeap2) Insert(val int) {
+func (mh *minHeap2) Insert(val int) {
+	*mh = append(*mh, val)
+	mh.bubbleUp(len(*mh) - 1)
+}
 
+func (mh *minHeap2) bubbleUp(i int) {
+	parentIndex := mh.getParent(i)
+	if (*mh)[i] < (*mh)[parentIndex] {
+		mh.swap(i, parentIndex)
+	}
+	mh.bubbleUp(parentIndex)
+}
+
+func (mh *minHeap2) swap(a, b int) {
+	(*mh)[a], (*mh)[b] = (*mh)[b], (*mh)[a]
+}
+
+func (mh *minHeap2) getParent(i int) int {
+	return i / 2
 }
 
 func buildHeap(arr []int) minHeap2 {
-	heap := minHeap2{}
-	
+	heap := minHeap2{0}
+
 	for _, v := range arr {
 		heap.Insert(v)
 	}
