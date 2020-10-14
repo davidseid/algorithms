@@ -19,3 +19,16 @@ func TestHeapSort2(t *testing.T) {
 		}
 	})
 }
+
+type minHeap2 []int
+
+func heapSort2(arr []int) []int {
+	minHeap := buildHeap(arr)
+
+	result := []int{}
+
+	for range minHeap {
+		result = append(result, minHeap.ExtractMin())
+	}
+	return result
+}
