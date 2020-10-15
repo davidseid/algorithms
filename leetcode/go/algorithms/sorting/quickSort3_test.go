@@ -19,3 +19,11 @@ func TestQuickSort3(t *testing.T) {
 		}
 	})
 }
+
+func quickSort3(arr []int) []int {
+
+}
+
+func partition(arr []int) int {
+
+}
