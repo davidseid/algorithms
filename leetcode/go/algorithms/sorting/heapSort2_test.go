@@ -1,7 +1,6 @@
 package sorting
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/go-test/deep"
@@ -98,11 +97,9 @@ func buildHeap(arr []int) minHeap2 {
 
 func heapSort2(arr []int) []int {
 	minHeap := buildHeap(arr)
-	fmt.Println(minHeap)
+	result := make([]int, len(arr))
 
-	result := []int{}
-
-	for i := range minHeap {
+	for i := 0; i < len(arr); i++ {
 		result[i] = minHeap.ExtractMin()
 	}
 	return result
