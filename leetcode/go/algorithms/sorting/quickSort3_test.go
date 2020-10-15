@@ -21,10 +21,7 @@ func TestQuickSort3(t *testing.T) {
 }
 
 func quickSort3(arr []int) []int {
-	if len(arr) == 1 {
-		return arr
-	}
-	p := partition(arr)
+	p := partition3(arr)
 
 	quickSort(arr[:p])
 
@@ -35,6 +32,18 @@ func quickSort3(arr []int) []int {
 	return arr
 }
 
-func partition(arr []int) int {
+func partition3(arr []int) int {
+	left := 0
+	right := len(arr) - 1
 
+	for i := range arr {
+		if arr[i] < arr[right] {
+			arr[i], arr[left] = arr[left], arr[i]
+			left++
+		}
+	}
+
+	arr[left], arr[right] = arr[right], arr[left]
+
+	return left
 }
