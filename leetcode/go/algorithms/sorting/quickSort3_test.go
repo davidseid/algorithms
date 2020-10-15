@@ -21,7 +21,18 @@ func TestQuickSort3(t *testing.T) {
 }
 
 func quickSort3(arr []int) []int {
+	if len(arr) == 1 {
+		return arr
+	}
+	p := partition(arr)
 
+	quickSort(arr[:p])
+
+	if p < len(arr)-1 {
+		quickSort(arr[p+1:])
+	}
+
+	return arr
 }
 
 func partition(arr []int) int {
