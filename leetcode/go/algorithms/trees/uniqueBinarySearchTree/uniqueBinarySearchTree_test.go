@@ -27,6 +27,12 @@ Constraints:
 1 <= n <= 19
 */
 
+/*
+Rationale:
+Solved with recursive catalan formula. Had to look it up though, need to resolve with
+more intuitive solution that does not involve building all trees manually and deduping them.
+*/
+
 func TestUniqueBinarySearchTree(t *testing.T) {
 	input := 3
 
