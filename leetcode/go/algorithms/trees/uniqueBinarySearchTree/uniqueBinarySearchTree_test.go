@@ -35,10 +35,19 @@ func TestUniqueBinarySearchTree(t *testing.T) {
 	expected := 5
 
 	if actual != expected {
-		t.Errorf("Got %s, want %s", actual, expected)
+		t.Errorf("Got %d, want %d", actual, expected)
 	}
 }
 
 func numTrees(n int) int {
+	if n <= 1 {
+		return 1
+	}
 
+	count := 0
+	for i := 0; i < n; i++ {
+		count += numTrees(i) * numTrees(n-1-i)
+	}
+
+	return count
 }
