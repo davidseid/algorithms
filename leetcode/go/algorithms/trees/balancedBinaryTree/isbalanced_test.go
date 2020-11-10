@@ -93,3 +93,7 @@ func TestIsBalanced(t *testing.T) {
 		}
 	})
 }
+
+func isBalanced(root *TreeNode) bool {
+
+}
