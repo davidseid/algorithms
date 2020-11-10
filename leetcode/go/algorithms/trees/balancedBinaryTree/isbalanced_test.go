@@ -98,9 +98,12 @@ func TestIsBalanced(t *testing.T) {
 }
 
 func isBalanced(root *TreeNode) bool {
+	if root == nil {
+		return true
+	}
 
-	leftHeight := getHeight(root.Left)
-	rightHeight := getHeight(root.Right)
+	leftHeight := depth(root.Left)
+	rightHeight := depth(root.Right)
 
 	diff := leftHeight - rightHeight
 
@@ -108,5 +111,14 @@ func isBalanced(root *TreeNode) bool {
 		return false
 	}
 
-	return true
+	return isBalanced(root.Left) && isBalanced(root.Right)
+}
+
+func depth(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+
+	return int(math.Max(float64(depth(root.Left)), float64(depth(root.Right))) + 1)
+
 }
