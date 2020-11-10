@@ -1,6 +1,9 @@
 package balancedBinaryTree
 
-import "testing"
+import (
+	"math"
+	"testing"
+)
 
 /*
 110. Balanced Binary Tree
@@ -96,4 +99,14 @@ func TestIsBalanced(t *testing.T) {
 
 func isBalanced(root *TreeNode) bool {
 
+	leftHeight := getHeight(root.Left)
+	rightHeight := getHeight(root.Right)
+
+	diff := leftHeight - rightHeight
+
+	if math.Abs(float64(diff)) > 1 {
+		return false
+	}
+
+	return true
 }
