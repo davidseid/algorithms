@@ -1,5 +1,7 @@
 package balancedBinaryTree
 
+import "testing"
+
 /*
 110. Balanced Binary Tree
 https://leetcode.com/problems/balanced-binary-tree/
@@ -33,3 +35,61 @@ Constraints:
 The number of nodes in the tree is in the range [0, 5000].
 -104 <= Node.val <= 104
 */
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+func TestIsBalanced(t *testing.T) {
+	t.Run("should return true if left and right subtrees of every node differ in height by no more than one", func(t *testing.T) {
+		root := &TreeNode{
+			Val: 3,
+			Left: &TreeNode{
+				Val: 9,
+			},
+			Right: &TreeNode{
+				Val: 20,
+				Left: &TreeNode{
+					Val: 15,
+				},
+				Right: &TreeNode{
+					Val: 7,
+				},
+			},
+		}
+
+		if isBalanced(root) != true {
+			t.Errorf("got false, expected true")
+		}
+	})
+
+	t.Run("should return false if left and right subtrees of every node differ in height by more than one", func(t *testing.T) {
+		root := &TreeNode{
+			Val: 1,
+			Left: &TreeNode{
+				Val: 2,
+				Left: &TreeNode{
+					Val: 3,
+					Left: &TreeNode{
+						Val: 4,
+					},
+					Right: &TreeNode{
+						Val: 4,
+					},
+				},
+				Right: &TreeNode{
+					Val: 3,
+				},
+			},
+			Right: &TreeNode{
+				Val: 2,
+			},
+		}
+
+		if isBalanced(root) != false {
+			t.Errorf("got true, expected false")
+		}
+	})
+}
