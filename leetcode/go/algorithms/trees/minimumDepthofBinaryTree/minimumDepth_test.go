@@ -62,6 +62,31 @@ func TestMinimumDepth(t *testing.T) {
 	}
 }
 
+func TestMinimumDepth2(t *testing.T) {
+	root := &TreeNode{
+		Val: 2,
+		Right: &TreeNode{
+			Val: 3,
+			Right: &TreeNode{
+				Val: 4,
+				Right: &TreeNode{
+					Val: 5,
+					Right: &TreeNode{
+						Val: 6,
+					},
+				},
+			},
+		},
+	}
+
+	expected := 5
+	actual := minDepth(root)
+
+	if actual != expected {
+		t.Errorf("Got %d, want %d", actual, expected)
+	}
+}
+
 func minDepth(root *TreeNode) int {
 
 }
