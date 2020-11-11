@@ -61,3 +61,7 @@ func TestMinimumDepth(t *testing.T) {
 		t.Errorf("Got %d, want %d", actual, expected)
 	}
 }
+
+func minDepth(root *TreeNode) int {
+
+}
