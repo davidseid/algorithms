@@ -39,6 +39,13 @@ The number of nodes in the tree is in the range [0, 5000].
 -104 <= Node.val <= 104
 */
 
+/*
+Time Complexity: O(nlogn)
+If n is the number of nodes, there are logn levels in the tree. For each node, we traverse logn nodes to calculate the depth.
+
+Space Complexity: O(1), we do not require any extra space with this approach, we are simply using CPU to calculate the depths.
+*/
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
@@ -119,8 +126,8 @@ func depth(root *TreeNode) int {
 		return 0
 	}
 
-	leftDepth := depth(root.Left)
-	rightDepth := depth(root.Right)
+	leftDepth := depth(root.Left) + 1
+	rightDepth := depth(root.Right) + 1
 
-	return int(math.Max(float64(leftDepth), float64(rightDepth)) + 1)
+	return int(math.Max(float64(leftDepth), float64(rightDepth)))
 }
