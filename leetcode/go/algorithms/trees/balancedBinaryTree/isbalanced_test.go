@@ -46,7 +46,11 @@ If n is the number of nodes, there are logn levels in the tree. For each node, w
 Space Complexity: O(1)
 We do not require any extra space with this approach, we are simply using CPU to calculate the depths.
 
+Improvement ideas:
+1) Add memoization. In the current solution, we recount the depth of nodes many times, wasting CPU and time. If we append a depth value to the
+nodes or otherwise maintain the previously calculated depths, we can significantly reduce the time complexity, with a mild tradeoff for space.
 
+2)
 */
 
 type TreeNode struct {
