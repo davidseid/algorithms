@@ -50,7 +50,9 @@ Improvement ideas:
 1) Add memoization. In the current solution, we recount the depth of nodes many times, wasting CPU and time. If we append a depth value to the
 nodes or otherwise maintain the previously calculated depths, we can significantly reduce the time complexity, with a mild tradeoff for space.
 
-2)
+2) Try BFS. Currently, because we are evaluating in a depth first manner. This means we can have a very long left subtree from the root and no right subtree,
+but from the algorithm's point of view we must first exhaust the depth calculations on the left subtree. This may not necessarily be an improvement,
+it is unclear if it is just trading off which we calculate first. Is that any more efficient than DFS? Imagine other trees that are more performant for DFS...
 */
 
 type TreeNode struct {
