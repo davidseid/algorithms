@@ -105,9 +105,9 @@ func isBalanced(root *TreeNode) bool {
 	leftHeight := depth(root.Left)
 	rightHeight := depth(root.Right)
 
-	diff := leftHeight - rightHeight
+	diff := math.Abs(float64(leftHeight - rightHeight))
 
-	if math.Abs(float64(diff)) > 1 {
+	if diff > 1 {
 		return false
 	}
 
@@ -119,6 +119,8 @@ func depth(root *TreeNode) int {
 		return 0
 	}
 
-	return int(math.Max(float64(depth(root.Left)), float64(depth(root.Right))) + 1)
+	leftDepth := depth(root.Left)
+	rightDepth := depth(root.Right)
 
+	return int(math.Max(float64(leftDepth), float64(rightDepth)) + 1)
 }
