@@ -43,7 +43,10 @@ The number of nodes in the tree is in the range [0, 5000].
 Time Complexity: O(nlogn)
 If n is the number of nodes, there are logn levels in the tree. For each node, we traverse logn nodes to calculate the depth.
 
-Space Complexity: O(1), we do not require any extra space with this approach, we are simply using CPU to calculate the depths.
+Space Complexity: O(1)
+We do not require any extra space with this approach, we are simply using CPU to calculate the depths.
+
+
 */
 
 type TreeNode struct {
