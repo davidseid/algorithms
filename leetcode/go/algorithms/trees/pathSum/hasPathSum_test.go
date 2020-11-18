@@ -24,6 +24,11 @@ Given the below binary tree and sum = 22,
 return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
 */
 
+/*
+Time Complexity: O(n) - In the worst case we must traverse every node to determine if a path equals the sum.
+Space Complexity: O(1) - No extra space is required beyond the input tree as n increases.
+*/
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
