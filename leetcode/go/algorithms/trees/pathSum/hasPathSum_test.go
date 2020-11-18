@@ -59,5 +59,13 @@ func TestHasPathSum(t *testing.T) {
 				},
 			},
 		}
+
+		expected := true
+
+		actual := hasPathSum(tree, 22)
+
+		if actual != expected {
+			t.Errorf("Got %v, expected %s=v", actual, expected)
+		}
 	})
 }
