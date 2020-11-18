@@ -69,3 +69,7 @@ func TestHasPathSum(t *testing.T) {
 		}
 	})
 }
+
+func hasPathSum(root *TreeNode, sum int) bool {
+
+}
