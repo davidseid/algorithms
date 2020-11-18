@@ -1,5 +1,7 @@
 package pathSum
 
+import "testing"
+
 /*
 112. Path Sum
 https://leetcode.com/problems/path-sum/
@@ -26,4 +28,36 @@ type TreeNode struct {
 	Val   int
 	Left  *TreeNode
 	Right *TreeNode
+}
+
+func TestHasPathSum(t *testing.T) {
+	t.Run("should determine whether a tree has a path adding up to the sum", func(t *testing.T) {
+		tree := &TreeNode{
+			Val: 5,
+			Left: &TreeNode{
+				Val: 4,
+				Left: &TreeNode{
+					Val: 11,
+					Left: &TreeNode{
+						Val: 7,
+					},
+					Right: &TreeNode{
+						Val: 2,
+					},
+				},
+			},
+			Right: &TreeNode{
+				Val: 8,
+				Left: &TreeNode{
+					Val: 13,
+				},
+				Right: &TreeNode{
+					Val: 4,
+					Right: &TreeNode{
+						Val: 1,
+					},
+				},
+			},
+		}
+	})
 }
