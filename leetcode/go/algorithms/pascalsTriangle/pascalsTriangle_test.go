@@ -1,6 +1,10 @@
 package pascalsTriangle
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/go-test/deep"
+)
 
 /*
 119. Pascal's Triangle II
@@ -28,8 +32,8 @@ func TestGetRowFromPascalsTriangle(t *testing.T) {
 
 		actual := getRow(rowIndex)
 
-		if actual != expected {
-			t.Errorf("Got %d, want %d", actual, expected)
+		if diff := deep.Equal(actual, expected); diff != nil {
+			t.Error(diff)
 		}
 	})
 
@@ -39,8 +43,8 @@ func TestGetRowFromPascalsTriangle(t *testing.T) {
 
 		actual := getRow(rowIndex)
 
-		if actual != expected {
-			t.Errorf("Got %d, want %d", actual, expected)
+		if diff := deep.Equal(actual, expected); diff != nil {
+			t.Error(diff)
 		}
 	})
 
@@ -50,13 +54,31 @@ func TestGetRowFromPascalsTriangle(t *testing.T) {
 
 		actual := getRow(rowIndex)
 
-		if actual != expected {
-			t.Errorf("Got %d, want %d", actual, expected)
+		if diff := deep.Equal(actual, expected); diff != nil {
+			t.Error(diff)
 		}
 	})
 
 }
 
 func getRow(rowIndex int) []int {
+	triangle := [][]int{
+		{1},
+		{1, 1},
+	}
 
+	for i := 2; i <= rowIndex; i++ {
+		row := []int{1}
+
+		for j := 1; j < i; j++ {
+			left := triangle[i-1][j-1]
+			right := triangle[i-1][j]
+			row = append(row, left+right)
+		}
+
+		row = append(row, 1)
+		triangle = append(triangle, row)
+	}
+
+	return triangle[rowIndex]
 }
