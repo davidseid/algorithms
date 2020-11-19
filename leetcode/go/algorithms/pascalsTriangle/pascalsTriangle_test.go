@@ -33,4 +33,26 @@ func TestGetRowFromPascalsTriangle(t *testing.T) {
 		}
 	})
 
+	t.Run("should work2", func(t *testing.T) {
+		rowIndex := 0
+		expected := []int{1}
+
+		actual := getRow(rowIndex)
+
+		if actual != expected {
+			t.Errorf("Got %d, want %d", actual, expected)
+		}
+	})
+
+	t.Run("should work3", func(t *testing.T) {
+		rowIndex := 1
+		expected := []int{1, 1}
+
+		actual := getRow(rowIndex)
+
+		if actual != expected {
+			t.Errorf("Got %d, want %d", actual, expected)
+		}
+	})
+
 }
