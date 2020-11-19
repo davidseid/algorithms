@@ -1,5 +1,7 @@
 package pascalsTriangle
 
+import "testing"
+
 /*
 119. Pascal's Triangle II
 
@@ -17,3 +19,18 @@ Follow up:
 Could you optimize your algorithm to use only O(k) extra space?
 
 */
+
+func TestGetRowFromPascalsTriangle(t *testing.T) {
+
+	t.Run("should work", func(t *testing.T) {
+		rowIndex := 3
+		expected := []int{1, 3, 3, 1}
+
+		actual := getRow(rowIndex)
+
+		if actual != expected {
+			t.Errorf("Got %d, want %d", actual, expected)
+		}
+	})
+
+}
