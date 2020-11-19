@@ -56,3 +56,7 @@ func TestGetRowFromPascalsTriangle(t *testing.T) {
 	})
 
 }
+
+func getRow(rowIndex int) []int {
+
+}
