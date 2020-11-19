@@ -24,6 +24,12 @@ Could you optimize your algorithm to use only O(k) extra space?
 
 */
 
+/*
+Time Complexity: O(n^2), Each row is calculated by iterating through the previous row, requiring a nested loop.
+Space Copmlexity: O(n), we must always maintain a row of size n as the basis for calculating the next row
+but we need not maintain the full triangle.
+*/
+
 func TestGetRowFromPascalsTriangle(t *testing.T) {
 
 	t.Run("should work", func(t *testing.T) {
