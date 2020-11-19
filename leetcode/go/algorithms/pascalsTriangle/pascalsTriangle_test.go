@@ -62,23 +62,18 @@ func TestGetRowFromPascalsTriangle(t *testing.T) {
 }
 
 func getRow(rowIndex int) []int {
-	triangle := [][]int{
-		{1},
-		{1, 1},
-	}
+	lastRow := []int{1}
 
-	for i := 2; i <= rowIndex; i++ {
+	for i := 1; i <= rowIndex; i++ {
 		row := []int{1}
 
 		for j := 1; j < i; j++ {
-			left := triangle[i-1][j-1]
-			right := triangle[i-1][j]
-			row = append(row, left+right)
+			row = append(row, lastRow[j-1]+lastRow[j])
 		}
 
 		row = append(row, 1)
-		triangle = append(triangle, row)
+		lastRow = row
 	}
 
-	return triangle[rowIndex]
+	return lastRow
 }
