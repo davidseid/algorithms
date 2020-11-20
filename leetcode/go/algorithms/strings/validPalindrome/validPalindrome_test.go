@@ -39,4 +39,15 @@ func TestValidPalindrome(t *testing.T) {
 			t.Errorf("Got %v, want %v", actual, expected)
 		}
 	})
+
+	t.Run("should return false for non palindromes", func(t *testing.T) {
+		input := "race a car"
+		expected := false
+
+		actual := isPalindrome(input)
+
+		if actual != expected {
+			t.Errorf("Got %v, want %v", actual, expected)
+		}
+	})
 }
