@@ -1,3 +1,7 @@
+package validPalindrome
+
+import "testing"
+
 /*
 125. Valid Palindrome
 
@@ -22,6 +26,17 @@ Output: false
 Constraints:
 
 s consists only of printable ASCII characters.
-
-
 */
+
+func TestValidPalindrome(t *testing.T) {
+	t.Run("should return true for palindromes", func(t *testing.T) {
+		input := "A man, a plan, a canal: Panama"
+		expected := true
+
+		actual := isPalindrome(input)
+
+		if actual != expected {
+			t.Errorf("Got %v, want %v", actual, expected)
+		}
+	})
+}
