@@ -51,3 +51,7 @@ func TestValidPalindrome(t *testing.T) {
 		}
 	})
 }
+
+func isPalindrome(s string) bool {
+
+}
