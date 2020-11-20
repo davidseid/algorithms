@@ -102,9 +102,9 @@ func isPalindrome(s string) bool {
 }
 
 func isAlphanumeric(char rune) bool {
-	if char < 48 || (char > 57 && char < 65) || (char > 90 && char < 97) || char > 122 {
-		return false
+	if (char >= 48 && char <= 57) || (char >= 65 && char <= 90) || (char >= 97 && char <= 122) {
+		return true
 	}
 
-	return true
+	return false
 }
