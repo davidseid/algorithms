@@ -1,8 +1,6 @@
 package validPalindrome
 
 import (
-	"fmt"
-	"regexp"
 	"strings"
 	"testing"
 )
@@ -55,31 +53,61 @@ func TestValidPalindrome(t *testing.T) {
 			t.Errorf("Got %v, want %v", actual, expected)
 		}
 	})
+
+	t.Run("should return true for palindromes with tricky characters", func(t *testing.T) {
+		input := "Marge, let's \"[went].\" I await {news} telegram."
+		expected := true
+
+		actual := isPalindrome(input)
+
+		if actual != expected {
+			t.Errorf("Got %v, want %v", actual, expected)
+		}
+	})
 }
 
 func isPalindrome(s string) bool {
-	regex, err := regexp.Compile("[^a-zA-Z0-9]+")
+	// regex, err := regexp.Compile("[^a-zA-Z0-9]+")
 
-	if err != nil {
-		panic("Failed to compile regex")
-	}
+	// if err != nil {
+	// 	panic("Failed to compile regex")
+	// }
 
-	s = strings.ToLower(s)
-	s = regex.ReplaceAllString(s, "")
+	// s = strings.ToLower(s)
+	// s = regex.ReplaceAllString(s, "")
 
+	runes := []rune(s)
 	left := 0
 	right := len(s) - 1
 
 	for left <= right {
-		fmt.Println(string(s[left]))
-		fmt.Println(string(s[right]))
+		leftChar := runes[left]
+		rightChar := runes[right]
 
-		if s[left] != s[right] {
+		if !isAlphanumeric(leftChar) {
+			left++
+			continue
+		}
+
+		if !isAlphanumeric(rightChar) {
+			right--
+			continue
+		}
+
+		if strings.ToLower(string(leftChar)) != strings.ToLower(string(rightChar)) {
 			return false
 		}
 
 		left++
 		right--
+	}
+
+	return true
+}
+
+func isAlphanumeric(char rune) bool {
+	if char < 48 || (char > 57 && char < 65) || (char > 90 && char < 97) || char > 122 {
+		return false
 	}
 
 	return true
