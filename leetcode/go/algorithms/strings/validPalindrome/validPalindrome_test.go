@@ -31,6 +31,11 @@ Constraints:
 s consists only of printable ASCII characters.
 */
 
+/*
+Time Complexity: O(n), we must touch every character in the worst case to know if the string is a palindrome
+Space Complexity: O(1), we do not require extra space proportional to n
+*/
+
 func TestValidPalindrome(t *testing.T) {
 	t.Run("should return true for palindromes", func(t *testing.T) {
 		input := "A man, a plan, a canal: Panama"
@@ -67,15 +72,6 @@ func TestValidPalindrome(t *testing.T) {
 }
 
 func isPalindrome(s string) bool {
-	// regex, err := regexp.Compile("[^a-zA-Z0-9]+")
-
-	// if err != nil {
-	// 	panic("Failed to compile regex")
-	// }
-
-	// s = strings.ToLower(s)
-	// s = regex.ReplaceAllString(s, "")
-
 	runes := []rune(s)
 	left := 0
 	right := len(s) - 1
