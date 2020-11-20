@@ -1,6 +1,11 @@
 package validPalindrome
 
-import "testing"
+import (
+	"fmt"
+	"regexp"
+	"strings"
+	"testing"
+)
 
 /*
 125. Valid Palindrome
@@ -53,5 +58,29 @@ func TestValidPalindrome(t *testing.T) {
 }
 
 func isPalindrome(s string) bool {
+	regex, err := regexp.Compile("[^a-zA-Z0-9]+")
 
+	if err != nil {
+		panic("Failed to compile regex")
+	}
+
+	s = strings.ToLower(s)
+	s = regex.ReplaceAllString(s, "")
+
+	left := 0
+	right := len(s) - 1
+
+	for left <= right {
+		fmt.Println(string(s[left]))
+		fmt.Println(string(s[right]))
+
+		if s[left] != s[right] {
+			return false
+		}
+
+		left++
+		right--
+	}
+
+	return true
 }
