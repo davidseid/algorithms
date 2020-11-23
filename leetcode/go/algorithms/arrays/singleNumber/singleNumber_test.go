@@ -35,6 +35,11 @@ Constraints:
     Each element in the array appears twice except for one element which appears only once.
 */
 
+/*
+Time Complexity: O(n) - We iterate through the nums array once
+Space Complexity: O(1) - We only maintain an integer tracking the xor
+*/
+
 func TestSingleNumber(t *testing.T) {
 	t.Run("should find single number when last", func(t *testing.T) {
 		expected := 1
