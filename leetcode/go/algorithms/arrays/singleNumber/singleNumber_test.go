@@ -1,6 +1,8 @@
 package singleNumber
 
-import "testing"
+import (
+	"testing"
+)
 
 /*
 136. Single Number
@@ -63,5 +65,21 @@ func TestSingleNumber(t *testing.T) {
 }
 
 func singleNumber(nums []int) int {
+	counts := map[int]int{}
 
+	for _, num := range nums {
+		if _, ok := counts[num]; !ok {
+			counts[num] = 1
+			continue
+		}
+		counts[num]++
+	}
+
+	for num, count := range counts {
+		if count == 1 {
+			return num
+		}
+	}
+
+	return -1
 }
