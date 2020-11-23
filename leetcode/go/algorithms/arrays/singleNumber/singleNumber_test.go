@@ -61,3 +61,7 @@ func TestSingleNumber(t *testing.T) {
 		}
 	})
 }
+
+func singleNumber(nums []int) int {
+
+}
