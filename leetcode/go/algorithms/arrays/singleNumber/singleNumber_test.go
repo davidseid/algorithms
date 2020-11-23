@@ -38,6 +38,8 @@ Constraints:
 /*
 Time Complexity: O(n) - We iterate through the nums array once
 Space Complexity: O(1) - We only maintain an integer tracking the xor
+Key Insight: Maintaining a bitwise xor integer allows us to skip using extra space (a map or set).
+With xor, the bit values are removed if they were already found.
 */
 
 func TestSingleNumber(t *testing.T) {
