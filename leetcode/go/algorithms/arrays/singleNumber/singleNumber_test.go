@@ -1,5 +1,7 @@
 package singleNumber
 
+import "testing"
+
 /*
 136. Single Number
 https://leetcode.com/problems/single-number/
@@ -30,3 +32,14 @@ Constraints:
     -3 * 104 <= nums[i] <= 3 * 104
     Each element in the array appears twice except for one element which appears only once.
 */
+
+func TestSingleNumber(t *testing.T) {
+	t.Run("should find single number when last", func(t *testing.T) {
+		expected := 1
+		actual := singleNumber([]int{2, 2, 1})
+
+		if actual != expected {
+			t.Errorf("Got %d, want %d", actual, expected)
+		}
+	})
+}
