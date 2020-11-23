@@ -65,21 +65,11 @@ func TestSingleNumber(t *testing.T) {
 }
 
 func singleNumber(nums []int) int {
-	counts := map[int]int{}
+	xor := 0
 
 	for _, num := range nums {
-		if _, ok := counts[num]; !ok {
-			counts[num] = 1
-			continue
-		}
-		counts[num]++
+		xor ^= num
 	}
 
-	for num, count := range counts {
-		if count == 1 {
-			return num
-		}
-	}
-
-	return -1
+	return xor
 }
