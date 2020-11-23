@@ -42,4 +42,13 @@ func TestSingleNumber(t *testing.T) {
 			t.Errorf("Got %d, want %d", actual, expected)
 		}
 	})
+
+	t.Run("should find single number when first", func(t *testing.T) {
+		expected := 4
+		actual := singleNumber([]int{4, 1, 2, 1, 2})
+
+		if actual != expected {
+			t.Errorf("Got %d, want %d", actual, expected)
+		}
+	})
 }
