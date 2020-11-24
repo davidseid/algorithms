@@ -95,7 +95,34 @@ func TestGetIntersectionNode(t *testing.T) {
 	})
 
 	t.Run("should find intersection node when B is longer", func(t *testing.T) {
+		intersectionNode := &ListNode{
+			Val: 2,
+			Next: &ListNode{
+				Val: 4,
+			},
+		}
 
+		listA := &ListNode{
+			Val: 1,
+			Next: &ListNode{
+				Val: 9,
+				Next: &ListNode{
+					Val:  1,
+					Next: intersectionNode,
+				},
+			},
+		}
+
+		listB := &ListNode{
+			Val:  3,
+			Next: intersectionNode,
+		}
+
+		actual := getIntersectionNode(listA, listB)
+
+		if diff := deep.Equal(actual, intersectionNode); diff != nil {
+			t.Error(diff)
+		}
 	})
 
 	t.Run("should return null when no intersecting node existsg", func(t *testing.T) {
