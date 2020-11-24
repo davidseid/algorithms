@@ -1,5 +1,7 @@
 package intersectionOfLinkedLists
 
+import "testing"
+
 /*
 160. Intersection of Two Linked Lists
 https://leetcode.com/problems/intersection-of-two-linked-lists/
@@ -43,3 +45,17 @@ Notes:
     Each value on each linked list is in the range [1, 10^9].
     Your code should preferably run in O(n) time and use only O(1) memory.
 */
+
+func TestGetIntersectionNode(t *testing.T) {
+	t.Run("should find intersection node when A is longer", func(t *testing.T) {
+
+	})
+
+	t.Run("should find intersection node when B is longer", func(t *testing.T) {
+
+	})
+
+	t.Run("should return null when no intersecting node exists", func(t *testing.T) {
+
+	})
+}
