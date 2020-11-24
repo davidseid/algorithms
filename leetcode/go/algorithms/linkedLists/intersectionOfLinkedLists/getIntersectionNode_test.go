@@ -53,6 +53,9 @@ Notes:
 /*
 Time Complexity: O(n), we must iterate through each linkedlist at most twice (to account for different length lists)
 Space Complexity: O(1), we require no extra space, simply comparing nodes as we iterate.
+
+Key Insight: In order to avoid mutating the nodes or maintaining storage of seen node data, we can swap the pointer to iterate through the other list
+once it finishes a first pass. This means that on the next pass through the pointers will be synchronized because they will have covered the same ground.
 */
 
 type ListNode struct {
