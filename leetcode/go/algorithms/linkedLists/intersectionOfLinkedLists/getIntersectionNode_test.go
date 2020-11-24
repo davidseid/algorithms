@@ -50,6 +50,11 @@ Notes:
     Your code should preferably run in O(n) time and use only O(1) memory.
 */
 
+/*
+Time Complexity: O(n), we must iterate through each linkedlist at most twice (to account for different length lists)
+Space Complexity: O(1), we require no extra space, simply comparing nodes as we iterate.
+*/
+
 type ListNode struct {
 	Val  int
 	Next *ListNode
