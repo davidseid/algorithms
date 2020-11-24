@@ -1,6 +1,10 @@
 package intersectionOfLinkedLists
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/go-test/deep"
+)
 
 /*
 160. Intersection of Two Linked Lists
@@ -54,6 +58,40 @@ type ListNode struct {
 func TestGetIntersectionNode(t *testing.T) {
 	t.Run("should find intersection node when A is longer", func(t *testing.T) {
 
+		intersectionNode := &ListNode{
+			Val: 8,
+			Next: &ListNode{
+				Val: 4,
+				Next: &ListNode{
+					Val: 5,
+				},
+			},
+		}
+
+		listA := &ListNode{
+			Val: 4,
+			Next: &ListNode{
+				Val:  1,
+				Next: intersectionNode,
+			},
+		}
+
+		listB := &ListNode{
+			Val: 5,
+			Next: &ListNode{
+				Val: 6,
+				Next: &ListNode{
+					Val:  1,
+					Next: intersectionNode,
+				},
+			},
+		}
+
+		actual := getIntersectionNode(listA, listB)
+
+		if diff := deep.Equal(actual, intersectionNode); diff != nil {
+			t.Error(diff)
+		}
 	})
 
 	t.Run("should find intersection node when B is longer", func(t *testing.T) {
