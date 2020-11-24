@@ -152,3 +152,7 @@ func TestGetIntersectionNode(t *testing.T) {
 		}
 	})
 }
+
+func getIntersectionNode(headA, headB *ListNode) *ListNode {
+
+}
