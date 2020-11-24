@@ -46,6 +46,11 @@ Notes:
     Your code should preferably run in O(n) time and use only O(1) memory.
 */
 
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
 func TestGetIntersectionNode(t *testing.T) {
 	t.Run("should find intersection node when A is longer", func(t *testing.T) {
 
@@ -55,7 +60,7 @@ func TestGetIntersectionNode(t *testing.T) {
 
 	})
 
-	t.Run("should return null when no intersecting node exists", func(t *testing.T) {
+	t.Run("should return null when no intersecting node existsg", func(t *testing.T) {
 
 	})
 }
