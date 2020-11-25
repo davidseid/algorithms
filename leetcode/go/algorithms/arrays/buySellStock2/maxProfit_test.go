@@ -63,4 +63,15 @@ func TestMaxProfit(t *testing.T) {
 			t.Errorf("Got %d, expected %d", actual, expected)
 		}
 	})
+
+	t.Run("should maximize profit in example 3 where no profit is possible", func(t *testing.T) {
+		prices := []int{7, 6, 4, 3, 1}
+
+		expected := 0
+		actual := maxProfit(prices)
+
+		if actual != expected {
+			t.Errorf("Got %d, expected %d", actual, expected)
+		}
+	})
 }
