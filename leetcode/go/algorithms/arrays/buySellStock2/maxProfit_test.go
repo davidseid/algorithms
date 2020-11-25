@@ -75,3 +75,7 @@ func TestMaxProfit(t *testing.T) {
 		}
 	})
 }
+
+func maxProfit(prices []int) int {
+
+}
