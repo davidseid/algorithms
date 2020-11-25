@@ -77,50 +77,28 @@ func TestMaxProfit(t *testing.T) {
 }
 
 func maxProfit(prices []int) int {
-	// iterate through array
-	// sell on all the cliffs
-
-	// buy sell or wait decision
-	// buy if haven't bought yet and tomorrow exists and is higher today
-	// sell if bought already and tomorrow is lower than today
-	// otherwise wait
-	// each time we sell, accumulate the worth
-
 	profit := 0
-	buyPrice := 0
-	invested := false
+	buyPrice := -1
 
-	for i, priceToday := range prices {
-		if i+1 < len(prices) {
-			priceTomorrow := prices[i+1]
+	for i := 0; i < len(prices)-1; i++ {
+		priceToday := prices[i]
+		priceTomorrow := prices[i+1]
 
-			if !invested && priceToday < priceTomorrow {
-				buyPrice = priceToday
-				invested = true
-				continue
-			}
-
-			if invested && priceToday > priceTomorrow {
-				profit += priceToday - buyPrice
-				buyPrice = 0
-				invested = false
-				continue
-			}
+		if buyPrice == -1 && priceToday < priceTomorrow {
+			buyPrice = priceToday
 			continue
 		}
 
-		if invested {
+		if buyPrice != -1 && priceToday > priceTomorrow {
 			profit += priceToday - buyPrice
+			buyPrice = -1
+			continue
 		}
+	}
+
+	if buyPrice != -1 {
+		profit += prices[len(prices)-1] - buyPrice
 	}
 
 	return profit
 }
-
-// func buy() {
-
-// }
-
-// func sell() {
-
-// }
