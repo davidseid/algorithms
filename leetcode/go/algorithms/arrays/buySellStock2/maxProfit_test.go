@@ -1,5 +1,7 @@
 package buySellStock2
 
+import "testing"
+
 /*
 122. Best Time to Buy and Sell Stock II
 https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
@@ -37,6 +39,14 @@ Constraints:
 
     1 <= prices.length <= 3 * 10 ^ 4
     0 <= prices[i] <= 10 ^ 4
-
-
 */
+
+func TestMaxProfit(t *testing.T) {
+	t.Run("should maximize profit in example 1", func(t *testing.T) {
+
+	})
+
+	t.Run("should maximize profit in example 2", func(t *testing.T) {
+
+	})
+}
