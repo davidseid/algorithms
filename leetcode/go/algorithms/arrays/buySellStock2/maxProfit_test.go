@@ -43,10 +43,24 @@ Constraints:
 
 func TestMaxProfit(t *testing.T) {
 	t.Run("should maximize profit in example 1", func(t *testing.T) {
+		prices := []int{7, 1, 5, 3, 6, 4}
 
+		expected := 7
+		actual := maxProfit(prices)
+
+		if actual != expected {
+			t.Errorf("Got %d, expected %d", actual, expected)
+		}
 	})
 
 	t.Run("should maximize profit in example 2", func(t *testing.T) {
+		prices := []int{1, 2, 3, 4, 5}
 
+		expected := 4
+		actual := maxProfit(prices)
+
+		if actual != expected {
+			t.Errorf("Got %d, expected %d", actual, expected)
+		}
 	})
 }
