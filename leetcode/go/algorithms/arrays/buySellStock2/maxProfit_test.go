@@ -41,6 +41,11 @@ Constraints:
     0 <= prices[i] <= 10 ^ 4
 */
 
+/*
+Time Complexity: O(n) - we must iterate through all the prices once
+Space Complexity: O(1) - we do not require extra space proportional to n, just an int to track profit and an int to record buyPrice
+*/
+
 func TestMaxProfit(t *testing.T) {
 	t.Run("should maximize profit in example 1", func(t *testing.T) {
 		prices := []int{7, 1, 5, 3, 6, 4}
