@@ -1,7 +1,5 @@
 package cloneGraphs
 
-import "testing"
-
 /*
 133. Clone Graph
 https://leetcode.com/problems/clone-graph/
@@ -63,27 +61,49 @@ Constraints:
     Number of Nodes will not exceed 100.
     There is no repeated edges and no self-loops in the graph.
     The Graph is connected and all nodes can be visited starting from the given node.
-
-
 */
 
-func TestCloneGraph(t *testing.T) {
-	t.Run("should return clone of original populated graph", func(t *testing.T) {
+// func buildGraphFromAdjList(adjList []int) *Node {
+// 	nodes := map[int]*Node{}
+// 	for i, neighbors := range adjList {
+// 		node := &Node{
+// 			Val: i + 1,
+// 		}
 
-	})
+// 		for _, neighbor := range neighbors {
+// 			node := &
+// 		}
+// 	}
+// }
 
-	t.Run("should return clone of graph with only one node", func(t *testing.T) {
+// func TestCloneGraph(t *testing.T) {
+// 	t.Run("should return clone of original populated graph", func(t *testing.T) {
+// 		adjList := [][]int{
+// 			{2, 4},
+// 			{1, 3},
+// 			{2, 4},
+// 			{1, 3},
+// 		}
 
-	})
+// 		node := buildGraphFromAdjList(adjList)
 
-	t.Run("should return clone of empty graph", func(t *testing.T) {
+// 		clone := cloneGraph(node)
 
-	})
+// 		// create and sort adj list from clone
+// 	})
 
-	t.Run("should return clone of two-node graph", func(t *testing.T) {
+// 	t.Run("should return clone of graph with only one node", func(t *testing.T) {
 
-	})
-}
+// 	})
+
+// 	t.Run("should return clone of empty graph", func(t *testing.T) {
+
+// 	})
+
+// 	t.Run("should return clone of two-node graph", func(t *testing.T) {
+
+// 	})
+// }
 
 type Node struct {
 	Val       int
@@ -91,5 +111,33 @@ type Node struct {
 }
 
 func cloneGraph(node *Node) *Node {
+	if node == nil {
+		return nil
+	}
 
+	visited := map[int]*Node{}
+
+	copy := &Node{
+		Val: node.Val,
+	}
+
+	visited[copy.Val] = copy
+
+	for _, curr := range node.Neighbors {
+		_, isVisited := visited[curr.Val]
+
+		if !isVisited {
+			newNode := &Node{
+				Val: curr.Val,
+			}
+
+			copy.Neighbors = append(copy.Neighbors, newNode)
+			dfs(curr, newNode, visited)
+			break
+		}
+
+		copy.Neighbors = append(copy.Neighbors, visited[curr.Val])
+	}
+
+	return copy
 }
