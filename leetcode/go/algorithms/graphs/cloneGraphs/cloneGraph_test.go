@@ -111,33 +111,29 @@ type Node struct {
 }
 
 func cloneGraph(node *Node) *Node {
+	visited := map[int]*Node{}
+
+	return dfs(node, visited)
+}
+
+func dfs(node *Node, visited map[int]*Node) *Node {
 	if node == nil {
 		return nil
 	}
 
-	visited := map[int]*Node{}
+	if _, ok := visited[node.Val]; ok {
+		return visited[node.Val]
+	}
 
-	copy := &Node{
+	root := &Node{
 		Val: node.Val,
 	}
 
-	visited[copy.Val] = copy
+	visited[node.Val] = root
 
-	for _, curr := range node.Neighbors {
-		_, isVisited := visited[curr.Val]
-
-		if !isVisited {
-			newNode := &Node{
-				Val: curr.Val,
-			}
-
-			copy.Neighbors = append(copy.Neighbors, newNode)
-			dfs(curr, newNode, visited)
-			break
-		}
-
-		copy.Neighbors = append(copy.Neighbors, visited[curr.Val])
+	for _, neighbor := range node.Neighbors {
+		root.Neighbors = append(root.Neighbors, dfs(neighbor, visited))
 	}
 
-	return copy
+	return root
 }
