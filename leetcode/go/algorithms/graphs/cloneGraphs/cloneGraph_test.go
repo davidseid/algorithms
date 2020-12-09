@@ -1,5 +1,7 @@
 package cloneGraphs
 
+import "testing"
+
 /*
 133. Clone Graph
 https://leetcode.com/problems/clone-graph/
@@ -14,8 +16,6 @@ class Node {
     public int val;
     public List<Node> neighbors;
 }
-
-
 
 Test case format:
 
@@ -66,6 +66,24 @@ Constraints:
 
 
 */
+
+func TestCloneGraph(t *testing.T) {
+	t.Run("should return clone of original populated graph", func(t *testing.T) {
+
+	})
+
+	t.Run("should return clone of graph with only one node", func(t *testing.T) {
+
+	})
+
+	t.Run("should return clone of empty graph", func(t *testing.T) {
+
+	})
+
+	t.Run("should return clone of two-node graph", func(t *testing.T) {
+
+	})
+}
 
 type Node struct {
 	Val       int
