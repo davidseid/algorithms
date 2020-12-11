@@ -54,8 +54,6 @@ Example 4:
 Input: adjList = [[2],[1]]
 Output: [[2],[1]]
 
-
-
 Constraints:
 
     1 <= Node.val <= 100
@@ -91,7 +89,43 @@ type Node struct {
 func cloneGraph(node *Node) *Node {
 	visited := map[int]*Node{}
 
-	return dfs(node, visited)
+	return bfs(node, visited)
+}
+
+type Queue struct {
+	Head *ListNode
+	Tail *ListNode
+}
+
+type ListNode struct {
+	Val  *Node
+	Next *ListNode
+}
+
+func bfs(node *Node, visited map[int]*Node) *Node {
+	if node == nil {
+		return nil
+	}
+
+	queue := []*Node{node}
+
+	visited[node.Val] = &Node{Val: node.Val}
+
+	for len(queue) > 0 {
+		curr := queue[len(queue)-1]
+		queue = queue[1:]
+		for _, neighbor := range curr.Neighbors {
+			if _, isVisited := visited[neighbor.Val]; !isVisited {
+				visited[neighbor.Val] = &Node{
+					Val: neighbor.Val,
+				}
+				queue = append(queue, neighbor)
+			}
+			visited[curr.Val].Neighbors = append(visited[curr.Val].Neighbors, visited[neighbor.Val])
+		}
+	}
+
+	return visited[node.Val]
 }
 
 func dfs(node *Node, visited map[int]*Node) *Node {
