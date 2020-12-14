@@ -83,31 +83,31 @@ func TestCloneGraph(t *testing.T) {
 
 // Queue Implementation with Doubly Linked List
 type Queue struct {
-	Head *ListNode
-	Tail *ListNode
+	Head *LinkedListNode
+	Tail *LinkedListNode
 	Size int
 }
 
-type ListNode struct {
+type LinkedListNode struct {
 	Val      *Node
-	Next     *ListNode
-	Previous *ListNode
+	Next     *LinkedListNode
+	Previous *LinkedListNode
 }
 
 func (q *Queue) Enqueue(node *Node) {
 	q.Size++
-	listNode := &ListNode{
+	linkedListNode := &LinkedListNode{
 		Val: node,
 	}
 
 	if q.Head == nil {
-		q.Head = listNode
-		q.Tail = listNode
+		q.Head = linkedListNode
+		q.Tail = linkedListNode
 		return
 	}
 
-	q.Tail.Next = listNode
-	q.Tail = listNode
+	q.Tail.Next = linkedListNode
+	q.Tail = linkedListNode
 }
 
 func (q *Queue) Dequeue() *Node {
@@ -148,15 +148,14 @@ func bfs(node *Node, visited map[int]*Node) *Node {
 
 	visited[node.Val] = &Node{Val: node.Val}
 
-	for len(queue) > 0 {
-		curr := queue[len(queue)-1]
-		queue = queue[1:]
+	for queue.getSize() > 0 {
+		curr := queue.Dequeue()
 		for _, neighbor := range curr.Neighbors {
 			if _, isVisited := visited[neighbor.Val]; !isVisited {
 				visited[neighbor.Val] = &Node{
 					Val: neighbor.Val,
 				}
-				queue = append(queue, neighbor)
+				queue.Enqueue(neighbor)
 			}
 			visited[curr.Val].Neighbors = append(visited[curr.Val].Neighbors, visited[neighbor.Val])
 		}
