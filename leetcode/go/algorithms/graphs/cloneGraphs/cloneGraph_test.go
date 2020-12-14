@@ -98,8 +98,9 @@ type Queue struct {
 }
 
 type ListNode struct {
-	Val  *Node
-	Next *ListNode
+	Val      *Node
+	Next     *ListNode
+	Previous *ListNode
 }
 
 func bfs(node *Node, visited map[int]*Node) *Node {
