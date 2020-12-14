@@ -81,17 +81,7 @@ func TestCloneGraph(t *testing.T) {
 	})
 }
 
-type Node struct {
-	Val       int
-	Neighbors []*Node
-}
-
-func cloneGraph(node *Node) *Node {
-	visited := map[int]*Node{}
-
-	return bfs(node, visited)
-}
-
+// Queue Implementation with Doubly Linked List
 type Queue struct {
 	Head *ListNode
 	Tail *ListNode
@@ -126,6 +116,19 @@ func (q *Queue) Dequeue() *Node {
 	node := q.Head
 	q.Head = q.Head.Next
 	return node.Val
+}
+
+// Graph Search Implementation
+
+type Node struct {
+	Val       int
+	Neighbors []*Node
+}
+
+func cloneGraph(node *Node) *Node {
+	visited := map[int]*Node{}
+
+	return bfs(node, visited)
 }
 
 func bfs(node *Node, visited map[int]*Node) *Node {
