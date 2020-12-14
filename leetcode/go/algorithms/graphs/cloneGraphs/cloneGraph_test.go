@@ -85,6 +85,7 @@ func TestCloneGraph(t *testing.T) {
 type Queue struct {
 	Head *ListNode
 	Tail *ListNode
+	Size int
 }
 
 type ListNode struct {
@@ -94,6 +95,7 @@ type ListNode struct {
 }
 
 func (q *Queue) Enqueue(node *Node) {
+	q.Size++
 	listNode := &ListNode{
 		Val: node,
 	}
@@ -113,9 +115,14 @@ func (q *Queue) Dequeue() *Node {
 		return nil
 	}
 
+	q.Size--
 	node := q.Head
 	q.Head = q.Head.Next
 	return node.Val
+}
+
+func (q *Queue) getSize() int {
+	return q.Size
 }
 
 // Graph Search Implementation
@@ -136,7 +143,8 @@ func bfs(node *Node, visited map[int]*Node) *Node {
 		return nil
 	}
 
-	queue := []*Node{node}
+	queue := &Queue{}
+	queue.Enqueue(node)
 
 	visited[node.Val] = &Node{Val: node.Val}
 
