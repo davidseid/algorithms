@@ -118,6 +118,16 @@ func (q *Queue) Enqueue(node *Node) {
 	q.Tail = listNode
 }
 
+func (q *Queue) Dequeue() *Node {
+	if q.Head == nil {
+		return nil
+	}
+
+	node := q.Head
+	q.Head = q.Head.Next
+	return node.Val
+}
+
 func bfs(node *Node, visited map[int]*Node) *Node {
 	if node == nil {
 		return nil
