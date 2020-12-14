@@ -103,6 +103,21 @@ type ListNode struct {
 	Previous *ListNode
 }
 
+func (q *Queue) Enqueue(node *Node) {
+	listNode := &ListNode{
+		Val: node,
+	}
+
+	if q.Head == nil {
+		q.Head = listNode
+		q.Tail = listNode
+		return
+	}
+
+	q.Tail.Next = listNode
+	q.Tail = listNode
+}
+
 func bfs(node *Node, visited map[int]*Node) *Node {
 	if node == nil {
 		return nil
