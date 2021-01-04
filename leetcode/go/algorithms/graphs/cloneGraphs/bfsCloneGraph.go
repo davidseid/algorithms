@@ -1,6 +1,4 @@
-package cloneGraphs
-
-import "testing"
+package clonegraphs
 
 /*
 133. Clone Graph
@@ -63,24 +61,6 @@ Constraints:
     The Graph is connected and all nodes can be visited starting from the given node.
 */
 
-func TestCloneGraph(t *testing.T) {
-	t.Run("should return clone of original populated graph", func(t *testing.T) {
-
-	})
-
-	t.Run("should return clone of graph with only one node", func(t *testing.T) {
-
-	})
-
-	t.Run("should return clone of empty graph", func(t *testing.T) {
-
-	})
-
-	t.Run("should return clone of two-node graph", func(t *testing.T) {
-
-	})
-}
-
 // Queue Implementation with Doubly Linked List
 type Queue struct {
 	Head *LinkedListNode
@@ -132,7 +112,7 @@ type Node struct {
 	Neighbors []*Node
 }
 
-func cloneGraph(node *Node) *Node {
+func bfsCloneGraph(node *Node) *Node {
 	visited := map[int]*Node{}
 
 	return bfs(node, visited)
@@ -162,26 +142,4 @@ func bfs(node *Node, visited map[int]*Node) *Node {
 	}
 
 	return visited[node.Val]
-}
-
-func dfs(node *Node, visited map[int]*Node) *Node {
-	if node == nil {
-		return nil
-	}
-
-	if _, ok := visited[node.Val]; ok {
-		return visited[node.Val]
-	}
-
-	root := &Node{
-		Val: node.Val,
-	}
-
-	visited[node.Val] = root
-
-	for _, neighbor := range node.Neighbors {
-		root.Neighbors = append(root.Neighbors, dfs(neighbor, visited))
-	}
-
-	return root
 }
