@@ -47,17 +47,16 @@ Constraints:
 func twoSum(nums []int, target int) []int {
 	seen := make(map[int]int)
 
-	for i := 0; i < len(nums); i++ {
-		complement := target - nums[i]
+	for i, num := range nums {
+		complement := target - num
 
 		if _, ok := seen[complement]; ok {
 			result := []int{i, seen[complement]}
 			return result
-		} else {
-			seen[nums[i]] = i
 		}
+		seen[nums[i]] = i
 	}
-	return []int{-1, -1}
+	return []int{-1}
 }
 
 func TestTwoSum(t *testing.T) {
