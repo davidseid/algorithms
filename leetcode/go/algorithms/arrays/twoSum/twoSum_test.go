@@ -83,4 +83,15 @@ func TestTwoSum(t *testing.T) {
 		}
 	})
 
+	t.Run("should return indices of two numbers such that they add up to target again", func(t *testing.T) {
+		input := []int{3, 2, 4}
+		target := 6
+
+		actual := twoSum(input, target)
+		expected := []int{1, 2}
+
+		if diff := deep.Equal(actual, expected); diff != nil {
+			t.Error(diff)
+		}
+	})
 }
