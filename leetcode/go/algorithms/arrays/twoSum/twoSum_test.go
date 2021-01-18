@@ -43,6 +43,33 @@ Constraints:
 
 */
 
+func twoSum(nums []int, target int) []int {
+	counts := map[int][]int{}
+
+	for i, num := range nums {
+		if _, ok := counts[num]; ok {
+			counts[num][1]++
+			continue
+		}
+
+		counts[num] = []int{i, 1}
+	}
+
+	for i, num := range nums {
+		counts[num][1]-- // to avoid reuse
+
+		diff := target - num
+
+		if tuple, ok := counts[diff]; ok && tuple[1] >= 1 {
+			return []int{i, tuple[0]}
+		}
+
+		counts[num][1]++ // replace for next iteration
+	}
+
+	return []int{-1} // did not find twosum
+}
+
 func TestTwoSum(t *testing.T) {
 	t.Run("should return indices of two numbers such that they add up to target", func(t *testing.T) {
 		input := []int{2, 7, 11, 15}
@@ -55,4 +82,5 @@ func TestTwoSum(t *testing.T) {
 			t.Error(diff)
 		}
 	})
+
 }
