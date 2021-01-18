@@ -1,6 +1,7 @@
 package twoSum
 
 import (
+	"sort"
 	"testing"
 
 	"github.com/go-test/deep"
@@ -44,30 +45,19 @@ Constraints:
 */
 
 func twoSum(nums []int, target int) []int {
-	counts := map[int][]int{}
+	seen := make(map[int]int)
 
-	for i, num := range nums {
-		if _, ok := counts[num]; ok {
-			counts[num][1]++
-			continue
+	for i := 0; i < len(nums); i++ {
+		complement := target - nums[i]
+
+		if _, ok := seen[complement]; ok {
+			result := []int{i, seen[complement]}
+			return result
+		} else {
+			seen[nums[i]] = i
 		}
-
-		counts[num] = []int{i, 1}
 	}
-
-	for i, num := range nums {
-		counts[num][1]-- // to avoid reuse
-
-		diff := target - num
-
-		if tuple, ok := counts[diff]; ok && tuple[1] >= 1 {
-			return []int{i, tuple[0]}
-		}
-
-		counts[num][1]++ // replace for next iteration
-	}
-
-	return []int{-1} // did not find twosum
+	return []int{-1, -1}
 }
 
 func TestTwoSum(t *testing.T) {
@@ -77,6 +67,8 @@ func TestTwoSum(t *testing.T) {
 
 		actual := twoSum(input, target)
 		expected := []int{0, 1}
+
+		sort.Ints(actual)
 
 		if diff := deep.Equal(actual, expected); diff != nil {
 			t.Error(diff)
@@ -89,6 +81,7 @@ func TestTwoSum(t *testing.T) {
 
 		actual := twoSum(input, target)
 		expected := []int{1, 2}
+		sort.Ints(actual)
 
 		if diff := deep.Equal(actual, expected); diff != nil {
 			t.Error(diff)
@@ -101,6 +94,7 @@ func TestTwoSum(t *testing.T) {
 
 		actual := twoSum(input, target)
 		expected := []int{0, 1}
+		sort.Ints(actual)
 
 		if diff := deep.Equal(actual, expected); diff != nil {
 			t.Error(diff)
