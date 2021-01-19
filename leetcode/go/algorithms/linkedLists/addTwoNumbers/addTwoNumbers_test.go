@@ -30,5 +30,51 @@ type ListNode struct {
 }
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+	sumDummyHead := &ListNode{}
+	pSum := sumDummyHead
 
+	p1 := l1
+	p2 := l2
+	carry := 0
+
+	for p1 != nil || p2 != nil {
+		val1 := 0
+		if p1 != nil {
+			val1 = p1.Val
+		}
+
+		val2 := 0
+		if p2 != nil {
+			val2 = p2.Val
+		}
+
+		sum := val1 + val2 + carry
+		carry = 0
+
+		if sum > 9 {
+			carry = 1
+			sum = sum - 10
+		}
+
+		pSum.Next = &ListNode{
+			Val: sum,
+		}
+		pSum = pSum.Next
+
+		if p1 != nil {
+			p1 = p1.Next
+		}
+
+		if p2 != nil {
+			p2 = p2.Next
+		}
+	}
+
+	if carry == 1 {
+		pSum.Next = &ListNode{
+			Val: 1,
+		}
+	}
+
+	return sumDummyHead.Next
 }
