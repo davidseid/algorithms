@@ -78,3 +78,8 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 
 	return sumDummyHead.Next
 }
+
+/*
+Time Complexity: Linear, O(n) with n being the larger of the two linked list inputs
+Space Complexity: Linear, O(n) with n being the larger of the two linked list inputs
+*/
