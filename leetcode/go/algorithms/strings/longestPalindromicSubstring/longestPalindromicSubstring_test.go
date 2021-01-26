@@ -32,8 +32,36 @@ Constraints:
     s consist of only digits and English letters (lower-case and/or upper-case),
 */
 
+func buildPalindrome(s string, left int, right int) string {
+	for right < len(s) && left >= 0 && s[left] == s[right] {
+		left--
+		right++
+	}
+
+	return string(s[left+1 : right])
+}
+
+func updateLongestIfRequired(palindrome, longest string) string {
+	if len(palindrome) > len(longest) {
+		return palindrome
+	}
+	return longest
+}
+
 func longestPalindrome(s string) string {
-	//
+	longest := ""
+
+	for i := 0; i < len(s); i++ {
+		palindrome := buildPalindrome(s, i, i)
+		longest = updateLongestIfRequired(palindrome, longest)
+
+		if i+1 < len(s) && s[i] == s[i+1] {
+			palindrome := buildPalindrome(s, i, i+1)
+			longest = updateLongestIfRequired(palindrome, longest)
+		}
+	}
+
+	return longest
 }
 
 func TestLongestPalindromicSubstring(t *testing.T) {
