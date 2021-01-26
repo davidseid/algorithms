@@ -33,10 +33,22 @@ Constraints:
 */
 
 func longestPalindrome(s string) string {
-
+	//
 }
 
 func TestLongestPalindromicSubstring(t *testing.T) {
+	t.Run("should check for longest palindromic substring in string", func(t *testing.T) {
+		input := "babad"
+
+		expected := "bab"
+
+		actual := longestPalindrome(input)
+
+		if actual != expected {
+			t.Errorf("Got %s, want %s", actual, expected)
+		}
+	})
+
 	t.Run("should check for longest palindromic substring in string", func(t *testing.T) {
 		input := "cbbd"
 
