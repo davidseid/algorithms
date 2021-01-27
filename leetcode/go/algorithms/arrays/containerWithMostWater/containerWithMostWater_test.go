@@ -34,5 +34,34 @@ Constraints:
 */
 
 func maxArea(height []int) int {
+	if len(height) < 2 {
+		return 0
+	}
 
+	result := 0
+	left := 0
+	right := len(height) - 1
+
+	for left < right {
+		minHeight := getMinHeight(height[left], height[right])
+		area := minHeight * (right - left)
+
+		if area > result {
+			result = area
+		}
+
+		if height[left] < height[right] {
+			left++
+			continue
+		}
+		right--
+	}
+	return result
+}
+
+func getMinHeight(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }
