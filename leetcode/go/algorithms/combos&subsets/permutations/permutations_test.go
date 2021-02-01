@@ -27,3 +27,30 @@ Constraints:
     -10 <= nums[i] <= 10
     All the integers of nums are unique.
 */
+
+func permute(nums []int) [][]int {
+
+	return getPermutations(nums, []int{})
+}
+
+func getPermutations(nums, permutation []int) [][]int {
+	permutations := [][]int{}
+
+	if len(nums) == 0 {
+		permutations = append(permutations, permutation)
+		return permutations
+	}
+
+	for i, num := range nums {
+		remaining := append([]int{}, nums[:i]...)
+		if i+1 < len(nums) {
+			remaining = append(remaining, nums[i+1:]...)
+		}
+
+		nextPermutation := append([]int{}, permutation...)
+		nextPermutation = append(nextPermutation, num)
+		permutations = append(permutations, getPermutations(remaining, nextPermutation)...)
+	}
+
+	return permutations
+}
