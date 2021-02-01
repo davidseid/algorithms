@@ -29,28 +29,26 @@ Constraints:
 */
 
 func permute(nums []int) [][]int {
-
-	return getPermutations(nums, []int{})
+	result := [][]int{}
+	path := []int{}
+	visited := map[int]bool{}
+	getPermutations(nums, result, path, visited)
+	return result
 }
 
-func getPermutations(nums, permutation []int) [][]int {
-	permutations := [][]int{}
-
-	if len(nums) == 0 {
-		permutations = append(permutations, permutation)
-		return permutations
+func getPermutations(nums []int, result [][]int, path []int, visited map[int]bool) {
+	if len(path) == len(nums) {
+		result = append(result, path)
+		return
 	}
 
-	for i, num := range nums {
-		remaining := append([]int{}, nums[:i]...)
-		if i+1 < len(nums) {
-			remaining = append(remaining, nums[i+1:]...)
+	for _, num := range nums {
+		if _, ok := visited[num]; !ok {
+			path = append(path, num)
+			visited[num] = true
+			getPermutations(nums, result, path, visited)
+			visited[num] = false
+			path = path[:len(path)-1]
 		}
-
-		nextPermutation := append([]int{}, permutation...)
-		nextPermutation = append(nextPermutation, num)
-		permutations = append(permutations, getPermutations(remaining, nextPermutation)...)
 	}
-
-	return permutations
 }
